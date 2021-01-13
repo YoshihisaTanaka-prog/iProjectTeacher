@@ -1,0 +1,21 @@
+PODS:
+  - NCMB (3.1.0)
+
+DEPENDENCIES:
+  - NCMB (from `https://github.com/NIFCLOUD-mbaas/ncmb_ios.git`)
+
+EXTERNAL SOURCES:
+  NCMB:
+    :git: https://github.com/NIFCLOUD-mbaas/ncmb_ios.git
+
+CHECKOUT OPTIONS:
+  NCMB:
+    :commit: f11ec347e410179817d72ac2be21f4578b11bc5f
+    :git: https://github.com/NIFCLOUD-mbaas/ncmb_ios.git
+
+SPEC CHECKSUMS:
+  NCMB: c308972109137bf523ec1830bac16de6a31c25f4
+
+PODFILE CHECKSUM: d040cd32ee000076020ff75dc188432cf753317f
+
+COCOAPODS: 1.10.0

@@ -31,6 +31,7 @@
 		04A7E97525AF2B4A00C0F43C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 04A7E97425AF2B4A00C0F43C /* Assets.xcassets */; };
 		04A7E97825AF2B4A00C0F43C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 04A7E97625AF2B4A00C0F43C /* LaunchScreen.storyboard */; };
 		04A7E98425AF2D0500C0F43C /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04A7E98325AF2D0500C0F43C /* Extensions.swift */; };
+		04EA678F25BC8A8F005F0D06 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04EA678E25BC8A8F005F0D06 /* User.swift */; };
 		B123C8D481952C9E0A702E92 /* Pods_iProjectTeacher.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D3759B1903BBE7A837BFD9A5 /* Pods_iProjectTeacher.framework */; };
 /* End PBXBuildFile section */
 
@@ -61,6 +62,7 @@
 		04A7E97725AF2B4A00C0F43C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		04A7E97925AF2B4A00C0F43C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		04A7E98325AF2D0500C0F43C /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		04EA678E25BC8A8F005F0D06 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		D3759B1903BBE7A837BFD9A5 /* Pods_iProjectTeacher.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_iProjectTeacher.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DA086042A27D7B93DB7D0EC3 /* Pods-iProjectTeacher.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iProjectTeacher.debug.xcconfig"; path = "Target Support Files/Pods-iProjectTeacher/Pods-iProjectTeacher.debug.xcconfig"; sourceTree = "<group>"; };
 		DAA621FD172288AB5F2AF65B /* Pods-iProjectTeacher.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iProjectTeacher.release.xcconfig"; path = "Target Support Files/Pods-iProjectTeacher/Pods-iProjectTeacher.release.xcconfig"; sourceTree = "<group>"; };
@@ -151,6 +153,7 @@
 				04A7E96B25AF2B4900C0F43C /* AppDelegate.swift */,
 				04A7E96D25AF2B4900C0F43C /* SceneDelegate.swift */,
 				04A7E96F25AF2B4900C0F43C /* ViewController.swift */,
+				04EA678E25BC8A8F005F0D06 /* User.swift */,
 				04A7E97125AF2B4900C0F43C /* Main.storyboard */,
 				04A7E98325AF2D0500C0F43C /* Extensions.swift */,
 				04A7E97425AF2B4A00C0F43C /* Assets.xcassets */,
@@ -304,6 +307,7 @@
 				04845C5D25BC76F80032B567 /* YourChatViewCell.swift in Sources */,
 				04845C6925BC76F80032B567 /* SearchUserForCreateGroupViewController.swift in Sources */,
 				04A7E96E25AF2B4900C0F43C /* SceneDelegate.swift in Sources */,
+				04EA678F25BC8A8F005F0D06 /* User.swift in Sources */,
 				04845C6025BC76F80032B567 /* YourGroupChatViewCell.swift in Sources */,
 				04845C6A25BC76F80032B567 /* GoToChatExtension.swift in Sources */,
 				04845C6225BC76F80032B567 /* MyBalloonView.swift in Sources */,

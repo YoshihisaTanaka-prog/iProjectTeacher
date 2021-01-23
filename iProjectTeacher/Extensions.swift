@@ -32,3 +32,14 @@ extension Double{
         return String(self)
     }
 }
+
+extension UIViewController{
+    func showOkAlert(title: String, message: String) {
+        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        let alertOkAction = UIAlertAction(title: "OK", style: .default) { (action) in
+            alertController.dismiss(animated: true, completion: nil)
+        }
+        alertController.addAction(alertOkAction)
+        self.present(alertController, animated: true, completion: nil)
+    }
+}

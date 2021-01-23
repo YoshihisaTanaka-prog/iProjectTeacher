@@ -1,0 +1,235 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="eJe-Zz-UMf">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--チャット-->
+        <scene sceneID="fxb-xc-RKG">
+            <objects>
+                <viewController storyboardIdentifier="ChatRoomTable" modalPresentationStyle="fullScreen" id="oI8-6Y-Kmb" customClass="ChatTableViewController" customModule="ChatTest2" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="3RO-H3-E4K">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="sHu-uB-aPa">
+                                <rect key="frame" x="0.0" y="88" width="414" height="774"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="Cell" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell" id="xaw-ND-LLg">
+                                        <rect key="frame" x="0.0" y="28" width="414" height="43.5"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="xaw-ND-LLg" id="q8d-8B-4qV">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <viewLayoutGuide key="safeArea" id="ybe-jc-YxH"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="チャット" id="9L3-aP-ria">
+                        <barButtonItem key="rightBarButtonItem" title="Item" image="plus" catalog="system" id="EuN-oi-zUo">
+                            <connections>
+                                <action selector="tappedPlus" destination="oI8-6Y-Kmb" id="PFC-Tx-ViT"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="tableView" destination="sHu-uB-aPa" id="XBg-lv-V2H"/>
+                        <segue destination="Lsu-kr-G6W" kind="show" identifier="GoToRoom" id="Cyl-I6-4a1"/>
+                        <segue destination="v26-OI-X0w" kind="show" identifier="MakeGroup" id="Qx0-fN-Eok"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="y2Z-iN-oQY" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="857.97101449275374" y="79.6875"/>
+        </scene>
+        <!--グループチャットの作成-->
+        <scene sceneID="6oi-Ec-uXH">
+            <objects>
+                <viewController id="v26-OI-X0w" customClass="CreateGroupViewController" customModule="ChatTest2" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="hPE-yN-QhZ">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="グループ名" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Ylj-qM-Ra6">
+                                <rect key="frame" x="49" y="186" width="315" height="34"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fcd-4j-vbm">
+                                <rect key="frame" x="160" y="572" width="92" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="グループ作成"/>
+                                <connections>
+                                    <action selector="tappedCreate" destination="v26-OI-X0w" eventType="touchUpInside" id="BEx-KZ-4Xf"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <viewLayoutGuide key="safeArea" id="3x3-cX-kqk"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="グループチャットの作成" id="ekX-yF-63G"/>
+                    <connections>
+                        <outlet property="textField" destination="Ylj-qM-Ra6" id="gQp-Nl-X8A"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="zQv-zo-yVQ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1776.8115942028987" y="-611.38392857142856"/>
+        </scene>
+        <!--Search User For Create Group View Controller-->
+        <scene sceneID="0BO-eL-pkz">
+            <objects>
+                <viewController id="0dk-1q-DQK" customClass="SearchUserForCreateGroupViewController" customModule="ChatTest2" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="B02-wP-cEa">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="U4u-NR-na3">
+                                <rect key="frame" x="0.0" y="94" width="414" height="714"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell" id="6iY-JH-ug6">
+                                        <rect key="frame" x="0.0" y="28" width="414" height="43.5"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="6iY-JH-ug6" id="drn-Ka-QI5">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Aq0-SW-TMt">
+                                <rect key="frame" x="159" y="32" width="102" height="36"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <state key="normal" title="参加させる"/>
+                                <connections>
+                                    <action selector="addUserToGroup" destination="0dk-1q-DQK" eventType="touchUpInside" id="YSg-qI-6E5"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <viewLayoutGuide key="safeArea" id="1pF-co-TGX"/>
+                    </view>
+                    <connections>
+                        <outlet property="tableView" destination="U4u-NR-na3" id="MOv-48-1h2"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="r6i-wI-VVf" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2728.985507246377" y="79.6875"/>
+        </scene>
+        <!--Chat View Controller-->
+        <scene sceneID="znn-Tq-1fo">
+            <objects>
+                <viewController storyboardIdentifier="ChatRoom" modalPresentationStyle="fullScreen" id="Lsu-kr-G6W" customClass="ChatViewController" customModule="ChatTest2" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="FIB-Lt-4yT">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ncx-cq-FyW">
+                                <rect key="frame" x="0.0" y="772" width="414" height="90"/>
+                                <subviews>
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="797-Ra-Igl">
+                                        <rect key="frame" x="16" y="16" width="327" height="58"/>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                        <color key="textColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                    </textView>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ooe-eT-sYG">
+                                        <rect key="frame" x="351" y="30" width="46" height="30"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="46" id="iYU-YN-aB8"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="30"/>
+                                        <state key="normal" title="≫"/>
+                                        <connections>
+                                            <action selector="tappedSend" destination="Lsu-kr-G6W" eventType="touchUpInside" id="qad-aQ-6tI"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <constraints>
+                                    <constraint firstItem="797-Ra-Igl" firstAttribute="leading" secondItem="ncx-cq-FyW" secondAttribute="leading" constant="16" id="1XR-uk-tNj"/>
+                                    <constraint firstItem="Ooe-eT-sYG" firstAttribute="leading" secondItem="797-Ra-Igl" secondAttribute="trailing" constant="8" id="Lqw-jA-mTx"/>
+                                    <constraint firstItem="Ooe-eT-sYG" firstAttribute="top" secondItem="ncx-cq-FyW" secondAttribute="top" constant="30" id="RC0-VP-GZI"/>
+                                    <constraint firstAttribute="height" constant="90" id="YBm-s5-7UB"/>
+                                    <constraint firstAttribute="bottom" secondItem="Ooe-eT-sYG" secondAttribute="bottom" constant="30" id="YQh-ry-1iW"/>
+                                    <constraint firstItem="797-Ra-Igl" firstAttribute="top" secondItem="ncx-cq-FyW" secondAttribute="top" constant="16" id="dNx-gS-i3m"/>
+                                    <constraint firstAttribute="trailing" secondItem="Ooe-eT-sYG" secondAttribute="trailing" constant="17" id="ehO-e8-uoi"/>
+                                    <constraint firstAttribute="bottom" secondItem="797-Ra-Igl" secondAttribute="bottom" constant="16" id="mWZ-N1-Hmx"/>
+                                </constraints>
+                            </view>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="m4r-gg-KBs">
+                                <rect key="frame" x="0.0" y="88" width="414" height="684"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="0oF-mz-qGx">
+                                        <rect key="frame" x="0.0" y="28" width="414" height="43.5"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="0oF-mz-qGx" id="t7L-Rr-B57">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="ncx-cq-FyW" firstAttribute="trailing" secondItem="bSP-lg-0D9" secondAttribute="trailing" id="0Jj-Qb-CRA"/>
+                            <constraint firstItem="ncx-cq-FyW" firstAttribute="bottom" secondItem="bSP-lg-0D9" secondAttribute="bottom" id="TCH-6g-Twp"/>
+                            <constraint firstItem="ncx-cq-FyW" firstAttribute="top" secondItem="m4r-gg-KBs" secondAttribute="bottom" id="bCq-6j-3VY"/>
+                            <constraint firstItem="m4r-gg-KBs" firstAttribute="leading" secondItem="bSP-lg-0D9" secondAttribute="leading" id="fvq-tt-I9W"/>
+                            <constraint firstItem="m4r-gg-KBs" firstAttribute="top" secondItem="bSP-lg-0D9" secondAttribute="top" id="goZ-6R-DiZ"/>
+                            <constraint firstItem="ncx-cq-FyW" firstAttribute="leading" secondItem="bSP-lg-0D9" secondAttribute="leading" id="lgS-zs-JhY"/>
+                            <constraint firstItem="m4r-gg-KBs" firstAttribute="trailing" secondItem="bSP-lg-0D9" secondAttribute="trailing" id="ryI-yf-Imq"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="bSP-lg-0D9"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="kMS-f3-oyt"/>
+                    <connections>
+                        <outlet property="tableView" destination="m4r-gg-KBs" id="dc5-vd-KbH"/>
+                        <outlet property="textView" destination="797-Ra-Igl" id="qJA-Zx-fw7"/>
+                        <segue destination="0dk-1q-DQK" kind="presentation" identifier="UserList" id="jYd-04-5yK"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="zjN-dc-zbb" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1776.8115942028987" y="79.6875"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="3O2-fa-nJH">
+            <objects>
+                <navigationController storyboardIdentifier="RootNavigationController" automaticallyAdjustsScrollViewInsets="NO" modalPresentationStyle="fullScreen" id="eJe-Zz-UMf" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="UYW-Xj-eAK">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="oI8-6Y-Kmb" kind="relationship" relationship="rootViewController" id="3fQ-36-Dcp"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="5Tx-oe-mv3" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-52.173913043478265" y="79.6875"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="plus" catalog="system" width="128" height="113"/>
+    </resources>
+</document>

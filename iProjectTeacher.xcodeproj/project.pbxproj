@@ -31,6 +31,11 @@
 		04A7E97525AF2B4A00C0F43C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 04A7E97425AF2B4A00C0F43C /* Assets.xcassets */; };
 		04A7E97825AF2B4A00C0F43C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 04A7E97625AF2B4A00C0F43C /* LaunchScreen.storyboard */; };
 		04A7E98425AF2D0500C0F43C /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04A7E98325AF2D0500C0F43C /* Extensions.swift */; };
+		04A841D825C5790A00469B5E /* Opening1ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04A841D425C5790A00469B5E /* Opening1ViewController.swift */; };
+		04A841D925C5790A00469B5E /* Opening2ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04A841D525C5790A00469B5E /* Opening2ViewController.swift */; };
+		04A841DA25C5790A00469B5E /* Opening.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 04A841D625C5790A00469B5E /* Opening.storyboard */; };
+		04A841DB25C5790A00469B5E /* ExtensionForScreenSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04A841D725C5790A00469B5E /* ExtensionForScreenSize.swift */; };
+		04A841DD25C5796000469B5E /* SignIn.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 04A841DC25C5796000469B5E /* SignIn.storyboard */; };
 		04EA678F25BC8A8F005F0D06 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04EA678E25BC8A8F005F0D06 /* User.swift */; };
 		B123C8D481952C9E0A702E92 /* Pods_iProjectTeacher.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D3759B1903BBE7A837BFD9A5 /* Pods_iProjectTeacher.framework */; };
 /* End PBXBuildFile section */
@@ -62,6 +67,11 @@
 		04A7E97725AF2B4A00C0F43C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		04A7E97925AF2B4A00C0F43C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		04A7E98325AF2D0500C0F43C /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		04A841D425C5790A00469B5E /* Opening1ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Opening1ViewController.swift; sourceTree = "<group>"; };
+		04A841D525C5790A00469B5E /* Opening2ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Opening2ViewController.swift; sourceTree = "<group>"; };
+		04A841D625C5790A00469B5E /* Opening.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Opening.storyboard; sourceTree = "<group>"; };
+		04A841D725C5790A00469B5E /* ExtensionForScreenSize.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExtensionForScreenSize.swift; sourceTree = "<group>"; };
+		04A841DC25C5796000469B5E /* SignIn.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SignIn.storyboard; sourceTree = "<group>"; };
 		04EA678E25BC8A8F005F0D06 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		D3759B1903BBE7A837BFD9A5 /* Pods_iProjectTeacher.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_iProjectTeacher.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DA086042A27D7B93DB7D0EC3 /* Pods-iProjectTeacher.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iProjectTeacher.debug.xcconfig"; path = "Target Support Files/Pods-iProjectTeacher/Pods-iProjectTeacher.debug.xcconfig"; sourceTree = "<group>"; };
@@ -150,17 +160,31 @@
 			isa = PBXGroup;
 			children = (
 				04845C4525BC76F80032B567 /* Chat */,
+				04A841D325C5790A00469B5E /* Open */,
 				04A7E96B25AF2B4900C0F43C /* AppDelegate.swift */,
 				04A7E96D25AF2B4900C0F43C /* SceneDelegate.swift */,
 				04A7E96F25AF2B4900C0F43C /* ViewController.swift */,
 				04EA678E25BC8A8F005F0D06 /* User.swift */,
 				04A7E97125AF2B4900C0F43C /* Main.storyboard */,
+				04A841DC25C5796000469B5E /* SignIn.storyboard */,
 				04A7E98325AF2D0500C0F43C /* Extensions.swift */,
 				04A7E97425AF2B4A00C0F43C /* Assets.xcassets */,
 				04A7E97625AF2B4A00C0F43C /* LaunchScreen.storyboard */,
 				04A7E97925AF2B4A00C0F43C /* Info.plist */,
 			);
 			path = iProjectTeacher;
+			sourceTree = "<group>";
+		};
+		04A841D325C5790A00469B5E /* Open */ = {
+			isa = PBXGroup;
+			children = (
+				04A841D425C5790A00469B5E /* Opening1ViewController.swift */,
+				04A841D525C5790A00469B5E /* Opening2ViewController.swift */,
+				04A841D625C5790A00469B5E /* Opening.storyboard */,
+				04A841D725C5790A00469B5E /* ExtensionForScreenSize.swift */,
+			);
+			name = Open;
+			path = Chat/Open;
 			sourceTree = "<group>";
 		};
 		4BCE1EAC3475CBE8D25AB8B3 /* Pods */ = {
@@ -244,7 +268,9 @@
 				04A7E97525AF2B4A00C0F43C /* Assets.xcassets in Resources */,
 				04845C5F25BC76F80032B567 /* MyChatViewCell.xib in Resources */,
 				04845C6325BC76F80032B567 /* ChatRoomInputView.xib in Resources */,
+				04A841DA25C5790A00469B5E /* Opening.storyboard in Resources */,
 				04A7E97325AF2B4900C0F43C /* Main.storyboard in Resources */,
+				04A841DD25C5796000469B5E /* SignIn.storyboard in Resources */,
 				04845C5E25BC76F80032B567 /* YourGroupChatViewCell.xib in Resources */,
 				04845C6725BC76F80032B567 /* Chat.storyboard in Resources */,
 				04845C5C25BC76F80032B567 /* YourChatViewCell.xib in Resources */,
@@ -303,7 +329,9 @@
 				04845C5B25BC76F80032B567 /* MyChatViewCell.swift in Sources */,
 				04845C6525BC76F80032B567 /* Chat.swift in Sources */,
 				04A7E97025AF2B4900C0F43C /* ViewController.swift in Sources */,
+				04A841D825C5790A00469B5E /* Opening1ViewController.swift in Sources */,
 				04A7E96C25AF2B4900C0F43C /* AppDelegate.swift in Sources */,
+				04A841D925C5790A00469B5E /* Opening2ViewController.swift in Sources */,
 				04845C5D25BC76F80032B567 /* YourChatViewCell.swift in Sources */,
 				04845C6925BC76F80032B567 /* SearchUserForCreateGroupViewController.swift in Sources */,
 				04A7E96E25AF2B4900C0F43C /* SceneDelegate.swift in Sources */,
@@ -312,6 +340,7 @@
 				04845C6A25BC76F80032B567 /* GoToChatExtension.swift in Sources */,
 				04845C6225BC76F80032B567 /* MyBalloonView.swift in Sources */,
 				04845C6825BC76F80032B567 /* CreateGroupViewController.swift in Sources */,
+				04A841DB25C5790A00469B5E /* ExtensionForScreenSize.swift in Sources */,
 				04845C6425BC76F80032B567 /* YourBalloonView.swift in Sources */,
 				04845C6125BC76F80032B567 /* ChatRoomInputView.swift in Sources */,
 				04845C5A25BC76F80032B567 /* ChatViewController.swift in Sources */,

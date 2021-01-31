@@ -11,11 +11,6 @@ import NCMB
 
 class Opening2ViewController: UIViewController {
     
-    var sizeX: CGFloat!
-    var sizeY: CGFloat!
-    var marginTop: CGFloat!
-    var marginBottom: CGFloat!
-    
     @IBOutlet var label: UILabel!
 
     override func viewDidLoad() {
@@ -26,12 +21,14 @@ class Opening2ViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
 //        TabBarやNavigationBarがある時の画面サイズの取得
-        screenSizeG["NnEt"] = Size([sizeX, sizeY - marginTop - self.view.safeAreaInsets.bottom])
-        screenSizeG["EnNt"] = Size([sizeX, sizeY - marginBottom - self.view.safeAreaInsets.top])
-        screenSizeG["EnEt"] = Size([sizeX, sizeY - self.view.safeAreaInsets.top - self.view.safeAreaInsets.bottom])
-        print("NnEt", screenSizeG["NnEt"]!.size)
-        print("EnNt", screenSizeG["EnNt"]!.size)
-        print("EnEt", screenSizeG["EnEt"]!.size)
+        let size = screenSizeG["NnNt"]!
+        
+        screenSizeG["NnEt"] = Size(tm: size.topMargin, bm: self.view.safeAreaInsets.bottom)
+        screenSizeG["EnNt"] = Size(tm: self.view.safeAreaInsets.top, bm: size.bottomMargin)
+        screenSizeG["EnEt"] = Size(tm: self.view.safeAreaInsets.top, bm: self.view.safeAreaInsets.bottom)
+        print("NnEt", screenSizeG["NnEt"]!.viewHeight)
+        print("EnNt", screenSizeG["EnNt"]!.viewHeight)
+        print("EnEt", screenSizeG["EnEt"]!.viewHeight)
         
         self.tabBarController?.tabBar.alpha = 0.f
         self.navigationController?.navigationBar.alpha = 0.f

@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		041FF1B425C82F16003F2AF5 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 041FF1B325C82F16003F2AF5 /* SignInViewController.swift */; };
+		041FF1B525C82F16003F2AF5 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 041FF1B225C82F16003F2AF5 /* SignUpViewController.swift */; };
 		04845C5A25BC76F80032B567 /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04845C4625BC76F80032B567 /* ChatViewController.swift */; };
 		04845C5B25BC76F80032B567 /* MyChatViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04845C4925BC76F80032B567 /* MyChatViewCell.swift */; };
 		04845C5C25BC76F80032B567 /* YourChatViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04845C4A25BC76F80032B567 /* YourChatViewCell.xib */; };
@@ -41,6 +43,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		041FF1B225C82F16003F2AF5 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
+		041FF1B325C82F16003F2AF5 /* SignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
 		04845C4625BC76F80032B567 /* ChatViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
 		04845C4925BC76F80032B567 /* MyChatViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyChatViewCell.swift; sourceTree = "<group>"; };
 		04845C4A25BC76F80032B567 /* YourChatViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = YourChatViewCell.xib; sourceTree = "<group>"; };
@@ -176,6 +180,8 @@
 				04A7E96D25AF2B4900C0F43C /* SceneDelegate.swift */,
 				04A7E96F25AF2B4900C0F43C /* ViewController.swift */,
 				04EA678E25BC8A8F005F0D06 /* User.swift */,
+				041FF1B325C82F16003F2AF5 /* SignInViewController.swift */,
+				041FF1B225C82F16003F2AF5 /* SignUpViewController.swift */,
 				04A7E97125AF2B4900C0F43C /* Main.storyboard */,
 				04A841DC25C5796000469B5E /* SignIn.storyboard */,
 				04A7E98325AF2D0500C0F43C /* Extensions.swift */,
@@ -325,6 +331,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				041FF1B525C82F16003F2AF5 /* SignUpViewController.swift in Sources */,
 				04845C5B25BC76F80032B567 /* MyChatViewCell.swift in Sources */,
 				04845C6525BC76F80032B567 /* Chat.swift in Sources */,
 				04A7E97025AF2B4900C0F43C /* ViewController.swift in Sources */,
@@ -339,6 +346,7 @@
 				04845C6225BC76F80032B567 /* MyBalloonView.swift in Sources */,
 				04845C6825BC76F80032B567 /* CreateGroupViewController.swift in Sources */,
 				049C840525C695F000D4D380 /* Opening1ViewController.swift in Sources */,
+				041FF1B425C82F16003F2AF5 /* SignInViewController.swift in Sources */,
 				04845C6425BC76F80032B567 /* YourBalloonView.swift in Sources */,
 				04845C6125BC76F80032B567 /* ChatRoomInputView.swift in Sources */,
 				049C840625C695F000D4D380 /* Opening2ViewController.swift in Sources */,

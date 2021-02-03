@@ -11,24 +11,22 @@ import NCMB
 
 class SignUpViewController: UIViewController, UITextFieldDelegate {
     
-    @IBOutlet var nameTextField: UITextField!
-    @IBOutlet var univnameTextField: UITextField!
+    @IBOutlet var NameTextField: UITextField!
     @IBOutlet var departmentTextField: UITextField!
     @IBOutlet var emailunivTextField: UITextField!
     @IBOutlet var subjectTextField: UITextField!
-    @IBOutlet var userTextField: UITextField!
+    @IBOutlet var userIdTextField: UITextField!
     @IBOutlet var passwordTextField: UITextField!
     @IBOutlet var confirmTextField: UITextField!
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        nameTextField.delegate = self
-        univnameTextField.delegate = self
+        NameTextField.delegate = self
         departmentTextField.delegate = self
         emailunivTextField.delegate = self
         subjectTextField.delegate = self
-        userTextField.delegate = self
+        userIdTextField.delegate = self
         passwordTextField.delegate = self
         confirmTextField.delegate = self
         
@@ -42,6 +40,11 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
         return true
     }
     
+    @IBAction func signUp() {
+        let user = NCMBUser()
+        
+        user.userName = NameTextField.text!
+    }
 
 
 }

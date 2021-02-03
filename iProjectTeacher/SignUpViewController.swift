@@ -7,24 +7,41 @@
 //
 
 import UIKit
+import NCMB
 
-class SignUpViewController: UIViewController {
+class SignUpViewController: UIViewController, UITextFieldDelegate {
+    
+    @IBOutlet var nameTextField: UITextField!
+    @IBOutlet var univnameTextField: UITextField!
+    @IBOutlet var departmentTextField: UITextField!
+    @IBOutlet var emailunivTextField: UITextField!
+    @IBOutlet var subjectTextField: UITextField!
+    @IBOutlet var userTextField: UITextField!
+    @IBOutlet var passwordTextField: UITextField!
+    @IBOutlet var confirmTextField: UITextField!
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+        nameTextField.delegate = self
+        univnameTextField.delegate = self
+        departmentTextField.delegate = self
+        emailunivTextField.delegate = self
+        subjectTextField.delegate = self
+        userTextField.delegate = self
+        passwordTextField.delegate = self
+        confirmTextField.delegate = self
+        
+    }
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
     }
     
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }

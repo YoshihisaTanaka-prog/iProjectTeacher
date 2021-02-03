@@ -10,13 +10,13 @@ import UIKit
 import NCMB
 class SignInViewController: UIViewController, UITextFieldDelegate {
     
-    @IBOutlet var userIdTextField: UITextField!
+    @IBOutlet var NameTextField: UITextField!
     @IBOutlet var passwordTextField: UITextField!
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        userIdTextField.delegate = self
+        NameTextField.delegate = self
         passwordTextField.delegate = self
     }
     
@@ -31,9 +31,9 @@ class SignInViewController: UIViewController, UITextFieldDelegate {
     
     @IBAction func signIn() {
         
-        if (userIdTextField.text?.count)! > 0 &&
+        if (NameTextField.text?.count)! > 0 &&
             (passwordTextField.text?.count)! > 0 {
-        NCMBUser.logInWithUsername(inBackground: userIdTextField.text!, password: passwordTextField.text!) { (user, error) in
+        NCMBUser.logInWithUsername(inBackground: NameTextField.text!, password: passwordTextField.text!) { (user, error) in
        
             if error != nil {
                 print(error)

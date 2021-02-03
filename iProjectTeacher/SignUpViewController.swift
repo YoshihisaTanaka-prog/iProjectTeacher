@@ -44,7 +44,6 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
         let user = NCMBUser()
         
         user.userName = NameTextField.text!
-    }
-
+        user 
 
 }

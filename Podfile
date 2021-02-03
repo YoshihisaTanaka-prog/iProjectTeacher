@@ -7,5 +7,7 @@ target 'iProjectTeacher' do
 
   # Pods for iProjectTeacher
   pod 'NCMB', :git => 'https://github.com/NIFCLOUD-mbaas/ncmb_ios.git'
+  
+  pod 'Cosmos'
 
 end

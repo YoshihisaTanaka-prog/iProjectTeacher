@@ -1,8 +1,14 @@
 PODS:
+  - Cosmos (23.0.0)
   - NCMB (3.1.0)
 
 DEPENDENCIES:
+  - Cosmos
   - NCMB (from `https://github.com/NIFCLOUD-mbaas/ncmb_ios.git`)
+
+SPEC REPOS:
+  trunk:
+    - Cosmos
 
 EXTERNAL SOURCES:
   NCMB:
@@ -14,8 +20,9 @@ CHECKOUT OPTIONS:
     :git: https://github.com/NIFCLOUD-mbaas/ncmb_ios.git
 
 SPEC CHECKSUMS:
+  Cosmos: b5c6a9a637e28a061b54c8f8b1d8529d7d4db73f
   NCMB: c308972109137bf523ec1830bac16de6a31c25f4
 
-PODFILE CHECKSUM: d040cd32ee000076020ff75dc188432cf753317f
+PODFILE CHECKSUM: 32acc18eafeb1d6b32b49c11507b4f65a2c81486
 
 COCOAPODS: 1.10.0

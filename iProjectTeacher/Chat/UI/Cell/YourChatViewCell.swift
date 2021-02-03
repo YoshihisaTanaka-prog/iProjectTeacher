@@ -7,9 +7,16 @@
 //
 
 import UIKit
+import NCMB
 
+protocol YourChatviewCellDelegate {
+        func didTapLikeButton(tableViewCell: UITableViewCell, button: UIButton)
+        func didTapMenuButton(tableViewCell: UITableViewCell, button: UIButton)
+        func didTapCommentsButton(tableViewCell: UITableViewCell, button: UIButton)
+}
 class YourChatViewCell: UITableViewCell {
-	
+
+    
 	@IBOutlet weak var textView: UITextView!
 	@IBOutlet weak var timeLabel: UILabel!
 	@IBOutlet weak var textViewWidthConstraint: NSLayoutConstraint!
@@ -28,6 +35,11 @@ class YourChatViewCell: UITableViewCell {
 	
 }
 
+
+    func like(button: UIButton) {
+           self.delegate?.didTapLikeButton(tableViewCell: self, button: button)
+       }
+
 extension YourChatViewCell {
 	func updateCell(text: String, time: String) {
 		self.textView?.text = text
@@ -40,5 +52,7 @@ extension YourChatViewCell {
 		}
 		textViewWidthConstraint.constant = rect.width//テキストが短くても最小のビューの幅を30とする
 	}
+    
+    
 }
 

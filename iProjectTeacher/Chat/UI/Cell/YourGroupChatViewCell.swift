@@ -29,6 +29,8 @@ class YourGroupChatViewCell: UITableViewCell {
     
 }
 
+ 
+
 extension YourGroupChatViewCell {
     func updateCell(text: String, time: String) {
         self.textView?.text = text
@@ -41,4 +43,6 @@ extension YourGroupChatViewCell {
         }
         textViewWidthConstraint.constant = rect.width//テキストが短くても最小のビューの幅を30とする
     }
+    
+    
 }

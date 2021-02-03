@@ -9,14 +9,16 @@
 import UIKit
 import NCMB
 
-class SearchUserForCreateGroupViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class SearchUserForCreateGroupViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate {
     
     var users: [NCMBUser] = []
     var selectedUserNumber:[Int] = []
     var selectedChatRoom: ChatRoom!
-    
+    var searchbar :UISearchBar!
     
     @IBOutlet var tableView: UITableView!
+    @IBOutlet var searchUserTableView: UITableView!
+
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,6 +26,17 @@ class SearchUserForCreateGroupViewController: UIViewController, UITableViewDataS
         tableView.delegate = self
         tableView.tableFooterView = UIView()
         loadUser()
+        setSearchBar()
+                
+                searchUserTableView.dataSource = self
+                searchUserTableView.delegate = self
+                
+                // カスタムセルの登録
+                let nib = UINib(nibName: "SearchUserTableViewCell", bundle: Bundle.main)
+                searchUserTableView.register(nib, forCellReuseIdentifier: "Cell")
+                
+                // 余計な線を消す
+                searchUserTableView.tableFooterView = UIView()
         // Do any additional setup after loading the view.
     }
     
@@ -109,5 +122,34 @@ class SearchUserForCreateGroupViewController: UIViewController, UITableViewDataS
             }
         })
     }
+
+    func setSearchBar(){
+         //NavigationBarにSearchBarをセット
+        if let navigationBarFrame = self.SearchUserForCreateGroupController?.navigationController.bounds {
+                   let searchBar: UISearchBar = UISearchBar(frame: navigationBarFrame)
+                   searchBar.delegate = self
+                   searchBar.placeholder = "ユーザーを検索"
+                   searchBar.autocapitalizationType = UITextAutocapitalizationType.none
+                   navigationItem.titleView = searchBar
+                   navigationItem.titleView?.frame = searchBar.frame
+    }
+    func searchBarShouldBeginEditing(_ searchBar: UISearchBar) -> Bool {
+            searchBar.setShowsCancelButton(true, animated: true)
+            return true
+        }
+        
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        loadUser(searchText: nil)
+        searchBar.showsCancelButton = false
+        searchBar.resignFirstResponder()
+    }
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        loadUser(searchText: searchBar.text)
+    }
+    
+}
+    
+
 
 }

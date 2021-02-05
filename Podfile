@@ -9,5 +9,11 @@ target 'iProjectTeacher' do
   pod 'NCMB', :git => 'https://github.com/NIFCLOUD-mbaas/ncmb_ios.git'
   
   pod 'Cosmos'
+  
+  pod 'FSCalendar'
+  
+  pod 'CalculateCalendarLogic'
+  
+  pod 'RealmSwift'
 
 end

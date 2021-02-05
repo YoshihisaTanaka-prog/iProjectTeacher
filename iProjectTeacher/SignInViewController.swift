@@ -36,7 +36,7 @@ class SignInViewController: UIViewController, UITextFieldDelegate {
         NCMBUser.logInWithUsername(inBackground: NameTextField.text!, password: passwordTextField.text!) { (user, error) in
        
             if error != nil {
-                print(error)
+                self.showOkAlert(title: "Error", message: error!.localizedDescription)
             }else{
                 //ログイン成功
                 let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)

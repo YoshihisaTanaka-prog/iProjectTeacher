@@ -41,9 +41,34 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
     }
     
     @IBAction func signUp() {
-        let user = NCMBUser()
-        
-        user.userName = NameTextField.text!
-        user 
+        if checkDomain(emailunivTextField.text!) {
+            let user = NCMBUser()
+            
+            user.userName = NameTextField.text!
+//    //        こうすることでメールを用いた本人確認ができるらしい。そのほかのデータ（名前、学部などをどうするのかについては考え中）
+//            var error: NSError? = nil
+//            NCMBUser.requestAuthenticationMail(emailunivTextField.text!, error: &error)
+//            if(error == nil){
+//                showOkAlert(title: "報告", message: "確認メールを送信いたします。")
+//            }
+//            else{
+//                showOkAlert(title: "Error", message: error!.localizedDescription)
+//            }
+        }
+        else{
+            showOkAlert(title: "エラー", message: "「" + emailunivTextField.text! + "」は未登録のドメインが含まれています。確認作業を行いますのでしばらくお待ちください。")
+        }
+    }
 
+}
+
+extension SignUpViewController{
+    func checkDomain(_ mailAdress: String) -> Bool {
+        //ここは背景が作ります。
+        let partition = mailAdress.components(separatedBy: "@")
+        if(partition.count == 1){
+            return false
+        }
+        return true
+    }
 }

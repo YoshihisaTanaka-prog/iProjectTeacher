@@ -1,6 +1,0 @@
-framework module SkyWay {
-  umbrella header "SkyWay.h"
-
-  export *
-  module * { export * }
-}

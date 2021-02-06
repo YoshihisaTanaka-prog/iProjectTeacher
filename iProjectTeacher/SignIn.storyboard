@@ -17,7 +17,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="ユーザーID" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="GsN-CJ-qE9">
+                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="名前" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="GsN-CJ-qE9">
                                 <rect key="frame" x="60" y="185" width="295" height="34"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -68,8 +68,8 @@
                     </view>
                     <navigationItem key="navigationItem" title="ログイン" id="PGg-R9-Ez9"/>
                     <connections>
+                        <outlet property="NameTextField" destination="GsN-CJ-qE9" id="jJz-3Q-YhB"/>
                         <outlet property="passwordTextField" destination="azt-L4-UGI" id="hgH-p8-DBe"/>
-                        <outlet property="userIdTextField" destination="GsN-CJ-qE9" id="KCj-V6-Jtf"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8xr-Lx-MVo" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

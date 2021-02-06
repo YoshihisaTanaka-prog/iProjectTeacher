@@ -14,6 +14,7 @@ protocol YourChatviewCellDelegate {
         func didTapMenuButton(tableViewCell: UITableViewCell, button: UIButton)
         func didTapCommentsButton(tableViewCell: UITableViewCell, button: UIButton)
 }
+
 class YourChatViewCell: UITableViewCell {
 
     
@@ -32,13 +33,12 @@ class YourChatViewCell: UITableViewCell {
 		super.setSelected(selected, animated: animated)
 		// Configure the view for the selected state
 	}
+    
+//    func like(button: UIButton) {
+//        self.delegate?.didTapLikeButton(tableViewCell: self, button: button)
+//    }
 	
 }
-
-
-    func like(button: UIButton) {
-           self.delegate?.didTapLikeButton(tableViewCell: self, button: button)
-       }
 
 extension YourChatViewCell {
 	func updateCell(text: String, time: String) {

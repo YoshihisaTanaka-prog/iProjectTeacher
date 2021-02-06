@@ -302,18 +302,17 @@ extension ChatViewController: UITableViewDelegate {
    
 }
 
-extension ChatViewController: UISearchBarDelegate{
-    func setSearchBar(){
-      // NavigationBarにSearchBarをセット
-             if let navigationBarFrame = self.ChatviewController?.bounds {
-                 let searchBar: UISearchBar = UISearchBar(frame: navigationBarFrame)
-                 searchBar.delegate = self
-                 searchBar.placeholder = "ユーザーを検索"
-                 searchBar.autocapitalizationType = UITextAutocapitalizationType.none
-                 navigationItem.titleView = searchBar
-                 navigationItem.titleView?.frame = searchBar.frame
-                }
-
-            }
-
-}
+//extension ChatViewController: UISearchBarDelegate{
+//    func setSearchBar(){
+//      // NavigationBarにSearchBarをセット
+//        if let navigationBarFrame = self.ChatviewController?.bounds {
+//            let searchBar: UISearchBar = UISearchBar(frame: navigationBarFrame)
+//            searchBar.delegate = self
+//            searchBar.placeholder = "ユーザーを検索"
+//            searchBar.autocapitalizationType = UITextAutocapitalizationType.none
+//            navigationItem.titleView = searchBar
+//            navigationItem.titleView?.frame = searchBar.frame
+//        }
+//    }
+//
+//}

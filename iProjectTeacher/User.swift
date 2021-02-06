@@ -10,20 +10,21 @@ import Foundation
 import UIKit
 import NCMB
 
-// userImages[userのobjectId]で画像を取り出せるようにした。
-var userImages: Dictionary<String, UIImage?> = [:]
-
 class User {
     var userId: String
     var userName: String
-//    var userRole: String
+    var isTeacher: Bool
     var oneOnOneSerch: String
+    var userImage: UIImage?
+    var teacherParameter: TeacherParameter?
+    var studentParameter: StudentParameter?
+    
     
     init(_ user: NCMBUser) {
         
         self.userId = user.objectId
         self.userName = user.object(forKey: "userName") as! String
-//        self.userRole = user.object(forKey: "userRole") as! String
+        self.isTeacher = user.object(forKey: "isTeacher") as! Bool
         
 //        個人チャットを検索するためのパラメータ
         if (NCMBUser.current()?.objectId)! < self.userId {
@@ -33,21 +34,46 @@ class User {
             oneOnOneSerch = self.userId + "-" + (NCMBUser.current()?.objectId)!
         }
         
+//        ユーザの詳細データ
+        let parameter = user.object(forKey: "parameter") as! NCMBObject
+        if(self.isTeacher){
+            self.teacherParameter = TeacherParameter(parameter)
+        }
+        else{
+            self.studentParameter = StudentParameter(parameter)
+        }
+        
 //        画像の設定
-        userImages.updateValue(nil, forKey: user.objectId)
         let imageUrl = user.object(forKey: "imageURL") as? String
         if( imageUrl != nil ){
             let file = NCMBFile.file(withName: imageUrl!, data: nil) as! NCMBFile
             file.getDataInBackground { (data, error) in
                 if error != nil {
-                }
-                else {
+                } else {
                     if data != nil {
                         let image = UIImage(data: data!)
-                        userImages.updateValue(image, forKey: user.objectId)
+                        self.userImage = image
                     }
                 }
             }
         }
+    }
+}
+
+class TeacherParameter{
+//    記入例
+    var aaa: String
+    init(_ parameter: NCMBObject) {
+        self.aaa = parameter.object(forKey: "aaa") as! String
+    }
+}
+
+class StudentParameter{
+    var SchoolName: String
+    var selection: String
+    
+    init(_ parameter: NCMBObject) {
+        self.SchoolName = parameter.object(forKey: "SchoolName") as! String
+        self.selection = parameter.object(forKey: "selection") as! String
     }
 }

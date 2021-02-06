@@ -26,7 +26,7 @@ class SearchUserForCreateGroupViewController: UIViewController, UITableViewDataS
         tableView.delegate = self
         tableView.tableFooterView = UIView()
         loadUser()
-        setSearchBar()
+//        setSearchBar()
                 
                 searchUserTableView.dataSource = self
                 searchUserTableView.delegate = self
@@ -123,33 +123,30 @@ class SearchUserForCreateGroupViewController: UIViewController, UITableViewDataS
         })
     }
 
-    func setSearchBar(){
-         //NavigationBarにSearchBarをセット
-        if let navigationBarFrame = self.SearchUserForCreateGroupController?.navigationController.bounds {
-                   let searchBar: UISearchBar = UISearchBar(frame: navigationBarFrame)
-                   searchBar.delegate = self
-                   searchBar.placeholder = "ユーザーを検索"
-                   searchBar.autocapitalizationType = UITextAutocapitalizationType.none
-                   navigationItem.titleView = searchBar
-                   navigationItem.titleView?.frame = searchBar.frame
-    }
-    func searchBarShouldBeginEditing(_ searchBar: UISearchBar) -> Bool {
-            searchBar.setShowsCancelButton(true, animated: true)
-            return true
-        }
-        
-    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
-        loadUser(searchText: nil)
-        searchBar.showsCancelButton = false
-        searchBar.resignFirstResponder()
-    }
+//    func setSearchBar(){
+//         //NavigationBarにSearchBarをセット
+//        if let navigationBarFrame = self.SearchUserForCreateGroupController?.navigationController.bounds {
+//                   let searchBar: UISearchBar = UISearchBar(frame: navigationBarFrame)
+//                   searchBar.delegate = self
+//                   searchBar.placeholder = "ユーザーを検索"
+//                   searchBar.autocapitalizationType = UITextAutocapitalizationType.none
+//                   navigationItem.titleView = searchBar
+//                   navigationItem.titleView?.frame = searchBar.frame
+//        }
+//    }
+//    func searchBarShouldBeginEditing(_ searchBar: UISearchBar) -> Bool {
+//            searchBar.setShowsCancelButton(true, animated: true)
+//            return true
+//        }
+//        
+//    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+//        loadUser(searchText: nil)
+//        searchBar.showsCancelButton = false
+//        searchBar.resignFirstResponder()
+//    }
+//    
+//    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+//        loadUser(searchText: searchBar.text)
+//    }
     
-    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        loadUser(searchText: searchBar.text)
-    }
-    
-}
-    
-
-
 }

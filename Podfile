@@ -6,6 +6,9 @@ target 'iProjectTeacher' do
   use_frameworks!
 
   # Pods for iProjectTeacher
+
+  pod 'SkyWay'
+
   pod 'NCMB', :git => 'https://github.com/NIFCLOUD-mbaas/ncmb_ios.git'
   
   pod 'Cosmos'

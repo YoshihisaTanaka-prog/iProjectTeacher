@@ -56,7 +56,7 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
 //            }
         }
         else{
-            showOkAlert(title: "エラー", message: "「" + emailunivTextField.text! + "」は未登録のドメインが含まれています。確認作業を行いますのでしばらくお待ちください。")
+            
         }
     }
 
@@ -67,6 +67,11 @@ extension SignUpViewController{
         //ここは背景が作ります。
         let partition = mailAdress.components(separatedBy: "@")
         if(partition.count == 1){
+            showOkAlert(title: "エラー", message: "メールアドレスが入力されていません。")
+            return false
+        }
+        if(false){
+            showOkAlert(title: "エラー", message: "「" + emailunivTextField.text! + "」は未登録のドメインが含まれています。確認作業を行いますのでしばらくお待ちください。")
             return false
         }
         return true

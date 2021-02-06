@@ -33,29 +33,15 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="clm-cu-QzR" customClass="FSCalendar">
-                                <rect key="frame" x="0.0" y="44" width="414" height="382"/>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2Me-jT-CM7" customClass="FSCalendar">
+                                <rect key="frame" x="0.0" y="44" width="414" height="319"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="382" id="WbP-sg-UPz"/>
-                                </constraints>
-                                <connections>
-                                    <outlet property="dataSource" destination="JbF-ey-fpy" id="DEq-f5-IRP"/>
-                                    <outlet property="delegate" destination="JbF-ey-fpy" id="7yZ-pq-33N"/>
-                                </connections>
                             </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="HVy-fI-OWa"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                        <constraints>
-                            <constraint firstItem="clm-cu-QzR" firstAttribute="trailing" secondItem="HVy-fI-OWa" secondAttribute="trailing" id="2Cl-Au-o5e"/>
-                            <constraint firstItem="clm-cu-QzR" firstAttribute="top" secondItem="HVy-fI-OWa" secondAttribute="top" id="8fM-MS-6mz"/>
-                            <constraint firstItem="clm-cu-QzR" firstAttribute="leading" secondItem="HVy-fI-OWa" secondAttribute="leading" id="iq8-qb-X5R"/>
-                        </constraints>
                     </view>
-                    <connections>
-                        <outlet property="calendar" destination="clm-cu-QzR" id="uob-gr-xej"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="o3n-iX-0Mj" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

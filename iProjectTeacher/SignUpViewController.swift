@@ -14,21 +14,15 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet var NameTextField: UITextField!
     @IBOutlet var departmentTextField: UITextField!
     @IBOutlet var emailunivTextField: UITextField!
-    @IBOutlet var subjectTextField: UITextField!
-    @IBOutlet var userIdTextField: UITextField!
-    @IBOutlet var passwordTextField: UITextField!
-    @IBOutlet var confirmTextField: UITextField!
-
+    @IBOutlet var furiganaTextField: UITextField!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         NameTextField.delegate = self
         departmentTextField.delegate = self
         emailunivTextField.delegate = self
-        subjectTextField.delegate = self
-        userIdTextField.delegate = self
-        passwordTextField.delegate = self
-        confirmTextField.delegate = self
+        furiganaTextField.delegate = self
         
     }
     override func didReceiveMemoryWarning() {
@@ -42,21 +36,22 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
     
     @IBAction func signUp() {
         if checkDomain(emailunivTextField.text!) {
-            let user = NCMBUser()
-            
-            user.userName = NameTextField.text!
-//    //        こうすることでメールを用いた本人確認ができるらしい。そのほかのデータ（名前、学部などをどうするのかについては考え中）
-//            var error: NSError? = nil
-//            NCMBUser.requestAuthenticationMail(emailunivTextField.text!, error: &error)
-//            if(error == nil){
-//                showOkAlert(title: "報告", message: "確認メールを送信いたします。")
-//            }
-//            else{
-//                showOkAlert(title: "Error", message: error!.localizedDescription)
-//            }
-        }
-        else{
-            
+    //        こうすることでメールを用いた本人確認ができるらしい。そのほかのデータ（名前、学部などをどうするのかについては考え中）
+            var error: NSError? = nil
+            let mail = emailunivTextField.text!
+            NCMBUser.requestAuthenticationMail(mail, error: &error)
+            if(error == nil){
+                showOkAlert(title: "報告", message: "確認メールを送信いたします。")
+                let ud = UserDefaults.standard
+                ud.set(true, forKey: mail + "isNeedToInputData")
+                ud.set(departmentTextField.text!, forKey: mail + "departments")
+                ud.set(NameTextField.text!, forKey: mail + "name")
+                ud.set(furiganaTextField.text!, forKey: mail + "furigana")
+                ud.synchronize()
+            }
+            else{
+                showOkAlert(title: "Error", message: error!.localizedDescription)
+            }
         }
     }
 

@@ -6,6 +6,7 @@ target 'iProjectTeacher' do
   use_frameworks!
 
   # Pods for iProjectTeacher
+
   pod 'NCMB', :git => 'https://github.com/NIFCLOUD-mbaas/ncmb_ios.git'
   
   pod 'Cosmos'
@@ -13,7 +14,5 @@ target 'iProjectTeacher' do
   pod 'FSCalendar'
   
   pod 'CalculateCalendarLogic'
-  
-  pod 'RealmSwift'
 
 end

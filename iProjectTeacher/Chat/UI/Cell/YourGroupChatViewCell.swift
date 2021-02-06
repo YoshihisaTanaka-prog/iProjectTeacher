@@ -7,16 +7,21 @@
 //
 
 import UIKit
-
+import Cosmos
 class YourGroupChatViewCell: UITableViewCell {
     
     @IBOutlet weak var textView: UITextView!
     @IBOutlet weak var timeLabel: UILabel!
     @IBOutlet weak var userNameLabel: UILabel!
     @IBOutlet weak var textViewWidthConstraint: NSLayoutConstraint!
+    @IBOutlet var cosmosView: CosmosView!
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        cosmosView.settings.totalStars = 5
+        // スター半分の評価ができるようにする
+        cosmosView.settings.fillMode = .half
+        
         self.backgroundColor = UIColor.clear
         self.textView.layer.cornerRadius = 15// 角を丸める
         self.addSubview(YourBalloonView(frame: CGRect(x: textView.frame.minX-10, y: textView.frame.minY-10, width: 50, height: 50)))//吹き出しのようにするためにビューを重ねる

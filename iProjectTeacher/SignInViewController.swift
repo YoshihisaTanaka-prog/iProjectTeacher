@@ -47,6 +47,16 @@ class SignInViewController: UIViewController, UITextFieldDelegate {
                 let ud = UserDefaults.standard
                 let mail = user!.mailAddress!
                 if( ud.bool(forKey: mail + "isNeedToInputData") ){
+                    
+                    //ACLオブジェクトを作成
+                    let acl = NCMBACL()
+                    //読み込み・検索を全開放
+                    acl.setPublicReadAccess(true)
+                    acl.setPublicWriteAccess(false)
+                    acl.setReadAccess(true, for: user)
+                    acl.setWriteAccess(true, for: user)
+                    user?.acl = acl
+                    
                     user?.userName = ud.string(forKey: mail + "name")
                     user?.setObject(ud.string(forKey: mail + "furigana") , forKey: "furigana")
                     user?.setObject(true, forKey: "isTeacher")

@@ -11,6 +11,9 @@ import NCMB
 
 class SignUpViewController: UIViewController, UITextFieldDelegate {
     
+    var domainList = Domains()
+    var wrongDomainList = Domains()
+    
     @IBOutlet var NameTextField: UITextField!
     @IBOutlet var departmentTextField: UITextField!
     @IBOutlet var emailunivTextField: UITextField!
@@ -18,6 +21,8 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        loadDomain()
 
         NameTextField.delegate = self
         departmentTextField.delegate = self
@@ -41,13 +46,16 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
             let mail = emailunivTextField.text!
             NCMBUser.requestAuthenticationMail(mail, error: &error)
             if(error == nil){
-                showOkAlert(title: "報告", message: "確認メールを送信いたします。")
+                self.showOkDismissAlert(title: "報告", message: "本人確認用のメールアドレスを送信いたします。しばらくお待ちください。")
+                
                 let ud = UserDefaults.standard
                 ud.set(true, forKey: mail + "isNeedToInputData")
                 ud.set(departmentTextField.text!, forKey: mail + "departments")
                 ud.set(NameTextField.text!, forKey: mail + "name")
                 ud.set(furiganaTextField.text!, forKey: mail + "furigana")
                 ud.synchronize()
+                let domain = emailunivTextField.text!.components(separatedBy: "@").last!
+                domainList.set(domain: domain, mail: emailunivTextField.text!)
             }
             else{
                 showOkAlert(title: "Error", message: error!.localizedDescription)
@@ -55,20 +63,4 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
         }
     }
 
-}
-
-extension SignUpViewController{
-    func checkDomain(_ mailAdress: String) -> Bool {
-        //ここは背景が作ります。
-        let partition = mailAdress.components(separatedBy: "@")
-        if(partition.count == 1){
-            showOkAlert(title: "エラー", message: "メールアドレスが入力されていません。")
-            return false
-        }
-        if(false){
-            showOkAlert(title: "エラー", message: "「" + emailunivTextField.text! + "」は未登録のドメインが含まれています。確認作業を行いますのでしばらくお待ちください。")
-            return false
-        }
-        return true
-    }
 }

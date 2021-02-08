@@ -67,6 +67,8 @@ class SignInViewController: UIViewController, UITextFieldDelegate {
                             let object = NCMBObject(className: "TeacherParameter")
                             object?.setObject(ud.string(forKey: mail + "departments"), forKey: "departments")
                             object?.setObject(user, forKey: "user")
+                            let collage = ud.object(forKey: mail + "collage") as! String
+                            object?.setObject(collage, forKey: "collage")
                             object?.saveInBackground({ (error) in
                                 if(error == nil){
                                     user?.setObject(object, forKey: "parameter")

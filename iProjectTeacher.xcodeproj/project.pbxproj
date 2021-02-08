@@ -64,6 +64,7 @@
 		04A841DD25C5796000469B5E /* SignIn.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 04A841DC25C5796000469B5E /* SignIn.storyboard */; };
 		04EA678F25BC8A8F005F0D06 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04EA678E25BC8A8F005F0D06 /* User.swift */; };
 		1B8124BD25CED3E700FDCF7F /* CalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B8124BC25CED3E700FDCF7F /* CalendarViewController.swift */; };
+		1BED6EBC25D1749200E912C6 /* Schedule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BED6EBB25D1749100E912C6 /* Schedule.swift */; };
 		B123C8D481952C9E0A702E92 /* Pods_iProjectTeacher.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D3759B1903BBE7A837BFD9A5 /* Pods_iProjectTeacher.framework */; };
 /* End PBXBuildFile section */
 
@@ -127,6 +128,7 @@
 		04A841DC25C5796000469B5E /* SignIn.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SignIn.storyboard; sourceTree = "<group>"; };
 		04EA678E25BC8A8F005F0D06 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		1B8124BC25CED3E700FDCF7F /* CalendarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarViewController.swift; sourceTree = "<group>"; };
+		1BED6EBB25D1749100E912C6 /* Schedule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Schedule.swift; sourceTree = "<group>"; };
 		D3759B1903BBE7A837BFD9A5 /* Pods_iProjectTeacher.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_iProjectTeacher.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DA086042A27D7B93DB7D0EC3 /* Pods-iProjectTeacher.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iProjectTeacher.debug.xcconfig"; path = "Target Support Files/Pods-iProjectTeacher/Pods-iProjectTeacher.debug.xcconfig"; sourceTree = "<group>"; };
 		DAA621FD172288AB5F2AF65B /* Pods-iProjectTeacher.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iProjectTeacher.release.xcconfig"; path = "Target Support Files/Pods-iProjectTeacher/Pods-iProjectTeacher.release.xcconfig"; sourceTree = "<group>"; };
@@ -278,6 +280,7 @@
 				04A7E96F25AF2B4900C0F43C /* ViewController.swift */,
 				04EA678E25BC8A8F005F0D06 /* User.swift */,
 				1B8124BC25CED3E700FDCF7F /* CalendarViewController.swift */,
+				1BED6EBB25D1749100E912C6 /* Schedule.swift */,
 				04744BAC25D0F3570043BCCF /* CheckAddress.swift */,
 				041FF1B325C82F16003F2AF5 /* SignInViewController.swift */,
 				041FF1B225C82F16003F2AF5 /* SignUpViewController.swift */,
@@ -466,6 +469,7 @@
 				04A7E96E25AF2B4900C0F43C /* SceneDelegate.swift in Sources */,
 				04EA678F25BC8A8F005F0D06 /* User.swift in Sources */,
 				04845C6025BC76F80032B567 /* YourGroupChatViewCell.swift in Sources */,
+				1BED6EBC25D1749200E912C6 /* Schedule.swift in Sources */,
 				04845C6A25BC76F80032B567 /* GoToChatExtension.swift in Sources */,
 				04845C6225BC76F80032B567 /* MyBalloonView.swift in Sources */,
 				04845C6825BC76F80032B567 /* CreateGroupViewController.swift in Sources */,

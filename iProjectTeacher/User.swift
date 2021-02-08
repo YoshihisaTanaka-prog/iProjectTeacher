@@ -62,9 +62,9 @@ class User {
 
 class TeacherParameter{
 //    記入例
-    var aaa: String
+    var departments: String
     init(_ parameter: NCMBObject) {
-        self.aaa = parameter.object(forKey: "aaa") as! String
+        self.departments = parameter.object(forKey: "departments") as! String
     }
 }
 

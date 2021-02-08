@@ -9,6 +9,10 @@
 /* Begin PBXBuildFile section */
 		041FF1B425C82F16003F2AF5 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 041FF1B325C82F16003F2AF5 /* SignInViewController.swift */; };
 		041FF1B525C82F16003F2AF5 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 041FF1B225C82F16003F2AF5 /* SignUpViewController.swift */; };
+		0459388B25D149C600A0E3C8 /* creating.png in Resources */ = {isa = PBXBuildFile; fileRef = 0459388A25D149C100A0E3C8 /* creating.png */; };
+		0459388D25D149C900A0E3C8 /* studentNoImage.png in Resources */ = {isa = PBXBuildFile; fileRef = 0459388925D149C100A0E3C8 /* studentNoImage.png */; };
+		0459388F25D149CC00A0E3C8 /* teacherNoImage.png in Resources */ = {isa = PBXBuildFile; fileRef = 0459388825D149C100A0E3C8 /* teacherNoImage.png */; };
+		04744BAD25D0F3570043BCCF /* CheckAddress.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04744BAC25D0F3570043BCCF /* CheckAddress.swift */; };
 		047C4E2E25C858C40082807A /* iTunesArtwork@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = 047C4E1925C858C40082807A /* iTunesArtwork@1x.png */; };
 		047C4E2F25C858C40082807A /* Icon-App-76x76@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 047C4E1B25C858C40082807A /* Icon-App-76x76@2x.png */; };
 		047C4E3025C858C40082807A /* Icon-App-29x29@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = 047C4E1C25C858C40082807A /* Icon-App-29x29@1x.png */; };
@@ -66,6 +70,10 @@
 /* Begin PBXFileReference section */
 		041FF1B225C82F16003F2AF5 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		041FF1B325C82F16003F2AF5 /* SignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
+		0459388825D149C100A0E3C8 /* teacherNoImage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = teacherNoImage.png; sourceTree = "<group>"; };
+		0459388925D149C100A0E3C8 /* studentNoImage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = studentNoImage.png; sourceTree = "<group>"; };
+		0459388A25D149C100A0E3C8 /* creating.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = creating.png; sourceTree = "<group>"; };
+		04744BAC25D0F3570043BCCF /* CheckAddress.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckAddress.swift; sourceTree = "<group>"; };
 		047C4E1925C858C40082807A /* iTunesArtwork@1x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "iTunesArtwork@1x.png"; sourceTree = "<group>"; };
 		047C4E1B25C858C40082807A /* Icon-App-76x76@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-App-76x76@2x.png"; sourceTree = "<group>"; };
 		047C4E1C25C858C40082807A /* Icon-App-29x29@1x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-App-29x29@1x.png"; sourceTree = "<group>"; };
@@ -139,6 +147,9 @@
 		047C4DEA25C856300082807A /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				0459388A25D149C100A0E3C8 /* creating.png */,
+				0459388925D149C100A0E3C8 /* studentNoImage.png */,
+				0459388825D149C100A0E3C8 /* teacherNoImage.png */,
 				047C4E1825C858C40082807A /* icons */,
 			);
 			path = Images;
@@ -266,8 +277,9 @@
 				04A7E96D25AF2B4900C0F43C /* SceneDelegate.swift */,
 				04A7E96F25AF2B4900C0F43C /* ViewController.swift */,
 				04EA678E25BC8A8F005F0D06 /* User.swift */,
-				041FF1B325C82F16003F2AF5 /* SignInViewController.swift */,
 				1B8124BC25CED3E700FDCF7F /* CalendarViewController.swift */,
+				04744BAC25D0F3570043BCCF /* CheckAddress.swift */,
+				041FF1B325C82F16003F2AF5 /* SignInViewController.swift */,
 				041FF1B225C82F16003F2AF5 /* SignUpViewController.swift */,
 				04A7E97125AF2B4900C0F43C /* Main.storyboard */,
 				04A841DC25C5796000469B5E /* SignIn.storyboard */,
@@ -360,6 +372,7 @@
 				04A7E97525AF2B4A00C0F43C /* Assets.xcassets in Resources */,
 				047C4E3825C858C40082807A /* Icon-App-29x29@3x.png in Resources */,
 				04845C5F25BC76F80032B567 /* MyChatViewCell.xib in Resources */,
+				0459388F25D149CC00A0E3C8 /* teacherNoImage.png in Resources */,
 				047C4E3925C858C40082807A /* Icon-App-40x40@2x.png in Resources */,
 				049C840725C695F000D4D380 /* Opening.storyboard in Resources */,
 				047C4E3025C858C40082807A /* Icon-App-29x29@1x.png in Resources */,
@@ -368,6 +381,7 @@
 				04A7E97325AF2B4900C0F43C /* Main.storyboard in Resources */,
 				047C4E3F25C858C40082807A /* README.md in Resources */,
 				04A841DD25C5796000469B5E /* SignIn.storyboard in Resources */,
+				0459388D25D149C900A0E3C8 /* studentNoImage.png in Resources */,
 				047C4E3225C858C40082807A /* Icon-App-20x20@1x.png in Resources */,
 				04845C5E25BC76F80032B567 /* YourGroupChatViewCell.xib in Resources */,
 				047C4E3125C858C40082807A /* Icon-App-40x40@1x.png in Resources */,
@@ -379,6 +393,7 @@
 				047C4E4025C858C40082807A /* iTunesArtwork@2x.png in Resources */,
 				04845C5C25BC76F80032B567 /* YourChatViewCell.xib in Resources */,
 				047C4E3325C858C40082807A /* Icon-App-83.5x83.5@2x.png in Resources */,
+				0459388B25D149C600A0E3C8 /* creating.png in Resources */,
 				047C4E2E25C858C40082807A /* iTunesArtwork@1x.png in Resources */,
 				047C4E3B25C858C40082807A /* Icon-App-60x60@2x.png in Resources */,
 				047C4E3425C858C40082807A /* Icon-App-20x20@3x.png in Resources */,
@@ -439,6 +454,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				041FF1B525C82F16003F2AF5 /* SignUpViewController.swift in Sources */,
+				04744BAD25D0F3570043BCCF /* CheckAddress.swift in Sources */,
 				04845C5B25BC76F80032B567 /* MyChatViewCell.swift in Sources */,
 				04845C6525BC76F80032B567 /* Chat.swift in Sources */,
 				04A7E97025AF2B4900C0F43C /* ViewController.swift in Sources */,

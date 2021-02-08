@@ -81,4 +81,13 @@ class    CalendarViewController:UIViewController,FSCalendarDelegate,FSCalendarDa
         return nil
     }
 
+    func calendar(_ calendar: FSCalendar, didSelect date: Date, at monthPosition: FSCalendarMonthPosition) {
+        let selectDay = getDay(date)
+    }
+    
+    //点マークをつける関数
+    func calendar(calendar: FSCalendar!, hasEventForDate date: NSDate!) -> Bool {
+        return true 
+    }
+    
 }

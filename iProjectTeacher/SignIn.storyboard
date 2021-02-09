@@ -149,12 +149,6 @@
                     </view>
                     <navigationItem key="navigationItem" id="dcB-9x-u5a"/>
                     <connections>
-                        <outlet property="NameTextField" destination="JHg-Ru-XT8" id="t2P-Bb-5NR"/>
-                        <outlet property="confirmTextField" destination="4Ma-Ve-e4L" id="v0p-in-9wS"/>
-                        <outlet property="departmentTextField" destination="GrI-Vv-ado" id="8aO-OO-6eP"/>
-                        <outlet property="emailunivTextField" destination="5S2-2d-toF" id="jvX-m3-R0A"/>
-                        <outlet property="passwordTextField" destination="lCS-yL-B8j" id="Jgl-RC-DDw"/>
-                        <outlet property="subjectTextField" destination="hJb-dt-sYs" id="ubv-QB-4UP"/>
                         <outlet property="NameTextField" destination="JHg-Ru-XT8" id="jdc-Rj-uc3"/>
                         <outlet property="departmentTextField" destination="GrI-Vv-ado" id="qIt-6p-aJb"/>
                         <outlet property="emailunivTextField" destination="5S2-2d-toF" id="m1V-Ma-341"/>

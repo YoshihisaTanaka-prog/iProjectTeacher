@@ -9,16 +9,18 @@
 import UIKit
 import NCMB
 
-class ChatViewController: UIViewController{
+class ChatViewController: UIViewController, UISearchBarDelegate{
     
     var selectedChatRoom: ChatRoom!
     var chats = ChatList()
     var timer: Timer!
     var addBarButtonItem: UIBarButtonItem!
+    var searchbar: UISearchBar!
     
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var textView: UITextView!
-    
+    @IBOutlet var searchUserTableView: UITableView!
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -100,6 +102,7 @@ class ChatViewController: UIViewController{
     @IBAction func tappedBack(){
         self.dismiss(animated: true, completion: nil)
     }
+    
     
     @IBAction func tappedSend(){
         if( textView.text != "" ){
@@ -197,7 +200,7 @@ class ChatViewController: UIViewController{
             }
         })
     }
-    
+   
     
     @objc func update(){
         self.loadChat()
@@ -296,4 +299,20 @@ extension ChatViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
         return 10
     }
+   
 }
+
+//extension ChatViewController: UISearchBarDelegate{
+//    func setSearchBar(){
+//      // NavigationBarにSearchBarをセット
+//        if let navigationBarFrame = self.ChatviewController?.bounds {
+//            let searchBar: UISearchBar = UISearchBar(frame: navigationBarFrame)
+//            searchBar.delegate = self
+//            searchBar.placeholder = "ユーザーを検索"
+//            searchBar.autocapitalizationType = UITextAutocapitalizationType.none
+//            navigationItem.titleView = searchBar
+//            navigationItem.titleView?.frame = searchBar.frame
+//        }
+//    }
+//
+//}

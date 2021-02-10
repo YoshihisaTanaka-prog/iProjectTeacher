@@ -1,16 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="WqB-Uu-3ug">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="WqB-Uu-3ug">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
         <!--Opening1 View Controller-->
         <scene sceneID="w2x-Jy-SYc">
             <objects>
-                <viewController storyboardIdentifier="OpningRootViewController" id="WqB-Uu-3ug" customClass="Opening1ViewController" customModule="opening" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="OpningRootViewController" id="WqB-Uu-3ug" customClass="Opening1ViewController" customModule="iProjectTeacher" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="9lG-gT-3x2">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -25,13 +27,13 @@
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <viewLayoutGuide key="safeArea" id="C7J-MW-XSK"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="7aF-FH-xxU" firstAttribute="centerX" secondItem="9lG-gT-3x2" secondAttribute="centerX" id="ePr-CN-2Du"/>
                             <constraint firstItem="7aF-FH-xxU" firstAttribute="top" secondItem="C7J-MW-XSK" secondAttribute="top" constant="30" id="fgJ-au-Fbr"/>
                             <constraint firstItem="C7J-MW-XSK" firstAttribute="bottom" secondItem="7aF-FH-xxU" secondAttribute="bottom" constant="30" id="jM9-oo-DeP"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="C7J-MW-XSK"/>
                     </view>
                     <connections>
                         <outlet property="label" destination="7aF-FH-xxU" id="tDn-kd-K84"/>
@@ -45,7 +47,7 @@
         <!--Opening2 View Controller-->
         <scene sceneID="NPc-Pn-Oc9">
             <objects>
-                <viewController storyboardIdentifier="Opning2ndViewController" modalTransitionStyle="flipHorizontal" modalPresentationStyle="fullScreen" id="Awg-rD-ODD" customClass="Opening2ViewController" customModule="opening" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="Opning2ndViewController" modalPresentationStyle="fullScreen" id="Awg-rD-ODD" customClass="Opening2ViewController" customModule="iProjectTeacher" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Khh-YV-5xs">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -60,13 +62,13 @@
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <viewLayoutGuide key="safeArea" id="afv-oT-ORY"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="afv-oT-ORY" firstAttribute="bottom" secondItem="IlA-hj-Jbg" secondAttribute="bottom" constant="30" id="EnC-VC-iPm"/>
                             <constraint firstItem="IlA-hj-Jbg" firstAttribute="centerX" secondItem="Khh-YV-5xs" secondAttribute="centerX" id="F4S-XD-OS9"/>
                             <constraint firstItem="IlA-hj-Jbg" firstAttribute="top" secondItem="afv-oT-ORY" secondAttribute="top" constant="30" id="LWT-eL-aHE"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="afv-oT-ORY"/>
                     </view>
                     <navigationItem key="navigationItem" id="SGS-9b-Xd2"/>
                     <connections>
@@ -80,7 +82,7 @@
         <!--Navigation Controller-->
         <scene sceneID="M5J-YI-EKH">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" definesPresentationContext="YES" modalTransitionStyle="flipHorizontal" modalPresentationStyle="fullScreen" id="s1i-2r-dyF" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" definesPresentationContext="YES" modalPresentationStyle="fullScreen" id="s1i-2r-dyF" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="" id="NG4-yf-JMC"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="7uM-7m-xQA">
@@ -103,6 +105,7 @@
                     <toolbarItems/>
                     <navigationItem key="navigationItem" id="7Q8-fL-V1A"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="8zH-2d-Hes">
+                        <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </tabBar>
@@ -115,4 +118,9 @@
             <point key="canvasLocation" x="2576.811594202899" y="127.90178571428571"/>
         </scene>
     </scenes>
+    <resources>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
 </document>

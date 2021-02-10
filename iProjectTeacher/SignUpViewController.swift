@@ -11,26 +11,27 @@ import NCMB
 
 class SignUpViewController: UIViewController, UITextFieldDelegate {
     
-    @IBOutlet var nameTextField: UITextField!
-    @IBOutlet var univnameTextField: UITextField!
+    var domainList = Domains()
+    var wrongDomainList = Domains()
+    
+    @IBOutlet var NameTextField: UITextField!
     @IBOutlet var departmentTextField: UITextField!
     @IBOutlet var emailunivTextField: UITextField!
-    @IBOutlet var subjectTextField: UITextField!
-    @IBOutlet var userTextField: UITextField!
+    @IBOutlet var furiganaTextField: UITextField!
     @IBOutlet var passwordTextField: UITextField!
     @IBOutlet var confirmTextField: UITextField!
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        loadDomain()
 
-        nameTextField.delegate = self
-        univnameTextField.delegate = self
+        NameTextField.delegate = self
         departmentTextField.delegate = self
         emailunivTextField.delegate = self
-        subjectTextField.delegate = self
-        userTextField.delegate = self
+        furiganaTextField.delegate = self
         passwordTextField.delegate = self
-        confirmTextField.delegate = self
+        confirmTextField.delegate = self 
         
     }
     override func didReceiveMemoryWarning() {
@@ -42,6 +43,37 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
         return true
     }
     
-
+    @IBAction func signUp() {
+        if checkDomain(emailunivTextField.text!) {
+    //        こうすることでメールを用いた本人確認ができるらしい。そのほかのデータ（名前、学部などをどうするのかについては考え中）
+            var error: NSError? = nil
+            let mail = emailunivTextField.text!
+            NCMBUser.requestAuthenticationMail(mail, error: &error)
+            if(error == nil){
+                self.showOkDismissAlert(title: "報告", message: "本人確認用のメールアドレスを送信いたします。しばらくお待ちください。")
+                
+                let ud = UserDefaults.standard
+                ud.set(true, forKey: mail + "isNeedToInputData")
+                ud.set(departmentTextField.text!, forKey: mail + "departments")
+                ud.set(NameTextField.text!, forKey: mail + "name")
+                ud.set(furiganaTextField.text!, forKey: mail + "furigana")
+                ud.synchronize()
+                let domain = emailunivTextField.text!.components(separatedBy: "@").last!
+                domainList.set(domain: domain, mail: emailunivTextField.text!)
+            }
+            else{
+                showOkAlert(title: "Error", message: error!.localizedDescription)
+            }
+        }
+        
+        let user = NCMBUser()
+        if passwordTextField.text == confirmTextField.text! {
+            user.password = passwordTextField.text!
+            
+        }else{
+            print("パスワードの不一致")
+        }
+        
+    }
 
 }

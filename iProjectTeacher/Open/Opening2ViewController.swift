@@ -38,16 +38,16 @@ class Opening2ViewController: UIViewController {
             self.label.textColor = .red
         }) { _ in
 //            ログイン判定
-            if NCMBUser.current() == nil {
-                // ログインしていなかったら
-                let storyboard = UIStoryboard(name: "SignIn", bundle: Bundle.main)
-                let rootViewController = storyboard.instantiateViewController(withIdentifier: "RootNavigationController")
-                self.present(rootViewController, animated: true, completion: nil)
-            } else {
+            if let _ = NCMBUser.current() {
                 // ログイン中だったら
                 let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
                 let rootViewController = storyboard.instantiateViewController(withIdentifier: "RootTabBarController")
                 self.present(rootViewController, animated: false, completion: nil)
+            } else {
+                // ログインしていなかったら
+                let storyboard = UIStoryboard(name: "SignIn", bundle: Bundle.main)
+                let rootViewController = storyboard.instantiateViewController(withIdentifier: "RootNavigationController")
+                self.present(rootViewController, animated: true, completion: nil)
             }
         }
     }

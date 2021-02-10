@@ -27,19 +27,40 @@ extension SignUpViewController{
             return false
         }
         else{
-            showOkDismissAlert(title: "報告", message: "本人確認用のメールアドレスを送信いたしますが、\n「" + emailunivTextField.text! + "」には未登録のドメインが含まれています。確認作業を行いますので、ユーザー登録完了後しばらくお待ちください。")
-            let object = NCMBObject(className: "Domain")
-            object?.setObject(partition.last!, forKey: "domain")
-            object?.setObject("", forKey: "collage")
-            object?.setObject(nil, forKey: "parmitted")
-            object?.setObject("", forKey: "prefecture")
-            object?.setObject("", forKey: "shortenCollege")
-            object?.saveInBackground({ (error) in
-                if(error != nil){
-                    self.showOkAlert(title: "Error", message: error!.localizedDescription)
-                }
-            })
-            send()
+            var error: NSError? = nil
+            let mail = emailunivTextField.text!
+            NCMBUser.requestAuthenticationMail(mail, error: &error)
+            if(error == nil){
+                self.showOkDismissAlert(title: "報告", message: "本人確認用のメールアドレスを送信いたしますが、\n「" + emailunivTextField.text! + "」には未登録のドメインが含まれています。確認作業を行いますので、ユーザー登録完了後しばらくお待ちください。")
+                
+                let object = NCMBObject(className: "Domain")
+                object?.setObject(partition.last!, forKey: "domain")
+                object?.setObject(false, forKey: "checked")
+                object?.setObject("", forKey: "collage")
+                object?.setObject(false, forKey: "parmitted")
+                object?.setObject("", forKey: "prefecture")
+                object?.setObject("", forKey: "shortenCollege")
+                object?.saveInBackground({ (error) in
+                    if(error == nil){
+                        self.send()
+                    }
+                    else{
+                        self.showOkAlert(title: "Error", message: error!.localizedDescription)
+                    }
+                })
+                
+                let ud = UserDefaults.standard
+                ud.set(true, forKey: mail + "isNeedToInputData")
+                ud.set(departmentTextField.text!, forKey: mail + "departments")
+                ud.set(NameTextField.text!, forKey: mail + "name")
+                ud.set(furiganaTextField.text!, forKey: mail + "furigana")
+                ud.synchronize()
+                let domain = emailunivTextField.text!.components(separatedBy: "@").last!
+                domainList.set(domain: domain, mail: emailunivTextField.text!)
+            }
+            else{
+                showOkAlert(title: "Error", message: error!.localizedDescription)
+            }
 
             return false
         }

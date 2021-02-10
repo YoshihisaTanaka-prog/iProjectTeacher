@@ -45,7 +45,6 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
     
     @IBAction func signUp() {
         if checkDomain(emailunivTextField.text!) {
-    //        こうすることでメールを用いた本人確認ができるらしい。そのほかのデータ（名前、学部などをどうするのかについては考え中）
             var error: NSError? = nil
             let mail = emailunivTextField.text!
             NCMBUser.requestAuthenticationMail(mail, error: &error)

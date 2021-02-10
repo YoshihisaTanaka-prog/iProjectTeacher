@@ -55,11 +55,11 @@ extension SignUpViewController{
                 ud.set(NameTextField.text!, forKey: mail + "name")
                 ud.set(furiganaTextField.text!, forKey: mail + "furigana")
                 ud.synchronize()
-                let domain = emailunivTextField.text!.components(separatedBy: "@").last!
-                domainList.set(domain: domain, mail: emailunivTextField.text!)
+//                let domain = emailunivTextField.text!.components(separatedBy: "@").last!
+//                domainList.set(domain: domain, mail: emailunivTextField.text!)
             }
-            else{
-                showOkAlert(title: "Error", message: error!.localizedDescription)
+         else{
+              showOkAlert(title: "Error", message: error!.localizedDescription)
             }
 
             return false

@@ -18,8 +18,7 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet var departmentTextField: UITextField!
     @IBOutlet var emailunivTextField: UITextField!
     @IBOutlet var furiganaTextField: UITextField!
-    @IBOutlet var passwordTextField: UITextField!
-    @IBOutlet var confirmTextField: UITextField!
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,8 +29,7 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
         departmentTextField.delegate = self
         emailunivTextField.delegate = self
         furiganaTextField.delegate = self
-        passwordTextField.delegate = self
-        confirmTextField.delegate = self 
+
         
     }
     override func didReceiveMemoryWarning() {
@@ -66,14 +64,8 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
             }
         }
         
-        let user = NCMBUser()
-        if passwordTextField.text == confirmTextField.text! {
-            user.password = passwordTextField.text!
-            
-        }else{
-            print("パスワードの不一致")
         }
         
     }
 
-}
+

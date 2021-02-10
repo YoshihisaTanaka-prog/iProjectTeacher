@@ -279,8 +279,7 @@
 				04A7E96D25AF2B4900C0F43C /* SceneDelegate.swift */,
 				04A7E96F25AF2B4900C0F43C /* ViewController.swift */,
 				04EA678E25BC8A8F005F0D06 /* User.swift */,
-				1B8124BC25CED3E700FDCF7F /* CalendarViewController.swift */,
-				1BED6EBB25D1749100E912C6 /* Schedule.swift */,
+				1BD9EE3F25D3AC8F001560A3 /* Calendar&Schedule */,
 				04744BAC25D0F3570043BCCF /* CheckAddress.swift */,
 				041FF1B325C82F16003F2AF5 /* SignInViewController.swift */,
 				041FF1B225C82F16003F2AF5 /* SignUpViewController.swift */,
@@ -292,6 +291,15 @@
 				04A7E97925AF2B4A00C0F43C /* Info.plist */,
 			);
 			path = iProjectTeacher;
+			sourceTree = "<group>";
+		};
+		1BD9EE3F25D3AC8F001560A3 /* Calendar&Schedule */ = {
+			isa = PBXGroup;
+			children = (
+				1BED6EBB25D1749100E912C6 /* Schedule.swift */,
+				1B8124BC25CED3E700FDCF7F /* CalendarViewController.swift */,
+			);
+			path = "Calendar&Schedule";
 			sourceTree = "<group>";
 		};
 		4BCE1EAC3475CBE8D25AB8B3 /* Pods */ = {

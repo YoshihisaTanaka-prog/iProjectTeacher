@@ -11,6 +11,10 @@ import CalculateCalendarLogic
 class    CalendarViewController:UIViewController,FSCalendarDelegate,FSCalendarDataSource,FSCalendarDelegateAppearance{
 
     @IBOutlet weak var calendar: FSCalendar!
+    @IBOutlet var scheduleTableView: UITableView!
+    
+    //タップした日付を入れる変数
+    var selectedDate = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -80,14 +84,48 @@ class    CalendarViewController:UIViewController,FSCalendarDelegate,FSCalendarDa
         
         return nil
     }
+    }
+    //FSCalendarに関する処理
+    extension CalendarViewController:FSCalendarDelegate,FSCalendarDataSource{
+    func calendar(_ calendar: FSCalendar, didSelect date: Date, at monthPosition: FSCalendarMonthPosition)
+        let formatter = DateFormatter()
+        formatter.dateFormatter = "yyyy-MM-dd"
+        selectedDate = formatter.string(from: date)
+        
+    }
+    //日付の下にタイトルをつける関数
+    func calendar(_ calendar;FSCalendar!, subtitleFor date: Date) -> String? {
+        let dateString = dateToString(date: date, format: "yyyy-MM-dd")
+        //もしscheduledDatesと一致する日だったら
+        if self.scheduledDates.contains(dateString){
+            return "class"
+        }
+        return ""
+    }
+    //日付の下に点を付ける関数
+    func calendar(_ calendar: FSCalendar, numberOfEventsFor date: Date) -> Int {
+        let dateString = dateToString(date: date, format: "yyyy-MM-dd")
+        if self.scheduledDates.contains(dateString){
+            return 1
+        }
+        return 0
+    }
+extension ViewController{
+    //date型→String型に変換する関数
+    func dateToString(date:Date,format:String)->String{
+        let formatter = DateFormatter()
+        formatter.calendar = Calendar(identifier: .gregorian)
+        formatter.dateFormat = format
+        return formatter.string(from: date)
+    }
+    //String型→date型に変換する関数
+    func StringToDate(string:String,format:String)->Date{
+        let formatter = DateFormatter()
+        formatter.calendar = Calendar(identifier: .gregorian)
+        formatter.dateFormat = format
+        return formatter.date(from: string)!
 
-    func calendar(_ calendar: FSCalendar, didSelect date: Date, at monthPosition: FSCalendarMonthPosition) {
-        let selectDay = getDay(date)
     }
-    
-    //点マークをつける関数
-    func calendar(calendar: FSCalendar!, hasEventForDate date: NSDate!) -> Bool {
-        return true 
-    }
+}
     
 }

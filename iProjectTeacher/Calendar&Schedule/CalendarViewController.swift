@@ -83,4 +83,7 @@ class    CalendarViewController:UIViewController,FSCalendarDelegate,FSCalendarDa
         return nil
     }
 
+    func calendar(_ calendar: FSCalendar, didSelect date: Date, at monthPosition: FSCalendarMonthPosition) {
+        let selectDay = getDay(date)
+    }
 }

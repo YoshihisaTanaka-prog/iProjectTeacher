@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		041FF1B425C82F16003F2AF5 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 041FF1B325C82F16003F2AF5 /* SignInViewController.swift */; };
 		041FF1B525C82F16003F2AF5 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 041FF1B225C82F16003F2AF5 /* SignUpViewController.swift */; };
+		0433E3A525D54709002A6BE5 /* Report.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0433E3A425D54709002A6BE5 /* Report.swift */; };
+		0433E3A925D54B09002A6BE5 /* ReportTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0433E3A725D54B09002A6BE5 /* ReportTableViewCell.swift */; };
+		0433E3AA25D54B09002A6BE5 /* ReportTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0433E3A825D54B09002A6BE5 /* ReportTableViewCell.xib */; };
 		0459388B25D149C600A0E3C8 /* creating.png in Resources */ = {isa = PBXBuildFile; fileRef = 0459388A25D149C100A0E3C8 /* creating.png */; };
 		0459388D25D149C900A0E3C8 /* studentNoImage.png in Resources */ = {isa = PBXBuildFile; fileRef = 0459388925D149C100A0E3C8 /* studentNoImage.png */; };
 		0459388F25D149CC00A0E3C8 /* teacherNoImage.png in Resources */ = {isa = PBXBuildFile; fileRef = 0459388825D149C100A0E3C8 /* teacherNoImage.png */; };
@@ -76,6 +79,9 @@
 /* Begin PBXFileReference section */
 		041FF1B225C82F16003F2AF5 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		041FF1B325C82F16003F2AF5 /* SignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
+		0433E3A425D54709002A6BE5 /* Report.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Report.swift; sourceTree = "<group>"; };
+		0433E3A725D54B09002A6BE5 /* ReportTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportTableViewCell.swift; sourceTree = "<group>"; };
+		0433E3A825D54B09002A6BE5 /* ReportTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ReportTableViewCell.xib; sourceTree = "<group>"; };
 		0459388825D149C100A0E3C8 /* teacherNoImage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = teacherNoImage.png; sourceTree = "<group>"; };
 		0459388925D149C100A0E3C8 /* studentNoImage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = studentNoImage.png; sourceTree = "<group>"; };
 		0459388A25D149C100A0E3C8 /* creating.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = creating.png; sourceTree = "<group>"; };
@@ -309,7 +315,10 @@
 			children = (
 				04B39D1C25D43E34003EDECE /* StudentInfoTableViewCell.swift */,
 				04B39D1D25D43E34003EDECE /* StudentInfoTableViewCell.xib */,
+				0433E3A725D54B09002A6BE5 /* ReportTableViewCell.swift */,
+				0433E3A825D54B09002A6BE5 /* ReportTableViewCell.xib */,
 				04B39D1825D43D57003EDECE /* StudentDetailViewController.swift */,
+				0433E3A425D54709002A6BE5 /* Report.swift */,
 			);
 			path = StudentInfo;
 			sourceTree = "<group>";
@@ -422,6 +431,7 @@
 				047C4E3125C858C40082807A /* Icon-App-40x40@1x.png in Resources */,
 				047C4E2F25C858C40082807A /* Icon-App-76x76@2x.png in Resources */,
 				047C4E4125C858C40082807A /* iTunesArtwork@3x.png in Resources */,
+				0433E3AA25D54B09002A6BE5 /* ReportTableViewCell.xib in Resources */,
 				047C4E3D25C858C40082807A /* Icon-App-40x40@3x.png in Resources */,
 				04845C6725BC76F80032B567 /* Chat.storyboard in Resources */,
 				047C4E3E25C858C40082807A /* Icon-App-29x29@2x.png in Resources */,
@@ -499,12 +509,14 @@
 				04845C6925BC76F80032B567 /* SearchUserForCreateGroupViewController.swift in Sources */,
 				1B55D80725D40008006BAE51 /* CalendarViewController.swift in Sources */,
 				049C840425C695F000D4D380 /* ScreenSize.swift in Sources */,
+				0433E3A525D54709002A6BE5 /* Report.swift in Sources */,
 				04A7E96E25AF2B4900C0F43C /* SceneDelegate.swift in Sources */,
 				04B39D1E25D43E34003EDECE /* StudentInfoTableViewCell.swift in Sources */,
 				04EA678F25BC8A8F005F0D06 /* User.swift in Sources */,
 				04845C6025BC76F80032B567 /* YourGroupChatViewCell.swift in Sources */,
 				1BED6EBC25D1749200E912C6 /* Schedule.swift in Sources */,
 				04845C6A25BC76F80032B567 /* GoToChatExtension.swift in Sources */,
+				0433E3A925D54B09002A6BE5 /* ReportTableViewCell.swift in Sources */,
 				04845C6225BC76F80032B567 /* MyBalloonView.swift in Sources */,
 				04845C6825BC76F80032B567 /* CreateGroupViewController.swift in Sources */,
 				049C840525C695F000D4D380 /* Opening1ViewController.swift in Sources */,

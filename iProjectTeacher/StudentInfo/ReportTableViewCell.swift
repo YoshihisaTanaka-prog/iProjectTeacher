@@ -1,5 +1,5 @@
 //
-//  StudentInfoTableViewCell.swift
+//  ReportTableViewCell.swift
 //  iProjectTeacher
 //
 //  Created by 田中義久 on 2021/02/11.
@@ -8,13 +8,13 @@
 
 import UIKit
 
-class StudentInfoTableViewCell: UITableViewCell {
+class ReportTableViewCell: UITableViewCell {
+    
+    @IBOutlet var titleLabel: UILabel!
 
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
-        let size = screenSizeG["EnEt"]!
-        self.contentView.frame = CGRect(x: 0.f, y: 0.f, width: size.width, height: size.viewHeight)
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

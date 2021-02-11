@@ -63,7 +63,9 @@
 		04A7E98425AF2D0500C0F43C /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04A7E98325AF2D0500C0F43C /* Extensions.swift */; };
 		04A841DD25C5796000469B5E /* SignIn.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 04A841DC25C5796000469B5E /* SignIn.storyboard */; };
 		04EA678F25BC8A8F005F0D06 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04EA678E25BC8A8F005F0D06 /* User.swift */; };
-		1B8124BD25CED3E700FDCF7F /* CalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B8124BC25CED3E700FDCF7F /* CalendarViewController.swift */; };
+		1B55D80425D3FFD9006BAE51 /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B55D80325D3FFD9006BAE51 /* Event.swift */; };
+		1B55D80725D40008006BAE51 /* CalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B55D80625D40008006BAE51 /* CalendarViewController.swift */; };
+		1B55D80A25D41365006BAE51 /* EventViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B55D80925D41365006BAE51 /* EventViewController.swift */; };
 		1BED6EBC25D1749200E912C6 /* Schedule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BED6EBB25D1749100E912C6 /* Schedule.swift */; };
 		B123C8D481952C9E0A702E92 /* Pods_iProjectTeacher.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D3759B1903BBE7A837BFD9A5 /* Pods_iProjectTeacher.framework */; };
 /* End PBXBuildFile section */
@@ -127,7 +129,9 @@
 		04A7E98325AF2D0500C0F43C /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		04A841DC25C5796000469B5E /* SignIn.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SignIn.storyboard; sourceTree = "<group>"; };
 		04EA678E25BC8A8F005F0D06 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
-		1B8124BC25CED3E700FDCF7F /* CalendarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarViewController.swift; sourceTree = "<group>"; };
+		1B55D80325D3FFD9006BAE51 /* Event.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
+		1B55D80625D40008006BAE51 /* CalendarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarViewController.swift; sourceTree = "<group>"; };
+		1B55D80925D41365006BAE51 /* EventViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventViewController.swift; sourceTree = "<group>"; };
 		1BED6EBB25D1749100E912C6 /* Schedule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Schedule.swift; sourceTree = "<group>"; };
 		D3759B1903BBE7A837BFD9A5 /* Pods_iProjectTeacher.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_iProjectTeacher.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DA086042A27D7B93DB7D0EC3 /* Pods-iProjectTeacher.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iProjectTeacher.debug.xcconfig"; path = "Target Support Files/Pods-iProjectTeacher/Pods-iProjectTeacher.debug.xcconfig"; sourceTree = "<group>"; };
@@ -297,7 +301,9 @@
 			isa = PBXGroup;
 			children = (
 				1BED6EBB25D1749100E912C6 /* Schedule.swift */,
-				1B8124BC25CED3E700FDCF7F /* CalendarViewController.swift */,
+				1B55D80625D40008006BAE51 /* CalendarViewController.swift */,
+				1B55D80925D41365006BAE51 /* EventViewController.swift */,
+				1B55D80325D3FFD9006BAE51 /* Event.swift */,
 			);
 			path = "Calendar&Schedule";
 			sourceTree = "<group>";
@@ -469,10 +475,11 @@
 				04845C5B25BC76F80032B567 /* MyChatViewCell.swift in Sources */,
 				04845C6525BC76F80032B567 /* Chat.swift in Sources */,
 				04A7E97025AF2B4900C0F43C /* ViewController.swift in Sources */,
-				1B8124BD25CED3E700FDCF7F /* CalendarViewController.swift in Sources */,
+				1B55D80A25D41365006BAE51 /* EventViewController.swift in Sources */,
 				04A7E96C25AF2B4900C0F43C /* AppDelegate.swift in Sources */,
 				04845C5D25BC76F80032B567 /* YourChatViewCell.swift in Sources */,
 				04845C6925BC76F80032B567 /* SearchUserForCreateGroupViewController.swift in Sources */,
+				1B55D80725D40008006BAE51 /* CalendarViewController.swift in Sources */,
 				049C840425C695F000D4D380 /* ScreenSize.swift in Sources */,
 				04A7E96E25AF2B4900C0F43C /* SceneDelegate.swift in Sources */,
 				04EA678F25BC8A8F005F0D06 /* User.swift in Sources */,
@@ -489,6 +496,7 @@
 				04845C5A25BC76F80032B567 /* ChatViewController.swift in Sources */,
 				04845C6625BC76F80032B567 /* ChatTableViewController.swift in Sources */,
 				04A7E98425AF2D0500C0F43C /* Extensions.swift in Sources */,
+				1B55D80425D3FFD9006BAE51 /* Event.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

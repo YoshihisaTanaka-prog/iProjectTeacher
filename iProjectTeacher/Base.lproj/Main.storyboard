@@ -26,44 +26,42 @@
             <point key="canvasLocation" x="1907" y="-258"/>
         </scene>
         <!--Calendar View Controller-->
-        <scene sceneID="n6a-nh-ztq">
+        <scene sceneID="XfS-IK-ZtN">
             <objects>
-                <viewController id="q5z-3a-6Xg" customClass="CalendarViewController" customModule="iProjectTeacher" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="JbF-ey-fpy">
+                <viewController id="sRV-AO-xh0" customClass="CalendarViewController" customModule="iProjectTeacher" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="WiG-yK-SNq">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2Me-jT-CM7" customClass="FSCalendar">
-                                <rect key="frame" x="0.0" y="88" width="414" height="381"/>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="M4a-eB-rCl" customClass="FSCalendar">
+                                <rect key="frame" x="0.0" y="88" width="414" height="356"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="319" id="Vyk-3e-Guj"/>
-                                </constraints>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="string" keyPath="headerDateFormat" value="yyyy年　MM月"/>
-                                </userDefinedRuntimeAttributes>
-                                <connections>
-                                    <outlet property="dataSource" destination="JbF-ey-fpy" id="5Ob-Mz-fQL"/>
-                                    <outlet property="delegate" destination="JbF-ey-fpy" id="Wt7-gF-6tf"/>
-                                </connections>
                             </view>
                         </subviews>
-                        <viewLayoutGuide key="safeArea" id="HVy-fI-OWa"/>
+                        <viewLayoutGuide key="safeArea" id="8lG-nf-w7r"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                        <constraints>
-                            <constraint firstItem="2Me-jT-CM7" firstAttribute="top" secondItem="HVy-fI-OWa" secondAttribute="top" id="lVm-RH-4Lu"/>
-                            <constraint firstItem="2Me-jT-CM7" firstAttribute="leading" secondItem="HVy-fI-OWa" secondAttribute="leading" id="vfj-rR-mGo"/>
-                            <constraint firstItem="2Me-jT-CM7" firstAttribute="trailing" secondItem="HVy-fI-OWa" secondAttribute="trailing" id="yOR-Db-e96"/>
-                        </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="hoy-Ti-uYR"/>
-                    <connections>
-                        <outlet property="calendar" destination="2Me-jT-CM7" id="2dN-eb-8hB"/>
-                    </connections>
+                    <navigationItem key="navigationItem" id="JQf-FP-bQA"/>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="o3n-iX-0Mj" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="21R-XZ-hf3" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1973.913043478261" y="609.375"/>
+            <point key="canvasLocation" x="2013.0434782608697" y="608.70535714285711"/>
+        </scene>
+        <!--Event View Controller-->
+        <scene sceneID="gR8-4O-rWw">
+            <objects>
+                <viewController id="N4V-2C-GDi" customClass="EventViewController" customModule="iProjectTeacher" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="spC-5L-kgJ">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="Gvo-CB-WxB"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Az0-2M-Cjl" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2891" y="609"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="AR8-7x-3Ap">
@@ -77,7 +75,7 @@
                     </tabBar>
                     <connections>
                         <segue destination="8Lw-W0-KY4" kind="relationship" relationship="viewControllers" id="abx-NM-Ptb"/>
-                        <segue destination="O4Y-Sp-m4i" kind="relationship" relationship="viewControllers" id="CGw-ST-fRY"/>
+                        <segue destination="ih9-jV-3fG" kind="relationship" relationship="viewControllers" id="IOL-VZ-uBH"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ar5-Se-GMh" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -104,23 +102,23 @@
             <point key="canvasLocation" x="1065" y="-258"/>
         </scene>
         <!--カレンダー-->
-        <scene sceneID="jYi-qp-UMS">
+        <scene sceneID="2iP-43-j4t">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="O4Y-Sp-m4i" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="カレンダー" image="calendar" catalog="system" id="0me-og-aoV"/>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="ih9-jV-3fG" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="カレンダー" image="calendar" catalog="system" id="6nf-Ni-EK9"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="22E-9R-ho4">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="RaK-J1-1za">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="q5z-3a-6Xg" kind="relationship" relationship="rootViewController" id="cAn-2a-wsQ"/>
+                        <segue destination="sRV-AO-xh0" kind="relationship" relationship="rootViewController" id="Flz-Qe-wDP"/>
                     </connections>
                 </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="hgB-3l-8k8" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="8oL-UN-UyW" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1063.768115942029" y="609.375"/>
+            <point key="canvasLocation" x="1064" y="609"/>
         </scene>
     </scenes>
     <resources>

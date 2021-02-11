@@ -18,8 +18,7 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet var departmentTextField: UITextField!
     @IBOutlet var emailunivTextField: UITextField!
     @IBOutlet var furiganaTextField: UITextField!
-    @IBOutlet var passwordTextField: UITextField!
-    @IBOutlet var confirmTextField: UITextField!
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,8 +29,7 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
         departmentTextField.delegate = self
         emailunivTextField.delegate = self
         furiganaTextField.delegate = self
-        passwordTextField.delegate = self
-        confirmTextField.delegate = self 
+
         
     }
     override func didReceiveMemoryWarning() {
@@ -45,7 +43,6 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
     
     @IBAction func signUp() {
         if checkDomain(emailunivTextField.text!) {
-    //        こうすることでメールを用いた本人確認ができるらしい。そのほかのデータ（名前、学部などをどうするのかについては考え中）
             var error: NSError? = nil
             let mail = emailunivTextField.text!
             NCMBUser.requestAuthenticationMail(mail, error: &error)
@@ -66,14 +63,8 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
             }
         }
         
-        let user = NCMBUser()
-        if passwordTextField.text == confirmTextField.text! {
-            user.password = passwordTextField.text!
-            
-        }else{
-            print("パスワードの不一致")
         }
         
     }
 
-}
+

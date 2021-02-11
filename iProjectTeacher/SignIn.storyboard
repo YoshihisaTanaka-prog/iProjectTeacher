@@ -143,18 +143,6 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="パスワード" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Hue-N1-ogq">
-                                <rect key="frame" x="61" y="328" width="292" height="34"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
-                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="パスワード（確認）" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="dQd-3d-zFL">
-                                <rect key="frame" x="60" y="370" width="293" height="34"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="U4X-Gi-maT"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -162,16 +150,14 @@
                     <navigationItem key="navigationItem" id="dcB-9x-u5a"/>
                     <connections>
                         <outlet property="NameTextField" destination="JHg-Ru-XT8" id="jdc-Rj-uc3"/>
-                        <outlet property="confirmTextField" destination="dQd-3d-zFL" id="KMx-yf-inZ"/>
                         <outlet property="departmentTextField" destination="GrI-Vv-ado" id="qIt-6p-aJb"/>
                         <outlet property="emailunivTextField" destination="5S2-2d-toF" id="m1V-Ma-341"/>
                         <outlet property="furiganaTextField" destination="Tyy-yk-xpu" id="EvH-0V-Hst"/>
-                        <outlet property="passwordTextField" destination="Hue-N1-ogq" id="QRX-jf-4hm"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yuM-jr-uRA" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1940.5797101449277" y="126.5625"/>
+            <point key="canvasLocation" x="1940.5797101449277" y="126.35869565217392"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="AWb-ua-VzB">

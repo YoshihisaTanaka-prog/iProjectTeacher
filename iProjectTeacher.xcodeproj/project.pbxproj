@@ -62,6 +62,9 @@
 		04A7E97825AF2B4A00C0F43C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 04A7E97625AF2B4A00C0F43C /* LaunchScreen.storyboard */; };
 		04A7E98425AF2D0500C0F43C /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04A7E98325AF2D0500C0F43C /* Extensions.swift */; };
 		04A841DD25C5796000469B5E /* SignIn.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 04A841DC25C5796000469B5E /* SignIn.storyboard */; };
+		04B39D1925D43D57003EDECE /* StudentDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B39D1825D43D57003EDECE /* StudentDetailViewController.swift */; };
+		04B39D1E25D43E34003EDECE /* StudentInfoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B39D1C25D43E34003EDECE /* StudentInfoTableViewCell.swift */; };
+		04B39D1F25D43E34003EDECE /* StudentInfoTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04B39D1D25D43E34003EDECE /* StudentInfoTableViewCell.xib */; };
 		04EA678F25BC8A8F005F0D06 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04EA678E25BC8A8F005F0D06 /* User.swift */; };
 		1B55D80425D3FFD9006BAE51 /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B55D80325D3FFD9006BAE51 /* Event.swift */; };
 		1B55D80725D40008006BAE51 /* CalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B55D80625D40008006BAE51 /* CalendarViewController.swift */; };
@@ -128,6 +131,9 @@
 		04A7E97925AF2B4A00C0F43C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		04A7E98325AF2D0500C0F43C /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		04A841DC25C5796000469B5E /* SignIn.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SignIn.storyboard; sourceTree = "<group>"; };
+		04B39D1825D43D57003EDECE /* StudentDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentDetailViewController.swift; sourceTree = "<group>"; };
+		04B39D1C25D43E34003EDECE /* StudentInfoTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentInfoTableViewCell.swift; sourceTree = "<group>"; };
+		04B39D1D25D43E34003EDECE /* StudentInfoTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = StudentInfoTableViewCell.xib; sourceTree = "<group>"; };
 		04EA678E25BC8A8F005F0D06 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		1B55D80325D3FFD9006BAE51 /* Event.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
 		1B55D80625D40008006BAE51 /* CalendarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarViewController.swift; sourceTree = "<group>"; };
@@ -283,6 +289,7 @@
 				04A7E96D25AF2B4900C0F43C /* SceneDelegate.swift */,
 				04A7E96F25AF2B4900C0F43C /* ViewController.swift */,
 				04EA678E25BC8A8F005F0D06 /* User.swift */,
+				04B39D1725D43D2D003EDECE /* StudentInfo */,
 				1BD9EE3F25D3AC8F001560A3 /* Calendar&Schedule */,
 				04744BAC25D0F3570043BCCF /* CheckAddress.swift */,
 				041FF1B325C82F16003F2AF5 /* SignInViewController.swift */,
@@ -295,6 +302,16 @@
 				04A7E97925AF2B4A00C0F43C /* Info.plist */,
 			);
 			path = iProjectTeacher;
+			sourceTree = "<group>";
+		};
+		04B39D1725D43D2D003EDECE /* StudentInfo */ = {
+			isa = PBXGroup;
+			children = (
+				04B39D1C25D43E34003EDECE /* StudentInfoTableViewCell.swift */,
+				04B39D1D25D43E34003EDECE /* StudentInfoTableViewCell.xib */,
+				04B39D1825D43D57003EDECE /* StudentDetailViewController.swift */,
+			);
+			path = StudentInfo;
 			sourceTree = "<group>";
 		};
 		1BD9EE3F25D3AC8F001560A3 /* Calendar&Schedule */ = {
@@ -398,6 +415,7 @@
 				04A7E97325AF2B4900C0F43C /* Main.storyboard in Resources */,
 				047C4E3F25C858C40082807A /* README.md in Resources */,
 				04A841DD25C5796000469B5E /* SignIn.storyboard in Resources */,
+				04B39D1F25D43E34003EDECE /* StudentInfoTableViewCell.xib in Resources */,
 				0459388D25D149C900A0E3C8 /* studentNoImage.png in Resources */,
 				047C4E3225C858C40082807A /* Icon-App-20x20@1x.png in Resources */,
 				04845C5E25BC76F80032B567 /* YourGroupChatViewCell.xib in Resources */,
@@ -482,6 +500,7 @@
 				1B55D80725D40008006BAE51 /* CalendarViewController.swift in Sources */,
 				049C840425C695F000D4D380 /* ScreenSize.swift in Sources */,
 				04A7E96E25AF2B4900C0F43C /* SceneDelegate.swift in Sources */,
+				04B39D1E25D43E34003EDECE /* StudentInfoTableViewCell.swift in Sources */,
 				04EA678F25BC8A8F005F0D06 /* User.swift in Sources */,
 				04845C6025BC76F80032B567 /* YourGroupChatViewCell.swift in Sources */,
 				1BED6EBC25D1749200E912C6 /* Schedule.swift in Sources */,
@@ -493,6 +512,7 @@
 				04845C6425BC76F80032B567 /* YourBalloonView.swift in Sources */,
 				04845C6125BC76F80032B567 /* ChatRoomInputView.swift in Sources */,
 				049C840625C695F000D4D380 /* Opening2ViewController.swift in Sources */,
+				04B39D1925D43D57003EDECE /* StudentDetailViewController.swift in Sources */,
 				04845C5A25BC76F80032B567 /* ChatViewController.swift in Sources */,
 				04845C6625BC76F80032B567 /* ChatTableViewController.swift in Sources */,
 				04A7E98425AF2D0500C0F43C /* Extensions.swift in Sources */,

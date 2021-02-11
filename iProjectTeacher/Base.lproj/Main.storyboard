@@ -48,17 +48,17 @@
             </objects>
             <point key="canvasLocation" x="2013.0434782608697" y="608.70535714285711"/>
         </scene>
-        <!--View Controller-->
+        <!--生徒一覧-->
         <scene sceneID="n1p-5U-hVI">
             <objects>
-                <viewController id="Ax0-th-gjF" sceneMemberID="viewController">
+                <viewController id="Ax0-th-gjF" customClass="StudentViewController" customModule="iProjectTeacher" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="7gR-7y-qJz">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <viewLayoutGuide key="safeArea" id="sfd-Af-SGY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
-                    <navigationItem key="navigationItem" id="1mk-Y4-4Kj"/>
+                    <navigationItem key="navigationItem" title="生徒一覧" id="1mk-Y4-4Kj"/>
                     <connections>
                         <segue destination="zSX-Po-tvM" kind="show" identifier="Detail" id="kqm-N9-QeZ"/>
                     </connections>
@@ -100,6 +100,9 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="8Vn-Q1-lWA"/>
+                    <connections>
+                        <outlet property="tableView" destination="SKp-Lk-D4b" id="Uwj-B2-bMA"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Hhn-iD-Ju7" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -178,11 +181,11 @@
             </objects>
             <point key="canvasLocation" x="1064" y="609"/>
         </scene>
-        <!--Item-->
+        <!--生徒一覧-->
         <scene sceneID="V6e-aB-eBt">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="hum-sq-PxR" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" id="FSJ-Op-XCq"/>
+                    <tabBarItem key="tabBarItem" title="生徒一覧" id="FSJ-Op-XCq"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="gJJ-qi-9vs">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>

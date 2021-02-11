@@ -7,13 +7,29 @@
 //
 
 import UIKit
+import NCMB
 
 class StudentViewController: UIViewController {
+    
+    var selectedStudent: User!
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.performSegue(withIdentifier: "Detail", sender: nil)
+        let query = NCMBUser.query()
+        query?.includeKey("parameter")
+        query?.whereKey("objectId", equalTo: "MT1ys6rPTWdg4LMp")
+        query?.findObjectsInBackground({ (result, error) in
+            if error == nil {
+                let user = result!.first! as! NCMBUser
+                self.selectedStudent = User(user)
+                self.performSegue(withIdentifier: "Detail", sender: nil)
+            }
+            else{
+                self.showOkAlert(title: "Error", message: error!.localizedDescription)
+            }
+        })
+        
 
         // Do any additional setup after loading the view.
     }
@@ -23,8 +39,13 @@ class StudentViewController: UIViewController {
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+        switch segue.identifier! {
+        case "Detail":
+            let view2 = segue.destination as! StudentDetailViewController
+            view2.student = selectedStudent
+        default:
+            break
+        }
     }
 
 }

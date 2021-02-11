@@ -31,13 +31,16 @@
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="高校＆学年" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="V5n-9L-bOj">
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="高校＆学年" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="V5n-9L-bOj">
                         <rect key="frame" x="178" y="116" width="223" height="21"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="21" id="pTu-D5-wbX"/>
+                        </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="氏名" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Kxc-g0-lMb">
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="氏名" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Kxc-g0-lMb">
                         <rect key="frame" x="178" y="79" width="223" height="21"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <nil key="textColor"/>
@@ -143,9 +146,11 @@
                     <constraint firstItem="fX1-re-1Mr" firstAttribute="top" secondItem="1BG-LM-xLD" secondAttribute="bottom" constant="35" id="CTf-Z0-kbY"/>
                     <constraint firstAttribute="trailing" secondItem="U0x-m2-eML" secondAttribute="trailing" constant="30" id="EGK-Pc-2v4"/>
                     <constraint firstItem="U0x-m2-eML" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="39" id="Egf-kU-yBt"/>
+                    <constraint firstItem="V5n-9L-bOj" firstAttribute="top" secondItem="Kxc-g0-lMb" secondAttribute="bottom" constant="16" id="HUr-hN-tGb"/>
                     <constraint firstItem="V5n-9L-bOj" firstAttribute="leading" secondItem="U0x-m2-eML" secondAttribute="leading" id="KCa-2i-gRC"/>
                     <constraint firstItem="fX1-re-1Mr" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" id="R1N-2U-HlL"/>
                     <constraint firstItem="Kxc-g0-lMb" firstAttribute="trailing" secondItem="U0x-m2-eML" secondAttribute="trailing" id="SOV-uS-bcT"/>
+                    <constraint firstItem="Kxc-g0-lMb" firstAttribute="top" secondItem="U0x-m2-eML" secondAttribute="bottom" constant="19" id="WbY-aT-mzN"/>
                     <constraint firstItem="Kxc-g0-lMb" firstAttribute="leading" secondItem="U0x-m2-eML" secondAttribute="leading" id="aZJ-Lf-Flu"/>
                     <constraint firstItem="V5n-9L-bOj" firstAttribute="trailing" secondItem="U0x-m2-eML" secondAttribute="trailing" id="rbA-u5-2De"/>
                     <constraint firstItem="1BG-LM-xLD" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="20" symbolic="YES" id="vSj-uI-hSU"/>
@@ -153,16 +158,8 @@
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
-            <point key="canvasLocation" x="194.92753623188406" y="212.94642857142856"/>
+            <point key="canvasLocation" x="659" y="57"/>
         </tableViewCell>
-        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="KpU-70-08l">
-            <rect key="frame" x="0.0" y="0.0" width="42" height="21"/>
-            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-            <nil key="textColor"/>
-            <nil key="highlightedColor"/>
-            <point key="canvasLocation" x="871" y="-18"/>
-        </label>
     </objects>
     <resources>
         <systemColor name="systemBackgroundColor">

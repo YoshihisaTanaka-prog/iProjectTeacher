@@ -13,6 +13,7 @@ class StudentDetailViewController: UIViewController, UITableViewDelegate, UITabl
     
     var reportList: [Report] = []
     var student: User!
+    var size: Size!
     
     @IBOutlet var tableView: UITableView!
 
@@ -20,14 +21,25 @@ class StudentDetailViewController: UIViewController, UITableViewDelegate, UITabl
         super.viewDidLoad()
         
         // Do any additional setup after loading the view.
+        tableView.estimatedRowHeight = 10.f
         tableView.rowHeight = UITableView.automaticDimension
         tableView.delegate = self
         tableView.dataSource = self
         
         tableView.register(UINib(nibName: "StudentInfoTableViewCell", bundle: nil), forCellReuseIdentifier: "StudentInfo")
         tableView.register(UINib(nibName: "ReportTableViewCell", bundle: nil), forCellReuseIdentifier: "Report")
+        size = getScreenSize(isExsistsNavigationBar: true, isExsistsTabBar: true)
+        loadReport()
     }
     
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        if(indexPath.row == 0){
+            return size.viewHeight
+        }
+        else{
+            return 44
+        }
+    }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return reportList.count + 1
@@ -41,7 +53,7 @@ class StudentDetailViewController: UIViewController, UITableViewDelegate, UITabl
         }
         else{
             let cell = tableView.dequeueReusableCell(withIdentifier: "Report") as! ReportTableViewCell
-            cell.titleLabel.text = reportList[indexPath.row].studentId
+            cell.titleLabel.text = reportList[indexPath.row - 1].studentId
             return cell
         }
     }

@@ -40,6 +40,9 @@ class User {
             self.teacherParameter = TeacherParameter(parameter)
         }
         else{
+            if parameter == nil {
+                fatalError("parameter is nil!")
+            }
             self.studentParameter = StudentParameter(parameter)
         }
         
@@ -73,7 +76,9 @@ class StudentParameter{
     var selection: String
     
     init(_ parameter: NCMBObject) {
-        self.SchoolName = parameter.object(forKey: "SchoolName") as! String
+        let school = parameter.object(forKey: "SchoolName") as? String
+        print(parameter,school)
+        self.SchoolName = school!
         self.selection = parameter.object(forKey: "selection") as! String
     }
 }

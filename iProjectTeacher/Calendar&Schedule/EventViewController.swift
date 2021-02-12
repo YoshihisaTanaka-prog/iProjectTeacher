@@ -62,6 +62,10 @@ class EventViewController: UIViewController {
         backBtn.addTarget(self, action: #selector(onbackClick(_:)), for: .touchUpInside)
         view.addSubview(backBtn)
 
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy/MM/dd"
+        y_text.text = formatter.string(from: y.date)
+        
     }
 
     //画面遷移(カレンダーページ)

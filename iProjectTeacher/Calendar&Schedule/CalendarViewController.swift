@@ -13,47 +13,16 @@ import RealmSwift
 
 class CalendarViewController: UIViewController, FSCalendarDelegate, FSCalendarDataSource, FSCalendarDelegateAppearance {
      //スケジュール内容
-    let labelDate = UILabel(frame: CGRect(x: 5, y: 580, width: 400, height: 50))
+    @IBOutlet var labelDate: UILabel!
         //「主なスケジュール」の表示
-        let labelTitle = UILabel(frame: CGRect(x: 0, y: 530, width: 180, height: 50))
+    @IBOutlet var labelTitle: UILabel!
         //カレンダー部分
    
         //日付の表示
-        let Date = UILabel(frame: CGRect(x: 5, y: 430, width: 200, height: 100))
+    @IBOutlet var  Date: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        let size = getScreenSize(isExsistsNavigationBar: true, isExsistsTabBar: true)!
-        let w = size.width
-        let h = size.viewHeight
-        
-
-        
-        //日付表示設定
-        Date.text = ""
-        Date.font = UIFont.systemFont(ofSize: 60.0)
-        Date.textColor = .black
-        view.addSubview(Date)
-
-        //「主なスケジュール」表示設定
-        labelTitle.text = ""
-        labelTitle.textAlignment = .center
-        labelTitle.font = UIFont.systemFont(ofSize: 20.0)
-        view.addSubview(labelTitle)
-        
-        //スケジュール内容表示設定
-        labelDate.text = ""
-        labelDate.font = UIFont.systemFont(ofSize: 18.0)
-        view.addSubview(labelDate)
-        
-        //スケジュール追加ボタン
-        let addBtn = UIButton(frame:CGRect(x: w - 70, y: h - 70, width: 60, height: 60))
-        addBtn.setTitle("+", for: UIControl.State())
-        addBtn.setTitleColor(.white, for: UIControl.State())
-        addBtn.backgroundColor = .orange
-        addBtn.layer.cornerRadius = 30.0
-        addBtn.addTarget(self, action: #selector(self.onClick), for: .touchUpInside)
-        view.addSubview(addBtn)
     }
     @objc func onClick(){ let storyboard = UIStoryboard(name: "Main", bundle: nil)
     let SecondController = storyboard.instantiateViewController(withIdentifier: "Insert")
@@ -118,10 +87,6 @@ class CalendarViewController: UIViewController, FSCalendarDelegate, FSCalendarDa
     //カレンダー処理(スケジュール表示処理)
         func calendar(_ calendar: FSCalendar, didSelect date: Date, at monthPosition: FSCalendarMonthPosition){
 
-            labelTitle.text = "主なスケジュール"
-            labelTitle.backgroundColor = .orange
-            view.addSubview(labelTitle)
-
             //予定がある場合、スケジュールをDBから取得・表示する。
             //無い場合、「スケジュールはありません」と表示。
             labelDate.text = "スケジュールはありません"
@@ -132,16 +97,17 @@ class CalendarViewController: UIViewController, FSCalendarDelegate, FSCalendarDa
             let year = tmpDate.component(.year, from: date)
             let month = tmpDate.component(.month, from: date)
             let day = tmpDate.component(.day, from: date)
-            let m = String(format: "%02d", month)
-            let d = String(format: "%02d", day)
-
-            let da = "\(year)/\(m)/\(d)"
-
-            //クリックしたら、日付が表示される。
-            Date.text = "\(m)/\(d)"
+    
+            let formatter = DateFormatter()
+            formatter.dateFormat = "yyyy/MM/dd"
+            let da = formatter.string(from: date)
+            Date.text = da
             view.addSubview(Date)
+          
+           
 
             //スケジュール取得
+        
             let realm = try! Realm()
             var result = realm.objects(Event.self)
             result = result.filter("date = '\(da)'")

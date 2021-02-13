@@ -7,10 +7,20 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		042767AD25D6C5D9004F0A85 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042767A925D6C5D9004F0A85 /* SignUpViewController.swift */; };
-		042767AE25D6C5D9004F0A85 /* UserPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042767AA25D6C5D9004F0A85 /* UserPageViewController.swift */; };
-		042767AF25D6C5D9004F0A85 /* SignIn.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 042767AB25D6C5D9004F0A85 /* SignIn.storyboard */; };
-		042767B025D6C5D9004F0A85 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042767AC25D6C5D9004F0A85 /* SignInViewController.swift */; };
+		041FF1B425C82F16003F2AF5 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 041FF1B325C82F16003F2AF5 /* SignInViewController.swift */; };
+		041FF1B525C82F16003F2AF5 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 041FF1B225C82F16003F2AF5 /* SignUpViewController.swift */; };
+		0427679125D69610004F0A85 /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0427677C25D69610004F0A85 /* ChatViewController.swift */; };
+		0427679825D69610004F0A85 /* ChatRoomInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0427678625D69610004F0A85 /* ChatRoomInputView.swift */; };
+		0427679925D69610004F0A85 /* MyBalloonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0427678725D69610004F0A85 /* MyBalloonView.swift */; };
+		0427679A25D69610004F0A85 /* ChatRoomInputView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0427678825D69610004F0A85 /* ChatRoomInputView.xib */; };
+		0427679B25D69610004F0A85 /* YourBalloonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0427678925D69610004F0A85 /* YourBalloonView.swift */; };
+		0427679C25D69610004F0A85 /* Memo.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0427678A25D69610004F0A85 /* Memo.strings */; };
+		0427679D25D69610004F0A85 /* Chat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0427678B25D69610004F0A85 /* Chat.swift */; };
+		0427679E25D69610004F0A85 /* ChatTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0427678C25D69610004F0A85 /* ChatTableViewController.swift */; };
+		0427679F25D69610004F0A85 /* Chat.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0427678D25D69610004F0A85 /* Chat.storyboard */; };
+		042767A025D69610004F0A85 /* CreateGroupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0427678E25D69610004F0A85 /* CreateGroupViewController.swift */; };
+		042767A125D69610004F0A85 /* SearchUserForCreateGroupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0427678F25D69610004F0A85 /* SearchUserForCreateGroupViewController.swift */; };
+		042767A225D69610004F0A85 /* GoToChatExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0427679025D69610004F0A85 /* GoToChatExtension.swift */; };
 		0433E3A525D54709002A6BE5 /* Report.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0433E3A425D54709002A6BE5 /* Report.swift */; };
 		0433E3A925D54B09002A6BE5 /* ReportTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0433E3A725D54B09002A6BE5 /* ReportTableViewCell.swift */; };
 		0433E3AA25D54B09002A6BE5 /* ReportTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0433E3A825D54B09002A6BE5 /* ReportTableViewCell.xib */; };
@@ -50,6 +60,7 @@
 		04A7E97525AF2B4A00C0F43C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 04A7E97425AF2B4A00C0F43C /* Assets.xcassets */; };
 		04A7E97825AF2B4A00C0F43C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 04A7E97625AF2B4A00C0F43C /* LaunchScreen.storyboard */; };
 		04A7E98425AF2D0500C0F43C /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04A7E98325AF2D0500C0F43C /* Extensions.swift */; };
+		04A841DD25C5796000469B5E /* SignIn.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 04A841DC25C5796000469B5E /* SignIn.storyboard */; };
 		04B39D1925D43D57003EDECE /* StudentDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B39D1825D43D57003EDECE /* StudentDetailViewController.swift */; };
 		04B39D1E25D43E34003EDECE /* StudentInfoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B39D1C25D43E34003EDECE /* StudentInfoTableViewCell.swift */; };
 		04B39D1F25D43E34003EDECE /* StudentInfoTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04B39D1D25D43E34003EDECE /* StudentInfoTableViewCell.xib */; };
@@ -62,10 +73,20 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		042767A925D6C5D9004F0A85 /* SignUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
-		042767AA25D6C5D9004F0A85 /* UserPageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserPageViewController.swift; sourceTree = "<group>"; };
-		042767AB25D6C5D9004F0A85 /* SignIn.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = SignIn.storyboard; sourceTree = "<group>"; };
-		042767AC25D6C5D9004F0A85 /* SignInViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
+		041FF1B225C82F16003F2AF5 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
+		041FF1B325C82F16003F2AF5 /* SignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
+		0427677C25D69610004F0A85 /* ChatViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
+		0427678625D69610004F0A85 /* ChatRoomInputView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatRoomInputView.swift; sourceTree = "<group>"; };
+		0427678725D69610004F0A85 /* MyBalloonView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyBalloonView.swift; sourceTree = "<group>"; };
+		0427678825D69610004F0A85 /* ChatRoomInputView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChatRoomInputView.xib; sourceTree = "<group>"; };
+		0427678925D69610004F0A85 /* YourBalloonView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YourBalloonView.swift; sourceTree = "<group>"; };
+		0427678A25D69610004F0A85 /* Memo.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = Memo.strings; sourceTree = "<group>"; };
+		0427678B25D69610004F0A85 /* Chat.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Chat.swift; sourceTree = "<group>"; };
+		0427678C25D69610004F0A85 /* ChatTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatTableViewController.swift; sourceTree = "<group>"; };
+		0427678D25D69610004F0A85 /* Chat.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Chat.storyboard; sourceTree = "<group>"; };
+		0427678E25D69610004F0A85 /* CreateGroupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateGroupViewController.swift; sourceTree = "<group>"; };
+		0427678F25D69610004F0A85 /* SearchUserForCreateGroupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchUserForCreateGroupViewController.swift; sourceTree = "<group>"; };
+		0427679025D69610004F0A85 /* GoToChatExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoToChatExtension.swift; sourceTree = "<group>"; };
 		0433E3A425D54709002A6BE5 /* Report.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Report.swift; sourceTree = "<group>"; };
 		0433E3A725D54B09002A6BE5 /* ReportTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportTableViewCell.swift; sourceTree = "<group>"; };
 		0433E3A825D54B09002A6BE5 /* ReportTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ReportTableViewCell.xib; sourceTree = "<group>"; };
@@ -107,6 +128,7 @@
 		04A7E97725AF2B4A00C0F43C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		04A7E97925AF2B4A00C0F43C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		04A7E98325AF2D0500C0F43C /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		04A841DC25C5796000469B5E /* SignIn.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SignIn.storyboard; sourceTree = "<group>"; };
 		04B39D1825D43D57003EDECE /* StudentDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentDetailViewController.swift; sourceTree = "<group>"; };
 		04B39D1C25D43E34003EDECE /* StudentInfoTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentInfoTableViewCell.swift; sourceTree = "<group>"; };
 		04B39D1D25D43E34003EDECE /* StudentInfoTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = StudentInfoTableViewCell.xib; sourceTree = "<group>"; };
@@ -132,15 +154,40 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		042767A825D6C5D9004F0A85 /* Sign */ = {
+		0427677B25D69610004F0A85 /* Chat */ = {
 			isa = PBXGroup;
 			children = (
-				042767A925D6C5D9004F0A85 /* SignUpViewController.swift */,
-				042767AA25D6C5D9004F0A85 /* UserPageViewController.swift */,
-				042767AB25D6C5D9004F0A85 /* SignIn.storyboard */,
-				042767AC25D6C5D9004F0A85 /* SignInViewController.swift */,
+				0427677C25D69610004F0A85 /* ChatViewController.swift */,
+				0427677D25D69610004F0A85 /* UI */,
+				0427678A25D69610004F0A85 /* Memo.strings */,
+				0427678B25D69610004F0A85 /* Chat.swift */,
+				0427678C25D69610004F0A85 /* ChatTableViewController.swift */,
+				0427678D25D69610004F0A85 /* Chat.storyboard */,
+				0427678E25D69610004F0A85 /* CreateGroupViewController.swift */,
+				0427678F25D69610004F0A85 /* SearchUserForCreateGroupViewController.swift */,
+				0427679025D69610004F0A85 /* GoToChatExtension.swift */,
 			);
-			path = Sign;
+			name = Chat;
+			path = ../../ChatTest2/ChatTest2/Chat;
+			sourceTree = "<group>";
+		};
+		0427677D25D69610004F0A85 /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				0427678525D69610004F0A85 /* View */,
+			);
+			path = UI;
+			sourceTree = "<group>";
+		};
+		0427678525D69610004F0A85 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				0427678625D69610004F0A85 /* ChatRoomInputView.swift */,
+				0427678725D69610004F0A85 /* MyBalloonView.swift */,
+				0427678825D69610004F0A85 /* ChatRoomInputView.xib */,
+				0427678925D69610004F0A85 /* YourBalloonView.swift */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 		047C4DEA25C856300082807A /* Images */ = {
@@ -223,15 +270,18 @@
 			children = (
 				049C83FF25C695F000D4D380 /* Open */,
 				047C4DEA25C856300082807A /* Images */,
-				1BD9EE3F25D3AC8F001560A3 /* Calendar&Schedule */,
-				04B39D1725D43D2D003EDECE /* StudentInfo */,
-				042767A825D6C5D9004F0A85 /* Sign */,
 				04A7E96B25AF2B4900C0F43C /* AppDelegate.swift */,
 				04A7E96D25AF2B4900C0F43C /* SceneDelegate.swift */,
 				04A7E96F25AF2B4900C0F43C /* ViewController.swift */,
 				04EA678E25BC8A8F005F0D06 /* User.swift */,
+				04B39D1725D43D2D003EDECE /* StudentInfo */,
+				1BD9EE3F25D3AC8F001560A3 /* Calendar&Schedule */,
+				0427677B25D69610004F0A85 /* Chat */,
+				041FF1B325C82F16003F2AF5 /* SignInViewController.swift */,
+				041FF1B225C82F16003F2AF5 /* SignUpViewController.swift */,
 				04744BAC25D0F3570043BCCF /* CheckAddress.swift */,
 				04A7E97125AF2B4900C0F43C /* Main.storyboard */,
+				04A841DC25C5796000469B5E /* SignIn.storyboard */,
 				04A7E98325AF2D0500C0F43C /* Extensions.swift */,
 				04A7E97425AF2B4A00C0F43C /* Assets.xcassets */,
 				04A7E97625AF2B4A00C0F43C /* LaunchScreen.storyboard */,
@@ -345,7 +395,6 @@
 				04A7E97825AF2B4A00C0F43C /* LaunchScreen.storyboard in Resources */,
 				04A7E97525AF2B4A00C0F43C /* Assets.xcassets in Resources */,
 				047C4E3825C858C40082807A /* Icon-App-29x29@3x.png in Resources */,
-				042767AF25D6C5D9004F0A85 /* SignIn.storyboard in Resources */,
 				0459388F25D149CC00A0E3C8 /* teacherNoImage.png in Resources */,
 				047C4E3925C858C40082807A /* Icon-App-40x40@2x.png in Resources */,
 				049C840725C695F000D4D380 /* Opening.storyboard in Resources */,
@@ -353,11 +402,14 @@
 				047C4E3C25C858C40082807A /* Icon-App-76x76@1x.png in Resources */,
 				04A7E97325AF2B4900C0F43C /* Main.storyboard in Resources */,
 				047C4E3F25C858C40082807A /* README.md in Resources */,
+				04A841DD25C5796000469B5E /* SignIn.storyboard in Resources */,
 				04B39D1F25D43E34003EDECE /* StudentInfoTableViewCell.xib in Resources */,
 				0459388D25D149C900A0E3C8 /* studentNoImage.png in Resources */,
 				047C4E3225C858C40082807A /* Icon-App-20x20@1x.png in Resources */,
 				047C4E3125C858C40082807A /* Icon-App-40x40@1x.png in Resources */,
 				047C4E2F25C858C40082807A /* Icon-App-76x76@2x.png in Resources */,
+				0427679F25D69610004F0A85 /* Chat.storyboard in Resources */,
+				0427679C25D69610004F0A85 /* Memo.strings in Resources */,
 				047C4E4125C858C40082807A /* iTunesArtwork@3x.png in Resources */,
 				0433E3AA25D54B09002A6BE5 /* ReportTableViewCell.xib in Resources */,
 				047C4E3D25C858C40082807A /* Icon-App-40x40@3x.png in Resources */,
@@ -367,6 +419,7 @@
 				0459388B25D149C600A0E3C8 /* creating.png in Resources */,
 				047C4E2E25C858C40082807A /* iTunesArtwork@1x.png in Resources */,
 				047C4E3B25C858C40082807A /* Icon-App-60x60@2x.png in Resources */,
+				0427679A25D69610004F0A85 /* ChatRoomInputView.xib in Resources */,
 				047C4E3425C858C40082807A /* Icon-App-20x20@3x.png in Resources */,
 				047C4E3525C858C40082807A /* ItunesArtwork@2x.png in Resources */,
 				047C4E3725C858C40082807A /* Icon-App-20x20@2x.png in Resources */,
@@ -424,27 +477,35 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				041FF1B525C82F16003F2AF5 /* SignUpViewController.swift in Sources */,
 				04744BAD25D0F3570043BCCF /* CheckAddress.swift in Sources */,
 				04A7E97025AF2B4900C0F43C /* ViewController.swift in Sources */,
 				1B55D80A25D41365006BAE51 /* EventViewController.swift in Sources */,
 				04A7E96C25AF2B4900C0F43C /* AppDelegate.swift in Sources */,
 				1B55D80725D40008006BAE51 /* CalendarViewController.swift in Sources */,
 				049C840425C695F000D4D380 /* ScreenSize.swift in Sources */,
+				042767A225D69610004F0A85 /* GoToChatExtension.swift in Sources */,
+				0427679B25D69610004F0A85 /* YourBalloonView.swift in Sources */,
+				0427679D25D69610004F0A85 /* Chat.swift in Sources */,
 				0433E3A525D54709002A6BE5 /* Report.swift in Sources */,
-				042767B025D6C5D9004F0A85 /* SignInViewController.swift in Sources */,
 				04A7E96E25AF2B4900C0F43C /* SceneDelegate.swift in Sources */,
 				04B39D1E25D43E34003EDECE /* StudentInfoTableViewCell.swift in Sources */,
+				0427679125D69610004F0A85 /* ChatViewController.swift in Sources */,
+				0427679E25D69610004F0A85 /* ChatTableViewController.swift in Sources */,
 				04EA678F25BC8A8F005F0D06 /* User.swift in Sources */,
-				042767AD25D6C5D9004F0A85 /* SignUpViewController.swift in Sources */,
 				1BED6EBC25D1749200E912C6 /* Schedule.swift in Sources */,
-				042767AE25D6C5D9004F0A85 /* UserPageViewController.swift in Sources */,
+				0427679925D69610004F0A85 /* MyBalloonView.swift in Sources */,
 				0433E3A925D54B09002A6BE5 /* ReportTableViewCell.swift in Sources */,
 				049C840525C695F000D4D380 /* Opening1ViewController.swift in Sources */,
+				042767A125D69610004F0A85 /* SearchUserForCreateGroupViewController.swift in Sources */,
+				042767A025D69610004F0A85 /* CreateGroupViewController.swift in Sources */,
+				041FF1B425C82F16003F2AF5 /* SignInViewController.swift in Sources */,
 				049C840625C695F000D4D380 /* Opening2ViewController.swift in Sources */,
 				04B39D1925D43D57003EDECE /* StudentDetailViewController.swift in Sources */,
 				0433E3AE25D5584B002A6BE5 /* StudentViewController.swift in Sources */,
 				04A7E98425AF2D0500C0F43C /* Extensions.swift in Sources */,
 				1B55D80425D3FFD9006BAE51 /* Event.swift in Sources */,
+				0427679825D69610004F0A85 /* ChatRoomInputView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

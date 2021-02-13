@@ -97,16 +97,17 @@ class CalendarViewController: UIViewController, FSCalendarDelegate, FSCalendarDa
             let year = tmpDate.component(.year, from: date)
             let month = tmpDate.component(.month, from: date)
             let day = tmpDate.component(.day, from: date)
-            let m = String(format: "%02d", month)
-            let d = String(format: "%02d", day)
-
-            let da = "\(year)/\(m)/\(d)"
-
-            //クリックしたら、日付が表示される。
-            Date.text = "\(m)/\(d)"
+    
+            let formatter = DateFormatter()
+            formatter.dateFormat = "yyyy/MM/dd"
+            let da = formatter.string(from: date)
+            Date.text = da
             view.addSubview(Date)
+          
+           
 
             //スケジュール取得
+        
             let realm = try! Realm()
             var result = realm.objects(Event.self)
             result = result.filter("date = '\(da)'")

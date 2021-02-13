@@ -99,6 +99,10 @@ class EventViewController: UIViewController {
         //前のページに戻る
         dismiss(animated: true, completion: nil)
 
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy/MM/dd"
+        y_text.text = formatter.string(from: y.date)
+        
     }
-
+    
 }

@@ -103,8 +103,8 @@ class CalendarViewController: UIViewController, FSCalendarDelegate, FSCalendarDa
             let da = formatter.string(from: date)
             Date.text = da
             view.addSubview(Date)
-          
-           
+            
+            
 
             //スケジュール取得
         
@@ -119,11 +119,19 @@ class CalendarViewController: UIViewController, FSCalendarDelegate, FSCalendarDa
                     view.addSubview(labelDate)
                 }
             }
+            func calendar(_ calendar: FSCalendar, numberOfEventsFor date: Date) -> Int {
+                if self.labelDate.contains(date as! UIFocusEnvironment) {
+                     return 1
+                }
+             
+                return 0
+            }
 
+            }
 
-
+            
+         
+            
         }
-   }
-  
 
 

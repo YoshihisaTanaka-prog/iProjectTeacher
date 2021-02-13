@@ -7,8 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		041FF1B425C82F16003F2AF5 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 041FF1B325C82F16003F2AF5 /* SignInViewController.swift */; };
-		041FF1B525C82F16003F2AF5 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 041FF1B225C82F16003F2AF5 /* SignUpViewController.swift */; };
 		0427679125D69610004F0A85 /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0427677C25D69610004F0A85 /* ChatViewController.swift */; };
 		0427679825D69610004F0A85 /* ChatRoomInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0427678625D69610004F0A85 /* ChatRoomInputView.swift */; };
 		0427679925D69610004F0A85 /* MyBalloonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0427678725D69610004F0A85 /* MyBalloonView.swift */; };
@@ -25,6 +23,10 @@
 		0433E3A925D54B09002A6BE5 /* ReportTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0433E3A725D54B09002A6BE5 /* ReportTableViewCell.swift */; };
 		0433E3AA25D54B09002A6BE5 /* ReportTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0433E3A825D54B09002A6BE5 /* ReportTableViewCell.xib */; };
 		0433E3AE25D5584B002A6BE5 /* StudentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0433E3AD25D5584B002A6BE5 /* StudentViewController.swift */; };
+		043A9DB525D80D1600587B0E /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043A9DB125D80D1500587B0E /* SignUpViewController.swift */; };
+		043A9DB625D80D1600587B0E /* UserPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043A9DB225D80D1500587B0E /* UserPageViewController.swift */; };
+		043A9DB725D80D1600587B0E /* SignIn.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 043A9DB325D80D1500587B0E /* SignIn.storyboard */; };
+		043A9DB825D80D1600587B0E /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043A9DB425D80D1500587B0E /* SignInViewController.swift */; };
 		0459388B25D149C600A0E3C8 /* creating.png in Resources */ = {isa = PBXBuildFile; fileRef = 0459388A25D149C100A0E3C8 /* creating.png */; };
 		0459388D25D149C900A0E3C8 /* studentNoImage.png in Resources */ = {isa = PBXBuildFile; fileRef = 0459388925D149C100A0E3C8 /* studentNoImage.png */; };
 		0459388F25D149CC00A0E3C8 /* teacherNoImage.png in Resources */ = {isa = PBXBuildFile; fileRef = 0459388825D149C100A0E3C8 /* teacherNoImage.png */; };
@@ -60,7 +62,6 @@
 		04A7E97525AF2B4A00C0F43C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 04A7E97425AF2B4A00C0F43C /* Assets.xcassets */; };
 		04A7E97825AF2B4A00C0F43C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 04A7E97625AF2B4A00C0F43C /* LaunchScreen.storyboard */; };
 		04A7E98425AF2D0500C0F43C /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04A7E98325AF2D0500C0F43C /* Extensions.swift */; };
-		04A841DD25C5796000469B5E /* SignIn.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 04A841DC25C5796000469B5E /* SignIn.storyboard */; };
 		04B39D1925D43D57003EDECE /* StudentDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B39D1825D43D57003EDECE /* StudentDetailViewController.swift */; };
 		04B39D1E25D43E34003EDECE /* StudentInfoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B39D1C25D43E34003EDECE /* StudentInfoTableViewCell.swift */; };
 		04B39D1F25D43E34003EDECE /* StudentInfoTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04B39D1D25D43E34003EDECE /* StudentInfoTableViewCell.xib */; };
@@ -73,8 +74,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		041FF1B225C82F16003F2AF5 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
-		041FF1B325C82F16003F2AF5 /* SignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
 		0427677C25D69610004F0A85 /* ChatViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
 		0427678625D69610004F0A85 /* ChatRoomInputView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatRoomInputView.swift; sourceTree = "<group>"; };
 		0427678725D69610004F0A85 /* MyBalloonView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyBalloonView.swift; sourceTree = "<group>"; };
@@ -91,6 +90,10 @@
 		0433E3A725D54B09002A6BE5 /* ReportTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportTableViewCell.swift; sourceTree = "<group>"; };
 		0433E3A825D54B09002A6BE5 /* ReportTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ReportTableViewCell.xib; sourceTree = "<group>"; };
 		0433E3AD25D5584B002A6BE5 /* StudentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentViewController.swift; sourceTree = "<group>"; };
+		043A9DB125D80D1500587B0E /* SignUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
+		043A9DB225D80D1500587B0E /* UserPageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserPageViewController.swift; sourceTree = "<group>"; };
+		043A9DB325D80D1500587B0E /* SignIn.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = SignIn.storyboard; sourceTree = "<group>"; };
+		043A9DB425D80D1500587B0E /* SignInViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
 		0459388825D149C100A0E3C8 /* teacherNoImage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = teacherNoImage.png; sourceTree = "<group>"; };
 		0459388925D149C100A0E3C8 /* studentNoImage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = studentNoImage.png; sourceTree = "<group>"; };
 		0459388A25D149C100A0E3C8 /* creating.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = creating.png; sourceTree = "<group>"; };
@@ -128,7 +131,6 @@
 		04A7E97725AF2B4A00C0F43C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		04A7E97925AF2B4A00C0F43C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		04A7E98325AF2D0500C0F43C /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
-		04A841DC25C5796000469B5E /* SignIn.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SignIn.storyboard; sourceTree = "<group>"; };
 		04B39D1825D43D57003EDECE /* StudentDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentDetailViewController.swift; sourceTree = "<group>"; };
 		04B39D1C25D43E34003EDECE /* StudentInfoTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentInfoTableViewCell.swift; sourceTree = "<group>"; };
 		04B39D1D25D43E34003EDECE /* StudentInfoTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = StudentInfoTableViewCell.xib; sourceTree = "<group>"; };
@@ -188,6 +190,17 @@
 				0427678925D69610004F0A85 /* YourBalloonView.swift */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		043A9DB025D80D1500587B0E /* Sign */ = {
+			isa = PBXGroup;
+			children = (
+				043A9DB125D80D1500587B0E /* SignUpViewController.swift */,
+				043A9DB225D80D1500587B0E /* UserPageViewController.swift */,
+				043A9DB325D80D1500587B0E /* SignIn.storyboard */,
+				043A9DB425D80D1500587B0E /* SignInViewController.swift */,
+			);
+			path = Sign;
 			sourceTree = "<group>";
 		};
 		047C4DEA25C856300082807A /* Images */ = {
@@ -277,11 +290,9 @@
 				04B39D1725D43D2D003EDECE /* StudentInfo */,
 				1BD9EE3F25D3AC8F001560A3 /* Calendar&Schedule */,
 				0427677B25D69610004F0A85 /* Chat */,
-				041FF1B325C82F16003F2AF5 /* SignInViewController.swift */,
-				041FF1B225C82F16003F2AF5 /* SignUpViewController.swift */,
+				043A9DB025D80D1500587B0E /* Sign */,
 				04744BAC25D0F3570043BCCF /* CheckAddress.swift */,
 				04A7E97125AF2B4900C0F43C /* Main.storyboard */,
-				04A841DC25C5796000469B5E /* SignIn.storyboard */,
 				04A7E98325AF2D0500C0F43C /* Extensions.swift */,
 				04A7E97425AF2B4A00C0F43C /* Assets.xcassets */,
 				04A7E97625AF2B4A00C0F43C /* LaunchScreen.storyboard */,
@@ -396,13 +407,13 @@
 				04A7E97525AF2B4A00C0F43C /* Assets.xcassets in Resources */,
 				047C4E3825C858C40082807A /* Icon-App-29x29@3x.png in Resources */,
 				0459388F25D149CC00A0E3C8 /* teacherNoImage.png in Resources */,
+				043A9DB725D80D1600587B0E /* SignIn.storyboard in Resources */,
 				047C4E3925C858C40082807A /* Icon-App-40x40@2x.png in Resources */,
 				049C840725C695F000D4D380 /* Opening.storyboard in Resources */,
 				047C4E3025C858C40082807A /* Icon-App-29x29@1x.png in Resources */,
 				047C4E3C25C858C40082807A /* Icon-App-76x76@1x.png in Resources */,
 				04A7E97325AF2B4900C0F43C /* Main.storyboard in Resources */,
 				047C4E3F25C858C40082807A /* README.md in Resources */,
-				04A841DD25C5796000469B5E /* SignIn.storyboard in Resources */,
 				04B39D1F25D43E34003EDECE /* StudentInfoTableViewCell.xib in Resources */,
 				0459388D25D149C900A0E3C8 /* studentNoImage.png in Resources */,
 				047C4E3225C858C40082807A /* Icon-App-20x20@1x.png in Resources */,
@@ -477,13 +488,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				041FF1B525C82F16003F2AF5 /* SignUpViewController.swift in Sources */,
 				04744BAD25D0F3570043BCCF /* CheckAddress.swift in Sources */,
 				04A7E97025AF2B4900C0F43C /* ViewController.swift in Sources */,
 				1B55D80A25D41365006BAE51 /* EventViewController.swift in Sources */,
 				04A7E96C25AF2B4900C0F43C /* AppDelegate.swift in Sources */,
 				1B55D80725D40008006BAE51 /* CalendarViewController.swift in Sources */,
 				049C840425C695F000D4D380 /* ScreenSize.swift in Sources */,
+				043A9DB625D80D1600587B0E /* UserPageViewController.swift in Sources */,
 				042767A225D69610004F0A85 /* GoToChatExtension.swift in Sources */,
 				0427679B25D69610004F0A85 /* YourBalloonView.swift in Sources */,
 				0427679D25D69610004F0A85 /* Chat.swift in Sources */,
@@ -499,10 +510,11 @@
 				049C840525C695F000D4D380 /* Opening1ViewController.swift in Sources */,
 				042767A125D69610004F0A85 /* SearchUserForCreateGroupViewController.swift in Sources */,
 				042767A025D69610004F0A85 /* CreateGroupViewController.swift in Sources */,
-				041FF1B425C82F16003F2AF5 /* SignInViewController.swift in Sources */,
 				049C840625C695F000D4D380 /* Opening2ViewController.swift in Sources */,
+				043A9DB525D80D1600587B0E /* SignUpViewController.swift in Sources */,
 				04B39D1925D43D57003EDECE /* StudentDetailViewController.swift in Sources */,
 				0433E3AE25D5584B002A6BE5 /* StudentViewController.swift in Sources */,
+				043A9DB825D80D1600587B0E /* SignInViewController.swift in Sources */,
 				04A7E98425AF2D0500C0F43C /* Extensions.swift in Sources */,
 				1B55D80425D3FFD9006BAE51 /* Event.swift in Sources */,
 				0427679825D69610004F0A85 /* ChatRoomInputView.swift in Sources */,

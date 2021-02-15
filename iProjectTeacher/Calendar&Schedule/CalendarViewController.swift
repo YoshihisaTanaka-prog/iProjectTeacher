@@ -119,14 +119,15 @@ class CalendarViewController: UIViewController, FSCalendarDelegate, FSCalendarDa
                     view.addSubview(labelDate)
                 }
             }
+            
             func calendar(_ calendar: FSCalendar, numberOfEventsFor date: Date) -> Int {
-                if self.labelDate.contains(date as! UIFocusEnvironment) {
-                     return 1
+                if result != nil {
+                    return 1
+                }else{
+                    return 0
                 }
-             
-                return 0
             }
-
+            
             }
 
             

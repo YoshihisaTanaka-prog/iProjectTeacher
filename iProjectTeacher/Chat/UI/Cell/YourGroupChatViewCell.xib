@@ -55,7 +55,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="DOt-0O-Hvu" customClass="CosmosView" customModule="Cosmos">
-                        <rect key="frame" x="188" y="18" width="190" height="41"/>
+                        <rect key="frame" x="247" y="18" width="131" height="41"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>

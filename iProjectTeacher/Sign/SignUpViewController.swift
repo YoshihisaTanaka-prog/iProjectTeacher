@@ -56,7 +56,7 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
                 ud.set(furiganaTextField.text!, forKey: mail + "furigana")
                 ud.synchronize()
                 let domain = emailunivTextField.text!.components(separatedBy: "@").last!
-                domainList.set(domain: domain, mail: emailunivTextField.text!)
+//                domainList.set(domain: domain, mail: emailunivTextField.text!)
             }
             else{
                 showOkAlert(title: "Error", message: error!.localizedDescription)

@@ -15,7 +15,6 @@ class User {
     var userName: String
     var isTeacher: Bool
     var oneOnOneSerch: String
-    var userImage: UIImage?
     var teacherParameter: TeacherParameter?
     var studentParameter: StudentParameter?
     
@@ -52,10 +51,11 @@ class User {
             let file = NCMBFile.file(withName: imageUrl!, data: nil) as! NCMBFile
             file.getDataInBackground { (data, error) in
                 if error != nil {
+                    
                 } else {
                     if data != nil {
                         let image = UIImage(data: data!)
-                        self.userImage = image
+                        userImagesCacheG[self.userId] = image
                     }
                 }
             }
@@ -77,7 +77,6 @@ class StudentParameter{
     
     init(_ parameter: NCMBObject) {
         let school = parameter.object(forKey: "SchoolName") as? String
-        print(parameter,school)
         self.SchoolName = school!
         self.selection = parameter.object(forKey: "selection") as! String
     }

@@ -50,6 +50,7 @@
 		04A7E97525AF2B4A00C0F43C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 04A7E97425AF2B4A00C0F43C /* Assets.xcassets */; };
 		04A7E97825AF2B4A00C0F43C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 04A7E97625AF2B4A00C0F43C /* LaunchScreen.storyboard */; };
 		04A7E98425AF2D0500C0F43C /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04A7E98325AF2D0500C0F43C /* Extensions.swift */; };
+		04ACB8B525DB2A7200916C15 /* GlobalParameters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04ACB8B425DB2A7200916C15 /* GlobalParameters.swift */; };
 		04B39D1925D43D57003EDECE /* StudentDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B39D1825D43D57003EDECE /* StudentDetailViewController.swift */; };
 		04B39D1E25D43E34003EDECE /* StudentInfoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B39D1C25D43E34003EDECE /* StudentInfoTableViewCell.swift */; };
 		04B39D1F25D43E34003EDECE /* StudentInfoTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04B39D1D25D43E34003EDECE /* StudentInfoTableViewCell.xib */; };
@@ -108,6 +109,7 @@
 		04A7E97725AF2B4A00C0F43C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		04A7E97925AF2B4A00C0F43C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		04A7E98325AF2D0500C0F43C /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		04ACB8B425DB2A7200916C15 /* GlobalParameters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalParameters.swift; sourceTree = "<group>"; };
 		04B39D1825D43D57003EDECE /* StudentDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentDetailViewController.swift; sourceTree = "<group>"; };
 		04B39D1C25D43E34003EDECE /* StudentInfoTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentInfoTableViewCell.swift; sourceTree = "<group>"; };
 		04B39D1D25D43E34003EDECE /* StudentInfoTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = StudentInfoTableViewCell.xib; sourceTree = "<group>"; };
@@ -137,6 +139,7 @@
 		043A9DB025D80D1500587B0E /* Sign */ = {
 			isa = PBXGroup;
 			children = (
+				04744BAC25D0F3570043BCCF /* CheckAddress.swift */,
 				043A9DB125D80D1500587B0E /* SignUpViewController.swift */,
 				043A9DB225D80D1500587B0E /* UserPageViewController.swift */,
 				043A9DB325D80D1500587B0E /* SignIn.storyboard */,
@@ -225,14 +228,14 @@
 			children = (
 				049C83FF25C695F000D4D380 /* Open */,
 				047C4DEA25C856300082807A /* Images */,
+				04B39D1725D43D2D003EDECE /* StudentInfo */,
+				1BD9EE3F25D3AC8F001560A3 /* Calendar&Schedule */,
+				043A9DB025D80D1500587B0E /* Sign */,
 				04A7E96B25AF2B4900C0F43C /* AppDelegate.swift */,
 				04A7E96D25AF2B4900C0F43C /* SceneDelegate.swift */,
 				04A7E96F25AF2B4900C0F43C /* ViewController.swift */,
 				04EA678E25BC8A8F005F0D06 /* User.swift */,
-				04B39D1725D43D2D003EDECE /* StudentInfo */,
-				1BD9EE3F25D3AC8F001560A3 /* Calendar&Schedule */,
-				043A9DB025D80D1500587B0E /* Sign */,
-				04744BAC25D0F3570043BCCF /* CheckAddress.swift */,
+				04ACB8B425DB2A7200916C15 /* GlobalParameters.swift */,
 				04A7E97125AF2B4900C0F43C /* Main.storyboard */,
 				04A7E98325AF2D0500C0F43C /* Extensions.swift */,
 				04A7E97425AF2B4A00C0F43C /* Assets.xcassets */,
@@ -434,6 +437,7 @@
 				1B55D80725D40008006BAE51 /* CalendarViewController.swift in Sources */,
 				049C840425C695F000D4D380 /* ScreenSize.swift in Sources */,
 				043A9DB625D80D1600587B0E /* UserPageViewController.swift in Sources */,
+				04ACB8B525DB2A7200916C15 /* GlobalParameters.swift in Sources */,
 				0433E3A525D54709002A6BE5 /* Report.swift in Sources */,
 				04A7E96E25AF2B4900C0F43C /* SceneDelegate.swift in Sources */,
 				04B39D1E25D43E34003EDECE /* StudentInfoTableViewCell.swift in Sources */,

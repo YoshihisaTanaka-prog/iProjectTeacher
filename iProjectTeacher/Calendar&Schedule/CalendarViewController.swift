@@ -11,22 +11,69 @@ import FSCalendar
 import CalculateCalendarLogic
 import RealmSwift
 
-class CalendarViewController: UIViewController, FSCalendarDelegate, FSCalendarDataSource, FSCalendarDelegateAppearance {
-    //スケジュール内容
-    @IBOutlet var labelDate: UILabel!
-    //「主なスケジュール」の表示
-    @IBOutlet var labelTitle: UILabel!
-    //カレンダー部分
+class CalendarViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, FSCalendarDelegate, FSCalendarDataSource, FSCalendarDelegateAppearance {
     
-    //日付の表示
-    @IBOutlet var  Date: UILabel!
+    var eventList: [Event] = []
+    var selectedDate = Date()
+    
+    @IBOutlet var tableView: UITableView!  //スケジュール内容
+    @IBOutlet var labelTitle: UILabel!  //「主なスケジュール」の表示
+    //カレンダー部分
+    @IBOutlet var datelabel: UILabel!  //日付の表示
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        tableView.dataSource = self
+        tableView.delegate = self
+        tableView.tableFooterView = UIView()
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        loadEvent(selectedDate)
+    }
+    
     @objc func onClick(){ let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let SecondController = storyboard.instantiateViewController(withIdentifier: "Insert")
         present(SecondController, animated: true, completion: nil)
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return max(eventList.count,1)
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell")!
+        cell.backgroundColor = .clear
+        if(eventList.count == 0){
+            cell.textLabel?.text = "予定はありません"
+            cell.textLabel?.textColor = .gray
+        }
+        else{
+            cell.textLabel?.text = eventList[indexPath.row].event
+            cell.textLabel?.textColor = .black
+        }
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.cellForRow(at: indexPath)?.backgroundColor = .none
+        if(eventList.count != 0){
+            let alertController = UIAlertController(title: "確認", message: "このイベントを削除しますか？", preferredStyle: .actionSheet)
+            let alertOkAction = UIAlertAction(title: "削除", style: .destructive) { (action) in
+//            ここに'eventList[IndexPath.row]'を削除するコードを書く--------------------------------------------------------
+                
+                
+                alertController.dismiss(animated: true, completion: nil)
+                self.loadEvent(self.selectedDate)
+            }
+            let cancelAction = UIAlertAction(title: "キャンセル", style: .cancel) { (action) in
+                alertController.dismiss(animated: true, completion: nil)
+            }
+            alertController.addAction(alertOkAction)
+            alertController.addAction(cancelAction)
+            self.present(alertController, animated: true, completion: nil)
+        }
+        self.tableView.reloadData()
     }
     
     fileprivate let gregorian: Calendar = Calendar(identifier: .gregorian)
@@ -84,44 +131,45 @@ class CalendarViewController: UIViewController, FSCalendarDelegate, FSCalendarDa
         
         return nil
     }
-    //カレンダー処理(スケジュール表示処理)
-    func calendar(_ calendar: FSCalendar, didSelect date: Date, at monthPosition: FSCalendarMonthPosition){
-        
+    
+    func loadEvent(_ date: Date) {
         //予定がある場合、スケジュールをDBから取得・表示する。
-        //無い場合、「スケジュールはありません」と表示。
-        labelDate.text = "スケジュールはありません"
-        labelDate.textColor = .lightGray
-        view.addSubview(labelDate)
-        
-        let tmpDate = Calendar(identifier: .gregorian)
-        let year = tmpDate.component(.year, from: date)
-        let month = tmpDate.component(.month, from: date)
-        let day = tmpDate.component(.day, from: date)
-        
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy/MM/dd"
         let da = formatter.string(from: date)
-        Date.text = da
-        view.addSubview(Date)
+        datelabel.text = da
         
-        
+        switch getWeekIdx(date) {
+        case 1:
+            datelabel.textColor = .red
+        case 7:
+            datelabel.textColor = .blue
+        default:
+            datelabel.textColor = .black
+        }
+        if(judgeHoliday(date)){
+            datelabel.textColor = .red
+        }
         
         //スケジュール取得
-        
         let realm = try! Realm()
         var result = realm.objects(Event.self)
         result = result.filter("date = '\(da)'")
-        print(result)
+        eventList = []
         for ev in result {
             if ev.date == da {
-                labelDate.text = ev.event
-                labelDate.textColor = .black
-                view.addSubview(labelDate)
+                eventList.append(ev)
             }
         }
-        
-        
+        tableView.reloadData()
     }
+    
+    //カレンダー処理(スケジュール表示処理)
+    func calendar(_ calendar: FSCalendar, didSelect date: Date, at monthPosition: FSCalendarMonthPosition){
+        selectedDate = date
+        loadEvent(selectedDate)
+    }
+    
     func calendar(_ calendar: FSCalendar, numberOfEventsFor date: Date) -> Int {
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy/MM/dd"
@@ -135,8 +183,6 @@ class CalendarViewController: UIViewController, FSCalendarDelegate, FSCalendarDa
             return 0
         }
     }
-    
-  
     
 }
 

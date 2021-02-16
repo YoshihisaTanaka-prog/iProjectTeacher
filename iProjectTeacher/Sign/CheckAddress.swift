@@ -72,18 +72,21 @@ extension SignUpViewController{
             if(error == nil){
                 let objects = result as! [NCMBObject]
                 for object in objects {
-                    let parmitted = object.object(forKey: "parmitted") as? Bool
-                    if(parmitted != nil){
-                        if(parmitted!){
-                            self.domainList.add(object)
-                        }
-                        else{
-                            self.wrongDomainList.add(object)
+                    let isChecked = object.object(forKey: "checked") as! Bool
+                    if(isChecked){
+                        let parmitted = object.object(forKey: "parmitted") as? Bool
+                        if(parmitted != nil){
+                            if(parmitted!){
+                                self.domainList.add(object)
+                            }
+                            else{
+                                self.wrongDomainList.add(object)
+                            }
                         }
                     }
                 }
                 print(self.domainList.domainList, self.wrongDomainList.domainList)
-                
+                domainListG = self.domainList
             }
             else{
                 self.showOkAlert(title: "Error", message: error!.localizedDescription)
@@ -125,13 +128,12 @@ class Domains{
         }
     }
     
-    func set(domain: String, mail: String) {
-        let i = domainList.firstIndex(of: domain)!
-        let ud = UserDefaults.standard
-        ud.set(domainList[i], forKey: mail + "domain")
-        ud.set(collageList[i], forKey: mail + "collage")
-        ud.set(prefectureList[i], forKey: "prefectures")
-        ud.synchronize()
+    func getGollage(domain: String) -> String {
+        let i = self.domainList.firstIndex(of: domain)
+        if i == nil {
+            return ""
+        }
+        return self.collageList[i!]
     }
     
     func contains(_ domain: String) -> Bool {

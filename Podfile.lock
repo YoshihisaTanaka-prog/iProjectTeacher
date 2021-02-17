@@ -3,11 +3,11 @@ PODS:
   - Cosmos (23.0.0)
   - FSCalendar (2.8.2)
   - NCMB (3.1.0)
-  - Realm (10.5.1):
-    - Realm/Headers (= 10.5.1)
-  - Realm/Headers (10.5.1)
-  - RealmSwift (10.5.1):
-    - Realm (= 10.5.1)
+  - Realm (10.6.0):
+    - Realm/Headers (= 10.6.0)
+  - Realm/Headers (10.6.0)
+  - RealmSwift (10.6.0):
+    - Realm (= 10.6.0)
 
 DEPENDENCIES:
   - CalculateCalendarLogic
@@ -38,9 +38,9 @@ SPEC CHECKSUMS:
   Cosmos: b5c6a9a637e28a061b54c8f8b1d8529d7d4db73f
   FSCalendar: e6a2eb9c571bf0719ed797ef807e08426753c241
   NCMB: c308972109137bf523ec1830bac16de6a31c25f4
-  Realm: 77fcb4e0b9f2963ea06f584749a0d7dc9cab95e1
-  RealmSwift: 6abe6aa6cd8b70cc1a87afcb9232cabea74ff1ac
+  Realm: 1ef421d4581513400ad4f8bd39c8157f3266c62e
+  RealmSwift: f80216fb8334b01ccf526e4f2dd5ff0da61863a2
 
 PODFILE CHECKSUM: 9069ed431765acd102aca1472116ac39c4ef3878
 
-COCOAPODS: 1.10.1
+COCOAPODS: 1.10.0

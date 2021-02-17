@@ -7,7 +7,7 @@
 //
 import UIKit
 import RealmSwift
-
+import NCMB
 
 class EventViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
     
@@ -95,12 +95,21 @@ class EventViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
             
             print("データ書き込み完了")
             
-            //前のページに戻る
-            dismiss(animated: true, completion: nil)
+           
             
-            let formatter = DateFormatter()
-            formatter.dateFormat = "yyyy/MM/dd"
-            y_text.text = formatter.string(from: y.date)
+            let object = NCMBObject(className:"ScheduleTeacher")
+            object?.setObject(NCMBUser.current().objectId,forKey:"teacherId")
+            object?.saveInBackground({ (error) in
+                if(error == nil){
+                    //前のページに戻る
+                    self.dismiss(animated: true, completion: nil)
+                    
+                }else{
+                    
+                self.showOkAlert(title: "Error", message: error!.localizedDescription)
+                }
+            })
+            
         }
     }
     

@@ -35,14 +35,19 @@ class User {
         
 //        ユーザの詳細データ
         let parameter = user.object(forKey: "parameter") as! NCMBObject
-        if(self.isTeacher){
-            self.teacherParameter = TeacherParameter(parameter)
+        let param = NCMBObject(className: parameter.ncmbClassName, objectId: parameter.objectId)
+        var error: NSError? = nil
+        param?.fetch(&error)
+        if(error == nil && param != nil){
+            if(param!.ncmbClassName == "teacherParameter"){
+                self.teacherParameter = TeacherParameter(param!)
+            }
+            else{
+                self.studentParameter = StudentParameter(param!)
+            }
         }
         else{
-            if parameter == nil {
-                fatalError("parameter is nil!")
-            }
-            self.studentParameter = StudentParameter(parameter)
+            fatalError(error!.localizedDescription)
         }
         
 //        画像の設定

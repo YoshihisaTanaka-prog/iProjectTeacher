@@ -20,7 +20,6 @@
 #define REALM_SCHEMA_HPP
 
 #include <string>
-#include <unordered_set>
 #include <vector>
 
 #include <realm/util/features.h>
@@ -30,8 +29,6 @@ class ObjectSchema;
 class SchemaChange;
 class StringData;
 struct Property;
-
-enum SchemaValidationMode : uint64_t { Basic = 0, Sync = 1, RejectEmbeddedOrphans = 2 };
 
 class Schema : private std::vector<ObjectSchema> {
 private:
@@ -59,8 +56,7 @@ public:
 
     // Verify that this schema is internally consistent (i.e. all properties are
     // valid, links link to types that actually exist, etc.)
-    void validate(uint64_t validation_mode = SchemaValidationMode::Basic) const;
-    std::unordered_set<std::string> get_embedded_object_orphans() const;
+    void validate(bool for_sync = false) const;
 
     // Get the changes which must be applied to this schema to produce the passed-in schema
     std::vector<SchemaChange> compare(Schema const&, bool include_removals = false) const;

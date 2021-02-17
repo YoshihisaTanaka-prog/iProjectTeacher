@@ -1,6 +1,6 @@
 ////////////////////////////////////////////////////////////////////////////
 //
-// Copyright 2016 Realm Inc.
+// Copyright 2014 Realm Inc.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -19,76 +19,115 @@
 import Foundation
 import Realm
 
+// MARK: MinMaxType
+
 /**
- `LinkingObjects` is an auto-updating container type. It represents zero or more objects that are linked to its owning
- model object through a property relationship.
+ Types of properties which can be used with the minimum and maximum value APIs.
 
- `LinkingObjects` can be queried with the same predicates as `List<Element>` and `Results<Element>`.
-
- `LinkingObjects` always reflects the current state of the Realm on the current thread, including during write
- transactions on the current thread. The one exception to this is when using `for...in` enumeration, which will always
- enumerate over the linking objects that were present when the enumeration is begun, even if some of them are deleted or
- modified to no longer link to the target object during the enumeration.
-
- `LinkingObjects` can only be used as a property on `Object` models. Properties of this type must be declared as `let`
- and cannot be `dynamic`.
+ - see: `min(ofProperty:)`, `max(ofProperty:)`
  */
-@frozen public struct LinkingObjects<Element: ObjectBase> where Element: RealmCollectionValue {
-    /// The type of the objects represented by the linking objects.
+public protocol MinMaxType {}
+extension NSNumber: MinMaxType {}
+extension Double: MinMaxType {}
+extension Float: MinMaxType {}
+extension Int: MinMaxType {}
+extension Int8: MinMaxType {}
+extension Int16: MinMaxType {}
+extension Int32: MinMaxType {}
+extension Int64: MinMaxType {}
+extension Date: MinMaxType {}
+extension NSDate: MinMaxType {}
+extension Decimal128: MinMaxType {}
+
+// MARK: AddableType
+
+/**
+ Types of properties which can be used with the sum and average value APIs.
+
+ - see: `sum(ofProperty:)`, `average(ofProperty:)`
+ */
+public protocol AddableType {
+    /// :nodoc:
+    init()
+}
+extension NSNumber: AddableType {}
+extension Double: AddableType {}
+extension Float: AddableType {}
+extension Int: AddableType {}
+extension Int8: AddableType {}
+extension Int16: AddableType {}
+extension Int32: AddableType {}
+extension Int64: AddableType {}
+extension Decimal128: AddableType {}
+
+/**
+ `Results` is an auto-updating container type in Realm returned from object queries.
+
+ `Results` can be queried with the same predicates as `List<Element>`, and you can
+ chain queries to further filter query results.
+
+ `Results` always reflect the current state of the Realm on the current thread, including during write transactions on
+ the current thread. The one exception to this is when using `for...in` enumeration, which will always enumerate over
+ the objects which matched the query when the enumeration is begun, even if some of them are deleted or modified to be
+ excluded by the filter during the enumeration.
+
+ `Results` are lazily evaluated the first time they are accessed; they only run queries when the result of the query is
+ requested. This means that chaining several temporary `Results` to sort and filter your data does not perform any
+ unnecessary work processing the intermediate state.
+
+ Once the results have been evaluated or a notification block has been added, the results are eagerly kept up-to-date,
+ with the work done to keep them up-to-date done on a background thread whenever possible.
+
+ Results instances cannot be directly instantiated.
+ */
+@frozen public struct Results<Element: RealmCollectionValue>: Equatable {
+
+    internal let rlmResults: RLMResults<AnyObject>
+
+    /// A human-readable description of the objects represented by the results.
+    public var description: String {
+        return RLMDescriptionWithMaxDepth("Results", rlmResults, RLMDescriptionMaxDepth)
+    }
+
+    /// The type of the objects described by the results.
     public typealias ElementType = Element
 
     // MARK: Properties
 
-    /// The Realm which manages the linking objects, or `nil` if the linking objects are unmanaged.
-    public var realm: Realm? { return rlmResults.isAttached ? Realm(rlmResults.realm) : nil }
+    /// The Realm which manages this results. Note that this property will never return `nil`.
+    public var realm: Realm? { return Realm(rlmResults.realm) }
 
-    /// Indicates if the linking objects are no longer valid.
-    ///
-    /// The linking objects become invalid if `invalidate()` is called on the containing `realm` instance.
-    ///
-    /// An invalidated linking objects can be accessed, but will always be empty.
+    /**
+     Indicates if the results are no longer valid.
+
+     The results becomes invalid if `invalidate()` is called on the containing `realm`. An invalidated results can be
+     accessed, but will always be empty.
+     */
     public var isInvalidated: Bool { return rlmResults.isInvalidated }
 
-    /// The number of linking objects.
+    /// The number of objects in the results.
     public var count: Int { return Int(rlmResults.count) }
 
     // MARK: Initializers
 
-    /**
-     Creates an instance of a `LinkingObjects`. This initializer should only be called when declaring a property on a
-     Realm model.
-
-     - parameter type:         The type of the object owning the property the linking objects should refer to.
-     - parameter propertyName: The property name of the property the linking objects should refer to.
-     */
-    public init(fromType _: Element.Type, property propertyName: String) {
-        self.propertyName = propertyName
+    internal init(_ rlmResults: RLMResults<AnyObject>) {
+        self.rlmResults = rlmResults
     }
-
-    /// A human-readable description of the objects represented by the linking objects.
-    public var description: String {
-        if realm == nil {
-            var this = self
-            return withUnsafePointer(to: &this) {
-                return "LinkingObjects<\(Element.className())> <\($0)> (\n\n)"
-            }
-        }
-        return RLMDescriptionWithMaxDepth("LinkingObjects", rlmResults, RLMDescriptionMaxDepth)
+    internal init(objc rlmResults: RLMResults<AnyObject>) {
+        self.rlmResults = rlmResults
     }
 
     // MARK: Index Retrieval
 
     /**
-     Returns the index of an object in the linking objects, or `nil` if the object is not present.
-
-     - parameter object: The object whose index is being queried.
+     Returns the index of the given object in the results, or `nil` if the object is not present.
      */
     public func index(of object: Element) -> Int? {
-        return notFoundToNil(index: rlmResults.index(of: object.unsafeCastToRLMObject()))
+        return notFoundToNil(index: rlmResults.index(of: object as AnyObject))
     }
 
     /**
-     Returns the index of the first object matching the given predicate, or `nil` if no objects match.
+     Returns the index of the first object matching the predicate, or `nil` if no objects match.
 
      - parameter predicate: The predicate with which to filter the objects.
      */
@@ -103,21 +142,21 @@ import Realm
 
      - parameter index: The index.
      */
-    public subscript(index: Int) -> Element {
-        throwForNegativeIndex(index)
-        return unsafeBitCast(rlmResults[UInt(index)], to: Element.self)
+    public subscript(position: Int) -> Element {
+        throwForNegativeIndex(position)
+        return dynamicBridgeCast(fromObjectiveC: rlmResults.object(at: UInt(position)))
     }
 
-    /// Returns the first object in the linking objects, or `nil` if the linking objects are empty.
-    public var first: Element? { return unsafeBitCast(rlmResults.firstObject(), to: Optional<Element>.self) }
+    /// Returns the first object in the results, or `nil` if the results are empty.
+    public var first: Element? { return rlmResults.firstObject().map(dynamicBridgeCast) }
 
-    /// Returns the last object in the linking objects, or `nil` if the linking objects are empty.
-    public var last: Element? { return unsafeBitCast(rlmResults.lastObject(), to: Optional<Element>.self) }
+    /// Returns the last object in the results, or `nil` if the results are empty.
+    public var last: Element? { return rlmResults.lastObject().map(dynamicBridgeCast) }
 
     // MARK: KVC
 
     /**
-     Returns an `Array` containing the results of invoking `valueForKey(_:)` with `key` on each of the linking objects.
+     Returns an `Array` containing the results of invoking `valueForKey(_:)` with `key` on each of the results.
 
      - parameter key: The name of the property whose values are desired.
      */
@@ -126,8 +165,7 @@ import Realm
     }
 
     /**
-     Returns an `Array` containing the results of invoking `valueForKeyPath(_:)` with `keyPath` on each of the linking
-     objects.
+     Returns an `Array` containing the results of invoking `valueForKeyPath(_:)` with `keyPath` on each of the results.
 
      - parameter keyPath: The key path to the property whose values are desired.
      */
@@ -136,11 +174,12 @@ import Realm
     }
 
     /**
-     Invokes `setValue(_:forKey:)` on each of the linking objects using the specified `value` and `key`.
+     Invokes `setValue(_:forKey:)` on each of the objects represented by the results using the specified `value` and
+     `key`.
 
      - warning: This method may only be called during a write transaction.
 
-     - parameter value: The value to set the property to.
+     - parameter value: The object value.
      - parameter key:   The name of the property whose value should be set on each object.
      */
     public func setValue(_ value: Any?, forKey key: String) {
@@ -150,18 +189,18 @@ import Realm
     // MARK: Filtering
 
     /**
-     Returns a `Results` containing all objects matching the given predicate in the linking objects.
+     Returns a `Results` containing all objects matching the given predicate in the collection.
 
      - parameter predicate: The predicate with which to filter the objects.
      */
     public func filter(_ predicate: NSPredicate) -> Results<Element> {
-        return Results(rlmResults.objects(with: predicate))
+        return Results<Element>(rlmResults.objects(with: predicate))
     }
 
     // MARK: Sorting
 
     /**
-     Returns a `Results` containing all the linking objects, but sorted.
+     Returns a `Results` containing the objects represented by the results, but sorted.
 
      Objects are sorted based on the values of the given key path. For example, to sort a collection of `Student`s from
      youngest to oldest based on their `age` property, you might call
@@ -170,7 +209,7 @@ import Realm
      - warning: Collections may only be sorted by properties of boolean, `Date`, `NSDate`, single and double-precision
                 floating point, integer, and string types.
 
-     - parameter keyPath:  The key path to sort by.
+     - parameter keyPath:   The key path to sort by.
      - parameter ascending: The direction to sort in.
      */
     public func sorted(byKeyPath keyPath: String, ascending: Bool = true) -> Results<Element> {
@@ -178,7 +217,7 @@ import Realm
     }
 
     /**
-     Returns a `Results` containing all the linking objects, but sorted.
+     Returns a `Results` containing the objects represented by the results, but sorted.
 
      - warning: Collections may only be sorted by properties of boolean, `Date`, `NSDate`, single and double-precision
                 floating point, integer, and string types.
@@ -189,14 +228,23 @@ import Realm
      */
     public func sorted<S: Sequence>(by sortDescriptors: S) -> Results<Element>
         where S.Iterator.Element == SortDescriptor {
-            return Results(rlmResults.sortedResults(using: sortDescriptors.map { $0.rlmSortDescriptorValue }))
+            return Results<Element>(rlmResults.sortedResults(using: sortDescriptors.map { $0.rlmSortDescriptorValue }))
+    }
+
+    /**
+     Returns a `Results` containing distinct objects based on the specified key paths
+
+     - parameter keyPaths:  The key paths used produce distinct results
+     */
+    public func distinct<S: Sequence>(by keyPaths: S) -> Results<Element>
+        where S.Iterator.Element == String {
+            return Results<Element>(rlmResults.distinctResults(usingKeyPaths: Array(keyPaths)))
     }
 
     // MARK: Aggregate Operations
 
     /**
-     Returns the minimum (lowest) value of the given property among all the linking objects, or `nil` if the linking
-     objects are empty.
+     Returns the minimum (lowest) value of the given property among all the results, or `nil` if the results are empty.
 
      - warning: Only a property whose type conforms to the `MinMaxType` protocol can be specified.
 
@@ -207,8 +255,7 @@ import Realm
     }
 
     /**
-     Returns the maximum (highest) value of the given property among all the linking objects, or `nil` if the linking
-     objects are empty.
+     Returns the maximum (highest) value of the given property among all the results, or `nil` if the results are empty.
 
      - warning: Only a property whose type conforms to the `MinMaxType` protocol can be specified.
 
@@ -219,7 +266,7 @@ import Realm
     }
 
     /**
-     Returns the sum of the values of a given property over all the linking objects.
+     Returns the sum of the values of a given property over all the results.
 
      - warning: Only a property whose type conforms to the `AddableType` protocol can be specified.
 
@@ -230,8 +277,7 @@ import Realm
     }
 
     /**
-     Returns the average value of a given property over all the linking objects, or `nil` if the linking objects are
-     empty.
+     Returns the average value of a given property over all the results, or `nil` if the results are empty.
 
      - warning: Only the name of a property whose type conforms to the `AddableType` protocol can be specified.
 
@@ -268,7 +314,7 @@ import Realm
      will reflect the state of the Realm after the write transaction.
 
      ```swift
-     let results = realm.objects(Dog.self)
+     let dogs = realm.objects(Dog.self)
      print("dogs.count: \(dogs?.count)") // => 0
      let token = dogs.observe { changes in
          switch changes {
@@ -302,65 +348,25 @@ import Realm
      - returns: A token which must be held for as long as you want updates to be delivered.
      */
     public func observe(on queue: DispatchQueue? = nil,
-                        _ block: @escaping (RealmCollectionChange<LinkingObjects>) -> Void) -> NotificationToken {
+                        _ block: @escaping (RealmCollectionChange<Results>) -> Void) -> NotificationToken {
         return rlmResults.addNotificationBlock(wrapObserveBlock(block), queue: queue)
     }
 
     // MARK: Frozen Objects
 
-    /// Returns if this collection is frozen.
-    public var isFrozen: Bool { return self.rlmResults.isFrozen }
-
-    /**
-     Returns a frozen (immutable) snapshot of this collection.
-
-     The frozen copy is an immutable collection which contains the same data as this collection
-     currently contains, but will not update when writes are made to the containing Realm. Unlike
-     live collections, frozen collections can be accessed from any thread.
-
-     - warning: This method cannot be called during a write transaction, or when the containing
-     Realm is read-only.
-     - warning: Holding onto a frozen collection for an extended period while performing write
-     transaction on the Realm may result in the Realm file growing to large sizes. See
-     `Realm.Configuration.maximumNumberOfActiveVersions` for more information.
-     */
-    public func freeze() -> LinkingObjects {
-        return LinkingObjects(propertyName: propertyName, handle: handle?.freeze())
+    public var isFrozen: Bool {
+        return rlmResults.isFrozen
     }
 
-    /**
-     Returns a live version of this frozen collection.
-
-     This method resolves a reference to a live copy of the same frozen collection.
-     If called on a live collection, will return itself.
-    */
-    public func thaw() -> LinkingObjects<Element>? {
-        return LinkingObjects(propertyName: propertyName, handle: handle?.thaw())
+    public func freeze() -> Results {
+        return Results(rlmResults.freeze())
     }
-
-    // MARK: Implementation
-
-    private init(propertyName: String, handle: RLMLinkingObjectsHandle?) {
-        self.propertyName = propertyName
-        self.handle = handle
-    }
-    internal init(objc: RLMResults<AnyObject>) {
-        self.propertyName = ""
-        self.handle = RLMLinkingObjectsHandle(linkingObjects: objc)
-    }
-
-    internal var rlmResults: RLMResults<AnyObject> {
-        return handle?.results ?? RLMResults<AnyObject>.emptyDetached()
-    }
-
-    internal var propertyName: String
-    internal var handle: RLMLinkingObjectsHandle?
 }
 
-extension LinkingObjects: RealmCollection {
+extension Results: RealmCollection {
     // MARK: Sequence Support
 
-    /// Returns an iterator that yields successive elements in the linking objects.
+    /// Returns a `RLMIterator` that yields successive elements in the results.
     public func makeIterator() -> RLMIterator<Element> {
         return RLMIterator(collection: rlmResults)
     }
@@ -369,6 +375,7 @@ extension LinkingObjects: RealmCollection {
     // swiftlint:disable:next identifier_name
     public func _asNSFastEnumerator() -> Any {
         return rlmResults
+
     }
 
     // MARK: Collection Support
@@ -382,13 +389,8 @@ extension LinkingObjects: RealmCollection {
     /// zero or more applications of successor().
     public var endIndex: Int { return count }
 
-    public func index(after: Int) -> Int {
-      return after + 1
-    }
-
-    public func index(before: Int) -> Int {
-      return before - 1
-    }
+    public func index(after i: Int) -> Int { return i + 1 }
+    public func index(before i: Int) -> Int { return i - 1 }
 
     /// :nodoc:
     // swiftlint:disable:next identifier_name
@@ -401,13 +403,23 @@ extension LinkingObjects: RealmCollection {
 
 // MARK: AssistedObjectiveCBridgeable
 
-extension LinkingObjects: AssistedObjectiveCBridgeable {
-    internal static func bridging(from objectiveCValue: Any, with metadata: Any?) -> LinkingObjects {
-        guard let object = objectiveCValue as? RLMResults<Element> else { preconditionFailure() }
-        return LinkingObjects<Element>(objc: object as! RLMResults<AnyObject>)
+extension Results: AssistedObjectiveCBridgeable {
+    internal static func bridging(from objectiveCValue: Any, with metadata: Any?) -> Results {
+        return Results(objectiveCValue as! RLMResults)
     }
 
     internal var bridged: (objectiveCValue: Any, metadata: Any?) {
-        return (objectiveCValue: handle!.results, metadata: nil)
+        return (objectiveCValue: rlmResults, metadata: nil)
+    }
+}
+
+// MARK: - Codable
+
+extension Results: Encodable where Element: Encodable {
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.unkeyedContainer()
+        for value in self {
+            try container.encode(value)
+        }
     }
 }

@@ -268,8 +268,7 @@ import Combine
 /// This handler is executed on a non-main global `DispatchQueue`.
 @dynamicMemberLookup
 @frozen public struct Functions {
-
-    private let user: User
+    weak var user: User?
 
     fileprivate init(user: User) {
         self.user = user
@@ -285,7 +284,7 @@ import Combine
     public subscript(dynamicMember string: String) -> Function {
         return { (arguments: [AnyBSON], completionHandler: @escaping FunctionCompletionHandler) in
             let objcArgs = arguments.map(ObjectiveCSupport.convert) as! [RLMBSON]
-            self.user.__callFunctionNamed(string, arguments: objcArgs) { (bson: RLMBSON?, error: Error?) in
+            self.user?.__callFunctionNamed(string, arguments: objcArgs) { (bson: RLMBSON?, error: Error?) in
                 completionHandler(ObjectiveCSupport.convert(object: bson), error)
             }
         }
@@ -301,7 +300,7 @@ import Combine
     public subscript(dynamicMember string: String) -> ResultFunction {
         return { (arguments: [AnyBSON], completionHandler: @escaping ResultFunctionCompletionHandler) in
             let objcArgs = arguments.map(ObjectiveCSupport.convert) as! [RLMBSON]
-            self.user.__callFunctionNamed(string, arguments: objcArgs) { (bson: RLMBSON?, error: Error?) in
+            self.user?.__callFunctionNamed(string, arguments: objcArgs) { (bson: RLMBSON?, error: Error?) in
                 if let bson = ObjectiveCSupport.convert(object: bson) {
                     completionHandler(.success(bson))
                 } else {

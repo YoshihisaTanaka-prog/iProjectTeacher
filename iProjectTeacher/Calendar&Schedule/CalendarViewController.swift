@@ -60,8 +60,15 @@ class CalendarViewController: UIViewController, UITableViewDataSource, UITableVi
         if(eventList.count != 0){
             let alertController = UIAlertController(title: "確認", message: "このイベントを削除しますか？", preferredStyle: .actionSheet)
             let alertOkAction = UIAlertAction(title: "削除", style: .destructive) { (action) in
-//            ここに'eventList[IndexPath.row]'を削除するコードを書く--------------------------------------------------------
-                
+                //            ここに'eventList[IndexPath.row]'を削除するコードを書く--------------------------------------------------------
+                do {
+                    let realm = try! Realm()
+                    try realm.write {
+                        realm.delete(self.eventList[indexPath.row])
+                    }
+                } catch {
+                    print("delete data error.")
+                }
                 
                 alertController.dismiss(animated: true, completion: nil)
                 self.loadEvent(self.selectedDate)

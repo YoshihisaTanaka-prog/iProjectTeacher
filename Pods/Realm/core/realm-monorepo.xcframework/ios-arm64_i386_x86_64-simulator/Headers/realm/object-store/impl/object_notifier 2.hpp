@@ -1,6 +1,6 @@
 ////////////////////////////////////////////////////////////////////////////
 //
-// Copyright 2016 Realm Inc.
+// Copyright 2017 Realm Inc.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -16,43 +16,30 @@
 //
 ////////////////////////////////////////////////////////////////////////////
 
-#ifndef REALM_LIST_NOTIFIER_HPP
-#define REALM_LIST_NOTIFIER_HPP
+#ifndef REALM_OS_OBJECT_NOTIFIER_HPP
+#define REALM_OS_OBJECT_NOTIFIER_HPP
 
 #include <realm/object-store/impl/collection_notifier.hpp>
 
-#include <realm/object-store/property.hpp>
-
-#include <realm/collection.hpp>
+#include <realm/keys.hpp>
 
 namespace realm {
+
 namespace _impl {
-class ListNotifier : public CollectionNotifier {
+class ObjectNotifier : public CollectionNotifier {
 public:
-    ListNotifier(std::shared_ptr<Realm> realm, CollectionBase const& list, PropertyType type);
+    ObjectNotifier(std::shared_ptr<Realm> realm, TableKey table, ObjKey obj);
 
 private:
-    PropertyType m_type;
-    std::unique_ptr<CollectionBase> m_list;
-
     TableKey m_table;
-    ColKey m_col;
     ObjKey m_obj;
-
-    // The last-seen size of the LinkView so that we can report row deletions
-    // when the LinkView itself is deleted
-    size_t m_prev_size;
-
     TransactionChangeInfo* m_info;
 
     void run() override;
 
-    void do_attach_to(Transaction& sg) override;
-
-    void release_data() noexcept override;
     bool do_add_required_change_info(TransactionChangeInfo& info) override;
 };
 } // namespace _impl
 } // namespace realm
 
-#endif // REALM_LIST_NOTIFIER_HPP
+#endif // REALM_OS_OBJECT_NOTIFIER_HPP

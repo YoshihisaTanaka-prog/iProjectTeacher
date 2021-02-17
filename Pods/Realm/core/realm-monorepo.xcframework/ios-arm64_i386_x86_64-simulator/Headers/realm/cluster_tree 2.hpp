@@ -58,9 +58,6 @@ public:
     {
         return m_size;
     }
-
-    static size_t size_from_ref(ref_type, Allocator& alloc);
-
     void destroy()
     {
         m_root->destroy_deep();
@@ -186,8 +183,7 @@ public:
         return *this;
     }
 
-    // Set the iterator to the given absolute position in the table.
-    void go(size_t abs_pos);
+    ObjKey go(size_t n);
     bool update() const;
     // Advance the iterator to the next object in the table. This also holds if the object
     // pointed to is deleted. That is - you will get the same result of advancing no matter
@@ -196,6 +192,10 @@ public:
 
     Iterator& operator+=(ptrdiff_t adj);
 
+    Iterator operator+(ptrdiff_t adj)
+    {
+        return Iterator(m_tree, get_position() + adj);
+    }
     bool operator==(const Iterator& rhs) const
     {
         return m_key == rhs.m_key;

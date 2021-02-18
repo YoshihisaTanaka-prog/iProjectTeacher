@@ -9,7 +9,6 @@
 import Foundation
 import UIKit
 
-var screenSizeG: Dictionary<String, Size> = [:]
 class Size{
     let width: CGFloat
     let screenHeight: CGFloat

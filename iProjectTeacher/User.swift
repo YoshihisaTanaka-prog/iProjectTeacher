@@ -15,7 +15,6 @@ class User {
     var userName: String
     var isTeacher: Bool
     var oneOnOneSerch: String
-    var userImage: UIImage?
     var teacherParameter: TeacherParameter?
     var studentParameter: StudentParameter?
     
@@ -36,14 +35,19 @@ class User {
         
 //        ユーザの詳細データ
         let parameter = user.object(forKey: "parameter") as! NCMBObject
-        if(self.isTeacher){
-            self.teacherParameter = TeacherParameter(parameter)
+        let param = NCMBObject(className: parameter.ncmbClassName, objectId: parameter.objectId)
+        var error: NSError? = nil
+        param?.fetch(&error)
+        if(error == nil && param != nil){
+            if(param!.ncmbClassName == "teacherParameter"){
+                self.teacherParameter = TeacherParameter(param!)
+            }
+            else{
+                self.studentParameter = StudentParameter(param!)
+            }
         }
         else{
-            if parameter == nil {
-                fatalError("parameter is nil!")
-            }
-            self.studentParameter = StudentParameter(parameter)
+            fatalError(error!.localizedDescription)
         }
         
 //        画像の設定
@@ -52,10 +56,11 @@ class User {
             let file = NCMBFile.file(withName: imageUrl!, data: nil) as! NCMBFile
             file.getDataInBackground { (data, error) in
                 if error != nil {
+                    
                 } else {
                     if data != nil {
                         let image = UIImage(data: data!)
-                        self.userImage = image
+                        userImagesCacheG[self.userId] = image
                     }
                 }
             }
@@ -77,7 +82,6 @@ class StudentParameter{
     
     init(_ parameter: NCMBObject) {
         let school = parameter.object(forKey: "SchoolName") as? String
-        print(parameter,school)
         self.SchoolName = school!
         self.selection = parameter.object(forKey: "selection") as! String
     }

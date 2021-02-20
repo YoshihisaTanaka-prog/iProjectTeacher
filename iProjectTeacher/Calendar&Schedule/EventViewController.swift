@@ -95,7 +95,7 @@ class EventViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
             
             print("データ書き込み完了")
             
-           
+            
             
             let object = NCMBObject(className:"ScheduleTeacher")
             object?.setObject(NCMBUser.current().objectId,forKey:"teacherId")

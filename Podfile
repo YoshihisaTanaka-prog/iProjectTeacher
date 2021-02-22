@@ -14,6 +14,8 @@ target 'iProjectTeacher' do
   pod 'FSCalendar'
   
   pod 'CalculateCalendarLogic'
+  
+  pod 'NYXImagesKit'
 
   pod 'RealmSwift'
 

@@ -99,6 +99,9 @@ class EventViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
             
             let object = NCMBObject(className:"ScheduleTeacher")
             object?.setObject(NCMBUser.current().objectId,forKey:"teacherId")
+            object?.setObject(subjectName, forKey:"subject" )
+            object?.setObject(y_text.text, forKey: "whenDo")
+            object?.setObject(eventText.text, forKey: "whatToDo")
             object?.saveInBackground({ (error) in
                 if(error == nil){
                     //前のページに戻る

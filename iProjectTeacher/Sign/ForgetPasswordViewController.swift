@@ -16,6 +16,8 @@ class ForgetPasswordViewController: UIViewController, UITextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        setBackGround(false, false)
+        
         ForgetemailTextField.delegate = self
 
         // Do any additional setup after loading the view.

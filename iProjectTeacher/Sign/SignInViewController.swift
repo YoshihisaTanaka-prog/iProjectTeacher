@@ -15,6 +15,7 @@ class SignInViewController: UIViewController, UITextFieldDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        setBackGround(true, false)
 
         emailTextField.delegate = self
         passwordTextField.delegate = self

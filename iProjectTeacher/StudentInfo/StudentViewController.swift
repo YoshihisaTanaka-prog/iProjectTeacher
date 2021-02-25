@@ -16,7 +16,7 @@ class StudentViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        setBackGround(true, true)
+        setBackGround(false, true)
         
         let query = NCMBUser.query()
         query?.includeKey("parameter")

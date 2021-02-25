@@ -22,6 +22,7 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setBackGround(true, false)
         
         loadDomain()
 

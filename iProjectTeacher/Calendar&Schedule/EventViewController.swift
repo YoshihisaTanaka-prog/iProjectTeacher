@@ -38,6 +38,8 @@ class EventViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy/MM/dd"
         y_text.text = formatter.string(from: y.date)
+        setBackGround(true, true)
+
     }
 
     

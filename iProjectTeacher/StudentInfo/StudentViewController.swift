@@ -16,6 +16,8 @@ class StudentViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        setBackGround(true, true)
+        
         let query = NCMBUser.query()
         query?.includeKey("parameter")
         query?.whereKey("objectId", equalTo: "MT1ys6rPTWdg4LMp")

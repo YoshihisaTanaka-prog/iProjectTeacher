@@ -20,6 +20,8 @@ class StudentDetailViewController: UIViewController, UITableViewDelegate, UITabl
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        setBackGround(true, true)
+        
         // Do any additional setup after loading the view.
         tableView.estimatedRowHeight = 10.f
         tableView.rowHeight = UITableView.automaticDimension

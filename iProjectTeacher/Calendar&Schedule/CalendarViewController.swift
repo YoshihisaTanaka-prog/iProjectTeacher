@@ -26,6 +26,8 @@ class CalendarViewController: UIViewController, UITableViewDataSource, UITableVi
         tableView.dataSource = self
         tableView.delegate = self
         tableView.tableFooterView = UIView()
+        setBackGround(true, true)
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {

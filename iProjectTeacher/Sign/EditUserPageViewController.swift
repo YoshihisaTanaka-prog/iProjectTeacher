@@ -20,7 +20,7 @@ class EditUserPageViewController: UIViewController, UITextFieldDelegate, UITextV
     @IBOutlet var emailTextField: UITextField!
     //@IBOutlet var parentsEmailTextField: UITextField!
     @IBOutlet var selectionTextField: UITextField!
-    @IBOutlet var choiceTextField: UITextField!
+    //@IBOutlet var choiceTextField: UITextField!
     //@IBOutlet var pickerView1: UIPickerView!
     @IBOutlet var introductionTextView: UITextView!
 
@@ -66,7 +66,7 @@ class EditUserPageViewController: UIViewController, UITextFieldDelegate, UITextV
         selectionTextField.delegate = self
         //pickerView1.delegate = self
         //pickerView1.dataSource = self
-        choiceTextField.delegate = self
+        //choiceTextField.delegate = self
         introductionTextView.delegate = self
         
         let mailAddress_ = NCMBUser.current()?.mailAddress
@@ -75,10 +75,11 @@ class EditUserPageViewController: UIViewController, UITextFieldDelegate, UITextV
         emailTextField.text = mailAddress_
         userIdFuriganaTextField.text = user_.userIdFurigana
         schoolTextField.text = user_.teacherParameter?.SchoolName
-        gradeTextField.text = user_.teacherParameter?.grade
+        //gradeTextField.text = user_.teacherParameter?.grade
+        gradeTextField.text = user_.grade
         introductionTextView.text = user_.teacherParameter?.introduction
         //pickerView1.selectRow(getSelectionNum(selesction: user_.studentParameter?.selection), inComponent: 0, animated: false)
-        choiceTextField.text = user_.teacherParameter?.choice
+        //choiceTextField.text = user_.teacherParameter?.choice
         
         selectionTextField.text = user_.teacherParameter?.selection
         
@@ -168,7 +169,7 @@ class EditUserPageViewController: UIViewController, UITextFieldDelegate, UITextV
         user.teacherParameter!.ncmb.setObject(schoolTextField.text, forKey: "SchoolName")
         user.ncmb.setObject(gradeTextField.text, forKey: "grade")
         //user.studentParameter!.ncmb.setObject(gradeTextField.text, forKey: "grade")
-        user.teacherParameter!.ncmb.setObject(choiceTextField.text, forKey: "choice")
+        //user.teacherParameter!.ncmb.setObject(choiceTextField.text, forKey: "choice")
         user.teacherParameter!.ncmb.setObject(selectionTextField.text, forKey: "selection")
         if(selected != nil){
             user.teacherParameter!.ncmb.setObject(selected!, forKey: "selection")

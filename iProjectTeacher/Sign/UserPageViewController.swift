@@ -70,11 +70,12 @@ class UserPageViewController: UIViewController, UITextFieldDelegate, UITextViewD
         //let userIdFurigana = NCMBUser.current()?.setObject(userIdFuriganaTextField.text, forKey: "furigana") as! String
         //let Introduction = NCMBUser.current()?.setObject(introductionTextView.text, forKey: "introduction") as! String
         //userIdTextField.text = userId
-        userIdTextField.text = user.teacherParameter?.name
+        userIdTextField.text = user.teacherParameter?.userName
         emailTextField.text = NCMBUser.current()?.mailAddress
         userIdFuriganaTextField.text = user.userIdFurigana
         schoolTextField.text = user.teacherParameter?.SchoolName
-        gradeTextField.text = user.teacherParameter?.grade
+        //gradeTextField.text = user.teacherParameter?.grade
+        gradeTextField.text = user.grade
         //choiceTextField.text = user.teacherParameter?.choice
         selectionTextField.text = user.teacherParameter?.selection
         //parentsEmailTextField.text = user.studentParameter?.parentEmailAdress

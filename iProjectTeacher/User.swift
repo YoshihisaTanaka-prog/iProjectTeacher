@@ -15,6 +15,7 @@ class User {
     var userName: String
     var userIdFurigana: String?
     var mailAddress: String?
+    var grade: String?
     //var isTeacher: Bool
     var oneOnOneSerch: String
     var teacherParameter: TeacherParameter?
@@ -30,6 +31,7 @@ class User {
         self.mailAddress = user.mailAddress
         self.userIdFurigana = user.object(forKey: "furigana") as? String
         self.userName = user.object(forKey: "name") as? String ?? ""
+        self.grade = user.object(forKey: "grade") as? String ?? ""
         
 //        個人チャットを検索するためのパラメータ
         if (NCMBUser.current()?.objectId)! < self.userId {
@@ -90,6 +92,7 @@ class TeacherParameter{
     var ncmb: NCMBObject  //  データ保存用
     //    必要が出たら追加してください。
     var name: String
+    var userName: String
     var departments: String
     var kamoku: String
     var youbi: String
@@ -98,6 +101,7 @@ class TeacherParameter{
     var SchoolName: String
     var selection: String
     var introduction: String
+    
     
     init(_ parameter: NCMBObject) {
         print("teacher parameter is creative")
@@ -130,6 +134,7 @@ class TeacherParameter{
         self.ncmb = parameter
 //        データ取得部分のコード
         self.name = fillS(parameter.object(forKey: "name") as? String)
+        self.userName = fillS(parameter.object(forKey: "userName") as? String)
         self.departments = fillS(parameter.object(forKey: "departments") as? String)
         self.kamoku = fillS(parameter.object(forKey: "kamoku") as? String)
         self.youbi = fillS(parameter.object(forKey: "youbi") as? String)

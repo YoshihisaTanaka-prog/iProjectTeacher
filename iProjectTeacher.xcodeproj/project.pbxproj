@@ -39,10 +39,6 @@
 		047C4E3F25C858C40082807A /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 047C4E2B25C858C40082807A /* README.md */; };
 		047C4E4025C858C40082807A /* iTunesArtwork@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 047C4E2C25C858C40082807A /* iTunesArtwork@2x.png */; };
 		047C4E4125C858C40082807A /* iTunesArtwork@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 047C4E2D25C858C40082807A /* iTunesArtwork@3x.png */; };
-		049C840425C695F000D4D380 /* ScreenSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049C840025C695F000D4D380 /* ScreenSize.swift */; };
-		049C840525C695F000D4D380 /* Opening1ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049C840125C695F000D4D380 /* Opening1ViewController.swift */; };
-		049C840625C695F000D4D380 /* Opening2ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049C840225C695F000D4D380 /* Opening2ViewController.swift */; };
-		049C840725C695F000D4D380 /* Opening.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 049C840325C695F000D4D380 /* Opening.storyboard */; };
 		04A7E96C25AF2B4900C0F43C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04A7E96B25AF2B4900C0F43C /* AppDelegate.swift */; };
 		04A7E96E25AF2B4900C0F43C /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04A7E96D25AF2B4900C0F43C /* SceneDelegate.swift */; };
 		04A7E97025AF2B4900C0F43C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04A7E96F25AF2B4900C0F43C /* ViewController.swift */; };
@@ -58,7 +54,17 @@
 		1B55D80425D3FFD9006BAE51 /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B55D80325D3FFD9006BAE51 /* Event.swift */; };
 		1B55D80725D40008006BAE51 /* CalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B55D80625D40008006BAE51 /* CalendarViewController.swift */; };
 		1B55D80A25D41365006BAE51 /* EventViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B55D80925D41365006BAE51 /* EventViewController.swift */; };
+		1F08D94325E69F920002E0AA /* Questionnaire_subViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F08D94025E69F920002E0AA /* Questionnaire_subViewController.swift */; };
+		1F08D94425E69F920002E0AA /* Questionnaire.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F08D94125E69F920002E0AA /* Questionnaire.swift */; };
+		1F08D94525E69F920002E0AA /* Questionnaire.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1F08D94225E69F920002E0AA /* Questionnaire.storyboard */; };
+		1F08D94D25E6A0890002E0AA /* ScreenSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F08D94925E6A0890002E0AA /* ScreenSize.swift */; };
+		1F08D94E25E6A0890002E0AA /* Opening1ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F08D94A25E6A0890002E0AA /* Opening1ViewController.swift */; };
+		1F08D94F25E6A0890002E0AA /* Opening2ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F08D94B25E6A0890002E0AA /* Opening2ViewController.swift */; };
+		1F08D95025E6A0890002E0AA /* Opening.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1F08D94C25E6A0890002E0AA /* Opening.storyboard */; };
 		1F0D921125E14A4C00503048 /* ForgetPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F0D921025E14A4C00503048 /* ForgetPasswordViewController.swift */; };
+		1F3FD57225E66D9000947E1C /* CheckBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F3FD57125E66D9000947E1C /* CheckBox.swift */; };
+		1F3FD57525E66D9A00947E1C /* Design.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F3FD57425E66D9A00947E1C /* Design.swift */; };
+		1F3FD57825E68B4200947E1C /* EditUserPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F3FD57725E68B4200947E1C /* EditUserPageViewController.swift */; };
 		B123C8D481952C9E0A702E92 /* Pods_iProjectTeacher.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D3759B1903BBE7A837BFD9A5 /* Pods_iProjectTeacher.framework */; };
 /* End PBXBuildFile section */
 
@@ -95,10 +101,6 @@
 		047C4E2B25C858C40082807A /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		047C4E2C25C858C40082807A /* iTunesArtwork@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "iTunesArtwork@2x.png"; sourceTree = "<group>"; };
 		047C4E2D25C858C40082807A /* iTunesArtwork@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "iTunesArtwork@3x.png"; sourceTree = "<group>"; };
-		049C840025C695F000D4D380 /* ScreenSize.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScreenSize.swift; sourceTree = "<group>"; };
-		049C840125C695F000D4D380 /* Opening1ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Opening1ViewController.swift; sourceTree = "<group>"; };
-		049C840225C695F000D4D380 /* Opening2ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Opening2ViewController.swift; sourceTree = "<group>"; };
-		049C840325C695F000D4D380 /* Opening.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Opening.storyboard; sourceTree = "<group>"; };
 		04A7E96825AF2B4900C0F43C /* iProjectTeacher.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iProjectTeacher.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		04A7E96B25AF2B4900C0F43C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		04A7E96D25AF2B4900C0F43C /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -116,7 +118,17 @@
 		1B55D80325D3FFD9006BAE51 /* Event.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
 		1B55D80625D40008006BAE51 /* CalendarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarViewController.swift; sourceTree = "<group>"; };
 		1B55D80925D41365006BAE51 /* EventViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventViewController.swift; sourceTree = "<group>"; };
+		1F08D94025E69F920002E0AA /* Questionnaire_subViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Questionnaire_subViewController.swift; sourceTree = "<group>"; };
+		1F08D94125E69F920002E0AA /* Questionnaire.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Questionnaire.swift; sourceTree = "<group>"; };
+		1F08D94225E69F920002E0AA /* Questionnaire.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Questionnaire.storyboard; sourceTree = "<group>"; };
+		1F08D94925E6A0890002E0AA /* ScreenSize.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScreenSize.swift; sourceTree = "<group>"; };
+		1F08D94A25E6A0890002E0AA /* Opening1ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Opening1ViewController.swift; sourceTree = "<group>"; };
+		1F08D94B25E6A0890002E0AA /* Opening2ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Opening2ViewController.swift; sourceTree = "<group>"; };
+		1F08D94C25E6A0890002E0AA /* Opening.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Opening.storyboard; sourceTree = "<group>"; };
 		1F0D921025E14A4C00503048 /* ForgetPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgetPasswordViewController.swift; sourceTree = "<group>"; };
+		1F3FD57125E66D9000947E1C /* CheckBox.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckBox.swift; sourceTree = "<group>"; };
+		1F3FD57425E66D9A00947E1C /* Design.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Design.swift; sourceTree = "<group>"; };
+		1F3FD57725E68B4200947E1C /* EditUserPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditUserPageViewController.swift; sourceTree = "<group>"; };
 		D3759B1903BBE7A837BFD9A5 /* Pods_iProjectTeacher.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_iProjectTeacher.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DA086042A27D7B93DB7D0EC3 /* Pods-iProjectTeacher.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iProjectTeacher.debug.xcconfig"; path = "Target Support Files/Pods-iProjectTeacher/Pods-iProjectTeacher.debug.xcconfig"; sourceTree = "<group>"; };
 		DAA621FD172288AB5F2AF65B /* Pods-iProjectTeacher.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iProjectTeacher.release.xcconfig"; path = "Target Support Files/Pods-iProjectTeacher/Pods-iProjectTeacher.release.xcconfig"; sourceTree = "<group>"; };
@@ -143,6 +155,7 @@
 				043A9DB325D80D1500587B0E /* SignIn.storyboard */,
 				1F0D921025E14A4C00503048 /* ForgetPasswordViewController.swift */,
 				043A9DB425D80D1500587B0E /* SignInViewController.swift */,
+				1F3FD57725E68B4200947E1C /* EditUserPageViewController.swift */,
 			);
 			path = Sign;
 			sourceTree = "<group>";
@@ -193,17 +206,6 @@
 			path = AppIcon.appiconset;
 			sourceTree = "<group>";
 		};
-		049C83FF25C695F000D4D380 /* Open */ = {
-			isa = PBXGroup;
-			children = (
-				049C840025C695F000D4D380 /* ScreenSize.swift */,
-				049C840125C695F000D4D380 /* Opening1ViewController.swift */,
-				049C840225C695F000D4D380 /* Opening2ViewController.swift */,
-				049C840325C695F000D4D380 /* Opening.storyboard */,
-			);
-			path = Open;
-			sourceTree = "<group>";
-		};
 		04A7E95F25AF2B4900C0F43C = {
 			isa = PBXGroup;
 			children = (
@@ -225,16 +227,19 @@
 		04A7E96A25AF2B4900C0F43C /* iProjectTeacher */ = {
 			isa = PBXGroup;
 			children = (
-				049C83FF25C695F000D4D380 /* Open */,
+				1F08D94825E6A0890002E0AA /* Opening */,
 				047C4DEA25C856300082807A /* Images */,
 				04B39D1725D43D2D003EDECE /* StudentInfo */,
 				1BD9EE3F25D3AC8F001560A3 /* Calendar&Schedule */,
 				043A9DB025D80D1500587B0E /* Sign */,
+				1F08D93F25E69F920002E0AA /* Questionnaire */,
 				04A7E96B25AF2B4900C0F43C /* AppDelegate.swift */,
 				04A7E96D25AF2B4900C0F43C /* SceneDelegate.swift */,
 				04A7E96F25AF2B4900C0F43C /* ViewController.swift */,
 				04EA678E25BC8A8F005F0D06 /* User.swift */,
 				04ACB8B425DB2A7200916C15 /* GlobalParameters.swift */,
+				1F3FD57125E66D9000947E1C /* CheckBox.swift */,
+				1F3FD57425E66D9A00947E1C /* Design.swift */,
 				04A7E97125AF2B4900C0F43C /* Main.storyboard */,
 				04A7E98325AF2D0500C0F43C /* Extensions.swift */,
 				04A7E97425AF2B4A00C0F43C /* Assets.xcassets */,
@@ -266,6 +271,27 @@
 				1B55D80325D3FFD9006BAE51 /* Event.swift */,
 			);
 			path = "Calendar&Schedule";
+			sourceTree = "<group>";
+		};
+		1F08D93F25E69F920002E0AA /* Questionnaire */ = {
+			isa = PBXGroup;
+			children = (
+				1F08D94025E69F920002E0AA /* Questionnaire_subViewController.swift */,
+				1F08D94125E69F920002E0AA /* Questionnaire.swift */,
+				1F08D94225E69F920002E0AA /* Questionnaire.storyboard */,
+			);
+			path = Questionnaire;
+			sourceTree = "<group>";
+		};
+		1F08D94825E6A0890002E0AA /* Opening */ = {
+			isa = PBXGroup;
+			children = (
+				1F08D94925E6A0890002E0AA /* ScreenSize.swift */,
+				1F08D94A25E6A0890002E0AA /* Opening1ViewController.swift */,
+				1F08D94B25E6A0890002E0AA /* Opening2ViewController.swift */,
+				1F08D94C25E6A0890002E0AA /* Opening.storyboard */,
+			);
+			path = Opening;
 			sourceTree = "<group>";
 		};
 		4BCE1EAC3475CBE8D25AB8B3 /* Pods */ = {
@@ -351,7 +377,6 @@
 				0459388F25D149CC00A0E3C8 /* teacherNoImage.png in Resources */,
 				043A9DB725D80D1600587B0E /* SignIn.storyboard in Resources */,
 				047C4E3925C858C40082807A /* Icon-App-40x40@2x.png in Resources */,
-				049C840725C695F000D4D380 /* Opening.storyboard in Resources */,
 				047C4E3025C858C40082807A /* Icon-App-29x29@1x.png in Resources */,
 				047C4E3C25C858C40082807A /* Icon-App-76x76@1x.png in Resources */,
 				04A7E97325AF2B4900C0F43C /* Main.storyboard in Resources */,
@@ -361,9 +386,11 @@
 				047C4E3225C858C40082807A /* Icon-App-20x20@1x.png in Resources */,
 				047C4E3125C858C40082807A /* Icon-App-40x40@1x.png in Resources */,
 				047C4E2F25C858C40082807A /* Icon-App-76x76@2x.png in Resources */,
+				1F08D94525E69F920002E0AA /* Questionnaire.storyboard in Resources */,
 				047C4E4125C858C40082807A /* iTunesArtwork@3x.png in Resources */,
 				0433E3AA25D54B09002A6BE5 /* ReportTableViewCell.xib in Resources */,
 				047C4E3D25C858C40082807A /* Icon-App-40x40@3x.png in Resources */,
+				1F08D95025E6A0890002E0AA /* Opening.storyboard in Resources */,
 				047C4E3E25C858C40082807A /* Icon-App-29x29@2x.png in Resources */,
 				047C4E4025C858C40082807A /* iTunesArtwork@2x.png in Resources */,
 				047C4E3325C858C40082807A /* Icon-App-83.5x83.5@2x.png in Resources */,
@@ -432,21 +459,26 @@
 				1B55D80A25D41365006BAE51 /* EventViewController.swift in Sources */,
 				04A7E96C25AF2B4900C0F43C /* AppDelegate.swift in Sources */,
 				1B55D80725D40008006BAE51 /* CalendarViewController.swift in Sources */,
-				049C840425C695F000D4D380 /* ScreenSize.swift in Sources */,
+				1F08D94F25E6A0890002E0AA /* Opening2ViewController.swift in Sources */,
 				043A9DB625D80D1600587B0E /* UserPageViewController.swift in Sources */,
 				04ACB8B525DB2A7200916C15 /* GlobalParameters.swift in Sources */,
+				1F08D94425E69F920002E0AA /* Questionnaire.swift in Sources */,
 				0433E3A525D54709002A6BE5 /* Report.swift in Sources */,
+				1F3FD57525E66D9A00947E1C /* Design.swift in Sources */,
+				1F3FD57825E68B4200947E1C /* EditUserPageViewController.swift in Sources */,
 				04A7E96E25AF2B4900C0F43C /* SceneDelegate.swift in Sources */,
 				04B39D1E25D43E34003EDECE /* StudentInfoTableViewCell.swift in Sources */,
 				04EA678F25BC8A8F005F0D06 /* User.swift in Sources */,
 				0433E3A925D54B09002A6BE5 /* ReportTableViewCell.swift in Sources */,
-				049C840525C695F000D4D380 /* Opening1ViewController.swift in Sources */,
 				1F0D921125E14A4C00503048 /* ForgetPasswordViewController.swift in Sources */,
-				049C840625C695F000D4D380 /* Opening2ViewController.swift in Sources */,
 				043A9DB525D80D1600587B0E /* SignUpViewController.swift in Sources */,
+				1F08D94E25E6A0890002E0AA /* Opening1ViewController.swift in Sources */,
+				1F08D94325E69F920002E0AA /* Questionnaire_subViewController.swift in Sources */,
 				04B39D1925D43D57003EDECE /* StudentDetailViewController.swift in Sources */,
 				0433E3AE25D5584B002A6BE5 /* StudentViewController.swift in Sources */,
+				1F08D94D25E6A0890002E0AA /* ScreenSize.swift in Sources */,
 				043A9DB825D80D1600587B0E /* SignInViewController.swift in Sources */,
+				1F3FD57225E66D9000947E1C /* CheckBox.swift in Sources */,
 				04A7E98425AF2D0500C0F43C /* Extensions.swift in Sources */,
 				1B55D80425D3FFD9006BAE51 /* Event.swift in Sources */,
 			);
@@ -595,6 +627,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = iProjectTeacher/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.5;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -613,6 +646,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = iProjectTeacher/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.5;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

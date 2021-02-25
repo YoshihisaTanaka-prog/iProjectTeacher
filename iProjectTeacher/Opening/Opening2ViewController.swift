@@ -17,6 +17,7 @@ class Opening2ViewController: UIViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        self.view.backgroundColor = dColor.opening
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -38,13 +39,17 @@ class Opening2ViewController: UIViewController {
             self.label.textColor = .red
         }) { _ in
 //            ログイン判定
-            if let _ = NCMBUser.current() {
+            if isLogInG {
                 // ログイン中だったら
+//                let storyboard = UIStoryboard(name: "Questionnaire", bundle: Bundle.main)
+//                let rootViewController = storyboard.instantiateViewController(withIdentifier: "QuestionnaireController")
                 let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
                 let rootViewController = storyboard.instantiateViewController(withIdentifier: "RootTabBarController")
                 self.present(rootViewController, animated: false, completion: nil)
             } else {
                 // ログインしていなかったら
+//                let storyboard = UIStoryboard(name: "Questionnaire", bundle: Bundle.main)
+//                let rootViewController = storyboard.instantiateViewController(withIdentifier: "QuestionnaireController")
                 let storyboard = UIStoryboard(name: "SignIn", bundle: Bundle.main)
                 let rootViewController = storyboard.instantiateViewController(withIdentifier: "RootNavigationController")
                 self.present(rootViewController, animated: true, completion: nil)

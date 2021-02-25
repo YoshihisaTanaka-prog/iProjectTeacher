@@ -14,10 +14,10 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
     var domainList = Domains()
     var wrongDomainList = Domains()
     
-    @IBOutlet var NameTextField: UITextField!
-    @IBOutlet var departmentTextField: UITextField!
+    //@IBOutlet var NameTextField: UITextField!
+    //@IBOutlet var departmentTextField: UITextField!
     @IBOutlet var emailunivTextField: UITextField!
-    @IBOutlet var furiganaTextField: UITextField!
+    //@IBOutlet var furiganaTextField: UITextField!
 
     
     override func viewDidLoad() {
@@ -25,10 +25,10 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
         
         loadDomain()
 
-        NameTextField.delegate = self
-        departmentTextField.delegate = self
+        //NameTextField.delegate = self
+        //departmentTextField.delegate = self
         emailunivTextField.delegate = self
-        furiganaTextField.delegate = self
+        //furiganaTextField.delegate = self
 
         
     }
@@ -51,9 +51,9 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
                 
                 let ud = UserDefaults.standard
                 ud.set(true, forKey: mail + "isNeedToInputData")
-                ud.set(departmentTextField.text!, forKey: mail + "departments")
-                ud.set(NameTextField.text!, forKey: mail + "name")
-                ud.set(furiganaTextField.text!, forKey: mail + "furigana")
+                //ud.set(departmentTextField.text!, forKey: mail + "departments")
+                //ud.set(NameTextField.text!, forKey: mail + "name")
+                //ud.set(furiganaTextField.text!, forKey: mail + "furigana")
                 ud.synchronize()
                 let domain = emailunivTextField.text!.components(separatedBy: "@").last!
 //                domainList.set(domain: domain, mail: emailunivTextField.text!)

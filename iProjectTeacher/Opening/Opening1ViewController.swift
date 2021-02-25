@@ -7,20 +7,29 @@
 //
 
 import UIKit
+import NCMB
 
 class Opening1ViewController: UIViewController {
     
     @IBOutlet var label: UILabel!
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        self.view.backgroundColor = dColor.opening
         
         label.alpha = 0.f
     }
     
     override func viewDidAppear(_ animated: Bool) {
+        if let user = NCMBUser.current() {
+            let _ = User(user)
+            isLogInG = true
+        }
+        else{
+            isLogInG = false
+        }
 //        画面サイズの取得
         screenSizeG["NnNt"] = Size(x: self.view.frame.size.width, y: self.view.frame.size.height, tm: self.view.safeAreaInsets.top, bm: self.view.safeAreaInsets.bottom)
         print("NnNt", screenSizeG["NnNt"]!.viewHeight)

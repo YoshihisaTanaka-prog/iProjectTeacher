@@ -51,9 +51,9 @@ extension SignUpViewController{
                 
                 let ud = UserDefaults.standard
                 ud.set(true, forKey: mail + "isNeedToInputData")
-                ud.set(departmentTextField.text!, forKey: mail + "departments")
-                ud.set(NameTextField.text!, forKey: mail + "name")
-                ud.set(furiganaTextField.text!, forKey: mail + "furigana")
+                //ud.set(departmentTextField.text!, forKey: mail + "departments")
+                //ud.set(NameTextField.text!, forKey: mail + "name")
+                //ud.set(furiganaTextField.text!, forKey: mail + "furigana")
                 ud.synchronize()
 //                let domain = emailunivTextField.text!.components(separatedBy: "@").last!
 //                domainList.set(domain: domain, mail: emailunivTextField.text!)
@@ -121,10 +121,10 @@ class Domains{
         }
         else{
             let collage = domainObject.object(forKey: "collage") as! String
-            let prefecture = domainObject.object(forKey: "prefecture") as! String
+            //let prefecture = domainObject.object(forKey: "prefecture") as! String
             domainList.append(domain)
             collageList.append(collage)
-            prefectureList.append([prefecture])
+            //prefectureList.append([prefecture])
         }
     }
     

@@ -11,6 +11,8 @@ import UIKit
 
 //  あくまで背景が勝手に決めたルールですが、グローバル変数は便利な反面ミスが発生しやすくなるので、名前の最後にGをつけておいてください。
 
-var screenSizeG: Dictionary<String, Size> = [:]
+//var screenSizeG: Dictionary<String, Size> = [:]
 var userImagesCacheG: Dictionary<String, UIImage> = [:]
 var domainListG = Domains()
+let dColor = OriginalCollor()
+var isLogInG: Bool = false

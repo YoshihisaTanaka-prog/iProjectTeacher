@@ -12,7 +12,7 @@
         <!--Opening1 View Controller-->
         <scene sceneID="w2x-Jy-SYc">
             <objects>
-                <viewController storyboardIdentifier="OpningRootViewController" id="WqB-Uu-3ug" customClass="Opening1ViewController" customModule="iProjectTeacher" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="OpningRootViewController" id="WqB-Uu-3ug" customClass="Opening1ViewController" customModule="iProjectStudent" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="9lG-gT-3x2">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -47,7 +47,7 @@
         <!--Opening2 View Controller-->
         <scene sceneID="NPc-Pn-Oc9">
             <objects>
-                <viewController storyboardIdentifier="Opning2ndViewController" modalPresentationStyle="fullScreen" id="Awg-rD-ODD" customClass="Opening2ViewController" customModule="iProjectTeacher" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="Opning2ndViewController" modalTransitionStyle="flipHorizontal" modalPresentationStyle="fullScreen" id="Awg-rD-ODD" customClass="Opening2ViewController" customModule="iProjectStudent" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Khh-YV-5xs">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -82,7 +82,7 @@
         <!--Navigation Controller-->
         <scene sceneID="M5J-YI-EKH">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" definesPresentationContext="YES" modalPresentationStyle="fullScreen" id="s1i-2r-dyF" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" definesPresentationContext="YES" modalTransitionStyle="flipHorizontal" modalPresentationStyle="fullScreen" id="s1i-2r-dyF" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="" id="NG4-yf-JMC"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="7uM-7m-xQA">

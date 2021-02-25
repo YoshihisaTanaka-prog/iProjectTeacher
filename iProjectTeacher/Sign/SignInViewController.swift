@@ -29,6 +29,74 @@ class SignInViewController: UIViewController, UITextFieldDelegate {
         return true
     }
     
+    
+    @IBAction func signIn() {
+        
+        if passwordTextField.text!.count > 0 {
+            NCMBUser.logInWithMailAddress(inBackground: emailTextField.text!, password: passwordTextField.text!) { (user, error) in
+                if error != nil{
+                    //エラーがあった場合
+                    self.showOkAlert(title: "Error", message: error!.localizedDescription)
+                } else {
+                    //ログイン成功
+                    let u = user?.object(forKey:"parameter") as? NCMBObject
+                    if u == nil {
+                        user!.acl = nil
+                        user?.saveInBackground({ (error) in
+                            if(error == nil){
+                                let storyboard = UIStoryboard(name: "Questionnaire", bundle: Bundle.main)
+                                let rootViewController = storyboard.instantiateViewController(withIdentifier: "QuestionnaireController")
+                                self.present(rootViewController, animated: false, completion: nil)
+                                
+                                //ログイン状態の保持
+                                let ud = UserDefaults.standard
+                                ud.set(true, forKey: "isLogin")
+                                ud.synchronize()
+                            }
+                            else{
+                                self.showOkAlert(title: "Error", message: error!.localizedDescription)
+                            }
+                        })
+                    } else {
+                        let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
+                        let rootViewController = storyboard.instantiateViewController(identifier: "RootTabBarController")
+                        self.present(rootViewController, animated: true, completion: nil)
+                        let _ = User(NCMBUser.current())
+                        
+                        //ログイン状態の保持
+                        let ud = UserDefaults.standard
+                        ud.set(true, forKey: "isLogin")
+                        ud.synchronize()
+                    }
+                }
+            }
+        }
+        
+        /*
+         if userIdTextField.text!.count > 0 && passwordTextField.text!.count > 0 {
+             NCMBUser.logInWithUsername(inBackground: userIdTextField.text!, password: passwordTextField.text!) { (user, error) in
+                 if error != nil{
+                     //エラーがあった場合
+                     self.showOkAlert(title: "Error", message: error!.localizedDescription)
+                 } else {
+                     //ログイン成功
+                     let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
+                     let rootViewController = storyboard.instantiateViewController(identifier: "RootTabBarController")
+                     self.present(rootViewController, animated: true, completion: nil)
+                     
+ //                    let _ = User(NCMBUser.current())
+                     
+                     //ログイン状態の保持
+                     let ud = UserDefaults.standard
+                     ud.set(true, forKey: "isLogin")
+                     ud.synchronize()
+                 }
+             }
+         }
+         */
+        
+    }
+    /*
     @IBAction func signIn() {
         
         if (emailTextField.text?.count)! > 0 &&
@@ -97,4 +165,5 @@ class SignInViewController: UIViewController, UITextFieldDelegate {
 
 
 }
+ */
 }

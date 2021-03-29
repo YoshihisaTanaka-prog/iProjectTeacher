@@ -10,6 +10,68 @@ import RealmSwift
 import NCMB
 
 class EventViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    
+    
+//    教科用の　ク ラ ス 内 変数・定数
+    private var selectedSubject = ""
+    private var selectedSubjectList = [["------",""]]
+    private let mainSubjectList = [["教科を選択",""],["国語",""],["数学",""],["理科",""],["社会",""],["英語","English"]]
+    private let subSubjectList = [
+        [["------",""]],
+        [["詳細を選択",""],["現代文","modernWriting"],["古文","ancientWiting"],["漢文","chineseWriting"]],
+        [["詳細を選択",""],["数学Ⅰ・A","math1a"],["数学Ⅱ・B","math2b"],["数学Ⅲ・C","math3c"]],
+        [["詳細を選択",""],["物理","physics"],["化学","chemistry"],["生物","biology"],["地学","earthScience"]],
+        [["詳細を選択",""],["地理","geography"],["日本史","japaneseHistory"],["世界史","worldHistory"],
+         ["現代社会","modernSociety"],["倫理","ethics"],["政治・経済","politicalScienceAndEconomics"]],
+        [["-----","English"]]
+    ]
+    
+//    以下の関数たちは 同 じ 引 数 のものを探して 置 き 換 え て ください。
+//    各ピッカービューの各縦部分の個数
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        switch component {
+        case 0:
+            return mainSubjectList.count
+        case 1:
+            return selectedSubjectList.count
+        default:
+            return 0
+        }
+    }
+//    ピッカービューに表示する内容を指定
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        switch component {
+        case 0:
+            return mainSubjectList[row][0]
+        case 1:
+            return selectedSubjectList[row][0]
+        default:
+            return ""
+        }
+    }
+//    ピッカービューが選ばれた時の処理
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        switch component {
+        case 0:
+            selectedSubjectList = subSubjectList[row]
+            pickerView.reloadComponent(1)
+            pickerView.selectRow(0, inComponent: 1, animated: true)
+            selectedSubject = mainSubjectList[row][1]
+            print(selectedSubject)
+        case 1:
+            selectedSubject = selectedSubjectList[row][1]
+            print(selectedSubject)
+        default:
+            break
+        }
+    }
+}
+
+/*
+class EventViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
     
     //スケジュール内容入力テキスト
     @IBOutlet var eventText: UITextView!
@@ -119,3 +181,4 @@ class EventViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
     }
     
 }
+*/

@@ -87,7 +87,7 @@ class UserPageViewController: UIViewController, UITextFieldDelegate, UITextViewD
         let  signOutAction = UIAlertAction(title: "ログアウト", style: .default) { (action) in
             NCMBUser.logOutInBackground { (error) in
                 if error != nil {
-                    print(error)
+                    self.showOkAlert(title: "Error", message: error!.localizedDescription)
                 } else {
                     //ログアウト成功
                     let storyboard = UIStoryboard(name: "SignIn", bundle: Bundle.main)

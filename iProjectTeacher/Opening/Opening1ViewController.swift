@@ -15,21 +15,14 @@ class Opening1ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
         // Do any additional setup after loading the view.
         self.view.backgroundColor = dColor.opening
-        
         label.alpha = 0.f
+        let _ = NCMBUser.current()
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        if let user = NCMBUser.current() {
-            let _ = User(user)
-            isLogInG = true
-        }
-        else{
-            isLogInG = false
-        }
+        let _ = NCMBUser.current()
 //        画面サイズの取得
         screenSizeG["NnNt"] = Size(x: self.view.frame.size.width, y: self.view.frame.size.height, tm: self.view.safeAreaInsets.top, bm: self.view.safeAreaInsets.bottom)
         print("NnNt", screenSizeG["NnNt"]!.viewHeight)

@@ -9,6 +9,8 @@
 import Foundation
 import UIKit
 import NCMB
+import Kingfisher
+
 
 extension Int{
     public var d: Double {
@@ -42,6 +44,33 @@ extension UIViewController{
         }
         alertController.addAction(alertOkAction)
         self.present(alertController, animated: true, completion: nil)
+    }
+    
+    func setUserImage(_ imageView: inout UIImageView, _ user: User){
+        imageView.image = userImagesCacheG[user.userId] ?? UIImage(named: "teacherNoImage.png")
+        if user.imageName != nil {
+            imageView.kf.setImage(with: URL(string: "https://mbaas.api.nifcloud.com/2013-09-01/applications/LEaF9q0Coe9T8EYl/publicFiles/" + user.userId), placeholder: UIImage(named: "teacherNoImage.png"))
+        }
+    }
+    
+    func sendToRailsServer(message: String, path: String){
+        print("https://telecture.herokuapp.com" + path)
+        print(message)
+        let url = URL(string: "https://telecture.herokuapp.com" + path)!
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        request.httpBody = ("token=fN4BnkumjMvnbZd47gFLYL7JpVn283eaZwxEpT8NYyhYMPUaRDzR3dQZxTUT2eQYz7gqG9UMjAm8VaM26fhH7ueN7fJbXPsfCpM8&" + message).data(using: .utf8)
+        print(request)
+        URLSession.shared.dataTask(with: request) { (data, response, error) in
+            if error == nil{
+                
+                if let response = response as? HTTPURLResponse{
+                    print( response.statusCode )
+                }
+            } else{
+                print(error!.localizedDescription)
+            }
+        }.resume()
     }
 }
 

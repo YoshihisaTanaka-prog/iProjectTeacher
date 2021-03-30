@@ -11,9 +11,6 @@ import NCMB
 
 class SignUpViewController: UIViewController, UITextFieldDelegate {
     
-    var domainList = Domains()
-    var wrongDomainList = Domains()
-    
     //@IBOutlet var NameTextField: UITextField!
     //@IBOutlet var departmentTextField: UITextField!
     @IBOutlet var emailunivTextField: UITextField!
@@ -23,8 +20,6 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         setBackGround(true, false)
-        
-        loadDomain()
 
         //NameTextField.delegate = self
         //departmentTextField.delegate = self
@@ -42,30 +37,28 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
         return true
     }
     
-    @IBAction func signUp() {
-        if checkDomain(emailunivTextField.text!) {
-            var error: NSError? = nil
-            let mail = emailunivTextField.text!
-            NCMBUser.requestAuthenticationMail(mail, error: &error)
-            if(error == nil){
-                self.showOkDismissAlert(title: "報告", message: "本人確認用のメールアドレスを送信いたします。しばらくお待ちください。")
-                
-                let ud = UserDefaults.standard
-                ud.set(true, forKey: mail + "isNeedToInputData")
-                //ud.set(departmentTextField.text!, forKey: mail + "departments")
-                //ud.set(NameTextField.text!, forKey: mail + "name")
-                //ud.set(furiganaTextField.text!, forKey: mail + "furigana")
-                ud.synchronize()
-                let domain = emailunivTextField.text!.components(separatedBy: "@").last!
-//                domainList.set(domain: domain, mail: emailunivTextField.text!)
-            }
-            else{
-                showOkAlert(title: "Error", message: error!.localizedDescription)
-            }
+    func showOkDismissAlert(title: String, message: String) {
+        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        let alertOkAction = UIAlertAction(title: "OK", style: .default) { (action) in
+            alertController.dismiss(animated: true, completion: nil)
+            self.navigationController?.popViewController(animated: true)
         }
-        
-        }
-        
+        alertController.addAction(alertOkAction)
+        self.present(alertController, animated: true, completion: nil)
     }
+    
+    @IBAction func signUp() {
+        var error: NSError? = nil
+        let mail = emailunivTextField.text!
+        NCMBUser.requestAuthenticationMail(mail, error: &error)
+        if(error == nil){
+            self.showOkDismissAlert(title: "報告", message: "本人確認用のメールアドレスを送信いたします。しばらくお待ちください。")
+        }
+        else{
+            showOkAlert(title: "Error", message: error!.localizedDescription)
+        }
+    }
+    
+}
 
 

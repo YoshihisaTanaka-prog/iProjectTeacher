@@ -16,7 +16,7 @@ class User {
     var userIdFurigana: String?
     var mailAddress: String?
     var grade: String?
-    //var isTeacher: Bool
+    var imageName: String?
     var oneOnOneSerch: String
     var teacherParameter: TeacherParameter?
     var studentParameter: StudentParameter?
@@ -27,7 +27,7 @@ class User {
         self.ncmb = user
         self.userId = user.objectId
         self.userName = user.object(forKey: "userName") as! String
-        //self.isTeacher = user.object(forKey: "isTeacher") as! Bool
+        self.imageName = user.object(forKey: "imageName") as? String
         self.mailAddress = user.mailAddress
         self.userIdFurigana = user.object(forKey: "furigana") as? String
         self.userName = user.object(forKey: "name") as? String ?? ""

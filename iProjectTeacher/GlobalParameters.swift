@@ -13,6 +13,5 @@ import UIKit
 
 //var screenSizeG: Dictionary<String, Size> = [:]
 var userImagesCacheG: Dictionary<String, UIImage> = [:]
-var domainListG = Domains()
 let dColor = OriginalCollor()
 var isLogInG: Bool = false

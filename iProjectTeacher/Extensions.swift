@@ -47,9 +47,19 @@ extension UIViewController{
     }
     
     func setUserImage(_ imageView: inout UIImageView, _ user: User){
-        imageView.image = userImagesCacheG[user.userId] ?? UIImage(named: "teacherNoImage.png")
+        if user.teacherParameter == nil{
+            imageView.image = userImagesCacheG[user.userId] ?? UIImage(named: "studentNoImage.png")
+        }
+        else{
+            imageView.image = userImagesCacheG[user.userId] ?? UIImage(named: "teacherNoImage.png")
+        }
         if user.imageName != nil {
-            imageView.kf.setImage(with: URL(string: "https://mbaas.api.nifcloud.com/2013-09-01/applications/LEaF9q0Coe9T8EYl/publicFiles/" + user.userId), placeholder: UIImage(named: "teacherNoImage.png"))
+            if user.teacherParameter == nil{
+                imageView.kf.setImage(with: URL(string: "https://mbaas.api.nifcloud.com/2013-09-01/applications/LEaF9q0Coe9T8EYl/publicFiles/" + user.userId), placeholder: UIImage(named: "studentNoImage.png"))
+            }
+            else{
+                imageView.kf.setImage(with: URL(string: "https://mbaas.api.nifcloud.com/2013-09-01/applications/LEaF9q0Coe9T8EYl/publicFiles/" + user.userId), placeholder: UIImage(named: "teacherNoImage.png"))
+            }
         }
     }
     

@@ -15,6 +15,7 @@
 		043A9DB625D80D1600587B0E /* UserPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043A9DB225D80D1500587B0E /* UserPageViewController.swift */; };
 		043A9DB725D80D1600587B0E /* SignIn.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 043A9DB325D80D1500587B0E /* SignIn.storyboard */; };
 		043A9DB825D80D1600587B0E /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043A9DB425D80D1500587B0E /* SignInViewController.swift */; };
+		0441D9A12619F5D4002DC165 /* ReportViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0441D9A02619F5D4002DC165 /* ReportViewController.swift */; };
 		0459388B25D149C600A0E3C8 /* creating.png in Resources */ = {isa = PBXBuildFile; fileRef = 0459388A25D149C100A0E3C8 /* creating.png */; };
 		0459388D25D149C900A0E3C8 /* studentNoImage.png in Resources */ = {isa = PBXBuildFile; fileRef = 0459388925D149C100A0E3C8 /* studentNoImage.png */; };
 		0459388F25D149CC00A0E3C8 /* teacherNoImage.png in Resources */ = {isa = PBXBuildFile; fileRef = 0459388825D149C100A0E3C8 /* teacherNoImage.png */; };
@@ -75,6 +76,7 @@
 		043A9DB225D80D1500587B0E /* UserPageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserPageViewController.swift; sourceTree = "<group>"; };
 		043A9DB325D80D1500587B0E /* SignIn.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = SignIn.storyboard; sourceTree = "<group>"; };
 		043A9DB425D80D1500587B0E /* SignInViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
+		0441D9A02619F5D4002DC165 /* ReportViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportViewController.swift; sourceTree = "<group>"; };
 		0459388825D149C100A0E3C8 /* teacherNoImage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = teacherNoImage.png; sourceTree = "<group>"; };
 		0459388925D149C100A0E3C8 /* studentNoImage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = studentNoImage.png; sourceTree = "<group>"; };
 		0459388A25D149C100A0E3C8 /* creating.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = creating.png; sourceTree = "<group>"; };
@@ -216,6 +218,7 @@
 				04B39D1D25D43E34003EDECE /* StudentInfoTableViewCell.xib */,
 				0433E3A725D54B09002A6BE5 /* ReportTableViewCell.swift */,
 				0433E3A825D54B09002A6BE5 /* ReportTableViewCell.xib */,
+				0441D9A02619F5D4002DC165 /* ReportViewController.swift */,
 				0433E3AD25D5584B002A6BE5 /* StudentViewController.swift */,
 				04B39D1825D43D57003EDECE /* StudentDetailViewController.swift */,
 				0433E3A425D54709002A6BE5 /* Report.swift */,
@@ -461,6 +464,7 @@
 				04A7E96E25AF2B4900C0F43C /* SceneDelegate.swift in Sources */,
 				04B39D1E25D43E34003EDECE /* StudentInfoTableViewCell.swift in Sources */,
 				04EA678F25BC8A8F005F0D06 /* User.swift in Sources */,
+				0441D9A12619F5D4002DC165 /* ReportViewController.swift in Sources */,
 				0433E3A925D54B09002A6BE5 /* ReportTableViewCell.swift in Sources */,
 				1F0D921125E14A4C00503048 /* ForgetPasswordViewController.swift in Sources */,
 				043A9DB525D80D1600587B0E /* SignUpViewController.swift in Sources */,

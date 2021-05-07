@@ -117,6 +117,7 @@ class QuestionnaireViewController: UIViewController {
             object?.setObject(0, forKey: "grade")
             object?.setObject("", forKey: "introduction")
             object?.setObject(false, forKey: "isAbleToTeach")
+            object?.setObject(true, forKey: "isPermitted")
             object?.setObject("", forKey: "selection")
             object?.setObject(NCMBUser.current(), forKey: "user")
             object?.setObject(NCMBUser.current()!.objectId, forKey: "userId")

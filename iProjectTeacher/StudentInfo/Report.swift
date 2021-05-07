@@ -14,9 +14,25 @@ class Report{
     var studentId: String
     var teacherId: String
     
+    var subject: String
+    var unit: String
+    var attitude: Int
+    var homework: String
+    var nextUnit: String
+    var messageToParents: String
+    var messageToTeacher: String
+    
     init(_ report: NCMBObject){
         self.objectId = report.objectId
         self.studentId = report.object(forKey: "studentId") as! String
         self.teacherId = report.object(forKey: "teacherId") as! String
+        
+        self.subject = report.object(forKey: "subject") as! String
+        self.unit = report.object(forKey: "unit") as! String
+        self.attitude = report.object(forKey: "attitude") as! Int
+        self.homework = report.object(forKey: "homework") as! String
+        self.nextUnit = report.object(forKey: "nextUnit") as! String
+        self.messageToParents = report.object(forKey: "messageToParents") as! String
+        self.messageToTeacher = report.object(forKey: "messageToTeacher") as! String
     }
 }

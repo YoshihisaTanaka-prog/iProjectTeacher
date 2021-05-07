@@ -55,16 +55,19 @@ class User {
             param?.fetch(&error)
 //                ここのif文の中身は生徒側のユーザクラスも変更お願いします。（教師側に合わせてください。）
             if(error == nil && param != nil){
-                if(param!.ncmbClassName == "TeacherParameter"){
-                    self.teacherParameter = TeacherParameter(param!)
-                    if(userImagesCacheG[self.userId] == nil){
-                        userImagesCacheG[self.userId] = UIImage(named: "teacherNoImage.png")
+                let isPermitted = param?.object(forKey: "isPermitted") as? Bool ?? false
+                if(isPermitted){
+                    if(param!.ncmbClassName == "TeacherParameter"){
+                        self.teacherParameter = TeacherParameter(param!)
+                        if(userImagesCacheG[self.userId] == nil){
+                            userImagesCacheG[self.userId] = UIImage(named: "teacherNoImage.png")
+                        }
                     }
-                }
-                else{
-                    self.studentParameter = StudentParameter(param!)
-                    if(userImagesCacheG[self.userId] == nil){
-                        userImagesCacheG[self.userId] = UIImage(named: "studentNoImage.png")
+                    else{
+                        self.studentParameter = StudentParameter(param!)
+                        if(userImagesCacheG[self.userId] == nil){
+                            userImagesCacheG[self.userId] = UIImage(named: "studentNoImage.png")
+                        }
                     }
                 }
             }

@@ -18,17 +18,12 @@ class Opening2ViewController: UIViewController {
 
         // Do any additional setup after loading the view.
         self.view.backgroundColor = dColor.opening
+        
+        self.tabBarController?.tabBar.alpha = 0.f
+        self.navigationController?.navigationBar.alpha = 0.f
     }
     
     override func viewDidAppear(_ animated: Bool) {
-//        ログイン判定
-        if let user = NCMBUser.current() {
-            let _ = User(user)
-            isLogInG = true
-        }
-        else{
-            isLogInG = false
-        }
 //        TabBarやNavigationBarがある時の画面サイズの取得
         let size = screenSizeG["NnNt"]!
         
@@ -38,9 +33,6 @@ class Opening2ViewController: UIViewController {
         print("NnEt", screenSizeG["NnEt"]!.viewHeight)
         print("EnNt", screenSizeG["EnNt"]!.viewHeight)
         print("EnEt", screenSizeG["EnEt"]!.viewHeight)
-        
-        self.tabBarController?.tabBar.alpha = 0.f
-        self.navigationController?.navigationBar.alpha = 0.f
         
         label.textColor = .black
         UIView.animate(withDuration: 0.8, animations: {

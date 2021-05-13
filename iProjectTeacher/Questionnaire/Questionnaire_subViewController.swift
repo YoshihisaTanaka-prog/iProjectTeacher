@@ -56,7 +56,7 @@ class QuestionnaireViewController: UIViewController {
         
 //        ドメインがDBに存在しない時の管理サイトへの通知と大学の自動入力
 //        まずは登録されたメールアドレスからドメインだけを抜き取り、許可されたドメインかどうか判定する。
-        domain = NCMBUser.current()!.mailAddress.components(separatedBy: "@").last!
+        domain = NCMBUser.current()!.mailAddress.components(separatedBy: "@").last!.lowercased()
         let query1 = NCMBQuery(className: "Domain")
         query1?.whereKey("domain", equalTo: domain)  // ドメインを検索
         query1?.findObjectsInBackground({ (result, error) in
@@ -131,6 +131,7 @@ class QuestionnaireViewController: UIViewController {
                 for score in scoreList{
                     object?.setObject(0, forKey: subject + score)
                 }
+                object?.setObject(false, forKey: "isAbleToTeach-" + subject)
             }
             object?.saveInBackground({ (error) in
                 if(error == nil){

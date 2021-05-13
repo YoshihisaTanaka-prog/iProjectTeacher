@@ -62,6 +62,8 @@
 		1F08D94F25E6A0890002E0AA /* Opening2ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F08D94B25E6A0890002E0AA /* Opening2ViewController.swift */; };
 		1F08D95025E6A0890002E0AA /* Opening.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1F08D94C25E6A0890002E0AA /* Opening.storyboard */; };
 		1F0D921125E14A4C00503048 /* ForgetPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F0D921025E14A4C00503048 /* ForgetPasswordViewController.swift */; };
+		1F2D2CC1264D4840008C9E30 /* Student.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1F2D2CC0264D4840008C9E30 /* Student.storyboard */; };
+		1F2D2CC4264D5325008C9E30 /* ReviewDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F2D2CC3264D5325008C9E30 /* ReviewDetailViewController.swift */; };
 		1F3FD57225E66D9000947E1C /* CheckBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F3FD57125E66D9000947E1C /* CheckBox.swift */; };
 		1F3FD57525E66D9A00947E1C /* Design.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F3FD57425E66D9A00947E1C /* Design.swift */; };
 		1F3FD57825E68B4200947E1C /* EditUserPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F3FD57725E68B4200947E1C /* EditUserPageViewController.swift */; };
@@ -126,6 +128,8 @@
 		1F08D94B25E6A0890002E0AA /* Opening2ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Opening2ViewController.swift; sourceTree = "<group>"; };
 		1F08D94C25E6A0890002E0AA /* Opening.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Opening.storyboard; sourceTree = "<group>"; };
 		1F0D921025E14A4C00503048 /* ForgetPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgetPasswordViewController.swift; sourceTree = "<group>"; };
+		1F2D2CC0264D4840008C9E30 /* Student.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Student.storyboard; sourceTree = "<group>"; };
+		1F2D2CC3264D5325008C9E30 /* ReviewDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewDetailViewController.swift; sourceTree = "<group>"; };
 		1F3FD57125E66D9000947E1C /* CheckBox.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckBox.swift; sourceTree = "<group>"; };
 		1F3FD57425E66D9A00947E1C /* Design.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Design.swift; sourceTree = "<group>"; };
 		1F3FD57725E68B4200947E1C /* EditUserPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditUserPageViewController.swift; sourceTree = "<group>"; };
@@ -197,6 +201,7 @@
 				1BD9EE3F25D3AC8F001560A3 /* Calendar&Schedule */,
 				043A9DB025D80D1500587B0E /* Sign */,
 				1F08D93F25E69F920002E0AA /* Questionnaire */,
+				1F2D2CBE264D47DE008C9E30 /* Student */,
 				04A7E96B25AF2B4900C0F43C /* AppDelegate.swift */,
 				04A7E96D25AF2B4900C0F43C /* SceneDelegate.swift */,
 				04A7E96F25AF2B4900C0F43C /* ViewController.swift */,
@@ -294,6 +299,15 @@
 			path = Opening;
 			sourceTree = "<group>";
 		};
+		1F2D2CBE264D47DE008C9E30 /* Student */ = {
+			isa = PBXGroup;
+			children = (
+				1F2D2CC0264D4840008C9E30 /* Student.storyboard */,
+				1F2D2CC3264D5325008C9E30 /* ReviewDetailViewController.swift */,
+			);
+			path = Student;
+			sourceTree = "<group>";
+		};
 		4BCE1EAC3475CBE8D25AB8B3 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -372,6 +386,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1BA0CFC125E7D8B80008FF43 /* Icon-App-40x40@1x.png in Resources */,
+				1F2D2CC1264D4840008C9E30 /* Student.storyboard in Resources */,
 				1BA0CFC225E7D8B80008FF43 /* Icon-App-20x20@1x.png in Resources */,
 				04A7E97825AF2B4A00C0F43C /* LaunchScreen.storyboard in Resources */,
 				1BA0CFCA25E7D8B80008FF43 /* Icon-App-60x60@3x.png in Resources */,
@@ -464,6 +479,7 @@
 				1F08D94425E69F920002E0AA /* Questionnaire.swift in Sources */,
 				0433E3A525D54709002A6BE5 /* Report.swift in Sources */,
 				1F3FD57525E66D9A00947E1C /* Design.swift in Sources */,
+				1F2D2CC4264D5325008C9E30 /* ReviewDetailViewController.swift in Sources */,
 				1F3FD57825E68B4200947E1C /* EditUserPageViewController.swift in Sources */,
 				04A7E96E25AF2B4900C0F43C /* SceneDelegate.swift in Sources */,
 				04B39D1E25D43E34003EDECE /* StudentInfoTableViewCell.swift in Sources */,

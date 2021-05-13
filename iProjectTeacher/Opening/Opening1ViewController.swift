@@ -20,25 +20,23 @@ class Opening1ViewController: UIViewController {
         label.alpha = 0.f
         isLogInG = false
         let ud = UserDefaults.standard
-//        まず、端末上にNCMBUser.current()の情報があるか確認
-        if let u = NCMBUser.current(){
-//            次に、パスワードが端末上に保存されているかどうか確認
-            if let p = ud.string(forKey: u.mailAddress){
-//                さらに、時間が経過し過ぎていないかどうか確認
-                let d = ud.object(forKey: u.mailAddress + "time") as! Date
-                let now = Date()
-                let elapsedDays = Calendar.current.dateComponents([.day], from: d, to: now).day //以前ログインしてからの経過日数を計算
-                if( elapsedDays! < 2 ){
-//                    条件を全て満たしていたら再ログインする。
-                    NCMBUser.logInWithMailAddress(inBackground: u.mailAddress, password: p) { (user, error) in
-                        if error == nil{
-//                            次回のログイン判定のために「以前ログインした時間」を保存する部分を今の時間に上書きする。
-                            ud.set(now, forKey: u.mailAddress + "time")
-                            ud.synchronize()
-//                            フォロワーを読み込む
-                            self.loadFollowlist()
-//                            ログインしていることを次のViewに伝える、ログイン中のユーザーの情報を保存する。
-                            DispatchQueue.main.async {
+        if ud.bool(forKey: "isLogin"){
+//            まず、端末上にNCMBUser.current()の情報があるか確認
+            if let u = NCMBUser.current(){
+//                次に、パスワードが端末上に保存されているかどうか確認
+                if let p = ud.string(forKey: u.mailAddress){
+//                    さらに、時間が経過し過ぎていないかどうか確認
+                    let d = ud.object(forKey: u.mailAddress + "time") as! Date
+                    let now = Date()
+                    let elapsedDays = Calendar.current.dateComponents([.day], from: d, to: now).day //以前ログインしてからの経過日数を計算
+                    if( elapsedDays! < 2 ){
+//                        条件を全て満たしていたら再ログインする。
+                        NCMBUser.logInWithMailAddress(inBackground: u.mailAddress, password: p) { (user, error) in
+                            if error == nil{
+//                                次回のログイン判定のために「以前ログインした時間」を保存する部分を今の時間に上書きする。
+                                ud.set(now, forKey: u.mailAddress + "time")
+                                ud.synchronize()
+//                                ログインしていることを次のViewに伝える、ログイン中のユーザーの情報を保存する。
                                 isLogInG = true
                                 currentUserG = User(user!)
                             }

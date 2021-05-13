@@ -15,3 +15,4 @@ import UIKit
 var userImagesCacheG: Dictionary<String, UIImage> = [:]
 let dColor = OriginalCollor()
 var isLogInG: Bool = false
+var currentUserG: User!

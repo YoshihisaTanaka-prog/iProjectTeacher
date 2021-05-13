@@ -62,7 +62,7 @@ class SignInViewController: UIViewController, UITextFieldDelegate {
                         let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
                         let rootViewController = storyboard.instantiateViewController(identifier: "RootTabBarController")
                         self.present(rootViewController, animated: true, completion: nil)
-                        let _ = User(NCMBUser.current())
+                        currentUserG = User(user!)
                         
                         //ログイン状態の保持
                         let ud = UserDefaults.standard

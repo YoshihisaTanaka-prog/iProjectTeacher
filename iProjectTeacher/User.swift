@@ -22,6 +22,7 @@ class User {
     var studentParameter: StudentParameter?
     
     
+    
     init(_ user: NCMBUser) {
         
         self.ncmb = user
@@ -161,6 +162,7 @@ class StudentParameter{
     var parentEmailAdress: String
     var introduction: String
     var youbi: String
+    var reports: [Report] = []
     
     init(_ parameter: NCMBObject) {
         print("student parameter is creative")
@@ -200,6 +202,6 @@ class StudentParameter{
         self.introduction = fillS(parameter.object(forKey: "introduction") as? String)
         self.youbi = fillS(parameter.object(forKey: "youbi") as? String)
         self.objectId = fillS(parameter.object(forKey: "objectId") as? String)
-        
+        self.reports = fillS(parameter.object(forKey: "reports") as ? "")
     }
 }

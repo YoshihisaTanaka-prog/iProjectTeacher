@@ -33,8 +33,8 @@ class ReportDetailViewController: UIViewController, UITextFieldDelegate, UITextV
         super.viewDidLoad()
         setBackGround(true, true)
         
-        userImageView.layer.cornerRadius = userImageView.bounds.width / 2.0
-        userImageView.layer.masksToBounds = true
+//        userImageView.layer.cornerRadius = userImageView.bounds.width / 2.0
+//        userImageView.layer.masksToBounds = true
         
         userIdTextField.delegate = self
         userIdFuriganaTextField.delegate = self
@@ -47,20 +47,19 @@ class ReportDetailViewController: UIViewController, UITextFieldDelegate, UITextV
         otherTeachersMessageTextView.delegate = self
         
         let object = NCMBObject(className: "Reports")
-        userIdTextField.text = object?.reports.userId
-        userIdFuriganaTextField.text = object?.reports.userIdFurigana
-        tangenTextField.text = object?.reports.tangen
-        gradeTextField.text = user_.studentParameter?.grade
-        introductionTextView.text = user_.studentParameter?.introduction
-        pickerView1.selectRow(getSelectionNum(selesction: user_.studentParameter?.selection), inComponent: 0, animated: false)
-        choiceTextField.text = user_.studentParameter!.choice
-        
-        parentsEmailTextField.text = user_.studentParameter?.parentEmailAdress
-        
-        setUserImage(&userImageView, user_)
-        
-        youbiCheckBox.setSelection(user_.studentParameter!.youbi)
+
+        userIdTextField.text = ""
+        userIdFuriganaTextField.text = ""
+        tangenTextField.text = ""
+        homeworkTextView.text = ""
+        nextplanTextView.text = ""
+        pickerView1.selectRow(0, inComponent: 0, animated: true)
+        pearentMessageTextView.text = ""
+        otherTeachersMessageTextView.text = ""
+ 
+
    
+ 
     }
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
@@ -72,6 +71,7 @@ class ReportDetailViewController: UIViewController, UITextFieldDelegate, UITextV
         return true
     }
     
+
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         let selectedImage = info[UIImagePickerController.InfoKey.originalImage] as! UIImage
         
@@ -151,51 +151,8 @@ class ReportDetailViewController: UIViewController, UITextFieldDelegate, UITextV
         
     }
     
-    @IBAction func selectImage() {
-        let actionController = UIAlertController(title: "画像の選択", message: "選択して下さい", preferredStyle: .actionSheet)
-        let cameraAction = UIAlertAction(title: "カメラ", style: .default) { (action) in
-            //カメラ起動
-            if UIImagePickerController.isSourceTypeAvailable(.camera) == true {
-                let picker = UIImagePickerController()
-                picker.sourceType = .camera
-                picker.delegate = self
-                self.present(picker, animated: true, completion: nil)
-            } else {
-                self.showOkAlert(title: "エラー", message: "この機種ではカメラが使用出来ません。")
-            }
-        }
-        let albumAction = UIAlertAction(title: "フォトライブラリ", style: .default) { (action) in
-            //アルバム起動
-            if UIImagePickerController.isSourceTypeAvailable(.photoLibrary) == true {
-                let picker = UIImagePickerController()
-                picker.sourceType = .photoLibrary
-                picker.delegate = self
-                self.present(picker, animated: true, completion: nil)
-            } else {
-                self.showOkAlert(title: "エラー", message: "この機種ではフォトライブラリが使用出来ません。")
-            }
-        }
-        let cancelAction = UIAlertAction(title: "キャンセル", style: .cancel) { (action) in
-            actionController.dismiss(animated: true, completion: nil)
-        }
-        actionController.addAction(cameraAction)
-        actionController.addAction(albumAction)
-        actionController.addAction(cancelAction)
-        self.present(actionController, animated: true, completion: nil)
-    }
     
-    @IBAction func selectWeek(){
-        let alertController = UIAlertController(title: "曜日を選んでください。", message: "\n\n\n\n\n\n\n\n\n\n\n", preferredStyle: .alert)
-        let alertOkAction = UIAlertAction(title: "選択完了", style: .default) { (action) in
-            self.youbiCheckBox.mainView.removeFromSuperview()
-            alertController.dismiss(animated: true, completion: nil)
-        }
-        let width = alertController.view.frame.width
-        youbiCheckBox.mainView.frame = CGRect(x: width / 10.f, y: 50, width: width * 0.8, height: youbiCheckBox.height)
-        alertController.view.addSubview(youbiCheckBox.mainView)
-        alertController.addAction(alertOkAction)
-        self.present(alertController, animated: true, completion: nil)
-    }
+    
     
     func getSelectionNum(selesction: String?) -> Int {
         if(selesction == nil){

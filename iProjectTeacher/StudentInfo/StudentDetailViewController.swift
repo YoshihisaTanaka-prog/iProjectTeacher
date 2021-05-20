@@ -9,11 +9,14 @@
 import UIKit
 import NCMB
 
+
+//選ばれた生徒の情報を表示。ここでレポートも表示される。このレポートをタップするとReportViewControllerへ。
 class StudentDetailViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     var reportList: [Report] = []
     var student: User!
     var size: Size!
+    var selectedReport: Report!
     
     @IBOutlet var tableView: UITableView!
 
@@ -59,6 +62,17 @@ class StudentDetailViewController: UIViewController, UITableViewDelegate, UITabl
             return cell
         }
     }
+
+    //didSelectRowAt: tableViewがタップされたときの処理を行う
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        //上から何番目か
+        if indexPath.row != 0 {
+            selectedReport = reportList[indexPath.row - 1]
+            self.performSegue(withIdentifier: "", sender: nil)
+            
+        }
+    }
+    
     
     func loadReport(){
         let query = NCMBQuery(className: "Report")
@@ -77,4 +91,15 @@ class StudentDetailViewController: UIViewController, UITableViewDelegate, UITabl
             }
         })
     }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        switch segue.identifier! {
+        case "Detail":
+            let view2 = segue.destination as! ReportViewController
+            view2.report = selectedReport
+        default:
+            break
+        }
+    }
+    
 }

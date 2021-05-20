@@ -202,6 +202,6 @@ class StudentParameter{
         self.introduction = fillS(parameter.object(forKey: "introduction") as? String)
         self.youbi = fillS(parameter.object(forKey: "youbi") as? String)
         self.objectId = fillS(parameter.object(forKey: "objectId") as? String)
-        self.reports = fillS(parameter.object(forKey: "reports") as ? "")
     }
 }
+

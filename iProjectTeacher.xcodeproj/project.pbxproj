@@ -19,7 +19,6 @@
 		0459388B25D149C600A0E3C8 /* creating.png in Resources */ = {isa = PBXBuildFile; fileRef = 0459388A25D149C100A0E3C8 /* creating.png */; };
 		0459388D25D149C900A0E3C8 /* studentNoImage.png in Resources */ = {isa = PBXBuildFile; fileRef = 0459388925D149C100A0E3C8 /* studentNoImage.png */; };
 		0459388F25D149CC00A0E3C8 /* teacherNoImage.png in Resources */ = {isa = PBXBuildFile; fileRef = 0459388825D149C100A0E3C8 /* teacherNoImage.png */; };
-		0475A651262861AA00C62D53 /* ReportStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0475A650262861AA00C62D53 /* ReportStoryboard.storyboard */; };
 		04A7E96C25AF2B4900C0F43C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04A7E96B25AF2B4900C0F43C /* AppDelegate.swift */; };
 		04A7E96E25AF2B4900C0F43C /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04A7E96D25AF2B4900C0F43C /* SceneDelegate.swift */; };
 		04A7E97025AF2B4900C0F43C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04A7E96F25AF2B4900C0F43C /* ViewController.swift */; };
@@ -67,6 +66,7 @@
 		1F3FD57225E66D9000947E1C /* CheckBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F3FD57125E66D9000947E1C /* CheckBox.swift */; };
 		1F3FD57525E66D9A00947E1C /* Design.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F3FD57425E66D9A00947E1C /* Design.swift */; };
 		1F3FD57825E68B4200947E1C /* EditUserPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F3FD57725E68B4200947E1C /* EditUserPageViewController.swift */; };
+		1FDD508926568EB20064B94C /* DocumentsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FDD508826568EB20064B94C /* DocumentsViewController.swift */; };
 		B123C8D481952C9E0A702E92 /* Pods_iProjectTeacher.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D3759B1903BBE7A837BFD9A5 /* Pods_iProjectTeacher.framework */; };
 /* End PBXBuildFile section */
 
@@ -83,7 +83,6 @@
 		0459388825D149C100A0E3C8 /* teacherNoImage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = teacherNoImage.png; sourceTree = "<group>"; };
 		0459388925D149C100A0E3C8 /* studentNoImage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = studentNoImage.png; sourceTree = "<group>"; };
 		0459388A25D149C100A0E3C8 /* creating.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = creating.png; sourceTree = "<group>"; };
-		0475A650262861AA00C62D53 /* ReportStoryboard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ReportStoryboard.storyboard; sourceTree = "<group>"; };
 		04A7E96825AF2B4900C0F43C /* iProjectTeacher.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iProjectTeacher.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		04A7E96B25AF2B4900C0F43C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		04A7E96D25AF2B4900C0F43C /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -133,6 +132,7 @@
 		1F3FD57125E66D9000947E1C /* CheckBox.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckBox.swift; sourceTree = "<group>"; };
 		1F3FD57425E66D9A00947E1C /* Design.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Design.swift; sourceTree = "<group>"; };
 		1F3FD57725E68B4200947E1C /* EditUserPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditUserPageViewController.swift; sourceTree = "<group>"; };
+		1FDD508826568EB20064B94C /* DocumentsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentsViewController.swift; sourceTree = "<group>"; };
 		D3759B1903BBE7A837BFD9A5 /* Pods_iProjectTeacher.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_iProjectTeacher.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DA086042A27D7B93DB7D0EC3 /* Pods-iProjectTeacher.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iProjectTeacher.debug.xcconfig"; path = "Target Support Files/Pods-iProjectTeacher/Pods-iProjectTeacher.debug.xcconfig"; sourceTree = "<group>"; };
 		DAA621FD172288AB5F2AF65B /* Pods-iProjectTeacher.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iProjectTeacher.release.xcconfig"; path = "Target Support Files/Pods-iProjectTeacher/Pods-iProjectTeacher.release.xcconfig"; sourceTree = "<group>"; };
@@ -229,7 +229,6 @@
 				0433E3AD25D5584B002A6BE5 /* StudentViewController.swift */,
 				04B39D1825D43D57003EDECE /* StudentDetailViewController.swift */,
 				0433E3A425D54709002A6BE5 /* Report.swift */,
-				0475A650262861AA00C62D53 /* ReportStoryboard.storyboard */,
 			);
 			path = StudentInfo;
 			sourceTree = "<group>";
@@ -304,6 +303,7 @@
 			children = (
 				1F2D2CC0264D4840008C9E30 /* Student.storyboard */,
 				1F2D2CC3264D5325008C9E30 /* ReportDetailViewController.swift */,
+				1FDD508826568EB20064B94C /* DocumentsViewController.swift */,
 			);
 			path = Student;
 			sourceTree = "<group>";
@@ -412,7 +412,6 @@
 				1BA0CFC825E7D8B80008FF43 /* Icon-App-29x29@3x.png in Resources */,
 				1F08D95025E6A0890002E0AA /* Opening.storyboard in Resources */,
 				1BA0CFC625E7D8B80008FF43 /* Contents.json in Resources */,
-				0475A651262861AA00C62D53 /* ReportStoryboard.storyboard in Resources */,
 				1BA0CFBE25E7D8B80008FF43 /* iTunesArtwork@1x.png in Resources */,
 				1BA0CFC325E7D8B80008FF43 /* Icon-App-83.5x83.5@2x.png in Resources */,
 				1BA0CFBF25E7D8B80008FF43 /* Icon-App-76x76@2x.png in Resources */,
@@ -471,6 +470,7 @@
 			files = (
 				04A7E97025AF2B4900C0F43C /* ViewController.swift in Sources */,
 				1B55D80A25D41365006BAE51 /* EventViewController.swift in Sources */,
+				1FDD508926568EB20064B94C /* DocumentsViewController.swift in Sources */,
 				04A7E96C25AF2B4900C0F43C /* AppDelegate.swift in Sources */,
 				1B55D80725D40008006BAE51 /* CalendarViewController.swift in Sources */,
 				1F08D94F25E6A0890002E0AA /* Opening2ViewController.swift in Sources */,

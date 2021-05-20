@@ -9,6 +9,7 @@
 import UIKit
 import NCMB
 
+//生徒一覧を出す。
 class StudentViewController: UIViewController {
     
     var selectedStudent: User!

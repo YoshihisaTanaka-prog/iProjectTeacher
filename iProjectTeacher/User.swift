@@ -97,7 +97,7 @@ class TeacherParameter{
     var name: String
     var userName: String
     var departments: String
-    var kamoku: String
+    var kamokuList: [[String]]
     var youbi: String
     var choice: String
     var grade: String
@@ -139,13 +139,31 @@ class TeacherParameter{
         self.name = fillS(parameter.object(forKey: "name") as? String)
         self.userName = fillS(parameter.object(forKey: "userName") as? String)
         self.departments = fillS(parameter.object(forKey: "departments") as? String)
-        self.kamoku = fillS(parameter.object(forKey: "kamoku") as? String)
+//        self.kamoku = fillS(parameter.object(forKey: "kamoku") as? String)
         self.youbi = fillS(parameter.object(forKey: "youbi") as? String)
         self.choice = fillS(parameter.object(forKey: "choice") as? String)
         self.grade = fillS(parameter.object(forKey: "grade") as? String)
         self.SchoolName = fillS(parameter.object(forKey: "SchoolName") as? String)
         self.selection = fillS(parameter.object(forKey: "selection") as? String)
         self.introduction = fillS(parameter.object(forKey: "introduction") as? String)
+        let subjectList = [
+            ["modernWriting","ancientWiting","chineseWriting"],
+            ["math1a","math2b","math3c"],
+            ["physics","chemistry","biology","earthScience"],
+            ["geography","japaneseHistory","worldHistory","modernSociety","ethics","politicalScienceAndEconomics"],
+            ["English"]
+        ]
+        self.kamokuList = []
+        for sList in subjectList{
+            var kamoku: [String] = []
+            for s in sList{
+                let isAbleToTeach = parameter.object(forKey: "isAbleToTeach" + s) as? Bool ?? false
+                if isAbleToTeach{
+                    kamoku.append(s)
+                }
+            }
+            self.kamokuList.append(kamoku)
+        }
     }
 }
 

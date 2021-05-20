@@ -35,6 +35,32 @@ extension Double{
         return String(self)
     }
 }
+extension String{
+    public var sArray: [String] {
+        let cArray = Array(self)
+        var ret: [String] = []
+        for c in cArray {
+            ret.append(String(c))
+        }
+        return ret
+    }
+    
+    public var upperHead: String{
+        if self == ""{
+            return self
+        }
+        let array = self.sArray
+        var ret = array[0].uppercased()
+        
+        if self.count != 1{
+            for i in 1..<array.count{
+                ret += array[i]
+            }
+        }
+        
+        return ret
+    }
+}
 
 extension UIViewController{
     func showOkAlert(title: String, message: String) {

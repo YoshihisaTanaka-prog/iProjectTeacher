@@ -23,11 +23,13 @@ class EditUserPageViewController: UIViewController, UITextFieldDelegate, UITextV
     //@IBOutlet var choiceTextField: UITextField!
     //@IBOutlet var pickerView1: UIPickerView!
     @IBOutlet var introductionTextView: UITextView!
+    
+    let kamokuAlertController = UIAlertController(title: "教科を選んでください。", message: "", preferredStyle: .actionSheet)
 
     var selected: String?
     let bunri = ["文理選択","文系","理系","その他"]
     var youbiCheckBox: CheckBox!
-    var kamokuCheckBox: CheckBox!
+    var kamokuCheckBoxList: [CheckBox] = []
     let youbiList: [CheckBoxInput] = [
         CheckBoxInput("月曜日"),
         CheckBoxInput("火曜日"),
@@ -37,14 +39,30 @@ class EditUserPageViewController: UIViewController, UITextFieldDelegate, UITextV
         CheckBoxInput("土曜日", color: .blue),
         CheckBoxInput("日曜日", color: .red)
     ]
-    let kamokuList: [CheckBoxInput] = [
-        CheckBoxInput("国語"),
-        CheckBoxInput("数学"),
-        CheckBoxInput("英語"),
-        CheckBoxInput("社会"),
-        CheckBoxInput("理科")
-        //CheckBoxInput("土曜日", color: .blue),
-        //CheckBoxInput("日曜日", color: .red)
+    let kamokuList: [[CheckBoxInput]] = [
+        [
+            CheckBoxInput("現代文", key: "modernWriting"),
+            CheckBoxInput("古文", key: "ancientWiting"),
+            CheckBoxInput("漢文", key: "chineseWriting")
+        ],[
+            CheckBoxInput("数学Ⅰ・A", key: "math1a"),
+            CheckBoxInput("数学Ⅱ・B", key: "math2b"),
+            CheckBoxInput("数学Ⅲ・C", key: "math3c")
+        ],[
+            CheckBoxInput("物理", key: "physics"),
+            CheckBoxInput("化学", key: "chemistry"),
+            CheckBoxInput("生物", key: "biology"),
+            CheckBoxInput("地学", key: "earthScience")
+        ],[
+            CheckBoxInput("地理", key: "geography"),
+            CheckBoxInput("日本史", key: "japaneseHistory"),
+            CheckBoxInput("世界史", key: "worldHistory"),
+            CheckBoxInput("現代社会", key: "modernSociety"),
+            CheckBoxInput("倫理", key: "ethics"),
+            CheckBoxInput("政治経済", key: "politicalScienceAndEconomics")
+        ],[
+            CheckBoxInput("英語", key: "English")
+        ]
     ]
     
     override func viewDidLoad() {
@@ -53,8 +71,13 @@ class EditUserPageViewController: UIViewController, UITextFieldDelegate, UITextV
         setBackGround(true, true)
         
         youbiCheckBox = CheckBox(youbiList,size: CGRect(x: 0, y: 0, width: 0, height: 0))
-        kamokuCheckBox = CheckBox(kamokuList,size: CGRect(x: 0, y: 0, width: 0, height: 0))
+        youbiCheckBox.setSelection(currentUserG.teacherParameter!.youbi)
         
+        for i in 0..<kamokuList.count{
+            let kamokuCheckBox = CheckBox(kamokuList[i],size: CGRect(x: 0, y: 0, width: 0, height: 0))
+            kamokuCheckBox.setSelectedKey(currentUserG.teacherParameter!.kamokuList[i])
+            kamokuCheckBoxList.append(kamokuCheckBox)
+        }
         userImageView.layer.cornerRadius = userImageView.bounds.width / 2.0
         userImageView.layer.masksToBounds = true
         
@@ -69,24 +92,19 @@ class EditUserPageViewController: UIViewController, UITextFieldDelegate, UITextV
         //choiceTextField.delegate = self
         introductionTextView.delegate = self
         
-        let mailAddress_ = NCMBUser.current()?.mailAddress
-        let user_ = User(NCMBUser.current())
-        userIdTextField.text = user_.userName
-        emailTextField.text = mailAddress_
-        userIdFuriganaTextField.text = user_.userIdFurigana
-        schoolTextField.text = user_.teacherParameter?.SchoolName
+        userIdTextField.text = currentUserG.userName
+        emailTextField.text = currentUserG.mailAddress
+        userIdFuriganaTextField.text = currentUserG.userIdFurigana
+        schoolTextField.text = currentUserG.teacherParameter?.SchoolName
         //gradeTextField.text = user_.teacherParameter?.grade
-        gradeTextField.text = user_.grade
-        introductionTextView.text = user_.teacherParameter?.introduction
+        gradeTextField.text = currentUserG.grade
+        introductionTextView.text = currentUserG.teacherParameter?.introduction
         //pickerView1.selectRow(getSelectionNum(selesction: user_.studentParameter?.selection), inComponent: 0, animated: false)
         //choiceTextField.text = user_.teacherParameter?.choice
         
-        selectionTextField.text = user_.teacherParameter?.selection
+        selectionTextField.text = currentUserG.teacherParameter?.selection
         
-        userImageView.image = userImagesCacheG[NCMBUser.current()!.objectId]
-        
-        youbiCheckBox.setSelection(user_.teacherParameter!.youbi)
-        kamokuCheckBox.setSelection(user_.teacherParameter!.kamoku)
+        userImageView.image = userImagesCacheG[currentUserG.userId]
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
@@ -109,13 +127,13 @@ class EditUserPageViewController: UIViewController, UITextFieldDelegate, UITextV
         picker.dismiss(animated: true, completion: nil)
         
         let data = UIImage.pngData(resizedImage!)
-        let file = NCMBFile.file(withName: NCMBUser.current()?.objectId, data: data()) as! NCMBFile
+        let file = NCMBFile.file(withName: currentUserG.userId, data: data()) as! NCMBFile
         file.saveInBackground { (error) in
             if error != nil{
                 self.showOkAlert(title: "Error", message: error!.localizedDescription)
             } else {
                 self.userImageView.image = selectedImage
-                userImagesCacheG[NCMBUser.current()!.objectId] = selectedImage
+                userImagesCacheG[currentUserG.userId] = selectedImage
             }
         } progressBlock: { (progress) in
             print(progress)
@@ -130,24 +148,19 @@ class EditUserPageViewController: UIViewController, UITextFieldDelegate, UITextV
     }
     
     // UIPickerViewの行数、リストの数
-    func pickerView(_ pickerView: UIPickerView,
-                    numberOfRowsInComponent component: Int) -> Int {
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         return bunri.count
         
     }
     
     // UIPickerViewの最初の表示
-    func pickerView(_ pickerView: UIPickerView,
-                    titleForRow row: Int,
-                    forComponent component: Int) -> String? {
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         return bunri[row]
         
     }
     
     // UIPickerViewのRowが選択された時の挙動
-    func pickerView(_ pickerView: UIPickerView,
-                    didSelectRow row: Int,
-                    inComponent component: Int) {
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         if row != 0 {
             selected = bunri[row]
         } else {
@@ -161,27 +174,37 @@ class EditUserPageViewController: UIViewController, UITextFieldDelegate, UITextV
     }
     
     @IBAction func saveUserInfo(){
-        let user = User(NCMBUser.current())
-        user.ncmb.setObject(userIdTextField.text, forKey: "name")
-        user.teacherParameter!.ncmb.setObject(userIdTextField.text, forKey: "userName")
-        user.ncmb.setObject(userIdFuriganaTextField.text, forKey: "furigana")
-        user.teacherParameter!.ncmb.setObject(userIdFuriganaTextField.text, forKey: "furigana")
-        user.teacherParameter!.ncmb.setObject(schoolTextField.text, forKey: "SchoolName")
-        user.ncmb.setObject(gradeTextField.text, forKey: "grade")
+        let user = currentUserG.ncmb
+        let param = currentUserG.teacherParameter!.ncmb
+        user.setObject(userIdTextField.text, forKey: "name")
+        user.setObject(userIdFuriganaTextField.text, forKey: "furigana")
+        user.setObject(gradeTextField.text, forKey: "grade")
+        param.setObject(userIdTextField.text, forKey: "userName")
+        param.setObject(userIdFuriganaTextField.text, forKey: "furigana")
+        param.setObject(schoolTextField.text, forKey: "SchoolName")
         //user.studentParameter!.ncmb.setObject(gradeTextField.text, forKey: "grade")
         //user.teacherParameter!.ncmb.setObject(choiceTextField.text, forKey: "choice")
-        user.teacherParameter!.ncmb.setObject(selectionTextField.text, forKey: "selection")
+        param.setObject(selectionTextField.text, forKey: "selection")
         if(selected != nil){
-            user.teacherParameter!.ncmb.setObject(selected!, forKey: "selection")
+            param.setObject(selected!, forKey: "selection")
         }
-        user.ncmb.mailAddress = emailTextField.text
-        user.teacherParameter!.ncmb.setObject(introductionTextView.text, forKey: "introduction")
-        user.teacherParameter!.ncmb.setObject(youbiCheckBox.getSelection(), forKey: "youbi")
-        user.ncmb.saveInBackground{ (error) in
+//        user.mailAddress = emailTextField.text
+        param.setObject(introductionTextView.text, forKey: "introduction")
+        param.setObject(youbiCheckBox.selectionText, forKey: "youbi")
+        for k in kamokuCheckBoxList{
+            for c in k.checkBoxes{
+                if c.isSelected{
+                    param.setObject(true, forKey: "isAbleToTeach" + c.key.upperHead)
+                } else {
+                    param.setObject(false, forKey: "isAbleToTeach" + c.key.upperHead)
+                }
+            }
+        }
+        user.saveInBackground{ (error) in
             if error != nil {
                 self.showOkAlert(title: "Error", message: error!.localizedDescription)
             } else {
-                user.teacherParameter!.ncmb.saveInBackground { (error) in
+                param.saveInBackground { (error) in
                     if error == nil{
                         self.navigationController?.popViewController(animated: true)
                     }
@@ -241,16 +264,48 @@ class EditUserPageViewController: UIViewController, UITextFieldDelegate, UITextV
     }
     
     @IBAction func selectclass(){
-        let alertController2 = UIAlertController(title: "科目を選んでください。", message: "\n\n\n\n\n\n\n\n\n\n\n", preferredStyle: .alert)
-        let alertOkAction2 = UIAlertAction(title: "選択完了", style: .default) { (action) in
+        var alertOkActionList = [UIAlertAction(title: "終了", style: .cancel) { (action) in
             self.youbiCheckBox.mainView.removeFromSuperview()
-            alertController2.dismiss(animated: true, completion: nil)
+            self.kamokuAlertController.dismiss(animated: true, completion: nil)
+        }]
+        for i in 0..<kamokuList.count{
+            alertOkActionList.append( makeAlertAction(i) )
         }
-        let width = alertController2.view.frame.width
-        youbiCheckBox.mainView.frame = CGRect(x: width / 10.f, y: 50, width: width * 0.8, height: youbiCheckBox.height)
-        alertController2.view.addSubview(youbiCheckBox.mainView)
-        alertController2.addAction(alertOkAction2)
-        self.present(alertController2, animated: true, completion: nil)
+        if kamokuAlertController.actions.count == 0{
+            for action in alertOkActionList{
+                kamokuAlertController.addAction(action)
+            }
+        }
+        self.present(kamokuAlertController, animated: true, completion: nil)
+    }
+    
+    func makeAlertAction(_ i : Int) -> UIAlertAction{
+        let subjectList = ["国語", "数学", "理科", "社会", "英語"]
+        return UIAlertAction(title: subjectList[i], style: .default) { (action) in
+            self.kamokuAlertController.dismiss(animated: true, completion: nil)
+            self.selectDetailClass(i)
+        }
+    }
+    
+    func selectDetailClass(_ i : Int) {
+        let alertController = UIAlertController(title: "科目を選んでください。", message: "\n\n\n\n\n\n\n\n\n\n\n", preferredStyle: .alert)
+        let action1 = UIAlertAction(title: "他の教科も設定する", style: .default) { (action) in
+            self.kamokuCheckBoxList[i].mainView.removeFromSuperview()
+            alertController.dismiss(animated: true, completion: nil)
+            self.present(self.kamokuAlertController, animated: true, completion: nil)
+        }
+        let action2 = UIAlertAction(title: "選択完了", style: .default) { (action) in
+            self.kamokuCheckBoxList[i].mainView.removeFromSuperview()
+            alertController.dismiss(animated: true, completion: nil)
+        }
+        
+        let width = alertController.view.frame.width
+        kamokuCheckBoxList[i].mainView.frame = CGRect(x: width / 10.f, y: 50, width: width * 0.8, height: kamokuCheckBoxList[i].height)
+        alertController.view.addSubview(kamokuCheckBoxList[i].mainView)
+        
+        alertController.addAction(action1)
+        alertController.addAction(action2)
+        self.present(alertController, animated: true, completion: nil)
     }
     
     func getSelectionNum(selesction: String?) -> Int {

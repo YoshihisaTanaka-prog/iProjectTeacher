@@ -131,7 +131,7 @@ class QuestionnaireViewController: UIViewController {
                 for score in scoreList{
                     object?.setObject(0, forKey: subject + score)
                 }
-                object?.setObject(false, forKey: "isAbleToTeach-" + subject)
+                object?.setObject(false, forKey: "isAbleToTeach" + subject.upperHead)
             }
             object?.saveInBackground({ (error) in
                 if(error == nil){

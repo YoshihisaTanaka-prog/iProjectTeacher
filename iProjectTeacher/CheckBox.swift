@@ -27,7 +27,7 @@ class CheckBox {
         print(height)
     }
     
-    func getSelection() -> String{
+    public var selectionText: String{
         var ret = ""
         for c in checkBoxes {
             if c.isSelected {
@@ -41,9 +41,10 @@ class CheckBox {
     
     func setSelection(_ selection: String) {
         if selection.count == checkBoxes.count {
-            let cList = Array(selection)
-            for i in 0..<cList.count{
-                let s = String(cList[i])
+            let array = selection.sArray
+            
+            for i in 0..<array.count{
+                let s = array[i]
                 if(s == "T"){
                     checkBoxes[i].isSelected = true
                     checkBoxes[i].button.setTitle("◉", for: .normal)
@@ -51,13 +52,36 @@ class CheckBox {
             }
         }
     }
+    
+    public var selectedKeys: [String] {
+        var ret: [String] = []
+        for c in checkBoxes {
+            if c.isSelected {
+                ret.append(c.key)
+            }
+        }
+        return ret
+    }
+    
+    func setSelectedKey(_ keyList: [String]) {
+        for c in checkBoxes{
+            if keyList.contains(c.key) {
+                c.isSelected = true
+                c.button.setTitle("◉", for: .normal)
+            }
+        }
+    }
+    
 }
 
 class CheckBoxButton {
     var button: UIButton
     var label: UILabel
+    var key: String
     var isSelected = false
+    
     init(_ c: CheckBoxInput, num: Int) {
+        self.key = c.key
         self.label = UILabel(frame: CGRect(x: 25.f, y: 25.f * num.f , width: 120.f, height: 20.f))
         self.label.text = c.title
         self.label.textColor = c.color
@@ -80,13 +104,28 @@ class CheckBoxButton {
 class CheckBoxInput{
     var title: String
     var color: UIColor
+    var key: String
     init(_ title: String, color: UIColor){
         self.title = title
+        self.key = title
         self.color = color
     }
     
     init(_ title: String){
         self.title = title
+        self.key = title
+        self.color = dColor.font
+    }
+    
+    init(_ title: String, color: UIColor, key: String){
+        self.title = title
+        self.key = key
+        self.color = color
+    }
+    
+    init(_ title: String, key: String){
+        self.title = title
+        self.key = key
         self.color = dColor.font
     }
 }

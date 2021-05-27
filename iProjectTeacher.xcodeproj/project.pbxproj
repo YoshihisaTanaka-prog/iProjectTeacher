@@ -63,6 +63,7 @@
 		1F08D94F25E6A0890002E0AA /* Opening2ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F08D94B25E6A0890002E0AA /* Opening2ViewController.swift */; };
 		1F08D95025E6A0890002E0AA /* Opening.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1F08D94C25E6A0890002E0AA /* Opening.storyboard */; };
 		1F0D921125E14A4C00503048 /* ForgetPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F0D921025E14A4C00503048 /* ForgetPasswordViewController.swift */; };
+		1F185222265F917E005666DE /* Radiobuttom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F185221265F917E005666DE /* Radiobuttom.swift */; };
 		1F2D2CC1264D4840008C9E30 /* Student.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1F2D2CC0264D4840008C9E30 /* Student.storyboard */; };
 		1F2D2CC4264D5325008C9E30 /* ReportDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F2D2CC3264D5325008C9E30 /* ReportDetailViewController.swift */; };
 		1F3FD57225E66D9000947E1C /* CheckBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F3FD57125E66D9000947E1C /* CheckBox.swift */; };
@@ -131,6 +132,7 @@
 		1F08D94B25E6A0890002E0AA /* Opening2ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Opening2ViewController.swift; sourceTree = "<group>"; };
 		1F08D94C25E6A0890002E0AA /* Opening.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Opening.storyboard; sourceTree = "<group>"; };
 		1F0D921025E14A4C00503048 /* ForgetPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgetPasswordViewController.swift; sourceTree = "<group>"; };
+		1F185221265F917E005666DE /* Radiobuttom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Radiobuttom.swift; sourceTree = "<group>"; };
 		1F2D2CC0264D4840008C9E30 /* Student.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Student.storyboard; sourceTree = "<group>"; };
 		1F2D2CC3264D5325008C9E30 /* ReportDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportDetailViewController.swift; sourceTree = "<group>"; };
 		1F3FD57125E66D9000947E1C /* CheckBox.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckBox.swift; sourceTree = "<group>"; };
@@ -212,6 +214,7 @@
 				04EA678E25BC8A8F005F0D06 /* User.swift */,
 				04ACB8B425DB2A7200916C15 /* GlobalParameters.swift */,
 				1F3FD57125E66D9000947E1C /* CheckBox.swift */,
+				1F185221265F917E005666DE /* Radiobuttom.swift */,
 				1F3FD57425E66D9A00947E1C /* Design.swift */,
 				04A7E97125AF2B4900C0F43C /* Main.storyboard */,
 				04A7E98325AF2D0500C0F43C /* Extensions.swift */,
@@ -474,6 +477,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1F185222265F917E005666DE /* Radiobuttom.swift in Sources */,
 				04A7E97025AF2B4900C0F43C /* ViewController.swift in Sources */,
 				1B55D80A25D41365006BAE51 /* EventViewController.swift in Sources */,
 				1FDD508926568EB20064B94C /* DocumentsViewController.swift in Sources */,

@@ -2,7 +2,7 @@
 //  QuestionnaireViewController.swift
 //  iProjectStudent
 //
-//  Created by Ring Trap on 2/8/21.
+//  Created by Kaori Nakamura on 2/8/21.
 //  Copyright © 2021 Tanaka_Yoshihisa_4413. All rights reserved.
 //
 

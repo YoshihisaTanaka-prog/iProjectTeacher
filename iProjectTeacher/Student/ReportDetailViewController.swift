@@ -2,7 +2,7 @@
 //  ReviewDetailViewController.swift
 //  iProjectTeacher
 //
-//  Created by Ring Trap on 5/13/21.
+//  Created by Kaori Nakamura on 5/13/21.
 //  Copyright © 2021 Tanaka_Yoshihisa_4413. All rights reserved.
 //
 

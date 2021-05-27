@@ -13,13 +13,15 @@ import RealmSwift
 
 class CalendarViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, FSCalendarDelegate, FSCalendarDataSource, FSCalendarDelegateAppearance {
     
-    var eventList: [Event] = []
-    var selectedDate = Date()
+    private var eventList: [Event] = []
+    private var selectedDate = Date()
+    private var currentMonth: Int!
     
-    @IBOutlet var tableView: UITableView!  //スケジュール内容
-    @IBOutlet var labelTitle: UILabel!  //「主なスケジュール」の表示
+    @IBOutlet private var tableView: UITableView!  //スケジュール内容
+    @IBOutlet private var labelTitle: UILabel!  //「主なスケジュール」の表示
     //カレンダー部分
-    @IBOutlet var datelabel: UILabel!  //日付の表示
+    @IBOutlet private var datelabel: UILabel!  //日付の表示
+    @IBOutlet private var calenderView: FSCalendar!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,7 +29,9 @@ class CalendarViewController: UIViewController, UITableViewDataSource, UITableVi
         tableView.delegate = self
         tableView.tableFooterView = UIView()
         setBackGround(true, true)
-        
+        calenderView.setToJapanise()
+        let tmpCalendar = Calendar(identifier: .gregorian)
+        currentMonth = tmpCalendar.component(.month, from: Date())
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -85,61 +89,15 @@ class CalendarViewController: UIViewController, UITableViewDataSource, UITableVi
         self.tableView.reloadData()
     }
     
+//    ここからカレンダー関係
+    
     fileprivate let gregorian: Calendar = Calendar(identifier: .gregorian)
+    
     fileprivate lazy var dateFormatter: DateFormatter = {
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy-MM-dd"
         return formatter
     }()
-    
-    // 祝日判定を行い結果を返すメソッド
-    func judgeHoliday(_ date : Date) -> Bool {
-        //祝日判定用のカレンダークラスのインスタンス
-        let tmpCalendar = Calendar(identifier: .gregorian)
-        
-        // 祝日判定を行う日にちの年、月、日を取得
-        let year = tmpCalendar.component(.year, from: date)
-        let month = tmpCalendar.component(.month, from: date)
-        let day = tmpCalendar.component(.day, from: date)
-        
-        let holiday = CalculateCalendarLogic()
-        
-        return holiday.judgeJapaneseHoliday(year: year, month: month, day: day)
-    }
-    
-    // date型 -> 年月日をIntで取得
-    func getDay(_ date:Date) -> (Int,Int,Int){
-        let tmpCalendar = Calendar(identifier: .gregorian)
-        let year = tmpCalendar.component(.year, from: date)
-        let month = tmpCalendar.component(.month, from: date)
-        let day = tmpCalendar.component(.day, from: date)
-        return (year,month,day)
-    }
-    
-    //曜日判定
-    func getWeekIdx(_ date: Date) -> Int{
-        let tmpCalendar = Calendar(identifier: .gregorian)
-        return tmpCalendar.component(.weekday, from: date)
-    }
-    
-    // 土日や祝日の日の文字色を変える
-    func calendar(_ calendar: FSCalendar, appearance: FSCalendarAppearance, titleDefaultColorFor date: Date) -> UIColor? {
-        //祝日判定をする
-        if self.judgeHoliday(date){
-            return UIColor.red
-        }
-        
-        //土日の判定
-        let weekday = self.getWeekIdx(date)
-        if weekday == 1 {
-            return UIColor.red
-        }
-        else if weekday == 7 {
-            return UIColor.blue
-        }
-        
-        return nil
-    }
     
     func loadEvent(_ date: Date) {
         //予定がある場合、スケジュールをDBから取得・表示する。
@@ -173,8 +131,85 @@ class CalendarViewController: UIViewController, UITableViewDataSource, UITableVi
         tableView.reloadData()
     }
     
-    //カレンダー処理(スケジュール表示処理)
+    // 祝日判定を行い結果を返すメソッド
+    func judgeHoliday(_ date : Date) -> Bool {
+        //祝日判定用のカレンダークラスのインスタンス
+        let tmpCalendar = Calendar(identifier: .gregorian)
+        
+        // 祝日判定を行う日にちの年、月、日を取得
+        let year = tmpCalendar.component(.year, from: date)
+        let month = tmpCalendar.component(.month, from: date)
+        let day = tmpCalendar.component(.day, from: date)
+        
+        let holiday = CalculateCalendarLogic()
+        
+        return holiday.judgeJapaneseHoliday(year: year, month: month, day: day)
+    }
+    
+    // date型 -> 年月日をIntで取得
+    func getDay(_ date:Date) -> (Int,Int,Int){
+        let tmpCalendar = Calendar(identifier: .gregorian)
+        let year = tmpCalendar.component(.year, from: date)
+        let month = tmpCalendar.component(.month, from: date)
+        let day = tmpCalendar.component(.day, from: date)
+        return (year,month,day)
+    }
+    
+    //曜日判定
+    func getWeekIdx(_ date: Date) -> Int{
+        let tmpCalendar = Calendar(identifier: .gregorian)
+        return tmpCalendar.component(.weekday, from: date)
+    }
+    
+    // 土日や祝日の日の文字色を変える
+    func calendar(_ calendar: FSCalendar, appearance: FSCalendarAppearance, titleDefaultColorFor date: Date) -> UIColor? {
+        let tmpCalendar = Calendar(identifier: .gregorian)
+        let inputMonth = tmpCalendar.component(.month, from: date)
+        if(inputMonth == currentMonth){
+            //祝日判定をする
+            if self.judgeHoliday(date){
+                return UIColor(iRed: 255, iGreen: 0, iBlue: 0)
+            }
+            
+            //土日の判定
+            let weekday = self.getWeekIdx(date)
+            if weekday == 1 {
+                return UIColor(iRed: 255, iGreen: 0, iBlue: 0)
+            }
+            else if weekday == 7 {
+                return UIColor(iRed: 0, iGreen: 0, iBlue: 255)
+            }
+            else{
+                return dColor.font
+            }
+        }
+        else{
+            //祝日判定をする
+            if self.judgeHoliday(date){
+                return UIColor(iRed: 255, iGreen: 127, iBlue: 127)
+            }
+            
+            //土日の判定
+            let weekday = self.getWeekIdx(date)
+            if weekday == 1 {
+                return UIColor(iRed: 255, iGreen: 127, iBlue: 127)
+            }
+            else if weekday == 7 {
+                return UIColor(iRed: 127, iGreen: 192, iBlue: 255)
+            }
+            else{
+                return nil
+            }
+        }
+    }
+    
+    //カレンダーで日付を選択された時の処理(スケジュール表示処理)
     func calendar(_ calendar: FSCalendar, didSelect date: Date, at monthPosition: FSCalendarMonthPosition){
+        let tmpCalendar = Calendar(identifier: .gregorian)
+        let inputMonth = tmpCalendar.component(.month, from: date)
+        if(currentMonth != inputMonth){
+            calenderView.setCurrentPage(date, animated: true)
+        }
         selectedDate = date
         loadEvent(selectedDate)
     }
@@ -191,6 +226,17 @@ class CalendarViewController: UIViewController, UITableViewDataSource, UITableVi
         }else{
             return 0
         }
+    }
+    
+    func calendarCurrentPageDidChange(_ calendar: FSCalendar) {
+        let tmpCalendar = Calendar(identifier: .gregorian)
+        currentMonth = tmpCalendar.component(.month, from: calendar.currentPage)
+        calenderView.reloadData()
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let view2 = segue.destination as! EventViewController
+        view2.sentDate = selectedDate
     }
     
 }

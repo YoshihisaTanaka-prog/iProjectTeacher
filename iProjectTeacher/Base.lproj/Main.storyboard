@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="d7d-d5-XGI">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="d7d-d5-XGI">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17126"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -48,7 +48,7 @@
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell" id="gAk-6J-cyE">
-                                        <rect key="frame" x="0.0" y="28" width="374" height="43.5"/>
+                                        <rect key="frame" x="0.0" y="24.5" width="374" height="43.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="gAk-6J-cyE" id="fld-sa-t0G">
                                             <rect key="frame" x="0.0" y="0.0" width="374" height="43.5"/>
@@ -64,11 +64,12 @@
                     <navigationItem key="navigationItem" id="JQf-FP-bQA">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="lPl-lT-OlE">
                             <connections>
-                                <segue destination="N4V-2C-GDi" kind="presentation" id="iwF-Ft-AqR"/>
+                                <segue destination="N4V-2C-GDi" kind="show" id="1Pt-2d-UV3"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="calenderView" destination="M4a-eB-rCl" id="fQk-NX-X3Z"/>
                         <outlet property="datelabel" destination="Rkc-Rf-cWe" id="ZIn-49-n63"/>
                         <outlet property="labelTitle" destination="p0A-G9-Wx8" id="2Ld-Pn-p4k"/>
                         <outlet property="tableView" destination="SBc-Av-56M" id="qu6-Lf-wJB"/>
@@ -110,7 +111,7 @@
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="8E4-0a-aVh">
-                                        <rect key="frame" x="0.0" y="28" width="414" height="43.5"/>
+                                        <rect key="frame" x="0.0" y="24.5" width="414" height="43.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="8E4-0a-aVh" id="NcH-5H-yw6">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
@@ -181,30 +182,24 @@
                                     <action selector="saveEvent:" destination="N4V-2C-GDi" eventType="touchUpInside" id="ebY-6c-feg"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ov7-8W-dad">
-                                <rect key="frame" x="115" y="722" width="175" height="46"/>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="L6k-Bh-kfQ">
+                                <rect key="frame" x="115" y="510" width="175" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="戻る"/>
+                                <state key="normal" title="Button"/>
                                 <connections>
-                                    <action selector="onbackClick:" destination="N4V-2C-GDi" eventType="touchUpInside" id="dwM-qv-AX3"/>
+                                    <action selector="selectDate" destination="N4V-2C-GDi" eventType="touchUpInside" id="vfN-1I-fdj"/>
                                 </connections>
                             </button>
-                            <datePicker contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="fill" contentVerticalAlignment="center" datePickerMode="date" translatesAutoresizingMaskIntoConstraints="NO" id="yaL-cO-jJ8">
-                                <rect key="frame" x="79" y="482" width="256" height="81"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                                <connections>
-                                    <action selector="picker:" destination="N4V-2C-GDi" eventType="touchUpInside" id="7PC-Hk-b77"/>
-                                </connections>
-                            </datePicker>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="Gvo-CB-WxB"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
+                    <navigationItem key="navigationItem" id="Azw-fp-okk"/>
                     <connections>
+                        <outlet property="calenderButton" destination="L6k-Bh-kfQ" id="dON-qo-gMo"/>
                         <outlet property="eventText" destination="cIX-vK-wK4" id="P7E-LO-SMa"/>
                         <outlet property="pickerView" destination="dFA-jX-13B" id="5kE-pY-7tM"/>
                         <outlet property="studentLabel" destination="9l1-ir-TZx" id="eTc-wb-EBC"/>
-                        <outlet property="y" destination="yaL-cO-jJ8" id="i9B-66-se9"/>
                         <outlet property="y_text" destination="mdS-5D-4HG" id="dPb-Op-xvc"/>
                     </connections>
                 </viewController>

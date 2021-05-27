@@ -22,6 +22,9 @@ extension Int{
     public var s: String {
         return String(self)
     }
+    public var s02: String {
+        return String(format: "%02d", self)
+    }
 }
 
 extension Double{
@@ -66,6 +69,16 @@ extension UIViewController{
     func showOkAlert(title: String, message: String) {
         let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
         let alertOkAction = UIAlertAction(title: "OK", style: .default) { (action) in
+            alertController.dismiss(animated: true, completion: nil)
+        }
+        alertController.addAction(alertOkAction)
+        self.present(alertController, animated: true, completion: nil)
+    }
+    
+    func showOkAlert(title: String, message: String, okAction: @escaping () -> Void ) {
+        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        let alertOkAction = UIAlertAction(title: "OK", style: .default) { (action) in
+            okAction()
             alertController.dismiss(animated: true, completion: nil)
         }
         alertController.addAction(alertOkAction)

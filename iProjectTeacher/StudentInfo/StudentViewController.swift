@@ -19,19 +19,19 @@ class StudentViewController: UIViewController {
         
         setBackGround(false, true)
         
-        let query = NCMBUser.query()
-        query?.includeKey("parameter")
-        query?.whereKey("objectId", equalTo: "MT1ys6rPTWdg4LMp")
-        query?.findObjectsInBackground({ (result, error) in
-            if error == nil {
-                let user = result!.first! as! NCMBUser
-                self.selectedStudent = User(user)
-                self.performSegue(withIdentifier: "Detail", sender: nil)
-            }
-            else{
-                self.showOkAlert(title: "Error", message: error!.localizedDescription)
-            }
-        })
+//        let query = NCMBUser.query()
+//        query?.includeKey("parameter")
+//        query?.whereKey("objectId", equalTo: "MT1ys6rPTWdg4LMp")
+//        query?.findObjectsInBackground({ (result, error) in
+//            if error == nil {
+//                let user = result!.first! as! NCMBUser
+//                self.selectedStudent = User(user)
+//                self.performSegue(withIdentifier: "Detail", sender: nil)
+//            }
+//            else{
+//                self.showOkAlert(title: "Error", message: error!.localizedDescription)
+//            }
+//        })
         
 
         // Do any additional setup after loading the view.

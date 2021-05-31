@@ -125,7 +125,7 @@ extension UIView{
     
     func setFontColor() {
         for view in self.subviews {
-            if !(view is IgnoreView){
+            if !((view is IgnoreView)||(view is UITextField)){
                 view.setFontColor()
             }
             if view is UILabel{

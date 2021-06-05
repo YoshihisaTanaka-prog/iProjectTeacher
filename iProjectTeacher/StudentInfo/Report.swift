@@ -10,7 +10,7 @@ import Foundation
 import NCMB
 
 class Report{
-    var objectId: String
+    var ncmb: NCMBObject
     var studentId: String
     var teacherId: String
     
@@ -23,7 +23,7 @@ class Report{
     var messageToTeacher: String
     
     init(_ report: NCMBObject){
-        self.objectId = report.objectId
+        self.ncmb = report
         self.studentId = report.object(forKey: "studentId") as! String
         self.teacherId = report.object(forKey: "teacherId") as! String
         

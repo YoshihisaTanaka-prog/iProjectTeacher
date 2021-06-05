@@ -113,25 +113,27 @@ class QuestionnaireViewController: UIViewController {
 //            その他の初期値
             object?.setObject("", forKey: "choice")
             object?.setObject(collageName, forKey: "collage")
+            object?.setObject(domain, forKey: "domain")
             object?.setObject("", forKey: "furigana")
             object?.setObject(0, forKey: "grade")
             object?.setObject("", forKey: "introduction")
             object?.setObject(false, forKey: "isAbleToTeach")
+            object?.setObject(true, forKey: "isActive")
             object?.setObject(true, forKey: "isPermitted")
             object?.setObject("", forKey: "selection")
             object?.setObject(NCMBUser.current(), forKey: "user")
             object?.setObject(NCMBUser.current()!.objectId, forKey: "userId")
             object?.setObject("", forKey: "userName")
-            object?.setObject("FFFFFF", forKey: "youbi")
+            object?.setObject("FFFFFFF", forKey: "youbi")
 //            平均点の計算・検索用の初期値
             let subjectList = ["modernWriting","ancientWiting","chineseWriting","math1a","math2b","math3c","physics","chemistry","biology","earthScience",
-                "geography","japaneseHistory","worldHistory","modernSociety","ethics","politicalScienceAndEconomics","English"]
-            let scoreList = ["AverageScore","TotalScore","TotalNum"]
+                "geography","japaneseHistory","worldHistory","modernSociety","ethics","politicalScienceAndEconomics","hsEnglish"]
+            let scoreList = ["TotalScore","TotalNum"]
             for subject in subjectList{
                 for score in scoreList{
                     object?.setObject(0, forKey: subject + score)
                 }
-                object?.setObject(false, forKey: "isAbleToTeach" + subject.upperHead)
+                object?.setObject(false, forKey: "isAbleToTeach" + subject.upHead)
             }
             object?.saveInBackground({ (error) in
                 if(error == nil){

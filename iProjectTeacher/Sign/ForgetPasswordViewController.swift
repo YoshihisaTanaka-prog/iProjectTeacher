@@ -28,13 +28,10 @@ class ForgetPasswordViewController: UIViewController, UITextFieldDelegate {
 
         NCMBUser.requestPasswordResetForEmail(inBackground: Forgetemail, block: {(error) in
           if (error != nil) {
-            print(error);
+            self.showOkAlert(title: "Error", message: error!.localizedDescription)
           } else {
-            print("メール送信完了")
+            self.showOkAlert(title: "メール送信完了", message: "パスワード変更の確認のためのメールを送信いたしました。")
           }
         })
-
-    
-}
-
+    }
 }

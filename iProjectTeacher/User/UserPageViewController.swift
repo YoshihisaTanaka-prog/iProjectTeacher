@@ -37,20 +37,7 @@ class UserPageViewController: UIViewController, UITextFieldDelegate, UITextViewD
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        let imagename = NCMBUser.current()?.object(forKey: "imageName") as? String
-        if imagename != nil {
-            let file = NCMBFile.file(withName: (NCMBUser.current()?.objectId)!, data: nil) as! NCMBFile
-            file.getDataInBackground { (data, error) in
-                if error != nil {
-                    self.showOkAlert(title: "Error", message: error!.localizedDescription)
-                } else {
-                    
-                    let image = UIImage(data: data!)
-                    self.userImageView.image = image
-                    //self.showOkAlert(title: "ダウンロードできました", message: "ダウンロードできました")
-                }
-            }
-        }
+        
         userImageView.layer.cornerRadius = userImageView.bounds.width / 2.0
         userImageView.layer.masksToBounds = true
         
@@ -65,21 +52,49 @@ class UserPageViewController: UIViewController, UITextFieldDelegate, UITextViewD
 //        pickerView1.dataSource = self
         introductionTextView.delegate = self
         
-        let userId = NCMBUser.current()?.userName
-        let user = User(NCMBUser.current())
         //let userIdFurigana = NCMBUser.current()?.setObject(userIdFuriganaTextField.text, forKey: "furigana") as! String
         //let Introduction = NCMBUser.current()?.setObject(introductionTextView.text, forKey: "introduction") as! String
         //userIdTextField.text = userId
-        userIdTextField.text = user.teacherParameter?.userName
-        emailTextField.text = NCMBUser.current()?.mailAddress
-        userIdFuriganaTextField.text = user.userIdFurigana
-        schoolTextField.text = user.teacherParameter?.SchoolName
-        //gradeTextField.text = user.teacherParameter?.grade
-        gradeTextField.text = user.grade
+        userIdTextField.text = currentUserG.userName
+        emailTextField.text = currentUserG.mailAddress
+        userIdFuriganaTextField.text = currentUserG.furigana
+        schoolTextField.text = currentUserG.teacherParameter?.collage
+        
+        gradeTextField.text = transformGrade(currentUserG.grade)
         //choiceTextField.text = user.teacherParameter?.choice
-        selectionTextField.text = user.teacherParameter?.selection
+        selectionTextField.text = currentUserG.teacherParameter?.selection
         //parentsEmailTextField.text = user.studentParameter?.parentEmailAdress
-        introductionTextView.text = user.teacherParameter?.introduction
+        introductionTextView.text = currentUserG.teacherParameter?.introduction
+        userImageView.image = userImagesCacheG[currentUserG.ncmb.objectId]
+    }
+    
+    private func transformGrade(_ grade: String) -> String {
+        let grades = grade.ary
+        var gradeText = "？？？？？"
+        if( grades.count != 0 ){
+            switch grades[0] {
+            case "E":
+                gradeText = "小学 "
+            case "J":
+                gradeText = "中学 "
+            case "H":
+                gradeText = "高校・高専"
+            case "R":
+                gradeText = "浪人生"
+            case "B":
+                gradeText = "学部 "
+            case "M":
+                gradeText = "修士 "
+            case "D":
+                gradeText = "博士 "
+            default:
+                break
+            }
+            if grades.count != 1{
+                gradeText += grades[1] + "年生"
+            }
+        }
+        return gradeText
     }
     
     @IBAction func showMenu(){

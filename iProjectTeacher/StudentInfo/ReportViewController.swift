@@ -62,7 +62,7 @@ class ReportViewController: UIViewController {
         }
         else{
 //            これいる？
-            let object = NCMBObject(className: "Report", objectId: report!.objectId)
+            let object = report?.ncmb
             object?.setObject(attitude, forKey: "attitude")
             object?.setObject(homeworkTextField.text, forKey: "homework")
             object?.setObject(messageToParentsTextField.text, forKey: "messageToParents")

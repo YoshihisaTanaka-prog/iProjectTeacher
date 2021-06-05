@@ -25,7 +25,7 @@ class EditUserPageViewController: UIViewController, UITextFieldDelegate, UITextV
     @IBOutlet var introductionTextView: UITextView!
     
     let kamokuAlertController = UIAlertController(title: "教科を選んでください。", message: "", preferredStyle: .actionSheet)
-
+    var imageName: String?
     var selected: String?
     let bunri = ["文理選択","文系","理系","その他"]
     var youbiCheckBox: CheckBox!
@@ -61,7 +61,7 @@ class EditUserPageViewController: UIViewController, UITextFieldDelegate, UITextV
             CheckBoxInput("倫理", key: "ethics"),
             CheckBoxInput("政治経済", key: "politicalScienceAndEconomics")
         ],[
-            CheckBoxInput("英語", key: "English")
+            CheckBoxInput("高校英語", key: "hsEnglish")
         ]
     ]
     
@@ -70,11 +70,11 @@ class EditUserPageViewController: UIViewController, UITextFieldDelegate, UITextV
         
         setBackGround(true, true)
         
-        youbiCheckBox = CheckBox(youbiList,size: CGRect(x: 0, y: 0, width: 0, height: 0))
+        youbiCheckBox = CheckBox(youbiList)
         youbiCheckBox.setSelection(currentUserG.teacherParameter!.youbi)
         
         for i in 0..<kamokuList.count{
-            let kamokuCheckBox = CheckBox(kamokuList[i],size: CGRect(x: 0, y: 0, width: 0, height: 0))
+            let kamokuCheckBox = CheckBox(kamokuList[i])
             kamokuCheckBox.setSelectedKey(currentUserG.teacherParameter!.kamokuList[i])
             kamokuCheckBoxList.append(kamokuCheckBox)
         }
@@ -94,8 +94,8 @@ class EditUserPageViewController: UIViewController, UITextFieldDelegate, UITextV
         
         userIdTextField.text = currentUserG.userName
         emailTextField.text = currentUserG.mailAddress
-        userIdFuriganaTextField.text = currentUserG.userIdFurigana
-        schoolTextField.text = currentUserG.teacherParameter?.SchoolName
+        userIdFuriganaTextField.text = currentUserG.furigana
+        schoolTextField.text = currentUserG.teacherParameter?.collage
         //gradeTextField.text = user_.teacherParameter?.grade
         gradeTextField.text = currentUserG.grade
         introductionTextView.text = currentUserG.teacherParameter?.introduction
@@ -104,7 +104,7 @@ class EditUserPageViewController: UIViewController, UITextFieldDelegate, UITextV
         
         selectionTextField.text = currentUserG.teacherParameter?.selection
         
-        userImageView.image = userImagesCacheG[currentUserG.userId]
+        userImageView.image = userImagesCacheG[currentUserG.ncmb.objectId]
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
@@ -127,13 +127,14 @@ class EditUserPageViewController: UIViewController, UITextFieldDelegate, UITextV
         picker.dismiss(animated: true, completion: nil)
         
         let data = UIImage.pngData(resizedImage!)
-        let file = NCMBFile.file(withName: currentUserG.userId, data: data()) as! NCMBFile
+        let file = NCMBFile.file(withName: currentUserG.ncmb.objectId, data: data()) as! NCMBFile
         file.saveInBackground { (error) in
             if error != nil{
                 self.showOkAlert(title: "Error", message: error!.localizedDescription)
             } else {
                 self.userImageView.image = selectedImage
-                userImagesCacheG[currentUserG.userId] = selectedImage
+                userImagesCacheG[currentUserG.ncmb.objectId] = resizedImage
+                self.imageName = currentUserG.ncmb.objectId
             }
         } progressBlock: { (progress) in
             print(progress)
@@ -176,27 +177,27 @@ class EditUserPageViewController: UIViewController, UITextFieldDelegate, UITextV
     @IBAction func saveUserInfo(){
         let user = currentUserG.ncmb
         let param = currentUserG.teacherParameter!.ncmb
-        user.setObject(userIdTextField.text, forKey: "name")
-        user.setObject(userIdFuriganaTextField.text, forKey: "furigana")
-        user.setObject(gradeTextField.text, forKey: "grade")
+        let im = user.object(forKey: "imageName")
+        if im == nil{
+            user.setObject(imageName, forKey: "imageName")
+        }
         param.setObject(userIdTextField.text, forKey: "userName")
         param.setObject(userIdFuriganaTextField.text, forKey: "furigana")
-        param.setObject(schoolTextField.text, forKey: "SchoolName")
-        //user.studentParameter!.ncmb.setObject(gradeTextField.text, forKey: "grade")
-        //user.teacherParameter!.ncmb.setObject(choiceTextField.text, forKey: "choice")
+        param.setObject(gradeTextField.text, forKey: "grade")
+        param.setObject(userIdTextField.text, forKey: "userName")
+        param.setObject(userIdFuriganaTextField.text, forKey: "furigana")
         param.setObject(selectionTextField.text, forKey: "selection")
         if(selected != nil){
             param.setObject(selected!, forKey: "selection")
         }
-//        user.mailAddress = emailTextField.text
         param.setObject(introductionTextView.text, forKey: "introduction")
         param.setObject(youbiCheckBox.selectionText, forKey: "youbi")
         for k in kamokuCheckBoxList{
             for c in k.checkBoxes{
                 if c.isSelected{
-                    param.setObject(true, forKey: "isAbleToTeach" + c.key.upperHead)
+                    param.setObject(true, forKey: "isAbleToTeach" + c.key.upHead)
                 } else {
-                    param.setObject(false, forKey: "isAbleToTeach" + c.key.upperHead)
+                    param.setObject(false, forKey: "isAbleToTeach" + c.key.upHead)
                 }
             }
         }
@@ -206,7 +207,10 @@ class EditUserPageViewController: UIViewController, UITextFieldDelegate, UITextV
             } else {
                 param.saveInBackground { (error) in
                     if error == nil{
-                        self.navigationController?.popViewController(animated: true)
+                        currentUserG = User(NCMBUser.current()!)
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
+                            self.navigationController?.popViewController(animated: true)
+                        }
                     }
                     else{
                         self.showOkAlert(title: "Error", message: error!.localizedDescription)
@@ -256,8 +260,6 @@ class EditUserPageViewController: UIViewController, UITextFieldDelegate, UITextV
             self.youbiCheckBox.mainView.removeFromSuperview()
             alertController.dismiss(animated: true, completion: nil)
         }
-        let width = alertController.view.frame.width
-        youbiCheckBox.mainView.frame = CGRect(x: width / 10.f, y: 50, width: width * 0.8, height: youbiCheckBox.height)
         alertController.view.addSubview(youbiCheckBox.mainView)
         alertController.addAction(alertOkAction)
         self.present(alertController, animated: true, completion: nil)
@@ -299,8 +301,6 @@ class EditUserPageViewController: UIViewController, UITextFieldDelegate, UITextV
             alertController.dismiss(animated: true, completion: nil)
         }
         
-        let width = alertController.view.frame.width
-        kamokuCheckBoxList[i].mainView.frame = CGRect(x: width / 10.f, y: 50, width: width * 0.8, height: kamokuCheckBoxList[i].height)
         alertController.view.addSubview(kamokuCheckBoxList[i].mainView)
         
         alertController.addAction(action1)

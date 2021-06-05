@@ -16,3 +16,7 @@ var userImagesCacheG: Dictionary<String, UIImage> = [:]
 let dColor = OriginalCollor()
 var isLogInG: Bool = false
 var currentUserG: User!
+var blockUserListG: [User] = []
+var followUserListG: [User] = []
+
+let token = "fN4BnkumjMvnbZd47gFLYL7JpVn283eaZwxEpT8NYyhYMPUaRDzR3dQZxTUT2eQYz7gqG9UMjAm8VaM26fhH7ueN7fJbXPsfCpM8"

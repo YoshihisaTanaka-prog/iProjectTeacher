@@ -371,8 +371,8 @@ class EditUserPageViewController: UIViewController, UITextFieldDelegate, UITextV
     }
     
     func makeAlertAction2(_ i : Int) -> UIAlertAction{
-        let subjectList = ["月曜日", "火曜日", "水曜日", "木曜日", "金曜日", "土曜日", "日曜日"]
-        return UIAlertAction(title: subjectList[i], style: .default) { (action) in
+        let youbiList = ["月曜日", "火曜日", "水曜日", "木曜日", "金曜日", "土曜日", "日曜日"]
+        return UIAlertAction(title: youbiList[i], style: .default) { (action) in
             self.youbiAlertController.dismiss(animated: true, completion: nil)
             self.selectDetailYoubi(i)
         }

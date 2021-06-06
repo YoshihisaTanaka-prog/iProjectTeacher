@@ -30,7 +30,7 @@ class Questionnaire {
 //        アンケートの一番上に表示する文章の設定
         let titleLabel = UILabel(frame: CGRect(x: 10.f, y: 10.f, width: size.width - 20.f, height: 0))
         titleLabel.numberOfLines = 0
-        titleLabel.text = "アンケートに答えて下さい。\n\nこのアンケートの結果はより良い教師とマッチングできるようにするために使います。\n\n"
+        titleLabel.text = "アンケートに答えて下さい。\n\nこのアンケートの結果はより良い生徒とマッチングできるようにするために使います。\n\n"
         titleLabel.sizeToFit()
         titleLabel.textAlignment = .center
         self.contentsView.addSubview(titleLabel)

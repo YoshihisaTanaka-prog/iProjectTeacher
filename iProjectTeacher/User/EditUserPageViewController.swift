@@ -25,11 +25,15 @@ class EditUserPageViewController: UIViewController, UITextFieldDelegate, UITextV
     @IBOutlet var introductionTextView: UITextView!
     
     let kamokuAlertController = UIAlertController(title: "教科を選んでください。", message: "", preferredStyle: .actionSheet)
+    let youbiAlertController = UIAlertController(title: "曜日を選んでください。", message: "", preferredStyle: .actionSheet)
     var imageName: String?
     var selected: String?
     let bunri = ["文理選択","文系","理系","その他"]
+    var kamokuCheckBox: CheckBox!
     var youbiCheckBox: CheckBox!
     var kamokuCheckBoxList: [CheckBox] = []
+    var youbiCheckBoxList: [CheckBox] = []
+
     let youbiList: [CheckBoxInput] = [
         CheckBoxInput("月曜日"),
         CheckBoxInput("火曜日"),
@@ -39,6 +43,56 @@ class EditUserPageViewController: UIViewController, UITextFieldDelegate, UITextV
         CheckBoxInput("土曜日", color: .blue),
         CheckBoxInput("日曜日", color: .red)
     ]
+
+    
+    let youbiList_: [[CheckBoxInput]] = [
+        [
+            CheckBoxInput("17:00-18:00", key: "Monday,17:00-18:00"),
+            CheckBoxInput("18:00-19:00", key: "Monday,18:00-19:00"),
+            CheckBoxInput("19:00-20:00", key: "Monday,19:00-20:00")
+        ],[
+            CheckBoxInput("17:00-18:00", key: "Tuesday,17:00-18:00"),
+            CheckBoxInput("18:00-19:00", key: "Tuesday,18:00-19:00"),
+            CheckBoxInput("19:00-20:00", key: "Tuesday,19:00-20:00")
+        ],[
+            CheckBoxInput("17:00-18:00", key: "Wednesday,17:00-18:00"),
+            CheckBoxInput("18:00-19:00", key: "Wednesday,18:00-19:00"),
+            CheckBoxInput("19:00-20:00", key: "Wednesday,19:00-20:00")
+        ],[
+            CheckBoxInput("17:00-18:00", key: "Thursday,17:00-18:00"),
+            CheckBoxInput("18:00-19:00", key: "Thursday,18:00-19:00"),
+            CheckBoxInput("19:00-20:00", key: "Thursday,19:00-20:00")
+        ],[
+            CheckBoxInput("17:00-18:00", key: "Friday,17:00-18:00"),
+            CheckBoxInput("18:00-19:00", key: "Friday,18:00-19:00"),
+            CheckBoxInput("19:00-20:00", key: "Friday,19:00-20:00")
+        ],[
+            CheckBoxInput("17:00-18:00", key: "Saturday,9:00-10:00"),
+            CheckBoxInput("17:00-18:00", key: "Saturday,10:00-11:00"),
+            CheckBoxInput("17:00-18:00", key: "Saturday,11:00-12:00"),
+            CheckBoxInput("17:00-18:00", key: "Saturday,13:00-14:00"),
+            CheckBoxInput("17:00-18:00", key: "Saturday,14:00-15:00"),
+            CheckBoxInput("17:00-18:00", key: "Saturday,15:00-16:00"),
+            CheckBoxInput("17:00-18:00", key: "Saturday,15:00-16:00"),
+            CheckBoxInput("17:00-18:00", key: "Saturday,16:00-17:00"),
+            CheckBoxInput("17:00-18:00", key: "Saturday,17:00-18:00"),
+            CheckBoxInput("18:00-19:00", key: "Saturday,18:00-19:00"),
+            CheckBoxInput("19:00-20:00", key: "Saturday,19:00-20:00")
+        ],[
+            CheckBoxInput("17:00-18:00", key: "Sunday,9:00-10:00"),
+            CheckBoxInput("17:00-18:00", key: "Sunday,10:00-11:00"),
+            CheckBoxInput("17:00-18:00", key: "Sunday,11:00-12:00"),
+            CheckBoxInput("17:00-18:00", key: "Sunday,13:00-14:00"),
+            CheckBoxInput("17:00-18:00", key: "Sunday,14:00-15:00"),
+            CheckBoxInput("17:00-18:00", key: "Sunday,15:00-16:00"),
+            CheckBoxInput("17:00-18:00", key: "Sunday,15:00-16:00"),
+            CheckBoxInput("17:00-18:00", key: "Sunday,16:00-17:00"),
+            CheckBoxInput("17:00-18:00", key: "Sunday,17:00-18:00"),
+            CheckBoxInput("18:00-19:00", key: "Sunday,18:00-19:00"),
+            CheckBoxInput("19:00-20:00", key: "Sunday,19:00-20:00")
+        ]
+    ]
+    
     let kamokuList: [[CheckBoxInput]] = [
         [
             CheckBoxInput("現代文", key: "modernWriting"),
@@ -70,14 +124,23 @@ class EditUserPageViewController: UIViewController, UITextFieldDelegate, UITextV
         
         setBackGround(true, true)
         
-        youbiCheckBox = CheckBox(youbiList)
-        youbiCheckBox.setSelection(currentUserG.teacherParameter!.youbi)
+        //youbiCheckBox = CheckBox(youbiList)
+        //youbiCheckBox.setSelection(currentUserG.teacherParameter!.youbi)
         
         for i in 0..<kamokuList.count{
             let kamokuCheckBox = CheckBox(kamokuList[i])
             kamokuCheckBox.setSelectedKey(currentUserG.teacherParameter!.kamokuList[i])
             kamokuCheckBoxList.append(kamokuCheckBox)
         }
+        
+        /*
+        for i in 0..<youbiList.count{
+            let youbiCheckBox = CheckBox(youbiList_[i])
+            youbiCheckBox.setSelectedKey(currentUserG.teacherParameter!.youbiList_[i])
+            youbiCheckBoxList.append(youbiCheckBox)
+        }
+ */
+        
         userImageView.layer.cornerRadius = userImageView.bounds.width / 2.0
         userImageView.layer.masksToBounds = true
         
@@ -254,6 +317,7 @@ class EditUserPageViewController: UIViewController, UITextFieldDelegate, UITextV
         self.present(actionController, animated: true, completion: nil)
     }
     
+    /*
     @IBAction func selectWeek(){
         let alertController = UIAlertController(title: "曜日を選んでください。", message: "\n\n\n\n\n\n\n\n\n\n\n", preferredStyle: .alert)
         let alertOkAction = UIAlertAction(title: "選択完了", style: .default) { (action) in
@@ -264,10 +328,27 @@ class EditUserPageViewController: UIViewController, UITextFieldDelegate, UITextV
         alertController.addAction(alertOkAction)
         self.present(alertController, animated: true, completion: nil)
     }
+ */
+    
+    @IBAction func selectWeek(){
+        var alertOkActionList = [UIAlertAction(title: "終了", style: .cancel) { (action) in
+            self.youbiCheckBox.mainView.removeFromSuperview()
+            self.youbiAlertController.dismiss(animated: true, completion: nil)
+        }]
+        for i in 0..<youbiList_.count{
+            alertOkActionList.append( makeAlertAction2(i) )
+        }
+        if youbiAlertController.actions.count == 0{
+            for action in alertOkActionList{
+                youbiAlertController.addAction(action)
+            }
+        }
+        self.present(youbiAlertController, animated: true, completion: nil)
+    }
     
     @IBAction func selectclass(){
         var alertOkActionList = [UIAlertAction(title: "終了", style: .cancel) { (action) in
-            self.youbiCheckBox.mainView.removeFromSuperview()
+            self.kamokuCheckBox.mainView.removeFromSuperview()
             self.kamokuAlertController.dismiss(animated: true, completion: nil)
         }]
         for i in 0..<kamokuList.count{
@@ -289,6 +370,15 @@ class EditUserPageViewController: UIViewController, UITextFieldDelegate, UITextV
         }
     }
     
+    func makeAlertAction2(_ i : Int) -> UIAlertAction{
+        let subjectList = ["月曜日", "火曜日", "水曜日", "木曜日", "金曜日", "土曜日", "日曜日"]
+        return UIAlertAction(title: subjectList[i], style: .default) { (action) in
+            self.youbiAlertController.dismiss(animated: true, completion: nil)
+            self.selectDetailYoubi(i)
+        }
+    }
+
+    
     func selectDetailClass(_ i : Int) {
         let alertController = UIAlertController(title: "科目を選んでください。", message: "\n\n\n\n\n\n\n\n\n\n\n", preferredStyle: .alert)
         let action1 = UIAlertAction(title: "他の教科も設定する", style: .default) { (action) in
@@ -302,6 +392,25 @@ class EditUserPageViewController: UIViewController, UITextFieldDelegate, UITextV
         }
         
         alertController.view.addSubview(kamokuCheckBoxList[i].mainView)
+        
+        alertController.addAction(action1)
+        alertController.addAction(action2)
+        self.present(alertController, animated: true, completion: nil)
+    }
+    
+    func selectDetailYoubi(_ i : Int) {
+        let alertController = UIAlertController(title: "時間帯を選んでください。", message: "\n\n\n\n\n\n\n\n\n\n\n", preferredStyle: .alert)
+        let action1 = UIAlertAction(title: "他の曜日も設定する", style: .default) { (action) in
+            self.youbiCheckBox.mainView.removeFromSuperview()
+            alertController.dismiss(animated: true, completion: nil)
+            self.present(self.youbiAlertController, animated: true, completion: nil)
+        }
+        let action2 = UIAlertAction(title: "選択完了", style: .default) { (action) in
+            self.youbiCheckBoxList[i].mainView.removeFromSuperview()
+            alertController.dismiss(animated: true, completion: nil)
+        }
+        
+        alertController.view.addSubview(youbiCheckBoxList[i].mainView)
         
         alertController.addAction(action1)
         alertController.addAction(action2)

@@ -28,4 +28,8 @@ extension UIViewController{
             }
         }.resume()
     }
+    
+    func sendReportEmailToParent(_ reportId: String){
+        sendToRailsServer(message: "id=" + reportId, path: "/app/user/report")
+    }
 }

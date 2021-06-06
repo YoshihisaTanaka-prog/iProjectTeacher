@@ -259,7 +259,6 @@
 				0441D9A02619F5D4002DC165 /* ReportViewController.swift */,
 				0433E3AD25D5584B002A6BE5 /* StudentViewController.swift */,
 				04B39D1825D43D57003EDECE /* StudentDetailViewController.swift */,
-				0433E3A425D54709002A6BE5 /* Report.swift */,
 			);
 			path = StudentInfo;
 			sourceTree = "<group>";
@@ -336,6 +335,7 @@
 				1F2D2CC0264D4840008C9E30 /* Student.storyboard */,
 				1F2D2CC3264D5325008C9E30 /* ReportDetailViewController.swift */,
 				1FDD508826568EB20064B94C /* DocumentsViewController.swift */,
+				0433E3A425D54709002A6BE5 /* Report.swift */,
 			);
 			path = Student;
 			sourceTree = "<group>";

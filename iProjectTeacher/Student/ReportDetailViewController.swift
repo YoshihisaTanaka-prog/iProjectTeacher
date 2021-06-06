@@ -10,23 +10,18 @@ import UIKit
 import NCMB
 import NYXImagesKit
 
-class ReportDetailViewController: UIViewController, UITextFieldDelegate, UITextViewDelegate, UIPickerViewDelegate, UIPickerViewDataSource,UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+class ReportDetailViewController: UIViewController, UITextFieldDelegate, UITextViewDelegate, UIPickerViewDelegate, UIPickerViewDataSource, UINavigationControllerDelegate {
 
-    
-    @IBOutlet var userImageView: UIImageView!
-    @IBOutlet var userIdTextField: UITextField!
-    @IBOutlet var userIdFuriganaTextField: UITextField!
-    @IBOutlet var tangenTextField: UITextField!
-    @IBOutlet var pickerView1: UIPickerView!
-    @IBOutlet var homeworkTextView: UITextView!
-    @IBOutlet var nextplanTextView: UITextView!
-    @IBOutlet var pearentMessageTextView: UITextView!
-    @IBOutlet var otherTeachersMessageTextView: UITextView!
+    @IBOutlet private var tangenTextField: UITextField!
+    @IBOutlet private var pickerView1: UIPickerView!
+    @IBOutlet private var homeworkTextView: UITextView!
+    @IBOutlet private var nextplanTextView: UITextView!
+    @IBOutlet private var pearentMessageTextView: UITextView!
+    @IBOutlet private var otherTeachersMessageTextView: UITextView!
 
-
-    var selected: String?
-    let hyouka = ["生徒の授業態度を選択してください","大変良い","まあまあ良い","普通","やや改善が必要","改善が必要"]
-    
+    private var selected: String?
+    private let hyouka = ["生徒の授業態度を選択してください","大変良い","まあまあ良い","普通","やや改善が必要","改善が必要"]
+    private var report: Report!
     
 
     override func viewDidLoad() {
@@ -36,8 +31,6 @@ class ReportDetailViewController: UIViewController, UITextFieldDelegate, UITextV
 //        userImageView.layer.cornerRadius = userImageView.bounds.width / 2.0
 //        userImageView.layer.masksToBounds = true
         
-        userIdTextField.delegate = self
-        userIdFuriganaTextField.delegate = self
         tangenTextField.delegate = self
         pickerView1.delegate = self
         pickerView1.dataSource = self
@@ -45,11 +38,7 @@ class ReportDetailViewController: UIViewController, UITextFieldDelegate, UITextV
         nextplanTextView.delegate = self
         pearentMessageTextView.delegate = self
         otherTeachersMessageTextView.delegate = self
-        
-        let object = NCMBObject(className: "Reports")
 
-        userIdTextField.text = ""
-        userIdFuriganaTextField.text = ""
         tangenTextField.text = ""
         homeworkTextView.text = ""
         nextplanTextView.text = ""
@@ -70,32 +59,6 @@ class ReportDetailViewController: UIViewController, UITextFieldDelegate, UITextV
         textView.resignFirstResponder()
         return true
     }
-    
-
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-        let selectedImage = info[UIImagePickerController.InfoKey.originalImage] as! UIImage
-        
-        let size = NSData(data: selectedImage.pngData()!).count.d
-        let scale = Float(sqrt(min(1.d, 90000.d / size)))
-        let resizedImage = selectedImage.scale(byFactor: scale)
-        
-        picker.dismiss(animated: true, completion: nil)
-        
-        let data = UIImage.pngData(resizedImage!)
-        let file = NCMBFile.file(withName: NCMBUser.current()?.objectId, data: data()) as! NCMBFile
-        file.saveInBackground { (error) in
-            if error != nil{
-                self.showOkAlert(title: "Error", message: error!.localizedDescription)
-            } else {
-                self.userImageView.image = selectedImage
-                userImagesCacheG[NCMBUser.current()!.objectId] = selectedImage
-            }
-        } progressBlock: { (progress) in
-            print(progress)
-        }
-        
-    }
-  
 
     // UIPickerViewの列の数
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
@@ -129,30 +92,42 @@ class ReportDetailViewController: UIViewController, UITextFieldDelegate, UITextV
     }
     
     @IBAction func saveUserInfo(){
-        let object = NCMBObject(className: "Report")
-        object?.setObject(userIdTextField.text, forKey: "studentName")
-        object?.setObject(userIdFuriganaTextField.text, forKey: "studentNameFurigana")
-        object?.setObject(tangenTextField.text, forKey: "tangen")
-        object?.setObject(homeworkTextView.text, forKey: "homework")
-        object?.setObject(nextplanTextView.text, forKey: "nextplan")
-        object?.setObject(pearentMessageTextView.text, forKey: "pearentMessage")
-        object?.setObject(otherTeachersMessageTextView.text, forKey: "otherTeachersMessage")
         if(selected != nil){
-            object?.setObject(selected!, forKey: "attitude")
-        }
-
-        object?.saveInBackground{ (error) in
-            if error != nil {
-                self.showOkAlert(title: "Error", message: error!.localizedDescription)
-            } else {
-
+            createReport()
+            let object = report.ncmb
+            object.setObject(report.studentId, forKey: "studentId")
+            object.setObject(report.teacherId, forKey: "teacherId")
+            object.setObject(report.subject, forKey: "subject")
+            object.setObject(report.unit, forKey: "unit")
+            object.setObject(report.attitude, forKey: "attitude")
+            object.setObject(report.homework, forKey: "homework")
+            object.setObject(report.nextUnit, forKey: "nextUnit")
+            object.setObject(report.messageToParents, forKey: "messageToParents")
+            object.setObject(report.messageToTeacher, forKey: "messageToTeacher")
+            object.setObject(report.fileNames, forKey: "fileNames")
+            object.saveInBackground{ (error) in
+                if error != nil {
+                    self.showOkAlert(title: "Error", message: error!.localizedDescription)
+                } else {
+                    self.sendReportEmailToParent(object.objectId)
+                }
             }
         }
-        
     }
     
+    @IBAction func createReport(){
+        if(selected != nil){
+            report = Report(studentId: "a", teacherId: currentUserG.ncmb.objectId, subject: "math1a", unit: tangenTextField.text ?? "", attitude: selected!, homework: homeworkTextView.text ?? "", nextUnit: nextplanTextView.text, messageToParents: pearentMessageTextView.text ?? "", messageToTeacher: otherTeachersMessageTextView.text ?? "")
+        }
+    }
     
-    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        // 値を渡すコード
+        // 次の画面を取得
+        let View2 = segue.destination as! DocumentsViewController
+        // 次の画面の変数にこの画面の変数を入れている
+        View2.report = report
+    }
     
     func getSelectionNum(selesction: String?) -> Int {
         if(selesction == nil){

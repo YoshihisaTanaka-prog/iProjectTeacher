@@ -162,11 +162,17 @@ extension UIView{
                 let v = view as! UITextField
                 v.textColor = dColor.font
                 v.backgroundColor = .clear
+                v.layer.borderWidth = 0.2.f
+                v.layer.borderColor = dColor.concept.cgColor
+                v.layer.cornerRadius = 5.f
             }
             if view is UITextView{
                 let v = view as! UITextView
                 v.textColor = dColor.font
                 v.backgroundColor = .clear
+                v.layer.borderWidth = 0.2.f
+                v.layer.borderColor = dColor.concept.cgColor
+                v.layer.cornerRadius = 5.f
             }
             if view is UIButton {
                 let v = view as! UIButton

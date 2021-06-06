@@ -68,35 +68,6 @@ class UserPageViewController: UIViewController, UITextFieldDelegate, UITextViewD
         userImageView.image = userImagesCacheG[currentUserG.ncmb.objectId]
     }
     
-    private func transformGrade(_ grade: String) -> String {
-        let grades = grade.ary
-        var gradeText = "？？？？？"
-        if( grades.count != 0 ){
-            switch grades[0] {
-            case "E":
-                gradeText = "小学 "
-            case "J":
-                gradeText = "中学 "
-            case "H":
-                gradeText = "高校・高専"
-            case "R":
-                gradeText = "浪人生"
-            case "B":
-                gradeText = "学部 "
-            case "M":
-                gradeText = "修士 "
-            case "D":
-                gradeText = "博士 "
-            default:
-                break
-            }
-            if grades.count != 1{
-                gradeText += grades[1] + "年生"
-            }
-        }
-        return gradeText
-    }
-    
     @IBAction func showMenu(){
         let alertController = UIAlertController(title: "メニュー", message: "メニューを選択して下さい。", preferredStyle: .actionSheet)
         let  signOutAction = UIAlertAction(title: "ログアウト", style: .default) { (action) in

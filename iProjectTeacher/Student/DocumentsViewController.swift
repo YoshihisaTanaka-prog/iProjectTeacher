@@ -11,8 +11,10 @@ import NCMB
 
 class DocumentsViewController: UIViewController, UITextFieldDelegate, UITextViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
-    @IBOutlet var documentImage: UIImageView!
-    var selectedImage: UIImage?
+    @IBOutlet private var documentImage: UIImageView!
+    private var selectedImage: UIImage?
+    
+    var report: Report!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -61,7 +63,10 @@ class DocumentsViewController: UIViewController, UITextFieldDelegate, UITextView
             let scale = Float(sqrt(min(1.d, 200000.d / size)))
             let resizedImage = selectedImage!.scale(byFactor: scale)
             let data = UIImage.pngData(resizedImage!)
-            let file = NCMBFile.file(withName: NCMBUser.current()?.objectId, data: data()) as! NCMBFile
+            let date = Date()
+            let fileName = date.y.s + "/" + date.m.s + "/" + date.d.s + "-" + currentUserG.ncmb.objectId
+            report.fileNames.append(fileName)
+            let file = NCMBFile.file(withName: fileName, data: data()) as! NCMBFile
             file.saveInBackground { (error) in
                 if error != nil{
                     self.showOkAlert(title: "Error", message: error!.localizedDescription)
@@ -72,19 +77,33 @@ class DocumentsViewController: UIViewController, UITextFieldDelegate, UITextView
                 print(progress)
             }
             
-        } else {
-            
+        }
+        let object = report.ncmb
+        object.setObject(report.studentId, forKey: "studentId")
+        object.setObject(report.teacherId, forKey: "teacherId")
+        object.setObject(report.subject, forKey: "subject")
+        object.setObject(report.unit, forKey: "unit")
+        object.setObject(report.attitude, forKey: "attitude")
+        object.setObject(report.homework, forKey: "homework")
+        object.setObject(report.nextUnit, forKey: "nextUnit")
+        object.setObject(report.messageToParents, forKey: "messageToParents")
+        object.setObject(report.messageToTeacher, forKey: "messageToTeacher")
+        object.setObject(report.fileNames, forKey: "fileNames")
+        object.saveInBackground{ (error) in
+            if error != nil {
+                self.showOkAlert(title: "Error", message: error!.localizedDescription)
+            } else {
+                self.sendReportEmailToParent(object.objectId)
+            }
         }
     }
     
     
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-        selectedImage = info[UIImagePickerController.InfoKey.originalImage] as! UIImage
+        selectedImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage
         self.documentImage.image = selectedImage!
         picker.dismiss(animated: true, completion: nil)
-
-        
     }
     
 }

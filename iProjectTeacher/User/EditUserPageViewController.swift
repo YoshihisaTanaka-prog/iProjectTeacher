@@ -18,10 +18,7 @@ class EditUserPageViewController: UIViewController, UITextFieldDelegate, UITextV
     @IBOutlet var schoolTextField: UITextField!
     @IBOutlet var gradeTextField: UITextField!
     @IBOutlet var emailTextField: UITextField!
-    //@IBOutlet var parentsEmailTextField: UITextField!
     @IBOutlet var selectionTextField: UITextField!
-    //@IBOutlet var choiceTextField: UITextField!
-    //@IBOutlet var pickerView1: UIPickerView!
     @IBOutlet var introductionTextView: UITextView!
     
     let kamokuAlertController = UIAlertController(title: "教科を選んでください。", message: "", preferredStyle: .actionSheet)
@@ -30,66 +27,54 @@ class EditUserPageViewController: UIViewController, UITextFieldDelegate, UITextV
     var selected: String?
     let bunri = ["文理選択","文系","理系","その他"]
     var kamokuCheckBox: CheckBox!
-    var youbiCheckBox: CheckBox!
+
     var kamokuCheckBoxList: [CheckBox] = []
     var youbiCheckBoxList: [CheckBox] = []
-
-    let youbiList: [CheckBoxInput] = [
-        CheckBoxInput("月曜日"),
-        CheckBoxInput("火曜日"),
-        CheckBoxInput("水曜日"),
-        CheckBoxInput("木曜日"),
-        CheckBoxInput("金曜日"),
-        CheckBoxInput("土曜日", color: .blue),
-        CheckBoxInput("日曜日", color: .red)
-    ]
-
-    
     let youbiList_: [[CheckBoxInput]] = [
         [
-            CheckBoxInput("17:00-18:00", key: "Monday,17:00-18:00"),
-            CheckBoxInput("18:00-19:00", key: "Monday,18:00-19:00"),
-            CheckBoxInput("19:00-20:00", key: "Monday,19:00-20:00")
+            CheckBoxInput("17:00-18:00",key: "17:00"),
+            CheckBoxInput("18:00-19:00",key: "18:00"),
+            CheckBoxInput("19:00-20:00",key: "19:00")
         ],[
-            CheckBoxInput("17:00-18:00", key: "Tuesday,17:00-18:00"),
-            CheckBoxInput("18:00-19:00", key: "Tuesday,18:00-19:00"),
-            CheckBoxInput("19:00-20:00", key: "Tuesday,19:00-20:00")
+            CheckBoxInput("17:00-18:00",key: "17:00"),
+            CheckBoxInput("18:00-19:00",key: "18:00"),
+            CheckBoxInput("19:00-20:00",key: "19:00")
         ],[
-            CheckBoxInput("17:00-18:00", key: "Wednesday,17:00-18:00"),
-            CheckBoxInput("18:00-19:00", key: "Wednesday,18:00-19:00"),
-            CheckBoxInput("19:00-20:00", key: "Wednesday,19:00-20:00")
+            CheckBoxInput("17:00-18:00",key: "17:00"),
+            CheckBoxInput("18:00-19:00",key: "18:00"),
+            CheckBoxInput("19:00-20:00",key: "19:00")
         ],[
-            CheckBoxInput("17:00-18:00", key: "Thursday,17:00-18:00"),
-            CheckBoxInput("18:00-19:00", key: "Thursday,18:00-19:00"),
-            CheckBoxInput("19:00-20:00", key: "Thursday,19:00-20:00")
+            CheckBoxInput("17:00-18:00",key: "17:00"),
+            CheckBoxInput("18:00-19:00",key: "18:00"),
+            CheckBoxInput("19:00-20:00",key: "19:00")
         ],[
-            CheckBoxInput("17:00-18:00", key: "Friday,17:00-18:00"),
-            CheckBoxInput("18:00-19:00", key: "Friday,18:00-19:00"),
-            CheckBoxInput("19:00-20:00", key: "Friday,19:00-20:00")
+            CheckBoxInput("17:00-18:00",key: "17:00"),
+            CheckBoxInput("18:00-19:00",key: "18:00"),
+            CheckBoxInput("19:00-20:00",key: "19:00")
         ],[
-            CheckBoxInput("17:00-18:00", key: "Saturday,9:00-10:00"),
-            CheckBoxInput("17:00-18:00", key: "Saturday,10:00-11:00"),
-            CheckBoxInput("17:00-18:00", key: "Saturday,11:00-12:00"),
-            CheckBoxInput("17:00-18:00", key: "Saturday,13:00-14:00"),
-            CheckBoxInput("17:00-18:00", key: "Saturday,14:00-15:00"),
-            CheckBoxInput("17:00-18:00", key: "Saturday,15:00-16:00"),
-            CheckBoxInput("17:00-18:00", key: "Saturday,15:00-16:00"),
-            CheckBoxInput("17:00-18:00", key: "Saturday,16:00-17:00"),
-            CheckBoxInput("17:00-18:00", key: "Saturday,17:00-18:00"),
-            CheckBoxInput("18:00-19:00", key: "Saturday,18:00-19:00"),
-            CheckBoxInput("19:00-20:00", key: "Saturday,19:00-20:00")
+            CheckBoxInput("9:00-10:00",key: "9:00"),
+            CheckBoxInput("10:00-11:00",key: "10:00"),
+            CheckBoxInput("11:00-12:00",key: "11:00"),
+            CheckBoxInput("12:00-13:00",key: "12:00"),
+            CheckBoxInput("13:00-14:00",key: "13:00"),
+            CheckBoxInput("14:00-15:00",key: "14:00"),
+            CheckBoxInput("15:00-16:00",key: "15:00"),
+            CheckBoxInput("16:00-17:00",key: "16:00"),
+            CheckBoxInput("17:00-18:00",key: "17:00"),
+            CheckBoxInput("18:00-19:00",key: "18:00"),
+            CheckBoxInput("19:00-20:00",key: "19:00")
         ],[
-            CheckBoxInput("17:00-18:00", key: "Sunday,9:00-10:00"),
-            CheckBoxInput("17:00-18:00", key: "Sunday,10:00-11:00"),
-            CheckBoxInput("17:00-18:00", key: "Sunday,11:00-12:00"),
-            CheckBoxInput("17:00-18:00", key: "Sunday,13:00-14:00"),
-            CheckBoxInput("17:00-18:00", key: "Sunday,14:00-15:00"),
-            CheckBoxInput("17:00-18:00", key: "Sunday,15:00-16:00"),
-            CheckBoxInput("17:00-18:00", key: "Sunday,15:00-16:00"),
-            CheckBoxInput("17:00-18:00", key: "Sunday,16:00-17:00"),
-            CheckBoxInput("17:00-18:00", key: "Sunday,17:00-18:00"),
-            CheckBoxInput("18:00-19:00", key: "Sunday,18:00-19:00"),
-            CheckBoxInput("19:00-20:00", key: "Sunday,19:00-20:00")
+            CheckBoxInput("9:00-10:00",key: "9:00"),
+            CheckBoxInput("10:00-11:00",key: "10:00"),
+            CheckBoxInput("11:00-12:00",key: "11:00"),
+            CheckBoxInput("12:00-13:00",key: "12:00"),
+            CheckBoxInput("13:00-14:00",key: "13:00"),
+            CheckBoxInput("14:00-15:00",key: "14:00"),
+            CheckBoxInput("15:00-16:00",key: "15:00"),
+            CheckBoxInput("16:00-17:00",key: "16:00"),
+            CheckBoxInput("17:00-18:00",key: "17:00"),
+            CheckBoxInput("18:00-19:00",key: "18:00"),
+            CheckBoxInput("19:00-20:00",key: "19:00")
         ]
     ]
     
@@ -124,22 +109,19 @@ class EditUserPageViewController: UIViewController, UITextFieldDelegate, UITextV
         
         setBackGround(true, true)
         
-        //youbiCheckBox = CheckBox(youbiList)
-        //youbiCheckBox.setSelection(currentUserG.teacherParameter!.youbi)
-        
         for i in 0..<kamokuList.count{
             let kamokuCheckBox = CheckBox(kamokuList[i])
             kamokuCheckBox.setSelectedKey(currentUserG.teacherParameter!.kamokuList[i])
             kamokuCheckBoxList.append(kamokuCheckBox)
         }
         
-        /*
-        for i in 0..<youbiList.count{
+        
+        for i in 0..<youbiList_.count{
             let youbiCheckBox = CheckBox(youbiList_[i])
-            youbiCheckBox.setSelectedKey(currentUserG.teacherParameter!.youbiList_[i])
+            youbiCheckBox.setSelectedKey(currentUserG.teacherParameter!.youbiTimeList[i])
             youbiCheckBoxList.append(youbiCheckBox)
         }
- */
+ 
         
         userImageView.layer.cornerRadius = userImageView.bounds.width / 2.0
         userImageView.layer.masksToBounds = true
@@ -254,7 +236,7 @@ class EditUserPageViewController: UIViewController, UITextFieldDelegate, UITextV
             param.setObject(selected!, forKey: "selection")
         }
         param.setObject(introductionTextView.text, forKey: "introduction")
-        param.setObject(youbiCheckBox.selectionText, forKey: "youbi")
+
         for k in kamokuCheckBoxList{
             for c in k.checkBoxes{
                 if c.isSelected{
@@ -264,6 +246,19 @@ class EditUserPageViewController: UIViewController, UITextFieldDelegate, UITextV
                 }
             }
         }
+        
+        var youbi = ""
+        let youbiList = ["Monday","Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
+        for i in 0..<youbiCheckBoxList.count {
+            param.setObject(youbiCheckBoxList[i].selectedKeys, forKey: youbiList[i]+"Time")
+            if youbiCheckBoxList[i].selectedKeys.count == 0 {
+                youbi += "F"
+            } else {
+                youbi += "T"
+            }
+        }
+        param.setObject(youbi, forKey: "youbi")
+        
         user.saveInBackground{ (error) in
             if error != nil {
                 self.showOkAlert(title: "Error", message: error!.localizedDescription)
@@ -317,22 +312,8 @@ class EditUserPageViewController: UIViewController, UITextFieldDelegate, UITextV
         self.present(actionController, animated: true, completion: nil)
     }
     
-    /*
-    @IBAction func selectWeek(){
-        let alertController = UIAlertController(title: "曜日を選んでください。", message: "\n\n\n\n\n\n\n\n\n\n\n", preferredStyle: .alert)
-        let alertOkAction = UIAlertAction(title: "選択完了", style: .default) { (action) in
-            self.youbiCheckBox.mainView.removeFromSuperview()
-            alertController.dismiss(animated: true, completion: nil)
-        }
-        alertController.view.addSubview(youbiCheckBox.mainView)
-        alertController.addAction(alertOkAction)
-        self.present(alertController, animated: true, completion: nil)
-    }
- */
-    
     @IBAction func selectWeek(){
         var alertOkActionList = [UIAlertAction(title: "終了", style: .cancel) { (action) in
-            self.youbiCheckBox.mainView.removeFromSuperview()
             self.youbiAlertController.dismiss(animated: true, completion: nil)
         }]
         for i in 0..<youbiList_.count{
@@ -399,9 +380,14 @@ class EditUserPageViewController: UIViewController, UITextFieldDelegate, UITextV
     }
     
     func selectDetailYoubi(_ i : Int) {
-        let alertController = UIAlertController(title: "時間帯を選んでください。", message: "\n\n\n\n\n\n\n\n\n\n\n", preferredStyle: .alert)
+        var message = ""
+        if i < 5 {
+            message = "\n\n\n\n\n\n"
+        } else {
+            message = "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n"
+        }
+        let alertController = UIAlertController(title: "時間帯を選んでください。", message: message, preferredStyle: .alert)
         let action1 = UIAlertAction(title: "他の曜日も設定する", style: .default) { (action) in
-            self.youbiCheckBox.mainView.removeFromSuperview()
             alertController.dismiss(animated: true, completion: nil)
             self.present(self.youbiAlertController, animated: true, completion: nil)
         }

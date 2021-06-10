@@ -106,7 +106,7 @@ class TeacherParameter{
     //    必要が出たら追加してください。
     var departments: String
     var kamokuList: [[String]]
-    var youbi: String
+    var youbiTimeList: [[String]]
     var collage: String
     var selection: String
     var introduction: String
@@ -117,11 +117,11 @@ class TeacherParameter{
         self.ncmb = parameter
 //        データ取得部分のコード
         self.departments = parameter.object(forKey: "departments") as? String ?? ""
-        self.kamokuList = []
-        self.youbi = parameter.object(forKey: "youbi") as? String ?? "FFFFFFF"
+        //self.youbi = parameter.object(forKey: "youbi") as? String ?? "FFFFFFF"
         self.collage = parameter.object(forKey: "collage") as? String ?? ""
         self.selection = parameter.object(forKey: "selection") as? String ?? ""
         self.introduction = parameter.object(forKey: "introduction") as? String ?? ""
+        self.kamokuList = []
         let subjectList = [
             ["modernWriting","ancientWiting","chineseWriting"],
             ["math1a","math2b","math3c"],
@@ -138,6 +138,14 @@ class TeacherParameter{
                 }
             }
             kamokuList.append(kamoku)
+        }
+        
+        self.youbiTimeList = []
+        let youbiList = ["Monday","Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
+        for y in youbiList{
+            let youbi = parameter.object(forKey: y + "Time") as? [String] ?? []
+            
+            youbiTimeList.append(youbi)
         }
         
         userName = parameter.object(forKey: "userName") as? String ?? ""

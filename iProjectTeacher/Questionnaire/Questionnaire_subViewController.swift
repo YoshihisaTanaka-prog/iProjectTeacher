@@ -117,9 +117,11 @@ class QuestionnaireViewController: UIViewController {
             object?.setObject("", forKey: "furigana")
             object?.setObject(0, forKey: "grade")
             object?.setObject("", forKey: "introduction")
+            object?.setObject(nil, forKey: "imageName")
             object?.setObject(false, forKey: "isAbleToTeach")
             object?.setObject(true, forKey: "isActive")
             object?.setObject(true, forKey: "isPermitted")
+            object?.setObject(nil, forKey: "peerId")
             object?.setObject("", forKey: "selection")
             object?.setObject(NCMBUser.current(), forKey: "user")
             object?.setObject(NCMBUser.current()!.objectId, forKey: "userId")
@@ -135,14 +137,15 @@ class QuestionnaireViewController: UIViewController {
                 }
                 object?.setObject(false, forKey: "isAbleToTeach" + subject.upHead)
             }
+//            出勤希望時間の初期値
+            let weekTimes = ["MondayTime","TuesdayTime","WednesdayTime","ThursdayTime","FridayTime","SaturdayTime","SundayTime"]
+            for w in weekTimes{
+                object?.setObject([], forKey: w)
+            }
             object?.saveInBackground({ (error) in
                 if(error == nil){
 //                    ユーザクラス側の初期値
                     NCMBUser.current()?.setObject(object, forKey: "parameter")
-                    NCMBUser.current()?.setObject(nil, forKey: "imageName")
-                    NCMBUser.current()?.setObject(nil, forKey: "peerId")
-                    NCMBUser.current()?.setObject(true, forKey: "isActive")
-                    NCMBUser.current()?.setObject("", forKey: "name")
                     NCMBUser.current()?.signUpInBackground({ (error) in
                         if(error == nil){
                             let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)

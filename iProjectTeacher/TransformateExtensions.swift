@@ -107,7 +107,9 @@ extension UIViewController{
             case "J":
                 gradeText = "中学 "
             case "H":
-                gradeText = "高校・高専"
+                gradeText = "高校"
+            case "C":
+                gradeText = "高専"
             case "R":
                 gradeText = "浪人生"
             case "B":
@@ -125,4 +127,18 @@ extension UIViewController{
         }
         return gradeText
     }
+    
+    func transformSubject(_ subject: String) -> String{
+        let subjectList = ["modernWriting","ancientWiting","chineseWriting","math1a","math2b","math3c","physics","chemistry","biology","earthScience",
+            "geography","japaneseHistory","worldHistory","modernSociety","ethics","politicalScienceAndEconomics","hsEnglish"]
+        let subjectJpList = ["現代文","古文","漢文","数学Ⅰ・A","数学Ⅱ・B","数学Ⅲ・C","物理","化学","生物","地学",
+            "地理","日本史","世界史","現代社会","倫理","政治・経済","高校英語"]
+        for i in 0..<subjectList.count{
+            if(subject == subjectList[i]){
+                return subjectJpList[i]
+            }
+        }
+        return ""
+    }
+    
 }

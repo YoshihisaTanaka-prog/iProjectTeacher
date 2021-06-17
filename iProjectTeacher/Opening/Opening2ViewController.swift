@@ -42,16 +42,12 @@ class Opening2ViewController: UIViewController {
                 // ログイン中だったら
 //                let storyboard = UIStoryboard(name: "Questionnaire", bundle: Bundle.main)
 //                let rootViewController = storyboard.instantiateViewController(withIdentifier: "QuestionnaireController")
+//                let storyboard = UIStoryboard(name: "Student", bundle: Bundle.main)
+//                let rootViewController = storyboard.instantiateViewController(identifier: "first")
                 self.loadFollowList()
-                let alertController = UIAlertController(title: "ユーザ情報取得中", message: "しばらくお待ちください。", preferredStyle: .alert)
-                self.present(alertController, animated: true, completion: nil)
-                //画像のダウンロードに時間がかかるので、2秒待機
-                DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
-                    alertController.dismiss(animated: true, completion: nil)
-                    let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
-                    let rootViewController = storyboard.instantiateViewController(identifier: "RootTabBarController")
-                    self.present(rootViewController, animated: true, completion: nil)
-                }
+                let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
+                let rootViewController = storyboard.instantiateViewController(identifier: "RootTabBarController")
+                self.present(rootViewController, animated: true, completion: nil)
 
             } else {
                 // ログインしていなかったら

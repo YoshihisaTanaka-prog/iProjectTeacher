@@ -26,7 +26,7 @@ class ReportDetailViewController: UIViewController, UITextFieldDelegate, UITextV
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        setBackGround(true, true)
+        setBackGround(true, false)
         
 //        userImageView.layer.cornerRadius = userImageView.bounds.width / 2.0
 //        userImageView.layer.masksToBounds = true
@@ -45,10 +45,6 @@ class ReportDetailViewController: UIViewController, UITextFieldDelegate, UITextV
         pickerView1.selectRow(0, inComponent: 0, animated: true)
         pearentMessageTextView.text = ""
         otherTeachersMessageTextView.text = ""
- 
-
-   
- 
     }
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
@@ -92,7 +88,9 @@ class ReportDetailViewController: UIViewController, UITextFieldDelegate, UITextV
     }
     
     @IBAction func saveUserInfo(){
-        if(selected != nil){
+//        if(selected == nil){
+//            showOkAlert(title: "注意", message: "単元を選択してください。")
+//        } else {
             createReport()
             let object = report.ncmb
             object.setObject(report.studentId, forKey: "studentId")
@@ -109,16 +107,17 @@ class ReportDetailViewController: UIViewController, UITextFieldDelegate, UITextV
                 if error != nil {
                     self.showOkAlert(title: "Error", message: error!.localizedDescription)
                 } else {
+                    self.showOkAlert(title: "報告書の保存", message: "保護者様に送信いたします。")
                     self.sendReportEmailToParent(object.objectId)
                 }
             }
-        }
+//        }
     }
     
     @IBAction func createReport(){
-        if(selected != nil){
-            report = Report(studentId: "a", teacherId: currentUserG.ncmb.objectId, subject: "math1a", unit: tangenTextField.text ?? "", attitude: selected!, homework: homeworkTextView.text ?? "", nextUnit: nextplanTextView.text, messageToParents: pearentMessageTextView.text ?? "", messageToTeacher: otherTeachersMessageTextView.text ?? "")
-        }
+//        if(selected != nil){
+            report = Report(studentId: "eKwToooiFnyI8BHC", teacherId: currentUserG.ncmb.objectId, subject: transformSubject("math1a"), unit: tangenTextField.text ?? "", attitude: selected ?? "", homework: homeworkTextView.text ?? "", nextUnit: nextplanTextView.text, messageToParents: pearentMessageTextView.text ?? "", messageToTeacher: otherTeachersMessageTextView.text ?? "")
+//        }
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

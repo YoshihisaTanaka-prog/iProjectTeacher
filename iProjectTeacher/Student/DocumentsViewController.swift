@@ -89,7 +89,7 @@ class DocumentsViewController: UIViewController, UITextFieldDelegate, UITextView
                 let resizedImage = photo.scale(byFactor: scale)
                 let data = UIImage.pngData(resizedImage!)
                 let date = Date()
-                let fileName = date.y.s + "/" + date.m.s + "/" + date.d.s + "-" + currentUserG.ncmb.objectId + "(" + String(i+1) + ")"
+                let fileName = date.y.s + "-" + date.m.s + "-" + date.d.s + "-" + currentUserG.userId + "(" + String(i+1) + ")"
                 report.fileNames.append(fileName)
                 let file = NCMBFile.file(withName: fileName, data: data()) as! NCMBFile
                 file.saveInBackground { (error) in

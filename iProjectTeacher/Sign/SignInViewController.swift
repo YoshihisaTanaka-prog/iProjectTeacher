@@ -63,35 +63,38 @@ class SignInViewController: UIViewController, UITextFieldDelegate {
                         })
                     } else {
                         //２回目以降のログイン
-                        currentUserG = User(user!)
-                        if( currentUserG.teacherParameter == nil ){
-                            //生徒垢の場合
-                            NCMBUser.logOutInBackground { (error) in
-                                if error != nil {
-                                    self.showOkAlert(title: "Error", message: error!.localizedDescription)
-                                } else {
-                                    self.showOkAlert(title: "注意", message: "このアカウントは生徒用のアカウントとして登録されています。\n教師用アカウントと生徒用アカウントは併用することができません。")
+                        currentUserG = User(user!.objectId,self)
+//                        DispatchQueue.main.asyncAfter(deadline: .now() + 10){
+//                            if( currentUserG.teacherParameter == nil ){
+//                                //生徒垢の場合
+//                                NCMBUser.logOutInBackground { (error) in
+//                                    if error != nil {
+//                                        self.showOkAlert(title: "Error", message: error!.localizedDescription)
+//                                    } else {
+//                                        self.showOkAlert(title: "注意", message: "このアカウントは生徒用のアカウントとして登録されています。\n教師用アカウントと生徒用アカウントは併用することができません。")
+//                                    }
+//                                }
+//                            } else {
+                                //教師垢の場合
+                                self.loadFollowList()
+                                let alertController = UIAlertController(title: "ユーザ情報取得中", message: "しばらくお待ちください。", preferredStyle: .alert)
+                                self.present(alertController, animated: true, completion: nil)
+                                //画像のダウンロードに時間がかかるので、2秒待機
+                                DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
+                                    alertController.dismiss(animated: true, completion: nil)
+                                    let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
+                                    let rootViewController = storyboard.instantiateViewController(identifier: "RootTabBarController")
+                                    self.present(rootViewController, animated: true, completion: nil)
                                 }
-                            }
-                        } else {
-                            //教師垢の場合
-                            self.loadFollowList()
-                            let alertController = UIAlertController(title: "ユーザ情報取得中", message: "しばらくお待ちください。", preferredStyle: .alert)
-                            self.present(alertController, animated: true, completion: nil)
-                            //画像のダウンロードに時間がかかるので、2秒待機
-                            DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
-                                alertController.dismiss(animated: true, completion: nil)
-                                let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
-                                let rootViewController = storyboard.instantiateViewController(identifier: "RootTabBarController")
-                                self.present(rootViewController, animated: true, completion: nil)
-                            }
-                            //ログイン状態の保持
-                            let ud = UserDefaults.standard
-                            ud.set(true, forKey: "isLogin")
-                            ud.set(self.passwordTextField.text!, forKey: self.emailTextField.text!)
-                            ud.set(Date(), forKey: self.emailTextField.text! + "time")
-                            ud.synchronize()
-                        }
+                                //ログイン状態の保持
+                                let ud = UserDefaults.standard
+                                ud.set(true, forKey: "isLogin")
+                                ud.set(self.passwordTextField.text!, forKey: self.emailTextField.text!)
+                                ud.set(Date(), forKey: self.emailTextField.text! + "time")
+                                ud.synchronize()
+//                            }
+
+//                        }
                     }
                 }
             }

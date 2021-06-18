@@ -67,25 +67,25 @@ class Parameter{
         let userId = parameter.object(forKey: "userId") as! String
         
         
-        if userImagesCacheG[userId] == nil{
-            if imageName == nil {
-                setNoImage(userId)
-            } else {
-                let file =  NCMBFile.file(withName: userId,data:nil) as! NCMBFile
-                file.getDataInBackground { (data, error) in
-                    if error == nil {
-                        if data == nil {
-                            self.setNoImage(userId)
-                        } else {
-                            let image = UIImage(data: data!)
-                            userImagesCacheG[userId] = image
-                        }
-                    } else {
-                        self.setNoImage(userId)
-                    }
-                }
-            }
-        }
+//        if userImagesCacheG[userId] == nil{
+//            if imageName == nil {
+//                setNoImage(userId)
+//            } else {
+//                let file =  NCMBFile.file(withName: userId,data:nil) as! NCMBFile
+//                file.getDataInBackground { (data, error) in
+//                    if error == nil {
+//                        if data == nil {
+//                            self.setNoImage(userId)
+//                        } else {
+//                            let image = UIImage(data: data!)
+//                            userImagesCacheG[userId] = image
+//                        }
+//                    } else {
+//                        self.setNoImage(userId)
+//                    }
+//                }
+//            }
+//        }
     }
     
     private func setNoImage(_ userId: String){
@@ -105,6 +105,7 @@ class TeacherParameter: Parameter{
     
     override init(_ parameter: NCMBObject) {
 //        データ取得部分のコード
+        print("teacher")
         self.departments = parameter.object(forKey: "departments") as? String ?? ""
         self.collage = parameter.object(forKey: "collage") as? String ?? ""
         self.kamokuList = []
@@ -168,6 +169,7 @@ class StudentParameter: Parameter{
     var parentEmailAdress: String
     
     override init(_ parameter: NCMBObject) {
+        print("student")
         self.schoolName = parameter.object(forKey: "schoolName") as? String ?? ""
         self.choice = parameter.object(forKey: "choice") as? [[String]] ?? []
         self.parentEmailAdress = parameter.object(forKey: "parentEmailAdress") as? String ?? ""

@@ -116,7 +116,7 @@ class ReportDetailViewController: UIViewController, UITextFieldDelegate, UITextV
     
     @IBAction func createReport(){
 //        if(selected != nil){
-            report = Report(studentId: "eKwToooiFnyI8BHC", teacherId: currentUserG.ncmb.objectId, subject: transformSubject("math1a"), unit: tangenTextField.text ?? "", attitude: selected ?? "", homework: homeworkTextView.text ?? "", nextUnit: nextplanTextView.text, messageToParents: pearentMessageTextView.text ?? "", messageToTeacher: otherTeachersMessageTextView.text ?? "")
+            report = Report(studentId: "eKwToooiFnyI8BHC", teacherId: currentUserG.userId, subject: transformSubject("math1a"), unit: tangenTextField.text ?? "", attitude: selected ?? "", homework: homeworkTextView.text ?? "", nextUnit: nextplanTextView.text, messageToParents: pearentMessageTextView.text ?? "", messageToTeacher: otherTeachersMessageTextView.text ?? "")
 //        }
     }
     

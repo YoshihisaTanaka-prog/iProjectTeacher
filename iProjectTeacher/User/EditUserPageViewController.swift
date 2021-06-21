@@ -118,7 +118,7 @@ class EditUserPageViewController: UIViewController, UITextFieldDelegate, UITextV
         
         for i in 0..<youbiList_.count{
             let youbiCheckBox = CheckBox(youbiList_[i])
-            youbiCheckBox.setSelectedKey(currentUserG.teacherParameter!.youbiTimeList[i])
+            youbiCheckBox.setSelectedKey(currentUserG.youbiTimeList[i])
             youbiCheckBoxList.append(youbiCheckBox)
         }
  
@@ -143,13 +143,13 @@ class EditUserPageViewController: UIViewController, UITextFieldDelegate, UITextV
         schoolTextField.text = currentUserG.teacherParameter?.collage
         //gradeTextField.text = user_.teacherParameter?.grade
         gradeTextField.text = currentUserG.grade
-        introductionTextView.text = currentUserG.teacherParameter?.introduction
+        introductionTextView.text = currentUserG.introduction
         //pickerView1.selectRow(getSelectionNum(selesction: user_.studentParameter?.selection), inComponent: 0, animated: false)
         //choiceTextField.text = user_.teacherParameter?.choice
         
-        selectionTextField.text = currentUserG.teacherParameter?.selection
+        selectionTextField.text = currentUserG.selection
         
-        userImageView.image = userImagesCacheG[currentUserG.ncmb.objectId]
+        userImageView.image = userImagesCacheG[currentUserG.userId]
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
@@ -172,14 +172,14 @@ class EditUserPageViewController: UIViewController, UITextFieldDelegate, UITextV
         picker.dismiss(animated: true, completion: nil)
         
         let data = UIImage.pngData(resizedImage!)
-        let file = NCMBFile.file(withName: currentUserG.ncmb.objectId, data: data()) as! NCMBFile
+        let file = NCMBFile.file(withName: currentUserG.userId, data: data()) as! NCMBFile
         file.saveInBackground { (error) in
             if error != nil{
                 self.showOkAlert(title: "Error", message: error!.localizedDescription)
             } else {
                 self.userImageView.image = selectedImage
-                userImagesCacheG[currentUserG.ncmb.objectId] = resizedImage
-                self.imageName = currentUserG.ncmb.objectId
+                userImagesCacheG[currentUserG.userId] = resizedImage
+                self.imageName = currentUserG.userId
             }
         } progressBlock: { (progress) in
             print(progress)
@@ -220,11 +220,10 @@ class EditUserPageViewController: UIViewController, UITextFieldDelegate, UITextV
     }
     
     @IBAction func saveUserInfo(){
-        let user = currentUserG.ncmb
         let param = currentUserG.teacherParameter!.ncmb
-        let im = user.object(forKey: "imageName")
+        let im = param.object(forKey: "imageName")
         if im == nil{
-            user.setObject(imageName, forKey: "imageName")
+            param.setObject(imageName, forKey: "imageName")
         }
         param.setObject(userIdTextField.text, forKey: "userName")
         param.setObject(userIdFuriganaTextField.text, forKey: "furigana")
@@ -259,23 +258,19 @@ class EditUserPageViewController: UIViewController, UITextFieldDelegate, UITextV
         }
         param.setObject(youbi, forKey: "youbi")
         
-        user.saveInBackground{ (error) in
-            if error != nil {
-                self.showOkAlert(title: "Error", message: error!.localizedDescription)
-            } else {
-                param.saveInBackground { (error) in
-                    if error == nil{
-                        currentUserG = User(NCMBUser.current()!)
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
-                            self.navigationController?.popViewController(animated: true)
-                        }
-                    }
-                    else{
-                        self.showOkAlert(title: "Error", message: error!.localizedDescription)
-                    }
+
+        param.saveInBackground { (error) in
+            if error == nil{
+                currentUserG = User(NCMBUser.current()!)
+                DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
+                    self.navigationController?.popViewController(animated: true)
                 }
             }
+            else{
+                self.showOkAlert(title: "Error", message: error!.localizedDescription)
+            }
         }
+
         
     }
     

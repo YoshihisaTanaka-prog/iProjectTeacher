@@ -12,8 +12,7 @@ import NCMB
 class DocumentsViewController: UIViewController, UITextFieldDelegate, UITextViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     @IBOutlet private var documentImage: UIImageView!
-    private var selectedImage: UIImage?
-    
+    private var selectedImages: [UIImage] = []
     var report: Report!
 
     override func viewDidLoad() {
@@ -58,6 +57,7 @@ class DocumentsViewController: UIViewController, UITextFieldDelegate, UITextView
     
     @IBAction func saveUserInfo(){
         
+        /*
         if selectedImage != nil {
             let size = NSData(data: selectedImage!.pngData()!).count.d
             let scale = Float(sqrt(min(1.d, 200000.d / size)))
@@ -78,6 +78,33 @@ class DocumentsViewController: UIViewController, UITextFieldDelegate, UITextView
             }
             
         }
+        */
+        
+        if selectedImages.count != 0 {
+            let photos = selectedImages
+            for i in 0..<photos.count {
+                let photo = photos[i]
+                let size = NSData(data: photo.pngData()!).count.d
+                let scale = Float(sqrt(min(1.d, 200000.d / size)))
+                let resizedImage = photo.scale(byFactor: scale)
+                let data = UIImage.pngData(resizedImage!)
+                let date = Date()
+                let fileName = date.y.s + "-" + date.m.s + "-" + date.d.s + "-" + currentUserG.userId + "(" + String(i+1) + ")"
+                report.fileNames.append(fileName)
+                let file = NCMBFile.file(withName: fileName, data: data()) as! NCMBFile
+                file.saveInBackground { (error) in
+                    if error != nil{
+                        self.showOkAlert(title: "Error", message: error!.localizedDescription)
+                    } else {
+                    print("success")
+                    }
+                } progressBlock: { (progress) in
+                    print(progress)
+                }
+            }
+        }
+        
+        
         let object = report.ncmb
         object.setObject(report.studentId, forKey: "studentId")
         object.setObject(report.teacherId, forKey: "teacherId")
@@ -101,8 +128,9 @@ class DocumentsViewController: UIViewController, UITextFieldDelegate, UITextView
     
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-        selectedImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage
-        self.documentImage.image = selectedImage!
+        let selectedImage = info[UIImagePickerController.InfoKey.originalImage] as! UIImage
+        self.documentImage.image = selectedImage
+        selectedImages.append(selectedImage)
         picker.dismiss(animated: true, completion: nil)
     }
     

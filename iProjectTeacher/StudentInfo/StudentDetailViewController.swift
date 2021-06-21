@@ -76,7 +76,7 @@ class StudentDetailViewController: UIViewController, UITableViewDelegate, UITabl
     
     func loadReport(){
         let query = NCMBQuery(className: "Report")
-        query?.whereKey("studentId", equalTo: student.ncmb.objectId)
+        query?.whereKey("studentId", equalTo: student.userId)
         query?.findObjectsInBackground({ (result, error) in
             if(error == nil){
                 self.reportList = []

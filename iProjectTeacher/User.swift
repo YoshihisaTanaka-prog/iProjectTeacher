@@ -22,7 +22,7 @@ class User {
     var teacherParameter: TeacherParameter?
     var studentParameter: StudentParameter?
     
-    init(_ userId: String, _ vc: UIViewController){
+    init(userId: String, isNeedParameter: Bool, viewController: UIViewController){
         self.userId = userId
         
 //        個人チャットを検索するためのパラメータ
@@ -34,27 +34,37 @@ class User {
         }
         
 //        ユーザの詳細データ
-        let query1 = NCMBQuery(className: "StudentParameter")!
-        query1.whereKey("userId", equalTo: self.userId)
-        let query2 = NCMBQuery(className: "TeacherParameter")!
-        query2.whereKey("userId", equalTo: self.userId)
-        let query = NCMBQuery.orQuery(withSubqueries: [query1,query2])
-        query?.findObjectsInBackground({ result, error in
-            if error == nil{
-                let param = result!.first! as! NCMBObject
-                if param.ncmbClassName == "TeacherParameter" {
-                    self.teacherParameter = TeacherParameter(param, userId: self.userId, userName: &self.userName, furigana: &self.furigana, grade: &self.grade, selection: &self.selection, introduction: &self.introduction, youbiTimeList: &self.youbiTimeList)
+        
+        if isNeedParameter{
+            let query1 = NCMBQuery(className: "TeacherParameter")
+            query1?.whereKey("userId", equalTo: self.userId)
+            query1?.findObjectsInBackground({ result, error in
+                if error == nil{
+                    if(result!.count > 0){
+                        let param = result!.first! as! NCMBObject
+                        self.teacherParameter = TeacherParameter(param, userId: self.userId, userName: &self.userName, furigana: &self.furigana, grade: &self.grade, selection: &self.selection, introduction: &self.introduction, youbiTimeList: &self.youbiTimeList)
+                    }
                 } else {
-                    self.studentParameter = StudentParameter(param, userId: self.userId, userName: &self.userName, furigana: &self.furigana, grade: &self.grade, selection: &self.selection, introduction: &self.introduction, youbiTimeList: &self.youbiTimeList)
+                    viewController.showOkAlert(title: "Error", message: error!.localizedDescription)
                 }
-            } else {
-                vc.showOkAlert(title: "Error", message: error!.localizedDescription)
-            }
-        })
+            })
+            let query2 = NCMBQuery(className: "StudentParameter")
+            query2?.whereKey("userId", equalTo: self.userId)
+            query2?.findObjectsInBackground({ result, error in
+                if error == nil{
+                    if(result!.count > 0){
+                        let param = result!.first! as! NCMBObject
+                        self.studentParameter = StudentParameter(param, userId: self.userId, userName: &self.userName, furigana: &self.furigana, grade: &self.grade, selection: &self.selection, introduction: &self.introduction, youbiTimeList: &self.youbiTimeList)
+                    }
+                } else {
+                    viewController.showOkAlert(title: "User Class Error", message: error!.localizedDescription)
+                }
+            })
+        }
     }
     
     convenience init(_ user: NCMBUser) {
-        self.init(user.objectId, UIViewController())
+        self.init(userId: user.objectId, isNeedParameter: true, viewController: UIViewController())
     }
 }
 
@@ -67,25 +77,25 @@ class Parameter{
         let userId = parameter.object(forKey: "userId") as! String
         
         
-//        if userImagesCacheG[userId] == nil{
-//            if imageName == nil {
-//                setNoImage(userId)
-//            } else {
-//                let file =  NCMBFile.file(withName: userId,data:nil) as! NCMBFile
-//                file.getDataInBackground { (data, error) in
-//                    if error == nil {
-//                        if data == nil {
-//                            self.setNoImage(userId)
-//                        } else {
-//                            let image = UIImage(data: data!)
-//                            userImagesCacheG[userId] = image
-//                        }
-//                    } else {
-//                        self.setNoImage(userId)
-//                    }
-//                }
-//            }
-//        }
+        if userImagesCacheG[userId] == nil{
+            if imageName == nil {
+                setNoImage(userId)
+            } else {
+                let file =  NCMBFile.file(withName: userId,data:nil) as! NCMBFile
+                file.getDataInBackground { (data, error) in
+                    if error == nil {
+                        if data == nil {
+                            self.setNoImage(userId)
+                        } else {
+                            let image = UIImage(data: data!)
+                            userImagesCacheG[userId] = image
+                        }
+                    } else {
+                        self.setNoImage(userId)
+                    }
+                }
+            }
+        }
     }
     
     private func setNoImage(_ userId: String){

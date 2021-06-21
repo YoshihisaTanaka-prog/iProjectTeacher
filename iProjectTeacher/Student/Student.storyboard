@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17126"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -174,14 +174,24 @@
                                 <rect key="frame" x="62" y="706" width="310" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="資料画像のアップロード"/>
+                                <connections>
+                                    <action selector="selectImage" destination="Ran-lK-urj" eventType="touchUpInside" id="H1c-jo-UlK"/>
+                                </connections>
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="MVp-r6-2JL"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
                     <navigationItem key="navigationItem" id="u3B-j8-Cca">
-                        <barButtonItem key="rightBarButtonItem" title="完了" id="rGq-7U-CNa"/>
+                        <barButtonItem key="rightBarButtonItem" title="完了" id="rGq-7U-CNa">
+                            <connections>
+                                <action selector="saveUserInfo" destination="Ran-lK-urj" id="yuT-Sy-p0u"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="documentImage" destination="lYy-pi-h5z" id="8Ji-zL-1dT"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gEa-uR-inS" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -190,7 +200,7 @@
         <!--Navigation Controller-->
         <scene sceneID="8Ll-IU-wkR">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="daq-Lg-2OP" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="first" automaticallyAdjustsScrollViewInsets="NO" modalPresentationStyle="fullScreen" id="daq-Lg-2OP" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="37i-zh-Q9m">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>

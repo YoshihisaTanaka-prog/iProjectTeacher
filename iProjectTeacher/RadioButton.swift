@@ -17,6 +17,7 @@ class Radiobutton {
     var radioButtonKeys: [String]
     var selectedText: String?
     var selectedKey: String?
+    var msg = ""
     
     var height = 5.f
     var width = 0.f
@@ -58,6 +59,10 @@ class Radiobutton {
         }
         self.mainView.frame = CGRect(x: 0, y: 60, width: 0, height: self.height)
         print(height)
+        let length = Int(height / 17.f + 0.5.f) + 1
+        for _ in 0..<length{
+            msg += "\n"
+        }
     }
     
     convenience init(_ list: [RadioButtonInput], selectedText: String) {

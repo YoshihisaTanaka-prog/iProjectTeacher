@@ -335,13 +335,8 @@ class EditUserPageViewController: UIViewController, UITextFieldDelegate, UITextV
     }
     
     func selectDetailYoubi(_ i : Int) {
-        var message = ""
-        if i < 5 {
-            message = "\n\n\n\n\n\n"
-        } else {
-            message = "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n"
-        }
-        let alertController = UIAlertController(title: "時間帯を選んでください。", message: message, preferredStyle: .alert)
+ 
+        let alertController = UIAlertController(title: "時間帯を選んでください。", message: youbiCheckBoxList[i].msg, preferredStyle: .alert)
         let action1 = UIAlertAction(title: "他の曜日も設定する", style: .default) { (action) in
             alertController.dismiss(animated: true, completion: nil)
             self.present(self.youbiAlertController, animated: true, completion: nil)

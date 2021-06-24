@@ -74,6 +74,7 @@
 		1F3FD57225E66D9000947E1C /* CheckBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F3FD57125E66D9000947E1C /* CheckBox.swift */; };
 		1F3FD57525E66D9A00947E1C /* Design.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F3FD57425E66D9A00947E1C /* Design.swift */; };
 		1F3FD57825E68B4200947E1C /* EditUserPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F3FD57725E68B4200947E1C /* EditUserPageViewController.swift */; };
+		1F947C4A2684A555007F2FC7 /* TimeRange.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F947C492684A555007F2FC7 /* TimeRange.swift */; };
 		1FDD508926568EB20064B94C /* DocumentsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FDD508826568EB20064B94C /* DocumentsViewController.swift */; };
 		B123C8D481952C9E0A702E92 /* Pods_iProjectTeacher.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D3759B1903BBE7A837BFD9A5 /* Pods_iProjectTeacher.framework */; };
 /* End PBXBuildFile section */
@@ -148,6 +149,7 @@
 		1F3FD57125E66D9000947E1C /* CheckBox.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckBox.swift; sourceTree = "<group>"; };
 		1F3FD57425E66D9A00947E1C /* Design.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Design.swift; sourceTree = "<group>"; };
 		1F3FD57725E68B4200947E1C /* EditUserPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditUserPageViewController.swift; sourceTree = "<group>"; };
+		1F947C492684A555007F2FC7 /* TimeRange.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeRange.swift; sourceTree = "<group>"; };
 		1FDD508826568EB20064B94C /* DocumentsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentsViewController.swift; sourceTree = "<group>"; };
 		D3759B1903BBE7A837BFD9A5 /* Pods_iProjectTeacher.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_iProjectTeacher.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DA086042A27D7B93DB7D0EC3 /* Pods-iProjectTeacher.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iProjectTeacher.debug.xcconfig"; path = "Target Support Files/Pods-iProjectTeacher/Pods-iProjectTeacher.debug.xcconfig"; sourceTree = "<group>"; };
@@ -231,6 +233,7 @@
 				04A7E96F25AF2B4900C0F43C /* ViewController.swift */,
 				04EA678E25BC8A8F005F0D06 /* User.swift */,
 				04ACB8B425DB2A7200916C15 /* GlobalParameters.swift */,
+				1F947C492684A555007F2FC7 /* TimeRange.swift */,
 				1F3FD57125E66D9000947E1C /* CheckBox.swift */,
 				1F185221265F917E005666DE /* RadioButton.swift */,
 				1F3FD57425E66D9A00947E1C /* Design.swift */,
@@ -528,6 +531,7 @@
 				043A9DB525D80D1600587B0E /* SignUpViewController.swift in Sources */,
 				043079AE266A3E5D00247080 /* TransformateExtensions.swift in Sources */,
 				1F08D94E25E6A0890002E0AA /* Opening1ViewController.swift in Sources */,
+				1F947C4A2684A555007F2FC7 /* TimeRange.swift in Sources */,
 				043079B6266A493600247080 /* RailsExtensions.swift in Sources */,
 				1F08D94325E69F920002E0AA /* Questionnaire_subViewController.swift in Sources */,
 				04B39D1925D43D57003EDECE /* StudentDetailViewController.swift in Sources */,

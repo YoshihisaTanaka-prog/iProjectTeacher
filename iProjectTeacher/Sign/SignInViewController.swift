@@ -63,7 +63,7 @@ class SignInViewController: UIViewController, UITextFieldDelegate {
                         })
                     } else {
                         //２回目以降のログイン
-                        currentUserG = User(user!.objectId,self)
+                        currentUserG = User(userId: user!.objectId, isNeedParameter: true, viewController: self)
 //                        DispatchQueue.main.asyncAfter(deadline: .now() + 10){
 //                            if( currentUserG.teacherParameter == nil ){
 //                                //生徒垢の場合

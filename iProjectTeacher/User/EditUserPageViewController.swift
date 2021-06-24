@@ -30,53 +30,7 @@ class EditUserPageViewController: UIViewController, UITextFieldDelegate, UITextV
 
     var kamokuCheckBoxList: [CheckBox] = []
     var youbiCheckBoxList: [CheckBox] = []
-    let youbiList_: [[CheckBoxInput]] = [
-        [
-            CheckBoxInput("17:00-18:00",key: "17:00"),
-            CheckBoxInput("18:00-19:00",key: "18:00"),
-            CheckBoxInput("19:00-20:00",key: "19:00")
-        ],[
-            CheckBoxInput("17:00-18:00",key: "17:00"),
-            CheckBoxInput("18:00-19:00",key: "18:00"),
-            CheckBoxInput("19:00-20:00",key: "19:00")
-        ],[
-            CheckBoxInput("17:00-18:00",key: "17:00"),
-            CheckBoxInput("18:00-19:00",key: "18:00"),
-            CheckBoxInput("19:00-20:00",key: "19:00")
-        ],[
-            CheckBoxInput("17:00-18:00",key: "17:00"),
-            CheckBoxInput("18:00-19:00",key: "18:00"),
-            CheckBoxInput("19:00-20:00",key: "19:00")
-        ],[
-            CheckBoxInput("17:00-18:00",key: "17:00"),
-            CheckBoxInput("18:00-19:00",key: "18:00"),
-            CheckBoxInput("19:00-20:00",key: "19:00")
-        ],[
-            CheckBoxInput("9:00-10:00",key: "9:00"),
-            CheckBoxInput("10:00-11:00",key: "10:00"),
-            CheckBoxInput("11:00-12:00",key: "11:00"),
-            CheckBoxInput("12:00-13:00",key: "12:00"),
-            CheckBoxInput("13:00-14:00",key: "13:00"),
-            CheckBoxInput("14:00-15:00",key: "14:00"),
-            CheckBoxInput("15:00-16:00",key: "15:00"),
-            CheckBoxInput("16:00-17:00",key: "16:00"),
-            CheckBoxInput("17:00-18:00",key: "17:00"),
-            CheckBoxInput("18:00-19:00",key: "18:00"),
-            CheckBoxInput("19:00-20:00",key: "19:00")
-        ],[
-            CheckBoxInput("9:00-10:00",key: "9:00"),
-            CheckBoxInput("10:00-11:00",key: "10:00"),
-            CheckBoxInput("11:00-12:00",key: "11:00"),
-            CheckBoxInput("12:00-13:00",key: "12:00"),
-            CheckBoxInput("13:00-14:00",key: "13:00"),
-            CheckBoxInput("14:00-15:00",key: "14:00"),
-            CheckBoxInput("15:00-16:00",key: "15:00"),
-            CheckBoxInput("16:00-17:00",key: "16:00"),
-            CheckBoxInput("17:00-18:00",key: "17:00"),
-            CheckBoxInput("18:00-19:00",key: "18:00"),
-            CheckBoxInput("19:00-20:00",key: "19:00")
-        ]
-    ]
+    var youbiList_: [[CheckBoxInput]] = []
     
     let kamokuList: [[CheckBoxInput]] = [
         [
@@ -115,6 +69,12 @@ class EditUserPageViewController: UIViewController, UITextFieldDelegate, UITextV
             kamokuCheckBoxList.append(kamokuCheckBox)
         }
         
+        for i in 0..<7{
+            youbiList_.append([])
+            for j in businessHoursG[i].first..<businessHoursG[i].last{
+                youbiList_[i].append(CheckBoxInput(j.s02+":00-"+(j+1).s02+":00", key: j.s02+":00"))
+            }
+        }
         
         for i in 0..<youbiList_.count{
             let youbiCheckBox = CheckBox(youbiList_[i])

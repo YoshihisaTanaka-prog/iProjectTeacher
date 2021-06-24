@@ -87,7 +87,8 @@ class Radiobutton {
         }
     }
     
-    @objc private func tapped(sender:UIButton){
+    @objc func tapped(sender:UIButton){
+        print(sender.tag)
         for i in 0..<radioButtonButtons.count {
             if i == sender.tag{
                 radioButtonButtons[i].setTitle("◉", for: .normal)

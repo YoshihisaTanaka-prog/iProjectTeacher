@@ -447,12 +447,6 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="学年" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="7m7-yf-lGb">
-                                <rect key="frame" x="103" y="362" width="214" height="34"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
                             <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="学部・学科" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Djt-wa-OEW">
                                 <rect key="frame" x="103" y="404" width="214" height="34"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -510,6 +504,21 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
+                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="学年" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="COv-Ml-T8b">
+                                <rect key="frame" x="103" y="360" width="214" height="34"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Tk6-Z6-Ug4">
+                                <rect key="frame" x="325" y="362" width="31" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="変更"/>
+                                <connections>
+                                    <action selector="selectgrade" destination="imA-Ww-owL" eventType="touchUpInside" id="v31-yZ-0Ed"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="mXL-3A-S9A"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -528,7 +537,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="emailTextField" destination="SaS-cX-aUL" id="xCK-gg-1oN"/>
-                        <outlet property="gradeTextField" destination="7m7-yf-lGb" id="ALy-hQ-eLO"/>
+                        <outlet property="gradeTextField" destination="COv-Ml-T8b" id="fbe-3u-NJ2"/>
                         <outlet property="introductionTextView" destination="8lD-9r-opv" id="Lgd-sQ-3Di"/>
                         <outlet property="schoolTextField" destination="fIb-Qz-W0n" id="E1f-sY-XBf"/>
                         <outlet property="selectionTextField" destination="Djt-wa-OEW" id="qhC-JE-XVn"/>
@@ -539,7 +548,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HPc-Bm-kAj" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2722" y="-258"/>
+            <point key="canvasLocation" x="2721.739130434783" y="-258.48214285714283"/>
         </scene>
     </scenes>
     <resources>

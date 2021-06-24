@@ -58,6 +58,20 @@ class EditUserPageViewController: UIViewController, UITextFieldDelegate, UITextV
         ]
     ]
     
+    var gradeRadioButton: Radiobutton!
+    let gradeList: [RadioButtonInput] = [
+        RadioButtonInput("学部1年生", key: "B1"),
+        RadioButtonInput("学部2年生", key: "B2"),
+        RadioButtonInput("学部3年生", key: "B3"),
+        RadioButtonInput("学部4年生", key: "B4"),
+        RadioButtonInput("修士1年生", key: "M1"),
+        RadioButtonInput("修士2年生", key: "M2"),
+        RadioButtonInput("博士1年生", key: "D1"),
+        RadioButtonInput("博士2年生", key: "D2"),
+        RadioButtonInput("博士3年生", key: "D3"),
+        RadioButtonInput("その他", key: "R")
+    ]
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -89,7 +103,7 @@ class EditUserPageViewController: UIViewController, UITextFieldDelegate, UITextV
         userIdTextField.delegate = self
         userIdFuriganaTextField.delegate = self
         schoolTextField.delegate = self
-        gradeTextField.delegate = self
+        gradeTextField.text = transformGrade(currentUserG.grade)
         emailTextField.delegate = self
         selectionTextField.delegate = self
         //pickerView1.delegate = self
@@ -102,7 +116,7 @@ class EditUserPageViewController: UIViewController, UITextFieldDelegate, UITextV
         userIdFuriganaTextField.text = currentUserG.furigana
         schoolTextField.text = currentUserG.teacherParameter?.collage
         //gradeTextField.text = user_.teacherParameter?.grade
-        gradeTextField.text = currentUserG.grade
+        //gradeTextField.text = currentUserG.grade
         introductionTextView.text = currentUserG.introduction
         //pickerView1.selectRow(getSelectionNum(selesction: user_.studentParameter?.selection), inComponent: 0, animated: false)
         //choiceTextField.text = user_.teacherParameter?.choice
@@ -110,6 +124,7 @@ class EditUserPageViewController: UIViewController, UITextFieldDelegate, UITextV
         selectionTextField.text = currentUserG.selection
         
         userImageView.image = userImagesCacheG[currentUserG.userId]
+        gradeRadioButton = Radiobutton(gradeList, selectedKey: currentUserG.grade)
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
@@ -187,7 +202,7 @@ class EditUserPageViewController: UIViewController, UITextFieldDelegate, UITextV
         }
         param.setObject(userIdTextField.text, forKey: "userName")
         param.setObject(userIdFuriganaTextField.text, forKey: "furigana")
-        param.setObject(gradeTextField.text, forKey: "grade")
+        //param.setObject(gradeTextField.text, forKey: "grade")
         param.setObject(userIdTextField.text, forKey: "userName")
         param.setObject(userIdFuriganaTextField.text, forKey: "furigana")
         param.setObject(selectionTextField.text, forKey: "selection")
@@ -265,6 +280,17 @@ class EditUserPageViewController: UIViewController, UITextFieldDelegate, UITextV
         actionController.addAction(albumAction)
         actionController.addAction(cancelAction)
         self.present(actionController, animated: true, completion: nil)
+    }
+    
+    @IBAction func selectgrade(){
+        let alertController = UIAlertController(title: "学年を選んでください。", message: gradeRadioButton.msg, preferredStyle: .alert)
+        let alertOkAction = UIAlertAction(title: "選択完了", style: .default) { (action) in
+            self.gradeRadioButton.mainView.removeFromSuperview()
+            alertController.dismiss(animated: true, completion: nil)
+        }
+        alertController.view.addSubview(gradeRadioButton.mainView)
+        alertController.addAction(alertOkAction)
+        self.present(alertController, animated: true, completion: nil)
     }
     
     @IBAction func selectWeek(){

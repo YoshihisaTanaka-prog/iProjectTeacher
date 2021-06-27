@@ -556,7 +556,7 @@
         <!--学校行事の予定追加-->
         <scene sceneID="dvH-Oc-VLD">
             <objects>
-                <viewController modalPresentationStyle="fullScreen" id="7un-6L-6N9" customClass="CollageEventViewController" customModule="iProjectTeacher" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController modalPresentationStyle="fullScreen" id="7un-6L-6N9" customClass="NormalEventViewController" customModule="iProjectTeacher" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="7FU-IK-NgT">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -569,7 +569,7 @@
                                 </constraints>
                                 <state key="normal" title="保存"/>
                                 <connections>
-                                    <action selector="save" destination="7un-6L-6N9" eventType="touchUpInside" id="4Kf-nf-DCD"/>
+                                    <action selector="save" destination="7un-6L-6N9" eventType="touchUpInside" id="GSa-jI-WNQ"/>
                                 </connections>
                             </button>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="予定のタイトル" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="m5N-Qy-CYM">
@@ -749,7 +749,7 @@
         <!--私用の予定追加-->
         <scene sceneID="uvJ-ml-Cy2">
             <objects>
-                <viewController modalPresentationStyle="fullScreen" id="OyJ-VW-ftR" customClass="PrivateEventViewController" customModule="iProjectTeacher" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController modalPresentationStyle="fullScreen" id="OyJ-VW-ftR" customClass="NormalEventViewController" customModule="iProjectTeacher" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="pw3-fW-jcE">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -762,7 +762,7 @@
                                 </constraints>
                                 <state key="normal" title="保存"/>
                                 <connections>
-                                    <action selector="saveEvent:" destination="OyJ-VW-ftR" eventType="touchUpInside" id="oYe-Wt-fEh"/>
+                                    <action selector="save" destination="OyJ-VW-ftR" eventType="touchUpInside" id="8HT-fs-a9a"/>
                                 </connections>
                             </button>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="予定のタイトル" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Dna-3X-IuG">
@@ -927,7 +927,12 @@
                     </view>
                     <navigationItem key="navigationItem" title="私用の予定追加" id="1A2-jN-UfA"/>
                     <connections>
-                        <outlet property="eventText" destination="Nwy-2L-wo3" id="dKd-gE-r30"/>
+                        <outlet property="endDateTextField" destination="JSw-HS-FGF" id="AoB-OO-3JZ"/>
+                        <outlet property="endTimeTextField" destination="Yem-RH-X92" id="etI-OC-bAj"/>
+                        <outlet property="firstDateTextField" destination="KWb-hO-sfP" id="fiG-fF-4Zq"/>
+                        <outlet property="firstTimeTextField" destination="Qci-dh-29R" id="xq6-Pm-w9B"/>
+                        <outlet property="textTextView" destination="Nwy-2L-wo3" id="XMR-i2-h3R"/>
+                        <outlet property="titleTextField" destination="Dna-3X-IuG" id="rCD-7W-ypQ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="n8a-mz-htT" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

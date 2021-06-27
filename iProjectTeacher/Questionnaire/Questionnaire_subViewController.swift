@@ -34,7 +34,7 @@ class QuestionnaireViewController: UIViewController {
         QuestionInputFormat(question: "初対面の人とも気さくに話せる", isNormal: false),
         QuestionInputFormat(question: "計画を立てるのが苦手", isNormal: false),
         QuestionInputFormat(question: "一人で過ごすのが好き", isNormal: true),
-        QuestionInputFormat(question:"慎重だとよく言われる", isNormal: false),
+        QuestionInputFormat(question: "慎重だとよく言われる", isNormal: false),
         QuestionInputFormat(question: "ポジティブに考えることが多い", isNormal: true),
         QuestionInputFormat(question: "新しいアイデアをひらめくことが好きだ", isNormal: false),
         QuestionInputFormat(question: "周りから大人しいと言われる", isNormal: true),

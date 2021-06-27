@@ -38,6 +38,9 @@
 		04B39D1E25D43E34003EDECE /* StudentInfoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B39D1C25D43E34003EDECE /* StudentInfoTableViewCell.swift */; };
 		04B39D1F25D43E34003EDECE /* StudentInfoTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04B39D1D25D43E34003EDECE /* StudentInfoTableViewCell.xib */; };
 		04EA678F25BC8A8F005F0D06 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04EA678E25BC8A8F005F0D06 /* User.swift */; };
+		04EEA6BE2684B298003E171A /* Calender.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 04EEA6BD2684B298003E171A /* Calender.storyboard */; };
+		04EEA6C02684BD19003E171A /* CollageEventViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04EEA6BF2684BD19003E171A /* CollageEventViewController.swift */; };
+		04EEA6C22684BD3E003E171A /* PrivateEventViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04EEA6C12684BD3E003E171A /* PrivateEventViewController.swift */; };
 		1B55D80425D3FFD9006BAE51 /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B55D80325D3FFD9006BAE51 /* Event.swift */; };
 		1B55D80725D40008006BAE51 /* CalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B55D80625D40008006BAE51 /* CalendarViewController.swift */; };
 		1B55D80A25D41365006BAE51 /* EventViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B55D80925D41365006BAE51 /* EventViewController.swift */; };
@@ -113,6 +116,9 @@
 		04B39D1C25D43E34003EDECE /* StudentInfoTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentInfoTableViewCell.swift; sourceTree = "<group>"; };
 		04B39D1D25D43E34003EDECE /* StudentInfoTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = StudentInfoTableViewCell.xib; sourceTree = "<group>"; };
 		04EA678E25BC8A8F005F0D06 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		04EEA6BD2684B298003E171A /* Calender.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Calender.storyboard; sourceTree = "<group>"; };
+		04EEA6BF2684BD19003E171A /* CollageEventViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollageEventViewController.swift; sourceTree = "<group>"; };
+		04EEA6C12684BD3E003E171A /* PrivateEventViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivateEventViewController.swift; sourceTree = "<group>"; };
 		1B55D80325D3FFD9006BAE51 /* Event.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
 		1B55D80625D40008006BAE51 /* CalendarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarViewController.swift; sourceTree = "<group>"; };
 		1B55D80925D41365006BAE51 /* EventViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventViewController.swift; sourceTree = "<group>"; };
@@ -305,8 +311,11 @@
 			children = (
 				1B55D80625D40008006BAE51 /* CalendarViewController.swift */,
 				1B55D80925D41365006BAE51 /* EventViewController.swift */,
+				04EEA6BF2684BD19003E171A /* CollageEventViewController.swift */,
+				04EEA6C12684BD3E003E171A /* PrivateEventViewController.swift */,
 				1B55D80325D3FFD9006BAE51 /* Event.swift */,
 				04526A89265EA25D00969BEC /* TimeSchaduleInput.swift */,
+				04EEA6BD2684B298003E171A /* Calender.storyboard */,
 			);
 			path = "Calendar&Schedule";
 			sourceTree = "<group>";
@@ -428,6 +437,7 @@
 				1BA0CFC925E7D8B80008FF43 /* Icon-App-40x40@2x.png in Resources */,
 				04A7E97525AF2B4A00C0F43C /* Assets.xcassets in Resources */,
 				1BA0CFCD25E7D8B80008FF43 /* Icon-App-40x40@3x.png in Resources */,
+				04EEA6BE2684B298003E171A /* Calender.storyboard in Resources */,
 				1BA0CFCB25E7D8B80008FF43 /* Icon-App-60x60@2x.png in Resources */,
 				1BA0CFCE25E7D8B80008FF43 /* Icon-App-29x29@2x.png in Resources */,
 				1BA0CFCC25E7D8B80008FF43 /* Icon-App-76x76@1x.png in Resources */,
@@ -505,6 +515,7 @@
 			files = (
 				1F185222265F917E005666DE /* RadioButton.swift in Sources */,
 				04A7E97025AF2B4900C0F43C /* ViewController.swift in Sources */,
+				04EEA6C02684BD19003E171A /* CollageEventViewController.swift in Sources */,
 				1B55D80A25D41365006BAE51 /* EventViewController.swift in Sources */,
 				1FDD508926568EB20064B94C /* DocumentsViewController.swift in Sources */,
 				04A7E96C25AF2B4900C0F43C /* AppDelegate.swift in Sources */,
@@ -524,6 +535,7 @@
 				04B39D1E25D43E34003EDECE /* StudentInfoTableViewCell.swift in Sources */,
 				04EA678F25BC8A8F005F0D06 /* User.swift in Sources */,
 				043079B4266A48D600247080 /* SetImageExtensions.swift in Sources */,
+				04EEA6C22684BD3E003E171A /* PrivateEventViewController.swift in Sources */,
 				0441D9A12619F5D4002DC165 /* ReportViewController.swift in Sources */,
 				0433E3A925D54B09002A6BE5 /* ReportTableViewCell.swift in Sources */,
 				1F0D921125E14A4C00503048 /* ForgetPasswordViewController.swift in Sources */,

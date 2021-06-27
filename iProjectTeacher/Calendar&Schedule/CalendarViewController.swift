@@ -37,11 +37,32 @@ class CalendarViewController: UIViewController, UITableViewDataSource, UITableVi
     override func viewWillAppear(_ animated: Bool) {
         loadEvent(selectedDate)
     }
-    
-    @objc func onClick(){ let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let SecondController = storyboard.instantiateViewController(withIdentifier: "Insert")
-        present(SecondController, animated: true, completion: nil)
+}
+
+extension CalendarViewController{
+    @IBAction func tappedPlus(){
+        let alertController = UIAlertController(title: "予定の種類を選択", message: "", preferredStyle: .actionSheet)
+        let telectureSchedule = UIAlertAction(title: "Telecture", style: .default) { (action) in
+            self.performSegue(withIdentifier: "Telecture", sender: nil)
+            alertController.dismiss(animated: true, completion: nil)
+        }
+        let collageSchedule = UIAlertAction(title: "大学の予定", style: .default) { (action) in
+            self.performSegue(withIdentifier: "Collage", sender: nil)
+            alertController.dismiss(animated: true, completion: nil)
+        }
+        let privateSchedule = UIAlertAction(title: "私用", style: .default) { (action) in
+            self.performSegue(withIdentifier: "Private", sender: nil)
+            alertController.dismiss(animated: true, completion: nil)
+        }
+        alertController.addAction(telectureSchedule)
+        alertController.addAction(collageSchedule)
+        alertController.addAction(privateSchedule)
+        self.present(alertController, animated: true, completion: nil)
     }
+}
+
+//イベントの取得と表示
+extension CalendarViewController{
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return max(eventList.count,1)
@@ -88,17 +109,10 @@ class CalendarViewController: UIViewController, UITableViewDataSource, UITableVi
         }
         self.tableView.reloadData()
     }
+}
     
-//    ここからカレンダー関係
-    
-    fileprivate let gregorian: Calendar = Calendar(identifier: .gregorian)
-    
-    fileprivate lazy var dateFormatter: DateFormatter = {
-        let formatter = DateFormatter()
-        formatter.dateFormat = "yyyy-MM-dd"
-        return formatter
-    }()
-    
+//ここからカレンダー関係
+extension CalendarViewController{
     func loadEvent(_ date: Date) {
         //予定がある場合、スケジュールをDBから取得・表示する。
         let formatter = DateFormatter()
@@ -234,9 +248,19 @@ class CalendarViewController: UIViewController, UITableViewDataSource, UITableVi
         calenderView.reloadData()
     }
     
+}
+
+//ここから値渡し
+extension CalendarViewController {
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        let view2 = segue.destination as! EventViewController
-        view2.sentDate = selectedDate
+        if segue.identifier == "Telecture" {
+            let view2 = segue.destination as! EventViewController
+            view2.sentDate = selectedDate
+        } else {
+            let view2 = segue.destination as! CollageEventViewController
+            view2.sentDate = selectedDate
+        }
     }
     
 }

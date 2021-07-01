@@ -16,24 +16,49 @@ extension UIViewController{
     func loadFollowList(){
         if NCMBUser.current() != nil{
             let query = NCMBQuery(className: "Follow")
-            query?.includeKey("fromUser")
-            query?.includeKey("toUser")
-            query?.whereKey("fromUser", equalTo: NCMBUser.current()!)
+            //query?.includeKey("fromUserId")
+            //query?.includeKey("toUserId")
+            query?.whereKey("fromUserId", equalTo: NCMBUser.current()!.objectId)
             query?.findObjectsInBackground({ (result, error) in
                 if(error == nil){
+                    blockedUserIdListG = []
+                    waitingUserListG = []
+                    followUserListG = []
+                    favoriteUserListG = []
                     for follow in result as! [NCMBObject]{
-                        let user = follow.object(forKey: "toUser") as! NCMBUser
+                        let userId = follow.object(forKey: "toUserId") as! String
                         let status = follow.object(forKey: "status") as! Int
                         if(status < 0){
-                            blockUserListG.append(User(user))
+                            blockedUserIdListG.append(userId)
                         }
                         else{
-                            followUserListG.append(User(user))
+                            switch status {
+                            case 0:
+                                waitingUserListG.append(User(userId: userId, isNeedParameter: true, viewController: self))
+                            case 1:
+                                followUserListG.append(User(userId: userId, isNeedParameter: true, viewController: self))
+                            case 2:
+                                favoriteUserListG.append(User(userId: userId, isNeedParameter: true, viewController: self))
+                            default:
+                                break
                         }
                     }
                 }
+                }
+                
             })
         }
+    }
+    
+    func mixFollowList() -> [User]{
+        var ret = waitingUserListG
+        for f in favoriteUserListG{
+            ret.append(f)
+        }
+        for f in followUserListG{
+            ret.append(f)
+        }
+        return ret
     }
     
     func createFollow(_ ncmbUser: NCMBUser){

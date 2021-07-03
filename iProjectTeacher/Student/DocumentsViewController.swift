@@ -57,29 +57,6 @@ class DocumentsViewController: UIViewController, UITextFieldDelegate, UITextView
     
     @IBAction func saveUserInfo(){
         
-        /*
-        if selectedImage != nil {
-            let size = NSData(data: selectedImage!.pngData()!).count.d
-            let scale = Float(sqrt(min(1.d, 200000.d / size)))
-            let resizedImage = selectedImage!.scale(byFactor: scale)
-            let data = UIImage.pngData(resizedImage!)
-            let date = Date()
-            let fileName = date.y.s + "/" + date.m.s + "/" + date.d.s + "-" + currentUserG.ncmb.objectId
-            report.fileNames.append(fileName)
-            let file = NCMBFile.file(withName: fileName, data: data()) as! NCMBFile
-            file.saveInBackground { (error) in
-                if error != nil{
-                    self.showOkAlert(title: "Error", message: error!.localizedDescription)
-                } else {
-                    
-                }
-            } progressBlock: { (progress) in
-                print(progress)
-            }
-            
-        }
-        */
-        
         if selectedImages.count != 0 {
             let photos = selectedImages
             for i in 0..<photos.count {
@@ -89,7 +66,7 @@ class DocumentsViewController: UIViewController, UITextFieldDelegate, UITextView
                 let resizedImage = photo.scale(byFactor: scale)
                 let data = UIImage.pngData(resizedImage!)
                 let date = Date()
-                let fileName = date.y.s + "-" + date.m.s + "-" + date.d.s + "-" + currentUserG.userId + "(" + String(i+1) + ")"
+                let fileName = date.y.s + "-" + date.m.s + "-" + date.d.s + "-" + currentUserG.userId + "-" + String(i+1)
                 report.fileNames.append(fileName)
                 let file = NCMBFile.file(withName: fileName, data: data()) as! NCMBFile
                 file.saveInBackground { (error) in
@@ -103,7 +80,6 @@ class DocumentsViewController: UIViewController, UITextFieldDelegate, UITextView
                 }
             }
         }
-        
         
         let object = report.ncmb
         object.setObject(report.studentId, forKey: "studentId")

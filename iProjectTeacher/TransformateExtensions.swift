@@ -69,18 +69,36 @@ extension String{
 
 extension Date{
     public var ymd: String{
-        let f = DateFormatter()
-        f.timeStyle = .none
-        f.dateStyle = .medium
-        f.locale = Locale.current
-        return f.string(from: self)
+        return self.y.s + "/" + self.m.s02 + "/" + self.d.s02
     }
     public var ymdJp: String{
-        let f = DateFormatter()
-        f.timeStyle = .none
-        f.dateStyle = .long
-        f.locale = Locale.current
-        return f.string(from: self)
+        return self.y.s + "年" + self.m.s02 + "月" + self.d.s02 + "日"
+    }
+    public var hms: String{
+        let c = Calendar.current
+        let h = c.component(.hour, from: self)
+        let m = c.component(.minute, from: self)
+        let s = c.component(.second, from: self)
+        return h.s02 + ":" + m.s02 + ":" + s.s02
+    }
+    public var hmsJp: String{
+        let c = Calendar.current
+        let h = c.component(.hour, from: self)
+        let m = c.component(.minute, from: self)
+        let s = c.component(.second, from: self)
+        return h.s02 + "時" + m.s02 + "分" + s.s02 + "秒"
+    }
+    public var hm: String{
+        let c = Calendar.current
+        let h = c.component(.hour, from: self)
+        let m = c.component(.minute, from: self)
+        return h.s02 + ":" + m.s02
+    }
+    public var hmJp: String{
+        let c = Calendar.current
+        let h = c.component(.hour, from: self)
+        let m = c.component(.minute, from: self)
+        return h.s02 + "時" + m.s02 + "分"
     }
     public var y: Int{
         let c = Calendar.current

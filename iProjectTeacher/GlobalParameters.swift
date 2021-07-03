@@ -21,15 +21,6 @@ var followUserListG: [User] = []
 var waitingUserListG: [User] = []
 var favoriteUserListG: [User] = []
 
-
-var myScheduleG = Schedules()
-var mixedScheduleG = Schedules()
-
-var cachedSchedules: [String: Schedule] = [:]
-var cachedLectures: [String: Lecture] = [:]
-
-let eventTypeRankG: [String : Int] = ["hope": 0, "telecture": 1, "private": 2, "school": 3]
-
 let token = "fN4BnkumjMvnbZd47gFLYL7JpVn283eaZwxEpT8NYyhYMPUaRDzR3dQZxTUT2eQYz7gqG9UMjAm8VaM26fhH7ueN7fJbXPsfCpM8"
 
 //営業時間を設定するための変数

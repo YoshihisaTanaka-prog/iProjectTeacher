@@ -29,26 +29,12 @@ class StudentViewController: UIViewController, UITableViewDataSource, UITableVie
         tableView.tableFooterView = UIView()
         tableView.rowHeight = 100.f
         
-        let nib = UINib(nibName: "StudentInfoTableViewCell", bundle: Bundle.main)
+        let nib = UINib(nibName: "StudentTableViewCell", bundle: Bundle.main)
         tableView.register(nib, forCellReuseIdentifier: "Cell2")
 //        /Users/tanakayoshihisa/iProjectStudent/iProjectStudent/Teacher
         setBackGround(true, true)
         students = mixFollowList()
-        
-//        let query = NCMBUser.query()
-//        query?.includeKey("parameter")
-//        query?.whereKey("objectId", equalTo: "MT1ys6rPTWdg4LMp")
-//        query?.findObjectsInBackground({ (result, error) in
-//            if error == nil {
-//                let user = result!.first! as! NCMBUser
-//                self.selectedStudent = User(user)
-//                self.performSegue(withIdentifier: "Detail", sender: nil)
-//            }
-//            else{
-//                self.showOkAlert(title: "Error", message: error!.localizedDescription)
-//            }
-//        })
-        
+  
 
         // Do any additional setup after loading the view.
     }
@@ -67,16 +53,17 @@ class StudentViewController: UIViewController, UITableViewDataSource, UITableVie
         }
     }
     
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return students.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell2") as! StudentInfoTableViewCell
-        cell.highSchool.text = students[indexPath.row].studentParameter!.schoolName + " " + transformGrade(students[indexPath.row].grade)
-        cell.highSchool.numberOfLines = 0
+        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell2") as! StudentTableViewCell
+//        cell.highSchool.text = students[indexPath.row].studentParameter!.schoolName + " " + transformGrade(students[indexPath.row].grade)
+//        cell.highSchool.numberOfLines = 0
         cell.userNameLabel.text = students[indexPath.row].userName
-        cell.userNameFuriganaLabel.text = students[indexPath.row].furigana
+//        cell.userNameFuriganaLabel.text = students[indexPath.row].furigana
         cell.userimage.image = userImagesCacheG[students[indexPath.row].userId]  //ユーザー画像を設定
         
         cell.setFontColor()

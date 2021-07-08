@@ -75,6 +75,8 @@
 		1F185222265F917E005666DE /* RadioButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F185221265F917E005666DE /* RadioButton.swift */; };
 		1F2D2CC1264D4840008C9E30 /* Student.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1F2D2CC0264D4840008C9E30 /* Student.storyboard */; };
 		1F2D2CC4264D5325008C9E30 /* ReportDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F2D2CC3264D5325008C9E30 /* ReportDetailViewController.swift */; };
+		1F3603E6269729B400B78DB6 /* StudentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F3603E4269729B400B78DB6 /* StudentTableViewCell.swift */; };
+		1F3603E7269729B400B78DB6 /* StudentTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1F3603E5269729B400B78DB6 /* StudentTableViewCell.xib */; };
 		1F3FD57225E66D9000947E1C /* CheckBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F3FD57125E66D9000947E1C /* CheckBox.swift */; };
 		1F3FD57525E66D9A00947E1C /* Design.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F3FD57425E66D9A00947E1C /* Design.swift */; };
 		1F3FD57825E68B4200947E1C /* EditUserPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F3FD57725E68B4200947E1C /* EditUserPageViewController.swift */; };
@@ -154,6 +156,8 @@
 		1F185221265F917E005666DE /* RadioButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RadioButton.swift; sourceTree = "<group>"; };
 		1F2D2CC0264D4840008C9E30 /* Student.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Student.storyboard; sourceTree = "<group>"; };
 		1F2D2CC3264D5325008C9E30 /* ReportDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportDetailViewController.swift; sourceTree = "<group>"; };
+		1F3603E4269729B400B78DB6 /* StudentTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentTableViewCell.swift; sourceTree = "<group>"; };
+		1F3603E5269729B400B78DB6 /* StudentTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = StudentTableViewCell.xib; sourceTree = "<group>"; };
 		1F3FD57125E66D9000947E1C /* CheckBox.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckBox.swift; sourceTree = "<group>"; };
 		1F3FD57425E66D9A00947E1C /* Design.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Design.swift; sourceTree = "<group>"; };
 		1F3FD57725E68B4200947E1C /* EditUserPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditUserPageViewController.swift; sourceTree = "<group>"; };
@@ -266,6 +270,8 @@
 			children = (
 				04B39D1C25D43E34003EDECE /* StudentInfoTableViewCell.swift */,
 				04B39D1D25D43E34003EDECE /* StudentInfoTableViewCell.xib */,
+				1F3603E4269729B400B78DB6 /* StudentTableViewCell.swift */,
+				1F3603E5269729B400B78DB6 /* StudentTableViewCell.xib */,
 				0433E3A725D54B09002A6BE5 /* ReportTableViewCell.swift */,
 				0433E3A825D54B09002A6BE5 /* ReportTableViewCell.xib */,
 				0441D9A02619F5D4002DC165 /* ReportViewController.swift */,
@@ -443,6 +449,7 @@
 				04EEA6BE2684B298003E171A /* Calender.storyboard in Resources */,
 				1BA0CFCB25E7D8B80008FF43 /* Icon-App-60x60@2x.png in Resources */,
 				1BA0CFCE25E7D8B80008FF43 /* Icon-App-29x29@2x.png in Resources */,
+				1F3603E7269729B400B78DB6 /* StudentTableViewCell.xib in Resources */,
 				1BA0CFCC25E7D8B80008FF43 /* Icon-App-76x76@1x.png in Resources */,
 				0459388F25D149CC00A0E3C8 /* teacherNoImage.png in Resources */,
 				1BA0CFC525E7D8B80008FF43 /* ItunesArtwork@2x.png in Resources */,
@@ -527,6 +534,7 @@
 				043079C2266A4B2A00247080 /* FollowExtensions.swift in Sources */,
 				1B55D80725D40008006BAE51 /* CalendarViewController.swift in Sources */,
 				1F08D94F25E6A0890002E0AA /* Opening2ViewController.swift in Sources */,
+				1F3603E6269729B400B78DB6 /* StudentTableViewCell.swift in Sources */,
 				043A9DB625D80D1600587B0E /* UserPageViewController.swift in Sources */,
 				04ACB8B525DB2A7200916C15 /* GlobalParameters.swift in Sources */,
 				1F08D94425E69F920002E0AA /* Questionnaire.swift in Sources */,

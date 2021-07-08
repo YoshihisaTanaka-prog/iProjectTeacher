@@ -42,7 +42,7 @@ class CalendarViewController: UIViewController, UITableViewDataSource, UITableVi
     
     override func viewWillAppear(_ animated: Bool) {
         datelabel.text = selectedDate.ymdJp
-        scheduleObject = myScheduleG
+//        scheduleObject = myScheduleG
         loadEvent(selectedDate)
         calenderView.reloadData()
     }

@@ -84,36 +84,36 @@ extension NormalEventViewController{
             }
             
             if(firstNum < endNum){
-                for i in firstNum..<endNum{
-                    if(myScheduleG.searchSchedule(date: day, time: i * 100) == nil){
-//                        予定が入っていない場合は新規作成
-                        let object = NCMBObject(className: "Schedule")!
-                        object.setObject(currentUserG.userId, forKey: "teacherId")
-                        object.setObject(nil, forKey: "studentId")
-                        object.setObject(eventType, forKey: "eventType")
-                        object.setObject(i * 100, forKey: "time")
-                        object.setObject(day.y * 100 + day.m, forKey: "ym")
-                        object.setObject(day.d, forKey: "date")
-                        object.setObject(nil, forKey: "lectureId")
-                        object.setObject(titleTextField.text!, forKey: "title")
-                        objects.append(object)
-                    } else if ( eventTypeRankG[myScheduleG.searchSchedule(date: day, time: i * 100)!.eventType]! <= eventTypeRankG[eventType]! ){
-//                        予定が入っていても予定の重要度が低い場合は上書き保存
-                        let object = myScheduleG.searchSchedule(date: day, time: i * 100)!.ncmb!
-                        object.setObject(currentUserG.userId, forKey: "teacherId")
-                        object.setObject(nil, forKey: "studentId")
-                        object.setObject(eventType, forKey: "eventType")
-                        object.setObject(i * 100, forKey: "time")
-                        object.setObject(day.y * 100 + day.m, forKey: "ym")
-                        object.setObject(day.d, forKey: "date")
-                        object.setObject(nil, forKey: "lectureId")
-                        object.setObject(titleTextField.text!, forKey: "title")
-                        objects.append(object)
-                        isbooking = true
-                    } else {
-                        isbooking = true
-                    }
-                }
+//                for i in firstNum..<endNum{
+//                    if(myScheduleG.searchSchedule(date: day, time: i * 100) == nil){
+////                        予定が入っていない場合は新規作成
+//                        let object = NCMBObject(className: "Schedule")!
+//                        object.setObject(currentUserG.userId, forKey: "teacherId")
+//                        object.setObject(nil, forKey: "studentId")
+//                        object.setObject(eventType, forKey: "eventType")
+//                        object.setObject(i * 100, forKey: "time")
+//                        object.setObject(day.y * 100 + day.m, forKey: "ym")
+//                        object.setObject(day.d, forKey: "date")
+//                        object.setObject(nil, forKey: "lectureId")
+//                        object.setObject(titleTextField.text!, forKey: "title")
+//                        objects.append(object)
+//                    } else if ( eventTypeRankG[myScheduleG.searchSchedule(date: day, time: i * 100)!.eventType]! <= eventTypeRankG[eventType]! ){
+////                        予定が入っていても予定の重要度が低い場合は上書き保存
+//                        let object = myScheduleG.searchSchedule(date: day, time: i * 100)!.ncmb!
+//                        object.setObject(currentUserG.userId, forKey: "teacherId")
+//                        object.setObject(nil, forKey: "studentId")
+//                        object.setObject(eventType, forKey: "eventType")
+//                        object.setObject(i * 100, forKey: "time")
+//                        object.setObject(day.y * 100 + day.m, forKey: "ym")
+//                        object.setObject(day.d, forKey: "date")
+//                        object.setObject(nil, forKey: "lectureId")
+//                        object.setObject(titleTextField.text!, forKey: "title")
+//                        objects.append(object)
+//                        isbooking = true
+//                    } else {
+//                        isbooking = true
+//                    }
+//                }
             }
             day = Calendar.current.date(byAdding: .day, value: 1, to: day)!
         }
@@ -123,10 +123,10 @@ extension NormalEventViewController{
             return
         }
         
-        myScheduleG.addSchedule(objects: objects)
-        if mixedScheduleG.count != 0 {
-            mixedScheduleG.addSchedule(objects: objects)
-        }
+//        myScheduleG.addSchedule(objects: objects)
+//        if mixedScheduleG.count != 0 {
+//            mixedScheduleG.addSchedule(objects: objects)
+//        }
         
         for i in 0..<objects.count{
             let object = objects[i]

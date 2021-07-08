@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17126"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -14,7 +14,7 @@
         <tableViewCell contentMode="scaleToFill" restorationIdentifier="StudentInfo" selectionStyle="default" indentationWidth="10" rowHeight="686" id="KGk-i7-Jjw" customClass="StudentInfoTableViewCell" customModule="iProjectTeacher" customModuleProvider="target">
             <rect key="frame" x="0.0" y="0.0" width="431" height="686"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM" customClass="StudentInfoTableViewCell" customModule="iProjectTeacher" customModuleProvider="target">
                 <rect key="frame" x="0.0" y="0.0" width="431" height="686"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
@@ -31,7 +31,7 @@
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="高校＆学年" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="V5n-9L-bOj">
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="高校" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="V5n-9L-bOj">
                         <rect key="frame" x="178" y="116" width="223" height="21"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="21" id="pTu-D5-wbX"/>
@@ -140,6 +140,15 @@
                             <constraint firstItem="fra-2s-qQk" firstAttribute="top" secondItem="4Fp-SA-9dH" secondAttribute="top" id="xme-IF-A1D"/>
                         </constraints>
                     </view>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="学年" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SXn-cd-kis">
+                        <rect key="frame" x="178" y="145" width="223" height="21"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="21" id="nGe-4f-Wcc"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
                 </subviews>
                 <constraints>
                     <constraint firstItem="1BG-LM-xLD" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="20" symbolic="YES" id="0x4-nN-7ud"/>
@@ -148,17 +157,30 @@
                     <constraint firstItem="U0x-m2-eML" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="39" id="Egf-kU-yBt"/>
                     <constraint firstItem="V5n-9L-bOj" firstAttribute="top" secondItem="Kxc-g0-lMb" secondAttribute="bottom" constant="16" id="HUr-hN-tGb"/>
                     <constraint firstItem="V5n-9L-bOj" firstAttribute="leading" secondItem="U0x-m2-eML" secondAttribute="leading" id="KCa-2i-gRC"/>
+                    <constraint firstItem="SXn-cd-kis" firstAttribute="top" secondItem="V5n-9L-bOj" secondAttribute="bottom" constant="8" symbolic="YES" id="PYf-4N-7uG"/>
                     <constraint firstItem="fX1-re-1Mr" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" id="R1N-2U-HlL"/>
+                    <constraint firstItem="SXn-cd-kis" firstAttribute="leading" secondItem="V5n-9L-bOj" secondAttribute="leading" id="R5v-85-fzG"/>
                     <constraint firstItem="Kxc-g0-lMb" firstAttribute="trailing" secondItem="U0x-m2-eML" secondAttribute="trailing" id="SOV-uS-bcT"/>
                     <constraint firstItem="Kxc-g0-lMb" firstAttribute="top" secondItem="U0x-m2-eML" secondAttribute="bottom" constant="19" id="WbY-aT-mzN"/>
                     <constraint firstItem="Kxc-g0-lMb" firstAttribute="leading" secondItem="U0x-m2-eML" secondAttribute="leading" id="aZJ-Lf-Flu"/>
                     <constraint firstItem="V5n-9L-bOj" firstAttribute="trailing" secondItem="U0x-m2-eML" secondAttribute="trailing" id="rbA-u5-2De"/>
+                    <constraint firstItem="SXn-cd-kis" firstAttribute="trailing" secondItem="V5n-9L-bOj" secondAttribute="trailing" id="uJ4-CM-ZWk"/>
                     <constraint firstItem="1BG-LM-xLD" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="20" symbolic="YES" id="vSj-uI-hSU"/>
                     <constraint firstItem="U0x-m2-eML" firstAttribute="leading" secondItem="1BG-LM-xLD" secondAttribute="trailing" constant="30" id="xN1-2H-qf7"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
-            <point key="canvasLocation" x="659" y="57"/>
+            <connections>
+                <outlet property="firstChoiceLabel" destination="fra-2s-qQk" id="PYn-rb-NVb"/>
+                <outlet property="grade" destination="SXn-cd-kis" id="ZF4-Id-f4v"/>
+                <outlet property="highSchool" destination="V5n-9L-bOj" id="Wy3-uh-qsl"/>
+                <outlet property="secondChoiceLabel" destination="vFF-gO-NOE" id="zIH-Qm-W4V"/>
+                <outlet property="thirdChoiceLabel" destination="fDo-2a-XRR" id="wFA-iN-bvN"/>
+                <outlet property="userNameFuriganaLabel" destination="U0x-m2-eML" id="mBw-yD-qQC"/>
+                <outlet property="userNameLabel" destination="Kxc-g0-lMb" id="qSZ-l6-jLq"/>
+                <outlet property="userimage" destination="1BG-LM-xLD" id="prV-qd-dqD"/>
+            </connections>
+            <point key="canvasLocation" x="658.69565217391312" y="56.919642857142854"/>
         </tableViewCell>
     </objects>
     <resources>

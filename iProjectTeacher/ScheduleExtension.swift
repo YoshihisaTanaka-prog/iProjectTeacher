@@ -11,9 +11,9 @@ import UIKit
 extension UIViewController{
     func loadSchedule(_ userIds: [String]){
         if userIds.count == 1{
-            myScheduleG.loadSchedules(date: Date(), userIds: userIds, vc: self)
+          //  myScheduleG.loadSchedules(date: Date(), userIds: userIds, vc: self)
         } else {
-            mixedScheduleG.loadSchedules(date: Date(), userIds: userIds, vc: self)
+          //  mixedScheduleG.loadSchedules(date: Date(), userIds: userIds, vc: self)
         }
     }
 }

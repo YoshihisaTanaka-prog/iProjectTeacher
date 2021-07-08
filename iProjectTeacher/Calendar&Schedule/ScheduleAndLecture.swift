@@ -178,7 +178,7 @@ class Frame{
         let id = schedule.objectId!
         let schedule = Schedule(schedule,vc)
         eventName = schedule.eventName
-        cachedSchedules[id] = schedule
+        //cachedSchedules[id] = schedule
         self.scheduleId = id
     }
     
@@ -189,7 +189,7 @@ class Frame{
         if error == nil{
             let schedule = Schedule(object,vc)
             eventName = schedule.eventName
-            cachedSchedules[scheduleId] = schedule
+          //  cachedSchedules[scheduleId] = schedule
             self.scheduleId = scheduleId
         } else {
             vc.showOkAlert(title: "Error", message: error!.localizedDescription)

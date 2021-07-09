@@ -73,6 +73,7 @@ class StudentViewController: UIViewController, UITableViewDataSource, UITableVie
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         selectedStudent = students[indexPath.row]
         self.performSegue(withIdentifier: "Detail", sender: nil)
+        tableView.reloadData()
     }
 
 }

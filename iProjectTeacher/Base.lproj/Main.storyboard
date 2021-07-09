@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="d7d-d5-XGI">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="d7d-d5-XGI">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17126"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -17,16 +17,15 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="sKT-E3-gcb">
-                                <rect key="frame" x="20" y="122" width="374" height="691"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="sKT-E3-gcb">
+                                <rect key="frame" x="0.0" y="88" width="414" height="725"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="165" id="ZDQ-5F-MCS">
-                                        <rect key="frame" x="0.0" y="28" width="374" height="165"/>
+                                        <rect key="frame" x="0.0" y="24.5" width="414" height="165"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="ZDQ-5F-MCS" id="zlr-rK-nnH">
-                                            <rect key="frame" x="0.0" y="0.0" width="374" height="165"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="165"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -35,6 +34,12 @@
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="sfd-Af-SGY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="sKT-E3-gcb" firstAttribute="top" secondItem="sfd-Af-SGY" secondAttribute="top" id="6xM-fG-S6C"/>
+                            <constraint firstItem="sKT-E3-gcb" firstAttribute="trailing" secondItem="sfd-Af-SGY" secondAttribute="trailing" id="R5q-ev-EdX"/>
+                            <constraint firstItem="sKT-E3-gcb" firstAttribute="leading" secondItem="sfd-Af-SGY" secondAttribute="leading" id="WkE-Hw-Mlr"/>
+                            <constraint firstItem="sKT-E3-gcb" firstAttribute="bottom" secondItem="sfd-Af-SGY" secondAttribute="bottom" id="gim-fV-Jts"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="生徒一覧" id="1mk-Y4-4Kj"/>
                     <connections>
@@ -59,7 +64,7 @@
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="80" id="8E4-0a-aVh">
-                                        <rect key="frame" x="0.0" y="28" width="414" height="80"/>
+                                        <rect key="frame" x="0.0" y="24.5" width="414" height="80"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="8E4-0a-aVh" id="NcH-5H-yw6">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="80"/>
@@ -74,8 +79,12 @@
                         <constraints>
                             <constraint firstItem="SKp-Lk-D4b" firstAttribute="bottom" secondItem="ZHN-Nm-2e7" secondAttribute="bottom" id="8Cs-nZ-nx3"/>
                             <constraint firstItem="SKp-Lk-D4b" firstAttribute="trailing" secondItem="ZHN-Nm-2e7" secondAttribute="trailing" id="IoN-jt-5Ea"/>
+                            <constraint firstItem="SKp-Lk-D4b" firstAttribute="top" secondItem="ZHN-Nm-2e7" secondAttribute="top" id="RUy-SD-pPm"/>
+                            <constraint firstItem="SKp-Lk-D4b" firstAttribute="trailing" secondItem="ZHN-Nm-2e7" secondAttribute="trailing" id="SVX-04-ux7"/>
+                            <constraint firstItem="SKp-Lk-D4b" firstAttribute="leading" secondItem="ZHN-Nm-2e7" secondAttribute="leading" id="TEb-xg-cBb"/>
                             <constraint firstItem="SKp-Lk-D4b" firstAttribute="top" secondItem="ZHN-Nm-2e7" secondAttribute="top" id="aFE-QF-EO7"/>
                             <constraint firstItem="SKp-Lk-D4b" firstAttribute="leading" secondItem="ZHN-Nm-2e7" secondAttribute="leading" id="gRQ-to-jEf"/>
+                            <constraint firstItem="SKp-Lk-D4b" firstAttribute="bottom" secondItem="ZHN-Nm-2e7" secondAttribute="bottom" id="pxB-Cl-hdZ"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="8Vn-Q1-lWA"/>
@@ -450,7 +459,7 @@
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell" id="Ydv-u3-TaR">
-                                        <rect key="frame" x="0.0" y="28" width="374" height="43.5"/>
+                                        <rect key="frame" x="0.0" y="24.5" width="374" height="43.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Ydv-u3-TaR" id="btg-HD-s5z">
                                             <rect key="frame" x="0.0" y="0.0" width="374" height="43.5"/>

@@ -42,7 +42,7 @@ class StudentDetailViewController: UIViewController, UITableViewDelegate, UITabl
             return size.viewHeight
         }
         else{
-            return 44
+            return 44.f
         }
     }
     
@@ -53,6 +53,8 @@ class StudentDetailViewController: UIViewController, UITableViewDelegate, UITabl
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if(indexPath.row == 0){
             let cell = tableView.dequeueReusableCell(withIdentifier: "StudentInfo") as! StudentInfoTableViewCell
+            cell.userimage.image = userImagesCacheG[student.userId]
+            cell.userNameLabel.text = student.userName
             
             return cell
         }
@@ -68,9 +70,9 @@ class StudentDetailViewController: UIViewController, UITableViewDelegate, UITabl
         //上から何番目か
         if indexPath.row != 0 {
             selectedReport = reportList[indexPath.row - 1]
-            self.performSegue(withIdentifier: "", sender: nil)
-            
+//            self.performSegue(withIdentifier: "", sender: nil)
         }
+        tableView.reloadData()
     }
     
     

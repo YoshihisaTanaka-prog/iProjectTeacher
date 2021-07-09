@@ -8,7 +8,7 @@
 
 import Foundation
 import UIKit
-
+import CalculateCalendarLogic
 
 
 extension Int{
@@ -108,9 +108,72 @@ extension Date{
         let c = Calendar.current
         return c.component(.month, from: self)
     }
+    public var maxDate: Int{
+        switch self.m {
+        case 1:
+            return 31
+        case 2:
+            let y = self.y
+            if y % 400 == 0{
+                return 29
+            }
+            if y % 100 == 0{
+                return 28
+            }
+            if y % 4 == 0{
+                return 29
+            }
+            return 28
+        case 3:
+            return 31
+        case 4:
+            return 30
+        case 5:
+            return 31
+        case 6:
+            return 30
+        case 7:
+            return 31
+        case 8:
+            return 31
+        case 9:
+            return 30
+        case 10:
+            return 31
+        case 11:
+            return 30
+        case 12:
+            return 31
+        default:
+            return 0
+        }
+    }
     public var d: Int{
         let c = Calendar.current
         return c.component(.day, from: self)
+    }
+    public var h: Int{
+        let c = Calendar.current
+        return c.component(.hour, from: self)
+    }
+    public var min: Int{
+        let c = Calendar.current
+        return c.component(.minute, from: self)
+    }
+    public var weekId: Int{
+        let holiday = CalculateCalendarLogic()
+        if (holiday.judgeJapaneseHoliday(year: self.y, month: self.m, day: self.d)){
+            return 6
+        }
+        let tmpCalendar = Calendar(identifier: .gregorian)
+        return (tmpCalendar.component(.weekday, from: self) + 5) % 7
+    }
+    
+    func mixDateAndTime(date: Date, time: Date) -> Date {
+        let hour = time.h
+        let minute = time.min
+        let c = Calendar(identifier: .gregorian)
+        return c.date(byAdding: .minute, value: 60 * hour + minute, to: date)!
     }
 }
 

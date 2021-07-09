@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0428E91B269088EB00F3FA2A /* ScheduleObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0428E91A269088EB00F3FA2A /* ScheduleObject.swift */; };
+		0428E91D26908A9500F3FA2A /* Schedule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0428E91C26908A9500F3FA2A /* Schedule.swift */; };
+		0428E91F26908ACF00F3FA2A /* TimeFrameUnit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0428E91E26908ACF00F3FA2A /* TimeFrameUnit.swift */; };
 		043079AE266A3E5D00247080 /* TransformateExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043079AD266A3E5D00247080 /* TransformateExtensions.swift */; };
 		043079B2266A486900247080 /* AlertExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043079B1266A486900247080 /* AlertExtensions.swift */; };
 		043079B4266A48D600247080 /* SetImageExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043079B3266A48D600247080 /* SetImageExtensions.swift */; };
@@ -22,12 +25,12 @@
 		043A9DB825D80D1600587B0E /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043A9DB425D80D1500587B0E /* SignInViewController.swift */; };
 		0441D9A12619F5D4002DC165 /* ReportViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0441D9A02619F5D4002DC165 /* ReportViewController.swift */; };
 		044BD1C5265D2DD000A169FC /* CalenderExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 044BD1C4265D2DD000A169FC /* CalenderExtension.swift */; };
-		044E43BA2688A6E100956C72 /* ScheduleAndLecture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 044E43B92688A6E100956C72 /* ScheduleAndLecture.swift */; };
 		044E43BC2688ABB700956C72 /* ScheduleExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 044E43BB2688ABB700956C72 /* ScheduleExtension.swift */; };
 		04526A8A265EA25D00969BEC /* TimeSchaduleInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04526A89265EA25D00969BEC /* TimeSchaduleInput.swift */; };
 		0459388B25D149C600A0E3C8 /* creating.png in Resources */ = {isa = PBXBuildFile; fileRef = 0459388A25D149C100A0E3C8 /* creating.png */; };
 		0459388D25D149C900A0E3C8 /* studentNoImage.png in Resources */ = {isa = PBXBuildFile; fileRef = 0459388925D149C100A0E3C8 /* studentNoImage.png */; };
 		0459388F25D149CC00A0E3C8 /* teacherNoImage.png in Resources */ = {isa = PBXBuildFile; fileRef = 0459388825D149C100A0E3C8 /* teacherNoImage.png */; };
+		0461B68F26972DE70097FD2C /* TelectureEventViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0461B68E26972DE70097FD2C /* TelectureEventViewController.swift */; };
 		04A7E96C25AF2B4900C0F43C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04A7E96B25AF2B4900C0F43C /* AppDelegate.swift */; };
 		04A7E96E25AF2B4900C0F43C /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04A7E96D25AF2B4900C0F43C /* SceneDelegate.swift */; };
 		04A7E97025AF2B4900C0F43C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04A7E96F25AF2B4900C0F43C /* ViewController.swift */; };
@@ -39,6 +42,7 @@
 		04B39D1925D43D57003EDECE /* StudentDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B39D1825D43D57003EDECE /* StudentDetailViewController.swift */; };
 		04B39D1E25D43E34003EDECE /* StudentInfoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B39D1C25D43E34003EDECE /* StudentInfoTableViewCell.swift */; };
 		04B39D1F25D43E34003EDECE /* StudentInfoTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04B39D1D25D43E34003EDECE /* StudentInfoTableViewCell.xib */; };
+		04BD63F3269072C800A45ADD /* Lecture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04BD63F2269072C800A45ADD /* Lecture.swift */; };
 		04EA678F25BC8A8F005F0D06 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04EA678E25BC8A8F005F0D06 /* User.swift */; };
 		04EEA6BE2684B298003E171A /* Calender.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 04EEA6BD2684B298003E171A /* Calender.storyboard */; };
 		04EEA6C02684BD19003E171A /* NormalEventViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04EEA6BF2684BD19003E171A /* NormalEventViewController.swift */; };
@@ -84,6 +88,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0428E91A269088EB00F3FA2A /* ScheduleObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleObject.swift; sourceTree = "<group>"; };
+		0428E91C26908A9500F3FA2A /* Schedule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Schedule.swift; sourceTree = "<group>"; };
+		0428E91E26908ACF00F3FA2A /* TimeFrameUnit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeFrameUnit.swift; sourceTree = "<group>"; };
 		043079AD266A3E5D00247080 /* TransformateExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransformateExtensions.swift; sourceTree = "<group>"; };
 		043079B1266A486900247080 /* AlertExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertExtensions.swift; sourceTree = "<group>"; };
 		043079B3266A48D600247080 /* SetImageExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetImageExtensions.swift; sourceTree = "<group>"; };
@@ -99,12 +106,12 @@
 		043A9DB425D80D1500587B0E /* SignInViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
 		0441D9A02619F5D4002DC165 /* ReportViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportViewController.swift; sourceTree = "<group>"; };
 		044BD1C4265D2DD000A169FC /* CalenderExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalenderExtension.swift; sourceTree = "<group>"; };
-		044E43B92688A6E100956C72 /* ScheduleAndLecture.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScheduleAndLecture.swift; sourceTree = "<group>"; };
 		044E43BB2688ABB700956C72 /* ScheduleExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleExtension.swift; sourceTree = "<group>"; };
 		04526A89265EA25D00969BEC /* TimeSchaduleInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeSchaduleInput.swift; sourceTree = "<group>"; };
 		0459388825D149C100A0E3C8 /* teacherNoImage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = teacherNoImage.png; sourceTree = "<group>"; };
 		0459388925D149C100A0E3C8 /* studentNoImage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = studentNoImage.png; sourceTree = "<group>"; };
 		0459388A25D149C100A0E3C8 /* creating.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = creating.png; sourceTree = "<group>"; };
+		0461B68E26972DE70097FD2C /* TelectureEventViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TelectureEventViewController.swift; sourceTree = "<group>"; };
 		04A7E96825AF2B4900C0F43C /* iProjectTeacher.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iProjectTeacher.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		04A7E96B25AF2B4900C0F43C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		04A7E96D25AF2B4900C0F43C /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -118,6 +125,7 @@
 		04B39D1825D43D57003EDECE /* StudentDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentDetailViewController.swift; sourceTree = "<group>"; };
 		04B39D1C25D43E34003EDECE /* StudentInfoTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentInfoTableViewCell.swift; sourceTree = "<group>"; };
 		04B39D1D25D43E34003EDECE /* StudentInfoTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = StudentInfoTableViewCell.xib; sourceTree = "<group>"; };
+		04BD63F2269072C800A45ADD /* Lecture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Lecture.swift; sourceTree = "<group>"; };
 		04EA678E25BC8A8F005F0D06 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		04EEA6BD2684B298003E171A /* Calender.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Calender.storyboard; sourceTree = "<group>"; };
 		04EEA6BF2684BD19003E171A /* NormalEventViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NormalEventViewController.swift; sourceTree = "<group>"; };
@@ -315,9 +323,13 @@
 				1B55D80625D40008006BAE51 /* CalendarViewController.swift */,
 				1B55D80925D41365006BAE51 /* EventViewController.swift */,
 				04EEA6BF2684BD19003E171A /* NormalEventViewController.swift */,
+				0461B68E26972DE70097FD2C /* TelectureEventViewController.swift */,
 				1B55D80325D3FFD9006BAE51 /* Event.swift */,
 				04526A89265EA25D00969BEC /* TimeSchaduleInput.swift */,
-				044E43B92688A6E100956C72 /* ScheduleAndLecture.swift */,
+				0428E91A269088EB00F3FA2A /* ScheduleObject.swift */,
+				0428E91E26908ACF00F3FA2A /* TimeFrameUnit.swift */,
+				04BD63F2269072C800A45ADD /* Lecture.swift */,
+				0428E91C26908A9500F3FA2A /* Schedule.swift */,
 				04EEA6BD2684B298003E171A /* Calender.storyboard */,
 			);
 			path = "Calendar&Schedule";
@@ -517,7 +529,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1F185222265F917E005666DE /* RadioButton.swift in Sources */,
-				044E43BA2688A6E100956C72 /* ScheduleAndLecture.swift in Sources */,
+				0428E91D26908A9500F3FA2A /* Schedule.swift in Sources */,
 				04A7E97025AF2B4900C0F43C /* ViewController.swift in Sources */,
 				04EEA6C02684BD19003E171A /* NormalEventViewController.swift in Sources */,
 				1B55D80A25D41365006BAE51 /* EventViewController.swift in Sources */,
@@ -528,6 +540,7 @@
 				1B55D80725D40008006BAE51 /* CalendarViewController.swift in Sources */,
 				1F08D94F25E6A0890002E0AA /* Opening2ViewController.swift in Sources */,
 				043A9DB625D80D1600587B0E /* UserPageViewController.swift in Sources */,
+				04BD63F3269072C800A45ADD /* Lecture.swift in Sources */,
 				04ACB8B525DB2A7200916C15 /* GlobalParameters.swift in Sources */,
 				1F08D94425E69F920002E0AA /* Questionnaire.swift in Sources */,
 				0433E3A525D54709002A6BE5 /* Report.swift in Sources */,
@@ -537,8 +550,10 @@
 				1F3FD57825E68B4200947E1C /* EditUserPageViewController.swift in Sources */,
 				044BD1C5265D2DD000A169FC /* CalenderExtension.swift in Sources */,
 				04A7E96E25AF2B4900C0F43C /* SceneDelegate.swift in Sources */,
+				0461B68F26972DE70097FD2C /* TelectureEventViewController.swift in Sources */,
 				04B39D1E25D43E34003EDECE /* StudentInfoTableViewCell.swift in Sources */,
 				04EA678F25BC8A8F005F0D06 /* User.swift in Sources */,
+				0428E91F26908ACF00F3FA2A /* TimeFrameUnit.swift in Sources */,
 				043079B4266A48D600247080 /* SetImageExtensions.swift in Sources */,
 				0441D9A12619F5D4002DC165 /* ReportViewController.swift in Sources */,
 				0433E3A925D54B09002A6BE5 /* ReportTableViewCell.swift in Sources */,
@@ -555,6 +570,7 @@
 				1F08D94D25E6A0890002E0AA /* ScreenSize.swift in Sources */,
 				043A9DB825D80D1600587B0E /* SignInViewController.swift in Sources */,
 				1F3FD57225E66D9000947E1C /* CheckBox.swift in Sources */,
+				0428E91B269088EB00F3FA2A /* ScheduleObject.swift in Sources */,
 				04A7E98425AF2D0500C0F43C /* NCMBUserExtensions.swift in Sources */,
 				1B55D80425D3FFD9006BAE51 /* Event.swift in Sources */,
 			);

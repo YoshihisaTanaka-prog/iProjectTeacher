@@ -13,9 +13,11 @@ import RealmSwift
 
 class CalendarViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, FSCalendarDelegate, FSCalendarDataSource, FSCalendarDelegateAppearance {
     
-    private var selectedDate = Date()
+    var student: User?
+    
+    private var selectedDate: Date!
     private var currentMonth: Int!
-    private var schedules: [[Schedule]] = []
+    private var schedules: [[TimeFrameUnit]] = []
     private var scheduleObject: Schedules!
     private var users:[User] = []
     private var userIds:[String] = []
@@ -34,7 +36,9 @@ class CalendarViewController: UIViewController, UITableViewDataSource, UITableVi
         setBackGround(true, true)
         calenderView.setToJapanise()
         let tmpCalendar = Calendar(identifier: .gregorian)
-        currentMonth = tmpCalendar.component(.month, from: Date())
+        let now = Date()
+        selectedDate = tmpCalendar.date(from: DateComponents(year: now.y, month: now.m, day: now.d))!
+        currentMonth = selectedDate.m
         
         users.append(currentUserG)
         userIds.append(currentUserG.userId)
@@ -51,9 +55,12 @@ class CalendarViewController: UIViewController, UITableViewDataSource, UITableVi
 extension CalendarViewController{
     @IBAction func tappedPlus(){
         let alertController = UIAlertController(title: "予定の種類を選択", message: "", preferredStyle: .actionSheet)
-        let telectureSchedule = UIAlertAction(title: "Telecture", style: .default) { (action) in
-            self.performSegue(withIdentifier: "Telecture", sender: nil)
-            alertController.dismiss(animated: true, completion: nil)
+        if( student != nil){
+            let telectureSchedule = UIAlertAction(title: "Telecture", style: .default) { (action) in
+                self.performSegue(withIdentifier: "Telecture", sender: nil)
+                alertController.dismiss(animated: true, completion: nil)
+            }
+            alertController.addAction(telectureSchedule)
         }
         let collageSchedule = UIAlertAction(title: "大学の予定", style: .default) { (action) in
             self.performSegue(withIdentifier: "Collage", sender: nil)
@@ -63,7 +70,6 @@ extension CalendarViewController{
             self.performSegue(withIdentifier: "Private", sender: nil)
             alertController.dismiss(animated: true, completion: nil)
         }
-        alertController.addAction(telectureSchedule)
         alertController.addAction(collageSchedule)
         alertController.addAction(privateSchedule)
         self.present(alertController, animated: true, completion: nil)
@@ -77,6 +83,7 @@ extension CalendarViewController{
         return max(schedules.count,1)
     }
     
+//    テーブルビューセルの表示
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell")!
         cell.backgroundColor = .clear
@@ -86,38 +93,39 @@ extension CalendarViewController{
         }
         else{
             let time = businessHoursG[(getWeekIdx(selectedDate) + 5) % 7].first + indexPath.row
-            cell.textLabel?.text = time.s02 + ":00-" + (time + 1).s02 + ":00  " + schedules[indexPath.row][0].eventName
+            cell.textLabel?.text = time.s02 + ":00-" + (time + 1).s02 + ":00  " + schedules[indexPath.row][0].title
             cell.textLabel?.textColor = .black
         }
         return cell
     }
     
+//    テーブルビューセル選択時の処理
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.cellForRow(at: indexPath)?.backgroundColor = .none
-        if(schedules.count != 0){
-            let alertController = UIAlertController(title: "確認", message: "このイベントを削除しますか？", preferredStyle: .actionSheet)
-            let alertOkAction = UIAlertAction(title: "削除", style: .destructive) { (action) in
-                self.schedules[indexPath.row][0].ncmb?.deleteInBackground({ error in
-                    if error != nil{
-                        self.showOkAlert(title: "Error", message: error!.localizedDescription)
-                    }
-                })
-                alertController.dismiss(animated: true, completion: nil)
-                self.loadEvent(self.selectedDate)
-            }
-            let cancelAction = UIAlertAction(title: "キャンセル", style: .cancel) { (action) in
-                alertController.dismiss(animated: true, completion: nil)
-            }
-            alertController.addAction(alertOkAction)
-            alertController.addAction(cancelAction)
-            self.present(alertController, animated: true, completion: nil)
-        }
+//        tableView.cellForRow(at: indexPath)?.backgroundColor = .none
+//        if(schedules.count != 0){
+//            let alertController = UIAlertController(title: "確認", message: "このイベントを削除しますか？", preferredStyle: .actionSheet)
+//            let alertOkAction = UIAlertAction(title: "削除", style: .destructive) { (action) in
+//                self.schedules[indexPath.row][0].ncmb?.deleteInBackground({ error in
+//                    if error != nil{
+//                        self.showOkAlert(title: "Error", message: error!.localizedDescription)
+//                    }
+//                })
+//                alertController.dismiss(animated: true, completion: nil)
+//                self.loadEvent(self.selectedDate)
+//            }
+//            let cancelAction = UIAlertAction(title: "キャンセル", style: .cancel) { (action) in
+//                alertController.dismiss(animated: true, completion: nil)
+//            }
+//            alertController.addAction(alertOkAction)
+//            alertController.addAction(cancelAction)
+//            self.present(alertController, animated: true, completion: nil)
+//        }
         self.tableView.reloadData()
     }
     
     func loadEvent(_ date: Date) {
         //予定がある場合、スケジュールをDBから取得・表示する。
-        schedules = scheduleObject.scheduleLists(date: date, users: users)
+        schedules = scheduleObject.showTimeFrame(date: date)
         tableView.reloadData()
     }
 }
@@ -208,8 +216,9 @@ extension CalendarViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         switch segue.identifier {
         case "Telecture":
-            let view2 = segue.destination as! EventViewController
+            let view2 = segue.destination as! TelectureEventViewController
             view2.sentDate = selectedDate
+            view2.student = student!
         case "Collage":
             let view2 = segue.destination as! NormalEventViewController
             view2.sentDate = selectedDate

@@ -38,6 +38,8 @@ class TelectureEventViewController: UIViewController, UIPickerViewDelegate, UIPi
     @IBOutlet private var dateTextField: UITextField!
     @IBOutlet private var timePickerView: UIPickerView!
     @IBOutlet private var detailTextView: UITextView!
+    @IBOutlet private var loopView: UIView!
+    @IBOutlet private var loopSwitch: UISwitch!
 
     override func viewDidLoad() {
         super.viewDidLoad()

@@ -630,6 +630,8 @@
                     <connections>
                         <outlet property="dateTextField" destination="bzg-Mt-aoX" id="8nL-e5-biN"/>
                         <outlet property="detailTextView" destination="QXy-vj-GBc" id="e0J-56-9MH"/>
+                        <outlet property="loopSwitch" destination="F3E-zY-aRz" id="zMQ-e0-c4X"/>
+                        <outlet property="loopView" destination="0pM-Pn-DZx" id="IHw-aa-cQ4"/>
                         <outlet property="subjectPickerView" destination="52l-Qo-jMp" id="bDJ-k8-yMV"/>
                         <outlet property="timePickerView" destination="nQF-KY-dhL" id="afr-5Z-bkd"/>
                     </connections>

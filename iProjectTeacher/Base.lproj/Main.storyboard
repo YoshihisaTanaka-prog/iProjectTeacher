@@ -507,7 +507,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="QXy-vj-GBc">
-                                <rect key="frame" x="82" y="426" width="250" height="287"/>
+                                <rect key="frame" x="82" y="477" width="250" height="236"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="250" id="sd1-Uk-KWc"/>
@@ -552,8 +552,14 @@
                                     <action selector="showPastReport" destination="wAq-jI-Qbv" eventType="touchUpInside" id="1mj-jX-vlx"/>
                                 </connections>
                             </button>
+                            <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nQF-KY-dhL">
+                                <rect key="frame" x="60" y="246" width="294" height="54"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="54" id="cGy-Wm-2cz"/>
+                                </constraints>
+                            </pickerView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="授業の詳細（予定）" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JHC-uF-bss">
-                                <rect key="frame" x="82" y="390" width="250" height="21"/>
+                                <rect key="frame" x="82" y="441" width="250" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="21" id="iIF-ug-fbz"/>
                                 </constraints>
@@ -561,12 +567,37 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nQF-KY-dhL">
-                                <rect key="frame" x="60" y="246" width="294" height="54"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0pM-Pn-DZx">
+                                <rect key="frame" x="60" y="380" width="294" height="41"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="毎週この時間に授業をする" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2fb-fj-zhX">
+                                        <rect key="frame" x="10" y="10" width="208" height="21"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="208" id="K4F-nG-JAV"/>
+                                            <constraint firstAttribute="height" constant="21" id="gbA-mJ-pZn"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="F3E-zY-aRz">
+                                        <rect key="frame" x="237" y="5" width="49" height="31"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="47" id="ecV-dk-RFb"/>
+                                        </constraints>
+                                    </switch>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="54" id="cGy-Wm-2cz"/>
+                                    <constraint firstItem="F3E-zY-aRz" firstAttribute="top" secondItem="0pM-Pn-DZx" secondAttribute="top" constant="5" id="Gv6-fU-000"/>
+                                    <constraint firstAttribute="bottom" secondItem="F3E-zY-aRz" secondAttribute="bottom" constant="5" id="H4a-4T-MXR"/>
+                                    <constraint firstAttribute="bottom" secondItem="2fb-fj-zhX" secondAttribute="bottom" constant="10" id="PoU-mY-582"/>
+                                    <constraint firstItem="2fb-fj-zhX" firstAttribute="top" secondItem="0pM-Pn-DZx" secondAttribute="top" constant="10" id="SCZ-Fe-eFM"/>
+                                    <constraint firstItem="2fb-fj-zhX" firstAttribute="leading" secondItem="0pM-Pn-DZx" secondAttribute="leading" constant="10" id="b3v-sM-kgw"/>
+                                    <constraint firstAttribute="height" constant="41" id="kLy-vf-7Zt"/>
+                                    <constraint firstAttribute="trailing" secondItem="F3E-zY-aRz" secondAttribute="trailing" constant="10" id="q9a-BH-X6y"/>
                                 </constraints>
-                            </pickerView>
+                            </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="W76-9D-3lc"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -574,18 +605,21 @@
                             <constraint firstItem="W76-9D-3lc" firstAttribute="trailing" secondItem="52l-Qo-jMp" secondAttribute="trailing" constant="20" id="0ds-oL-2dV"/>
                             <constraint firstItem="3FG-j2-xpA" firstAttribute="centerX" secondItem="IHD-qa-KUg" secondAttribute="centerX" id="2yk-3U-Kfr"/>
                             <constraint firstItem="5qb-Kf-g3Q" firstAttribute="top" secondItem="QXy-vj-GBc" secondAttribute="bottom" constant="40" id="8we-Oz-5NX"/>
-                            <constraint firstItem="JHC-uF-bss" firstAttribute="top" secondItem="3FG-j2-xpA" secondAttribute="bottom" constant="30" id="EBU-gU-nCk"/>
                             <constraint firstItem="5qb-Kf-g3Q" firstAttribute="centerX" secondItem="IHD-qa-KUg" secondAttribute="centerX" id="Gjy-eZ-O4K"/>
                             <constraint firstItem="QXy-vj-GBc" firstAttribute="top" secondItem="JHC-uF-bss" secondAttribute="bottom" constant="15" id="IaM-fX-Bsw"/>
                             <constraint firstItem="52l-Qo-jMp" firstAttribute="leading" secondItem="W76-9D-3lc" secondAttribute="leading" constant="20" id="JSv-dD-XZN"/>
                             <constraint firstItem="52l-Qo-jMp" firstAttribute="top" secondItem="W76-9D-3lc" secondAttribute="top" constant="20" id="KSJ-9D-ewq"/>
                             <constraint firstItem="QXy-vj-GBc" firstAttribute="leading" secondItem="JHC-uF-bss" secondAttribute="leading" id="Kqm-T7-o39"/>
+                            <constraint firstItem="0pM-Pn-DZx" firstAttribute="trailing" secondItem="nQF-KY-dhL" secondAttribute="trailing" id="O4f-XH-SRn"/>
                             <constraint firstItem="W76-9D-3lc" firstAttribute="bottom" secondItem="5qb-Kf-g3Q" secondAttribute="bottom" constant="30" id="OGB-G2-OHU"/>
                             <constraint firstItem="nQF-KY-dhL" firstAttribute="top" secondItem="bzg-Mt-aoX" secondAttribute="bottom" constant="20" id="PP9-y8-6vz"/>
                             <constraint firstItem="QXy-vj-GBc" firstAttribute="trailing" secondItem="JHC-uF-bss" secondAttribute="trailing" id="Q63-7b-SFp"/>
+                            <constraint firstItem="0pM-Pn-DZx" firstAttribute="top" secondItem="3FG-j2-xpA" secondAttribute="bottom" constant="20" id="TSp-Vg-fOV"/>
+                            <constraint firstItem="0pM-Pn-DZx" firstAttribute="leading" secondItem="nQF-KY-dhL" secondAttribute="leading" id="Twv-zd-iVa"/>
                             <constraint firstItem="QXy-vj-GBc" firstAttribute="centerX" secondItem="IHD-qa-KUg" secondAttribute="centerX" id="VY8-LR-cZ5"/>
                             <constraint firstItem="W76-9D-3lc" firstAttribute="trailing" secondItem="bzg-Mt-aoX" secondAttribute="trailing" constant="60" id="WhH-fV-oBr"/>
                             <constraint firstItem="bzg-Mt-aoX" firstAttribute="top" secondItem="52l-Qo-jMp" secondAttribute="bottom" constant="30" id="gyj-XI-xrG"/>
+                            <constraint firstItem="JHC-uF-bss" firstAttribute="top" secondItem="0pM-Pn-DZx" secondAttribute="bottom" constant="20" id="nAE-nc-aWg"/>
                             <constraint firstItem="nQF-KY-dhL" firstAttribute="trailing" secondItem="bzg-Mt-aoX" secondAttribute="trailing" id="oIj-WH-QBp"/>
                             <constraint firstItem="bzg-Mt-aoX" firstAttribute="leading" secondItem="W76-9D-3lc" secondAttribute="leading" constant="60" id="oze-6F-2aH"/>
                             <constraint firstItem="nQF-KY-dhL" firstAttribute="leading" secondItem="bzg-Mt-aoX" secondAttribute="leading" id="sFj-vf-dSZ"/>

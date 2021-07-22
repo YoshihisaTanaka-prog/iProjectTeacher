@@ -585,6 +585,9 @@
                                         <constraints>
                                             <constraint firstAttribute="width" constant="47" id="ecV-dk-RFb"/>
                                         </constraints>
+                                        <connections>
+                                            <action selector="tappedLoopSwitchWithSender:" destination="wAq-jI-Qbv" eventType="touchUpInside" id="VEw-g6-Ygv"/>
+                                        </connections>
                                     </switch>
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>

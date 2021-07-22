@@ -116,7 +116,6 @@ extension NormalEventViewController: UITableViewDataSource, UITableViewDelegate,
         let nib2 = UINib(nibName: "DateTableViewCell", bundle: Bundle.main)
         dateTableView.register(nib1, forCellReuseIdentifier: "Plus")
         dateTableView.register(nib2, forCellReuseIdentifier: "Date")
-        dateTableView.allowsSelection = false
     }
     
 //    セルの高さ

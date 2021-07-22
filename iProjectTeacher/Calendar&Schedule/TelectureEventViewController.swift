@@ -34,6 +34,8 @@ class TelectureEventViewController: UIViewController, UIPickerViewDelegate, UIPi
     private var timeTitleList = [String]()
     private var timeNumList = [Int]()
     
+    private var isTappedLoop = false
+    
     @IBOutlet private var subjectPickerView: UIPickerView!
     @IBOutlet private var dateTextField: UITextField!
     @IBOutlet private var timePickerView: UIPickerView!
@@ -55,7 +57,11 @@ class TelectureEventViewController: UIViewController, UIPickerViewDelegate, UIPi
         self.navigationItem.title = student.userName + "さんの授業を追加"
         setupToolbar()
         setTimeList()
-        
+        if student.status == 2 {
+            loopSwitch.setOn(isTappedLoop, animated: false)
+        } else {
+            loopView.removeFromSuperview()
+        }
     }
 }
 
@@ -82,8 +88,87 @@ extension TelectureEventViewController{
             })
         }
     }
+    
+//    関連付けが外れるかも。
+    @IBAction func tappedLoopSwitch(sender: UISwitch){
+        isTappedLoop = sender.isOn
+    }
+    
     @IBAction func tappedSave(){
-        
+        if selectedTimeIndex == 0 {
+            showOkAlert(title: "注意", message: "時間を選択してください。")
+        } else if selectedSubject == ""{
+            showOkAlert(title: "注意", message: "教科・科目を選択してください！")
+        } else{
+            if isTappedLoop {
+//                重複している予定があったらスキップさせる。
+                var bookingDateList = [Date]()
+                var saveDateList = [Date]()
+                
+                let tmp = Calendar(identifier: .gregorian)
+                let time = tmp.date(from: DateComponents(hour: timeNumList[selectedTimeIndex]))!
+                for i in 0..<10 {
+                    let d = tmp.date(byAdding: .day, value: 7*i, to: selectedDate)!
+                    let date = Date().mixDateAndTime(date: d, time: time)
+                    if mixedScheduleG.isExistsSchedule(date: d, time: timeNumList[selectedTimeIndex]) {
+                        bookingDateList.append(date)
+                    } else {
+                        saveDateList.append(date)
+                    }
+                }
+                
+                if saveDateList.count == 0 {
+                    showOkAlert(title: "注意", message: "全ての日程で予定が重複しています。")
+                } else{
+                    bookingDateList = bookingDateList.sorted(by: { a, b in
+                        return a < b
+                    })
+                    saveDateList = saveDateList.sorted(by: { a, b in
+                        return a < b
+                    })
+                    var txt = ""
+                    if bookingDateList.count == 0{
+                        saveLecture(saveDateList: saveDateList)
+                    } else{
+                        for i in 0..<bookingDateList.count{
+                            let d = bookingDateList[i]
+                            txt += d.ymdJp + " " + d.hmJp + "\n"
+                        }
+                        txt += "は予定が重複しています。\nこれらを除外して予定を保存しますか？"
+                        let alertController = UIAlertController(title: "注意", message: txt, preferredStyle: .alert)
+                        let alertOkAction = UIAlertAction(title: "OK", style: .default) { (action) in
+                            self.saveLecture(saveDateList: saveDateList)
+                            alertController.dismiss(animated: true, completion: nil)
+                        }
+                        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { (action) in
+                            alertController.dismiss(animated: true, completion: nil)
+                        }
+                        alertController.addAction(alertOkAction)
+                        alertController.addAction(cancelAction)
+                        self.present(alertController, animated: true, completion: nil)
+                    }
+                }
+                
+            } else{
+                if mixedScheduleG.isExistsSchedule(date: sentDate, time: timeNumList[selectedTimeIndex]){
+                    showOkAlert(title: "注意", message: "予定が重複しています。")
+                } else{
+                    let tmp = Calendar(identifier: .gregorian)
+                    let time = tmp.date(from: DateComponents(hour: timeNumList[selectedTimeIndex]))!
+                    let date = Date().mixDateAndTime(date: sentDate, time: time)
+                    saveLecture(saveDateList: [date])
+                }
+            }
+        }
+    }
+    private func saveLecture(saveDateList: [Date]){
+        let _ = Lecture(student: student, timeList: saveDateList, subject: selectedSubject, detail: detailTextView.text!, self)
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5, execute: {
+            mixedScheduleG.loadSchedule(date: self.sentDate, userIds: [currentUserG.userId, self.student.userId], self)
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+                self.navigationController?.popViewController(animated: true)
+            }
+        })
     }
 }
 

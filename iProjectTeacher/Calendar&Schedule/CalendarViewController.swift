@@ -79,8 +79,12 @@ extension CalendarViewController{
             self.performSegue(withIdentifier: "Normal", sender: nil)
             alertController.dismiss(animated: true, completion: nil)
         }
+        let cancelAction = UIAlertAction(title: "キャンセル", style: .cancel) { (action) in
+            alertController.dismiss(animated: true, completion: nil)
+        }
         alertController.addAction(collageSchedule)
         alertController.addAction(privateSchedule)
+        alertController.addAction(cancelAction)
         self.present(alertController, animated: true, completion: nil)
     }
 }

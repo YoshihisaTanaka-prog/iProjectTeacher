@@ -16,6 +16,7 @@ class Lecture {
     var timeList: [Date]
     var subject: String
     var subjectName: String
+    var detail: String
     var teacherAttendanceTime = 0
     var studentAttendanceTime = 0
     var isAbleToEdit: Bool
@@ -26,6 +27,7 @@ class Lecture {
         timeList = lecture.object(forKey: "timeList") as! [Date]
         subject = lecture.object(forKey: "subject") as! String
         subjectName = vc.transformSubject(subject)
+        detail = lecture.object(forKey: "detail") as? String ?? ""
         
         let studentId = ncmb.object(forKey: "studentId") as! String
         
@@ -69,7 +71,7 @@ class Lecture {
     }
     
 //    初回登録用
-    init(student: User, timeList: [Date], subject: String, _ vc: UIViewController){
+    init(student: User, timeList: [Date], subject: String, detail: String, _ vc: UIViewController){
         isAbleToEdit = true
         ncmb = NCMBObject(className: "Lecture")!
         teacher = currentUserG
@@ -86,6 +88,10 @@ class Lecture {
         
         self.subject = subject
         self.subjectName = vc.transformSubject(subject)
+        
+        self.detail = detail
+        ncmb.setObject(detail, forKey: "detail")
+        
         ncmb.setObject(subject, forKey: "subject")
         ncmb.setObject(0, forKey: "teacherAttendanceTime")
         ncmb.setObject(0, forKey: "studentAttendanceTime")

@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="KGk-i7-Jjw" customClass="DateTableViewCell" customModule="iProjectTeacher" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="214"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="214"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zyo-oo-iAe">
+                        <rect key="frame" x="20" y="20" width="280" height="21"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="21" id="Zdj-77-o3y"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="日付" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="xV5-Pg-uSJ">
+                        <rect key="frame" x="20" y="56" width="280" height="34"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="34" id="uNZ-ei-fEy"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <textInputTraits key="textInputTraits"/>
+                    </textField>
+                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="終了時間" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="KUs-qE-2Rx">
+                        <rect key="frame" x="20" y="149" width="280" height="34"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="34" id="4PL-os-9WJ"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <textInputTraits key="textInputTraits"/>
+                    </textField>
+                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="開始時間" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="qcf-td-SX8">
+                        <rect key="frame" x="20" y="105" width="280" height="34"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="34" id="kxh-Jh-3Zp"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <textInputTraits key="textInputTraits"/>
+                    </textField>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="xV5-Pg-uSJ" firstAttribute="top" secondItem="Zyo-oo-iAe" secondAttribute="bottom" constant="15" id="0Sf-iv-fEF"/>
+                    <constraint firstItem="Zyo-oo-iAe" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="20" id="5Iw-bP-90c"/>
+                    <constraint firstItem="qcf-td-SX8" firstAttribute="leading" secondItem="Zyo-oo-iAe" secondAttribute="leading" id="8qk-vC-CDq"/>
+                    <constraint firstItem="KUs-qE-2Rx" firstAttribute="trailing" secondItem="Zyo-oo-iAe" secondAttribute="trailing" id="976-R5-JZz"/>
+                    <constraint firstAttribute="trailing" secondItem="Zyo-oo-iAe" secondAttribute="trailing" constant="20" id="Nyn-eu-hPc"/>
+                    <constraint firstItem="KUs-qE-2Rx" firstAttribute="leading" secondItem="Zyo-oo-iAe" secondAttribute="leading" id="Tgn-so-KSO"/>
+                    <constraint firstItem="qcf-td-SX8" firstAttribute="trailing" secondItem="Zyo-oo-iAe" secondAttribute="trailing" id="Tma-cZ-7MM"/>
+                    <constraint firstItem="Zyo-oo-iAe" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="20" id="VX9-gC-AEY"/>
+                    <constraint firstItem="xV5-Pg-uSJ" firstAttribute="leading" secondItem="Zyo-oo-iAe" secondAttribute="leading" id="YI4-Bp-Km1"/>
+                    <constraint firstItem="KUs-qE-2Rx" firstAttribute="top" secondItem="qcf-td-SX8" secondAttribute="bottom" constant="10" id="aet-6x-f5a"/>
+                    <constraint firstItem="qcf-td-SX8" firstAttribute="top" secondItem="xV5-Pg-uSJ" secondAttribute="bottom" constant="15" id="fwN-Tu-Pco"/>
+                    <constraint firstItem="xV5-Pg-uSJ" firstAttribute="trailing" secondItem="Zyo-oo-iAe" secondAttribute="trailing" id="ocv-Dc-HLH"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <connections>
+                <outlet property="dateLabel" destination="Zyo-oo-iAe" id="W8T-HO-qPK"/>
+                <outlet property="dateTextField" destination="xV5-Pg-uSJ" id="Ujc-BW-G8U"/>
+                <outlet property="endTimeTextField" destination="KUs-qE-2Rx" id="qSm-Ex-TEl"/>
+                <outlet property="startTimeTextField" destination="qcf-td-SX8" id="YSv-R3-ED7"/>
+            </connections>
+            <point key="canvasLocation" x="134.78260869565219" y="173.10267857142856"/>
+        </tableViewCell>
+    </objects>
+</document>

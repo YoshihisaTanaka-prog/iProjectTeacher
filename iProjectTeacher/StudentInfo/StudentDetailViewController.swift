@@ -11,7 +11,7 @@ import NCMB
 
 
 //選ばれた生徒の情報を表示。ここでレポートも表示される。このレポートをタップするとReportViewControllerへ。
-class StudentDetailViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class StudentDetailViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, StudentInfoTableViewCellDelegate {
     
     var reportList: [Report] = []
     var student: User!
@@ -30,16 +30,19 @@ class StudentDetailViewController: UIViewController, UITableViewDelegate, UITabl
         tableView.rowHeight = UITableView.automaticDimension
         tableView.delegate = self
         tableView.dataSource = self
+        tableView.tableFooterView = UIView()
         
         tableView.register(UINib(nibName: "StudentInfoTableViewCell", bundle: nil), forCellReuseIdentifier: "StudentInfo")
         tableView.register(UINib(nibName: "ReportTableViewCell", bundle: nil), forCellReuseIdentifier: "Report")
         size = getScreenSize(isExsistsNavigationBar: true, isExsistsTabBar: true)
         loadReport()
+        mixedScheduleG.delete()
+        mixedScheduleG.loadSchedule(date: Date(), userIds: [currentUserG.userId, student.userId], self)
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if(indexPath.row == 0){
-            return size.viewHeight
+            return 530.f
         }
         else{
             return 44.f
@@ -55,12 +58,23 @@ class StudentDetailViewController: UIViewController, UITableViewDelegate, UITabl
             let cell = tableView.dequeueReusableCell(withIdentifier: "StudentInfo") as! StudentInfoTableViewCell
             cell.userimage.image = userImagesCacheG[student.userId]
             cell.userNameLabel.text = student.userName
+            cell.delegate = self
+            cell.student = student
+            cell.vc = self
+            cell.setButtons()
+            cell.selectionStyle = .none
+            cell.setFontColor()
+            cell.backgroundColor = dColor.base
             
             return cell
         }
         else{
             let cell = tableView.dequeueReusableCell(withIdentifier: "Report") as! ReportTableViewCell
             cell.titleLabel.text = reportList[indexPath.row - 1].studentId
+            cell.selectionStyle = .default
+            cell.setFontColor()
+            cell.backgroundColor = dColor.base
+            
             return cell
         }
     }
@@ -72,6 +86,18 @@ class StudentDetailViewController: UIViewController, UITableViewDelegate, UITabl
             selectedReport = reportList[indexPath.row - 1]
 //            self.performSegue(withIdentifier: "", sender: nil)
         }
+        tableView.reloadData()
+    }
+    
+    func tappedSchedule() {
+        self.performSegue(withIdentifier: "Schedule", sender: nil)
+    }
+    
+    func tappedChat() {
+        
+    }
+    
+    func tappedChangeStatus() {
         tableView.reloadData()
     }
     
@@ -99,6 +125,9 @@ class StudentDetailViewController: UIViewController, UITableViewDelegate, UITabl
         case "Detail":
             let view2 = segue.destination as! ReportViewController
             view2.report = selectedReport
+        case "Schedule":
+            let view2 = segue.destination as! CalendarViewController
+            view2.student = student
         default:
             break
         }

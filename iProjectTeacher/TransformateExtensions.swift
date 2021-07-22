@@ -18,6 +18,12 @@ extension Int{
     public var f: CGFloat {
         return CGFloat(self)
     }
+    public var jp: String {
+        let formatter = NumberFormatter()
+        formatter.numberStyle = .spellOut
+        formatter.locale = .init(identifier: "ja-JP")
+        return formatter.string(from: NSNumber(value: self)) ?? ""
+    }
     public var s: String {
         return String(self)
     }
@@ -173,7 +179,8 @@ extension Date{
         let hour = time.h
         let minute = time.min
         let c = Calendar(identifier: .gregorian)
-        return c.date(byAdding: .minute, value: 60 * hour + minute, to: date)!
+        let d = c.date(from: DateComponents(year: date.y, month: date.m, day: date.d))!
+        return c.date(byAdding: .minute, value: 60 * hour + minute, to: d)!
     }
 }
 

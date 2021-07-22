@@ -9,6 +9,10 @@
 import Foundation
 import NCMB
 
+protocol ReportDelegate {
+    func imagesDidLoad(images: [UIImage])
+}
+
 class Report{
     var ncmb: NCMBObject
     var studentId: String
@@ -21,6 +25,7 @@ class Report{
     var messageToParents: String
     var messageToTeacher: String
     var fileNames: [String] = []
+    var delegate: ReportDelegate?
     
     init(_ report: NCMBObject){
         self.ncmb = report
@@ -48,6 +53,45 @@ class Report{
         self.nextUnit = nextUnit
         self.messageToParents = messageToParents
         self.messageToTeacher = messageToTeacher
+    }
+    
+    func loadImage(vc: UIViewController){
+        var loadedImage: [Int: UIImage] = [:]
+        var isLoaded = [Bool]()
+        for _ in fileNames{
+            isLoaded.append(false)
+        }
+        for i in 0..<fileNames.count{
+            let fileName = fileNames[i]
+            let file = NCMBFile.file(withName: fileName, data:nil) as! NCMBFile
+            file.getDataInBackground { (data, error) in
+                if error == nil {
+                    DispatchQueue.main.async {
+                        isLoaded[i] = true
+                        let image = UIImage(data: data!)
+                        loadedImage[i] = image
+                        var isNeedToCallDelegate = true
+                        for l in isLoaded{
+                            if !l {
+                                isNeedToCallDelegate = false
+                                break
+                            }
+                        }
+                        if isNeedToCallDelegate{
+                            var images = [UIImage]()
+                            for i in 0..<isLoaded.count{
+                                if let image = loadedImage[i]{
+                                    images.append(image)
+                                }
+                            }
+                            self.delegate?.imagesDidLoad(images: images)
+                        }
+                    }
+                } else {
+                    vc.showOkAlert(title: "Loading image error", message: error!.localizedDescription)
+                }
+            }
+        }
     }
     
 }

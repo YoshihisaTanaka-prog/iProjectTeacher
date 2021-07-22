@@ -32,13 +32,15 @@ extension UIViewController{
                             blockedUserIdListG.append(userId)
                         }
                         else{
+                            let u = User(userId: userId, isNeedParameter: true, viewController: self)
+                            u.status = status
                             switch status {
                             case 0:
-                                waitingUserListG.append(User(userId: userId, isNeedParameter: true, viewController: self))
+                                waitingUserListG.append(u)
                             case 1:
-                                followUserListG.append(User(userId: userId, isNeedParameter: true, viewController: self))
+                                followUserListG.append(u)
                             case 2:
-                                favoriteUserListG.append(User(userId: userId, isNeedParameter: true, viewController: self))
+                                favoriteUserListG.append(u)
                             default:
                                 break
                         }

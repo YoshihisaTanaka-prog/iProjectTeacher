@@ -16,10 +16,10 @@ class CalendarViewController: UIViewController, UITableViewDataSource, UITableVi
     var student: User?
     
     private var selectedDate: Date!
+    private var selectedEventType = ""
     private var currentMonth: Int!
     private var schedules: [[TimeFrameUnit]] = []
     private var scheduleObject: Schedules!
-    private var users:[User] = []
     private var userIds:[String] = []
     
     @IBOutlet private var tableView: UITableView!  //スケジュール内容
@@ -40,18 +40,25 @@ class CalendarViewController: UIViewController, UITableViewDataSource, UITableVi
         selectedDate = tmpCalendar.date(from: DateComponents(year: now.y, month: now.m, day: now.d))!
         currentMonth = selectedDate.m
         
-        users.append(currentUserG)
         userIds.append(currentUserG.userId)
+        if student == nil{
+            scheduleObject = myScheduleG
+        } else {
+            self.navigationItem.title = student!.userName + "さんとのスケジュール"
+            userIds.append(student!.userId)
+            scheduleObject = mixedScheduleG
+        }
+        tableView.allowsSelection = false
     }
     
     override func viewWillAppear(_ animated: Bool) {
         datelabel.text = selectedDate.ymdJp
-//        scheduleObject = myScheduleG
         loadEvent(selectedDate)
         calenderView.reloadData()
     }
 }
 
+//イベントの追加
 extension CalendarViewController{
     @IBAction func tappedPlus(){
         let alertController = UIAlertController(title: "予定の種類を選択", message: "", preferredStyle: .actionSheet)
@@ -63,11 +70,13 @@ extension CalendarViewController{
             alertController.addAction(telectureSchedule)
         }
         let collageSchedule = UIAlertAction(title: "大学の予定", style: .default) { (action) in
-            self.performSegue(withIdentifier: "Collage", sender: nil)
+            self.selectedEventType = "School"
+            self.performSegue(withIdentifier: "Normal", sender: nil)
             alertController.dismiss(animated: true, completion: nil)
         }
         let privateSchedule = UIAlertAction(title: "私用", style: .default) { (action) in
-            self.performSegue(withIdentifier: "Private", sender: nil)
+            self.selectedEventType = "private"
+            self.performSegue(withIdentifier: "Normal", sender: nil)
             alertController.dismiss(animated: true, completion: nil)
         }
         alertController.addAction(collageSchedule)
@@ -130,7 +139,7 @@ extension CalendarViewController{
     }
 }
     
-//ここからカレンダー関係
+//カレンダー関係
 extension CalendarViewController{
     
     // 祝日判定を行い結果を返すメソッド
@@ -186,12 +195,14 @@ extension CalendarViewController{
     func calendar(_ calendar: FSCalendar, didSelect date: Date, at monthPosition: FSCalendarMonthPosition){
         let tmpCalendar = Calendar(identifier: .gregorian)
         let inputMonth = tmpCalendar.component(.month, from: date)
-        if(currentMonth != inputMonth){
-            calenderView.setCurrentPage(date, animated: true)
-        }
         selectedDate = date
         datelabel.text = date.ymdJp
         loadEvent(selectedDate)
+//        他の月を選んだ時に移動する
+        if(currentMonth != inputMonth){
+            calenderView.setCurrentPage(date, animated: true)
+            scheduleObject.loadSchedule(date: selectedDate, userIds: userIds, self)
+        }
     }
     
     func calendar(_ calendar: FSCalendar, numberOfEventsFor date: Date) -> Int {
@@ -210,7 +221,7 @@ extension CalendarViewController{
     
 }
 
-//ここから値渡し
+//値渡し
 extension CalendarViewController {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -219,14 +230,10 @@ extension CalendarViewController {
             let view2 = segue.destination as! TelectureEventViewController
             view2.sentDate = selectedDate
             view2.student = student!
-        case "Collage":
+        case "Normal":
             let view2 = segue.destination as! NormalEventViewController
             view2.sentDate = selectedDate
-            view2.eventType = "school"
-        case "Private":
-            let view2 = segue.destination as! NormalEventViewController
-            view2.sentDate = selectedDate
-            view2.eventType = "private"
+            view2.eventType = selectedEventType
         default:
             break
         }

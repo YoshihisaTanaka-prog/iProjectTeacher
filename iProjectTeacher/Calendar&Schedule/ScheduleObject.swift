@@ -43,6 +43,13 @@ class Schedules {
         return false
     }
     
+    func delete() {
+        for v in self.monthDic.values{
+            v.dateDic.removeAll()
+        }
+        self.monthDic.removeAll()
+    }
+    
     func searchSchedule(date: Date, time: Int) -> [TimeFrameUnit] {
         let ym = date.y.s + date.m.s02
         let d = date.d.s

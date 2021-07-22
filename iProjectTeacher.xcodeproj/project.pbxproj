@@ -31,6 +31,10 @@
 		0459388D25D149C900A0E3C8 /* studentNoImage.png in Resources */ = {isa = PBXBuildFile; fileRef = 0459388925D149C100A0E3C8 /* studentNoImage.png */; };
 		0459388F25D149CC00A0E3C8 /* teacherNoImage.png in Resources */ = {isa = PBXBuildFile; fileRef = 0459388825D149C100A0E3C8 /* teacherNoImage.png */; };
 		0461B68F26972DE70097FD2C /* TelectureEventViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0461B68E26972DE70097FD2C /* TelectureEventViewController.swift */; };
+		0479D2D526A06FAE00294DFB /* PlusTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0479D2D326A06FAE00294DFB /* PlusTableViewCell.swift */; };
+		0479D2D626A06FAE00294DFB /* PlusTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0479D2D426A06FAE00294DFB /* PlusTableViewCell.xib */; };
+		0479D2DB26A06FD800294DFB /* DateTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0479D2D926A06FD800294DFB /* DateTableViewCell.swift */; };
+		0479D2DC26A06FD800294DFB /* DateTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0479D2DA26A06FD800294DFB /* DateTableViewCell.xib */; };
 		04A7E96C25AF2B4900C0F43C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04A7E96B25AF2B4900C0F43C /* AppDelegate.swift */; };
 		04A7E96E25AF2B4900C0F43C /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04A7E96D25AF2B4900C0F43C /* SceneDelegate.swift */; };
 		04A7E97025AF2B4900C0F43C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04A7E96F25AF2B4900C0F43C /* ViewController.swift */; };
@@ -114,6 +118,10 @@
 		0459388925D149C100A0E3C8 /* studentNoImage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = studentNoImage.png; sourceTree = "<group>"; };
 		0459388A25D149C100A0E3C8 /* creating.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = creating.png; sourceTree = "<group>"; };
 		0461B68E26972DE70097FD2C /* TelectureEventViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TelectureEventViewController.swift; sourceTree = "<group>"; };
+		0479D2D326A06FAE00294DFB /* PlusTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlusTableViewCell.swift; sourceTree = "<group>"; };
+		0479D2D426A06FAE00294DFB /* PlusTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PlusTableViewCell.xib; sourceTree = "<group>"; };
+		0479D2D926A06FD800294DFB /* DateTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateTableViewCell.swift; sourceTree = "<group>"; };
+		0479D2DA26A06FD800294DFB /* DateTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DateTableViewCell.xib; sourceTree = "<group>"; };
 		04A7E96825AF2B4900C0F43C /* iProjectTeacher.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iProjectTeacher.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		04A7E96B25AF2B4900C0F43C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		04A7E96D25AF2B4900C0F43C /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -206,6 +214,17 @@
 				043A9DB425D80D1500587B0E /* SignInViewController.swift */,
 			);
 			path = Sign;
+			sourceTree = "<group>";
+		};
+		0479D2D226A06F8A00294DFB /* TableViewCells */ = {
+			isa = PBXGroup;
+			children = (
+				0479D2D326A06FAE00294DFB /* PlusTableViewCell.swift */,
+				0479D2D426A06FAE00294DFB /* PlusTableViewCell.xib */,
+				0479D2D926A06FD800294DFB /* DateTableViewCell.swift */,
+				0479D2DA26A06FD800294DFB /* DateTableViewCell.xib */,
+			);
+			path = TableViewCells;
 			sourceTree = "<group>";
 		};
 		047C4DEA25C856300082807A /* Images */ = {
@@ -326,6 +345,7 @@
 		1BD9EE3F25D3AC8F001560A3 /* Calendar&Schedule */ = {
 			isa = PBXGroup;
 			children = (
+				0479D2D226A06F8A00294DFB /* TableViewCells */,
 				1B55D80625D40008006BAE51 /* CalendarViewController.swift */,
 				1B55D80925D41365006BAE51 /* EventViewController.swift */,
 				04EEA6BF2684BD19003E171A /* NormalEventViewController.swift */,
@@ -461,9 +481,11 @@
 				04EEA6BE2684B298003E171A /* Calender.storyboard in Resources */,
 				1BA0CFCB25E7D8B80008FF43 /* Icon-App-60x60@2x.png in Resources */,
 				1BA0CFCE25E7D8B80008FF43 /* Icon-App-29x29@2x.png in Resources */,
+				0479D2D626A06FAE00294DFB /* PlusTableViewCell.xib in Resources */,
 				1F3603E7269729B400B78DB6 /* StudentTableViewCell.xib in Resources */,
 				1BA0CFCC25E7D8B80008FF43 /* Icon-App-76x76@1x.png in Resources */,
 				0459388F25D149CC00A0E3C8 /* teacherNoImage.png in Resources */,
+				0479D2DC26A06FD800294DFB /* DateTableViewCell.xib in Resources */,
 				1BA0CFC525E7D8B80008FF43 /* ItunesArtwork@2x.png in Resources */,
 				1BA0CFC425E7D8B80008FF43 /* Icon-App-20x20@3x.png in Resources */,
 				043A9DB725D80D1600587B0E /* SignIn.storyboard in Resources */,
@@ -538,6 +560,7 @@
 				1F185222265F917E005666DE /* RadioButton.swift in Sources */,
 				0428E91D26908A9500F3FA2A /* Schedule.swift in Sources */,
 				04A7E97025AF2B4900C0F43C /* ViewController.swift in Sources */,
+				0479D2DB26A06FD800294DFB /* DateTableViewCell.swift in Sources */,
 				04EEA6C02684BD19003E171A /* NormalEventViewController.swift in Sources */,
 				1B55D80A25D41365006BAE51 /* EventViewController.swift in Sources */,
 				1FDD508926568EB20064B94C /* DocumentsViewController.swift in Sources */,
@@ -573,6 +596,7 @@
 				1F947C4A2684A555007F2FC7 /* TimeRange.swift in Sources */,
 				043079B6266A493600247080 /* RailsExtensions.swift in Sources */,
 				1F08D94325E69F920002E0AA /* Questionnaire_subViewController.swift in Sources */,
+				0479D2D526A06FAE00294DFB /* PlusTableViewCell.swift in Sources */,
 				04B39D1925D43D57003EDECE /* StudentDetailViewController.swift in Sources */,
 				0433E3AE25D5584B002A6BE5 /* StudentViewController.swift in Sources */,
 				1F08D94D25E6A0890002E0AA /* ScreenSize.swift in Sources */,

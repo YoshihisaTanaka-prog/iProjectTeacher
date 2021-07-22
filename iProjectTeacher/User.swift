@@ -19,6 +19,7 @@ class User {
     var selection = ""
     var introduction = ""
     var youbiTimeList: [[String]] = []
+    var status = 0
     var teacherParameter: TeacherParameter?
     var studentParameter: StudentParameter?
     
@@ -80,7 +81,7 @@ class Parameter{
             if imageName == nil {
                 setNoImage(userId)
             } else {
-                let file =  NCMBFile.file(withName: userId,data:nil) as! NCMBFile
+                let file = NCMBFile.file(withName: userId,data:nil) as! NCMBFile
                 file.getDataInBackground { (data, error) in
                     if error == nil {
                         if data == nil {

@@ -41,20 +41,23 @@ class CalendarViewController: UIViewController, UITableViewDataSource, UITableVi
         currentMonth = selectedDate.m
         
         userIds.append(currentUserG.userId)
-        if student == nil{
-            scheduleObject = myScheduleG
-        } else {
+        if student != nil{
             self.navigationItem.title = student!.userName + "さんとのスケジュール"
             userIds.append(student!.userId)
-            scheduleObject = mixedScheduleG
         }
         tableView.allowsSelection = false
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        if student == nil{
+            scheduleObject = myScheduleG
+        } else {
+            scheduleObject = mixedScheduleG
+        }
+        scheduleObject.delegate = self
+        scheduleObject.loadSchedule(date: selectedDate, userIds: userIds, self)
         datelabel.text = selectedDate.ymdJp
         loadEvent(selectedDate)
-        calenderView.reloadData()
     }
 }
 
@@ -139,12 +142,26 @@ extension CalendarViewController{
     func loadEvent(_ date: Date) {
         //予定がある場合、スケジュールをDBから取得・表示する。
         schedules = scheduleObject.showTimeFrame(date: date)
+        for s in schedules{
+            print("0 >>", s[0].time, s[0].title, s[0].isMyEvent, "1 >>", s[1].time, s[1].title, s[1].isMyEvent)
+        }
         tableView.reloadData()
     }
 }
     
 //カレンダー関係
-extension CalendarViewController{
+extension CalendarViewController: ScheduleDelegate{
+    func allSchedulesDidLoaded() {
+        calenderView.reloadData()
+        if student == nil{
+            myScheduleG = scheduleObject
+        } else{
+            mixedScheduleG = scheduleObject
+        }
+        loadEvent(selectedDate)
+    }
+    
+    func schedulesDidLoaded() {}
     
     // 祝日判定を行い結果を返すメソッド
     func judgeHoliday(_ date : Date) -> Bool {
@@ -197,8 +214,7 @@ extension CalendarViewController{
     
     //カレンダーで日付を選択された時の処理(スケジュール表示処理)
     func calendar(_ calendar: FSCalendar, didSelect date: Date, at monthPosition: FSCalendarMonthPosition){
-        let tmpCalendar = Calendar(identifier: .gregorian)
-        let inputMonth = tmpCalendar.component(.month, from: date)
+        let inputMonth = date.m
         selectedDate = date
         datelabel.text = date.ymdJp
         loadEvent(selectedDate)
@@ -219,8 +235,11 @@ extension CalendarViewController{
     
     func calendarCurrentPageDidChange(_ calendar: FSCalendar) {
         let tmpCalendar = Calendar(identifier: .gregorian)
+        let date = tmpCalendar.date(from: DateComponents(year: calendar.currentPage.y, month: calendar.currentPage.m, day: 1))!
+        scheduleObject.loadSchedule(date: date, userIds: userIds, self)
         currentMonth = tmpCalendar.component(.month, from: calendar.currentPage)
         calenderView.reloadData()
+        loadEvent(selectedDate)
     }
     
 }

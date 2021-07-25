@@ -9,7 +9,13 @@
 import Foundation
 import NCMB
 
+protocol LectureDelegate {
+    func savedLecture()
+}
+
 class Lecture {
+    var delegate: LectureDelegate?
+    
     var ncmb: NCMBObject
     var student: User?
     var teacher: User?
@@ -33,41 +39,36 @@ class Lecture {
         
         let teacherId = ncmb.object(forKey: "teacherId") as! String
         isAbleToEdit = teacherId == currentUserG.userId
+        
         let query1 = NCMBQuery(className: "TeacherParameter")
         query1?.whereKey("userId", equalTo: teacherId)
-        query1?.findObjectsInBackground({ result, error in
-            if error == nil {
-                let object = result?.first as? NCMBObject
-                if object == nil{
-                    vc.showOkAlert(title: "Error", message: "教師が見つかりませんでした。")
-                } else {
-                    // ここに教師を登録するコードを書く
-                    self.teacher = User(userId: teacherId, isNeedParameter: false, viewController: vc)
-                    let _ = TeacherParameter(object!, user: &self.teacher!)
-                }
+        let result1 = try? query1?.findObjects()
+        if result1 == nil{
+            vc.showOkAlert(title: "Error", message: "教師が見つかりませんでした。")
+        } else{
+            let object = result1?.first as? NCMBObject
+            if object == nil{
+                vc.showOkAlert(title: "Error", message: "教師が見つかりませんでした。")
+            } else{
+                self.teacher = User(userId: teacherId, isNeedParameter: false, viewController: vc)
+                let _ = TeacherParameter(object!, user: &self.teacher!)
             }
-            else{
-                vc.showOkAlert(title: "Error", message: error!.localizedDescription)
-            }
-        })
+        }
         
         let query2 = NCMBQuery(className: "StudentParameter")
         query2?.whereKey("userId", equalTo: studentId)
-        query2?.findObjectsInBackground({ result, error in
-            if error == nil {
-                let object = result?.first as? NCMBObject
-                if object == nil{
-                    vc.showOkAlert(title: "Error", message: "生徒が見つかりませんでした。")
-                } else {
-                    // ここに生徒を登録するコードを書く
-                    self.student = User(userId: studentId, isNeedParameter: false, viewController: vc)
-                    let _ = StudentParameter(object!, user: &self.student!)
-                }
+        let result2 = try? query2?.findObjects()
+        if result2 == nil{
+            vc.showOkAlert(title: "Error", message: "生徒が見つかりませんでした。")
+        } else{
+            let object = result2?.first as? NCMBObject
+            if object == nil{
+                vc.showOkAlert(title: "Error", message: "生徒が見つかりませんでした。")
+            } else{
+                self.student = User(userId: teacherId, isNeedParameter: false, viewController: vc)
+                let _ = StudentParameter(object!, user: &self.student!)
             }
-            else{
-                vc.showOkAlert(title: "Error", message: error!.localizedDescription)
-            }
-        })
+        }
     }
     
 //    初回登録用
@@ -96,7 +97,9 @@ class Lecture {
         ncmb.setObject(0, forKey: "teacherAttendanceTime")
         ncmb.setObject(0, forKey: "studentAttendanceTime")
         ncmb.saveInBackground { error in
-            if error != nil{
+            if error == nil{
+                self.delegate?.savedLecture()
+            } else{
                 vc.showOkAlert(title: "Error", message: error!.localizedDescription)
             }
         }
@@ -110,7 +113,7 @@ extension Lecture{
         let c = Calendar(identifier: .gregorian)
         let tomorrow = c.date(byAdding: .day, value: 1, to: date)!
         for time in self.timeList{
-            if date <= time && time < tomorrow{
+            if date <= time && time < tomorrow && self.teacher != nil && self.student != nil{
 //                コピペ時注意＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊
                 let t = TimeFrameUnit(time: time.h, title: self.subjectName, isAbleToShow: true, isMyEvent: self.teacher!.userId == currentUserG.userId)
                 t.lectureId = self.ncmb.objectId

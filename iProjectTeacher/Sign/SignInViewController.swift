@@ -76,7 +76,7 @@ class SignInViewController: UIViewController, UITextFieldDelegate {
                         } else {
                             //教師垢の場合
                             self.loadFollowList()
-                            self.loadSchedule([NCMBUser.current()!.objectId])
+                            myScheduleG.loadSchedule(date: Date(), userIds: [NCMBUser.current()!.objectId], self)
                             let alertController = UIAlertController(title: "ユーザ情報取得中", message: "しばらくお待ちください。", preferredStyle: .alert)
                             self.present(alertController, animated: true, completion: nil)
                             //画像のダウンロードに時間がかかるので、2秒待機

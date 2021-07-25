@@ -42,6 +42,8 @@ class Opening1ViewController: UIViewController {
 //                                ログインしていることを次のViewに伝える、ログイン中のユーザーの情報を保存する。
                                 isLogInG = true
                                 currentUserG = User(user!)
+                                self.loadFollowList()
+                                myScheduleG.loadSchedule(date: Date(), userIds: [currentUserG.userId], self)
                             }
                         }
                     } else{

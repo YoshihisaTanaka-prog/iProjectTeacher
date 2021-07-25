@@ -13,8 +13,12 @@ class TelectureEventViewController: UIViewController, UIPickerViewDelegate, UIPi
     
     var student: User!
     var sentDate: Date!
+    private var limitDate: Date!
     private var toolBar:UIToolbar!
     private var selectedDate: Date!
+    
+    private var alert: UIAlertController!
+    
 //    教科用の　ク ラ ス 内 変数・定数
     private var selectedSubject = ""
     private var selectedSubjectId = 0
@@ -45,6 +49,15 @@ class TelectureEventViewController: UIViewController, UIPickerViewDelegate, UIPi
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        let tmp = Calendar(identifier: .gregorian)
+        let now = Date()
+        limitDate = tmp.date(from: DateComponents(year: now.y, month: now.m, day: now.d))!
+        limitDate = tmp.date(byAdding: .day, value: 3, to: limitDate)!
+        if sentDate < limitDate {
+            sentDate = limitDate
+            showOkAlert(title: "注意", message: limitDate.ymdJp + "以降の予定しか追加できません。")
+        }
 
         subjectPickerView.dataSource = self
         subjectPickerView.delegate = self
@@ -60,13 +73,15 @@ class TelectureEventViewController: UIViewController, UIPickerViewDelegate, UIPi
         if student.status == 2 {
             loopSwitch.setOn(isTappedLoop, animated: false)
         } else {
-            loopView.removeFromSuperview()
+            loopView.alpha = 0.f
+            loopSwitch.isEnabled = false
         }
     }
 }
 
 //IBAction関連
 extension TelectureEventViewController{
+    
     @IBAction func showPastReport(){
         if(selectedSubject == ""){
             self.showOkAlert(title: "注意", message: "教科・科目を選択してください！")
@@ -162,14 +177,24 @@ extension TelectureEventViewController{
         }
     }
     private func saveLecture(saveDateList: [Date]){
-        let _ = Lecture(student: student, timeList: saveDateList, subject: selectedSubject, detail: detailTextView.text!, self)
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5, execute: {
-            mixedScheduleG.loadSchedule(date: self.sentDate, userIds: [currentUserG.userId, self.student.userId], self)
-            DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
-                self.navigationController?.popViewController(animated: true)
-            }
-        })
+        alert = UIAlertController(title: "保存", message: "データを保存中です。\nしばらくお待ちください。", preferredStyle: .alert)
+        self.present(alert, animated: true, completion: nil)
+        let l = Lecture(student: student, timeList: saveDateList, subject: selectedSubject, detail: detailTextView.text!, self)
+        l.delegate = self
     }
+}
+
+extension TelectureEventViewController: ScheduleDelegate,LectureDelegate{
+    
+    func savedLecture() {
+        mixedScheduleG.delegate = self
+        mixedScheduleG.loadSchedule(date: self.sentDate, userIds: [currentUserG.userId, self.student.userId], self)
+    }
+    func schedulesDidLoaded() {
+        alert.dismiss(animated: true, completion: nil)
+        self.navigationController?.popViewController(animated: true)
+    }
+    func allSchedulesDidLoaded() {}
 }
 
 //テキストフィールド、テキストビュー関連
@@ -187,6 +212,10 @@ extension TelectureEventViewController: UITextFieldDelegate{
     }
 //    決定ボタンを押したときの処理
     @objc func doneBtn(){
+        if selectedDate < limitDate {
+            selectedDate = limitDate
+            showOkAlert(title: "注意", message: limitDate.ymdJp + "以降の予定しか追加できません。")
+        }
         sentDate = selectedDate
         dateTextField.text = sentDate.ymdJp
         dateTextField.resignFirstResponder()
@@ -301,10 +330,8 @@ extension TelectureEventViewController{
 //時間リストの設定
 extension TelectureEventViewController{
     private func setTimeList(){
-        timeTitleList = []
-        timeNumList = []
-        timeTitleList.append("時間を選択")
-        timeNumList.append(0)
+        timeTitleList = ["時間を選択"]
+        timeNumList = [0]
         for i in businessHoursG[sentDate.weekId].first..<businessHoursG[sentDate.weekId].last{
             if !mixedScheduleG.isExistsSchedule(date: sentDate, time: i){
                 timeTitleList.append(i.s02 + ":00 - " + (i+1).s02 + ":00")

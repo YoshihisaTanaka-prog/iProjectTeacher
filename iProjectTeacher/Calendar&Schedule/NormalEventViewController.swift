@@ -22,6 +22,7 @@ class NormalEventViewController: UIViewController, UITextFieldDelegate {
     private var firstTime: Date!
     private var endDate: Date!
     private var endTime: Date!
+    private var limitDate: Date!
     private var selectedDate: Date!
     private var isShownTableView = true
     private var dateTableView = UITableView()
@@ -36,10 +37,16 @@ class NormalEventViewController: UIViewController, UITextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let tmpCalendar = Calendar(identifier: .gregorian)
+        let tmp = Calendar(identifier: .gregorian)
         let d = Date()
-        let start = tmpCalendar.date(from: DateComponents(hour: d.h, minute: d.min))!
-        let end = tmpCalendar.date(byAdding: .hour, value: 1, to: start)!
+        let start = tmp.date(from: DateComponents(hour: d.h, minute: d.min))!
+        let end = tmp.date(byAdding: .hour, value: 1, to: start)!
+        let now = Date()
+        limitDate = tmp.date(from: DateComponents(year: now.y, month: now.m, day: now.d))!
+        if sentDate < limitDate {
+            sentDate = limitDate
+            showOkAlert(title: "注意", message: limitDate.ymdJp + "以降の予定しか追加できません。")
+        }
         savedDate.append([sentDate, start, end])
         
         firstDate = sentDate
@@ -139,6 +146,7 @@ extension NormalEventViewController: UITableViewDataSource, UITableViewDelegate,
             return tableView.dequeueReusableCell(withIdentifier: "Plus") as! PlusTableViewCell
         } else{
             let cell = tableView.dequeueReusableCell(withIdentifier: "Date") as! DateTableViewCell
+            cell.limitDate = self.limitDate
             let ir = indexPath.row
             cell.dateLabel.text = (ir+1).jp + "日目"
             cell.setDate(dates: savedDate[ir])
@@ -168,65 +176,70 @@ extension NormalEventViewController: UITableViewDataSource, UITableViewDelegate,
 
 //    セル内のテキストフィールドが上書きされた時の処理
     func didSelected(cellId: Int, tag: Int, selectedDate: Date) {
-        savedDate[cellId][tag-1] = selectedDate
-        if tag == 1 && savedDate.count > 1{
-            var showIndexPath = IndexPath(row: cellId, section: 0)
-//            データの入れ換えを1行で済ませるための関数
-            func shuffle(i: Int, j: Int){
-                let dates = savedDate[i]
-                savedDate[i] = savedDate[j]
-                savedDate[j] = dates
-            }
-//            データの和集合を求めて更新するのを1行で済ませるための関数
-            func mix(i: Int){
-                var sTime = savedDate[i][1]
-                var eTime = savedDate[i][2]
-                savedDate.remove(at: i)
-                sTime = min(sTime, savedDate[i][1])
-                eTime = max(eTime, savedDate[i][2])
-                savedDate[i][1] = sTime
-                savedDate[i][2] = eTime
-            }
-//        日付が変更されたらデータを並び替える必要があるかも。
-            var isNeedToBack = true
-            if cellId != 0 {
-//                必要なら変更されたデータを前方に移動させる。
-                var i = cellId
-                while i>0 {
-                    if(savedDate[i][0] < savedDate[i-1][0]){
-                        isNeedToBack = false
-                        shuffle(i: i, j: i-1)
-                        showIndexPath.row = i-1
-                    }else if(savedDate[i][0] == savedDate[i-1][0]){
-                        mix(i: i-1)
-                        showIndexPath.row = i-1
-                        break
-                    }else {
-                        break
-                    }
-                    i -= 1
-                }
-            }
-            if cellId != savedDate.count - 1 && isNeedToBack {
-//                必要なら変更されたデータを後方に移動させる
-                var i = cellId
-                while i<savedDate.count - 1 {
-                    if(savedDate[i][0] > savedDate[i+1][0]){
-                        shuffle(i: i, j: i+1)
-                        showIndexPath.row = i+1
-                    }else if(savedDate[i][0] == savedDate[i+1][0]){
-                        mix(i: i)
-                        showIndexPath.row = i
-                        break
-                    }else {
-                        break
-                    }
-                    i += 1
-                }
-            }
+        if selectedDate < limitDate {
+            self.showOkAlert(title: "注意", message: limitDate.ymdJp + "以降の予定しか追加できません。")
             dateTableView.reloadData()
-            DispatchQueue.main.async {
-                self.dateTableView.scrollToRow(at: showIndexPath, at: UITableView.ScrollPosition.top, animated: true)
+        } else {
+            savedDate[cellId][tag-1] = selectedDate
+            if tag == 1 && savedDate.count > 1{
+                var showIndexPath = IndexPath(row: cellId, section: 0)
+//                データの入れ換えを1行で済ませるための関数
+                func shuffle(i: Int, j: Int){
+                    let dates = savedDate[i]
+                    savedDate[i] = savedDate[j]
+                    savedDate[j] = dates
+                }
+//                データの和集合を求めて更新するのを1行で済ませるための関数
+                func mix(i: Int){
+                    var sTime = savedDate[i][1]
+                    var eTime = savedDate[i][2]
+                    savedDate.remove(at: i)
+                    sTime = min(sTime, savedDate[i][1])
+                    eTime = max(eTime, savedDate[i][2])
+                    savedDate[i][1] = sTime
+                    savedDate[i][2] = eTime
+                }
+//                日付が変更されたらデータを並び替える必要があるかも。
+                var isNeedToBack = true
+                if cellId != 0 {
+//                    必要なら変更されたデータを前方に移動させる。
+                    var i = cellId
+                    while i>0 {
+                        if(savedDate[i][0] < savedDate[i-1][0]){
+                            isNeedToBack = false
+                            shuffle(i: i, j: i-1)
+                            showIndexPath.row = i-1
+                        }else if(savedDate[i][0] == savedDate[i-1][0]){
+                            mix(i: i-1)
+                            showIndexPath.row = i-1
+                            break
+                        }else {
+                            break
+                        }
+                        i -= 1
+                    }
+                }
+                if cellId != savedDate.count - 1 && isNeedToBack {
+//                    必要なら変更されたデータを後方に移動させる
+                    var i = cellId
+                    while i<savedDate.count - 1 {
+                        if(savedDate[i][0] > savedDate[i+1][0]){
+                            shuffle(i: i, j: i+1)
+                            showIndexPath.row = i+1
+                        }else if(savedDate[i][0] == savedDate[i+1][0]){
+                            mix(i: i)
+                            showIndexPath.row = i
+                            break
+                        }else {
+                            break
+                        }
+                        i += 1
+                    }
+                }
+                dateTableView.reloadData()
+                DispatchQueue.main.async {
+                    self.dateTableView.scrollToRow(at: showIndexPath, at: UITableView.ScrollPosition.top, animated: true)
+                }
             }
         }
     }
@@ -250,6 +263,10 @@ extension NormalEventViewController{
     @objc func doneBtn(){
         switch tagNum {
         case Int8(1):
+            if selectedDate < limitDate {
+                selectedDate = limitDate
+                showOkAlert(title: "注意", message: limitDate.ymdJp + "以降の予定しか追加できません。")
+            }
             firstDate = selectedDate
             firstDateTextField.text = firstDate.ymdJp
             if endDate < firstDate{
@@ -266,6 +283,10 @@ extension NormalEventViewController{
             }
             firstTimeTextField.resignFirstResponder()
         case Int8(3):
+            if selectedDate < limitDate {
+                selectedDate = limitDate
+                showOkAlert(title: "注意", message: limitDate.ymdJp + "以降の予定しか追加できません。")
+            }
             endDate = selectedDate
             endDateTextField.text = endDate.ymdJp
             if endDate < firstDate{

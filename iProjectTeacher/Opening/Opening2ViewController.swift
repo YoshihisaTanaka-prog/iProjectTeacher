@@ -47,8 +47,6 @@ class Opening2ViewController: UIViewController {
                 let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
                 let rootViewController = storyboard.instantiateViewController(identifier: "RootTabBarController")
                 self.present(rootViewController, animated: true, completion: nil)
-                self.loadFollowList()
-                self.loadSchedule([NCMBUser.current()!.objectId])
 
             } else {
                 // ログインしていなかったら

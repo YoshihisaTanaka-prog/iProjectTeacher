@@ -11,12 +11,16 @@ import NCMB
 
 
 //選ばれた生徒の情報を表示。ここでレポートも表示される。このレポートをタップするとReportViewControllerへ。
-class StudentDetailViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, StudentInfoTableViewCellDelegate {
+class StudentDetailViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, StudentInfoTableViewCellDelegate, ScheduleDelegate {
+    
     
     var reportList: [Report] = []
     var student: User!
     var size: Size!
     var selectedReport: Report!
+    private var isFinishedLoadSchedule = false
+    private var isShowingAlertOfLoadingSchedule = false
+    private var alert: UIAlertController!
     
     @IBOutlet var tableView: UITableView!
 
@@ -36,6 +40,7 @@ class StudentDetailViewController: UIViewController, UITableViewDelegate, UITabl
         tableView.register(UINib(nibName: "ReportTableViewCell", bundle: nil), forCellReuseIdentifier: "Report")
         size = getScreenSize(isExsistsNavigationBar: true, isExsistsTabBar: true)
         loadReport()
+        mixedScheduleG.delegate = self
         mixedScheduleG.delete()
         mixedScheduleG.loadSchedule(date: Date(), userIds: [currentUserG.userId, student.userId], self)
     }
@@ -89,8 +94,24 @@ class StudentDetailViewController: UIViewController, UITableViewDelegate, UITabl
         tableView.reloadData()
     }
     
+    
+    func allSchedulesDidLoaded() {}
+    func schedulesDidLoaded() {
+        self.isFinishedLoadSchedule = true
+        if isShowingAlertOfLoadingSchedule{
+            alert.dismiss(animated: true, completion: nil)
+            self.performSegue(withIdentifier: "Schedule", sender: nil)
+        }
+    }
+    
     func tappedSchedule() {
-        self.performSegue(withIdentifier: "Schedule", sender: nil)
+        if isFinishedLoadSchedule{
+            self.performSegue(withIdentifier: "Schedule", sender: nil)
+        } else if !isShowingAlertOfLoadingSchedule{
+            isShowingAlertOfLoadingSchedule = true
+            alert = UIAlertController(title: "注意", message: "生徒とのスケジュールをロード中です。\nしばらくお待ちください。", preferredStyle: .alert)
+            self.present(alert, animated: true, completion: nil)
+        }
     }
     
     func tappedChat() {

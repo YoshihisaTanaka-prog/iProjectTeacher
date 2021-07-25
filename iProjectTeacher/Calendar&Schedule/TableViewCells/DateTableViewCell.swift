@@ -15,6 +15,7 @@ protocol DateTableViewCellDelegate {
 class DateTableViewCell: UITableViewCell, UITextFieldDelegate {
     
     var delegate: DateTableViewCellDelegate?
+    var limitDate: Date!
     private var date: Date!
     private var selectedDate: Date!
     private var startTime: Date!

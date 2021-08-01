@@ -125,10 +125,13 @@ extension TelectureEventViewController{
                 for i in 0..<10 {
                     let d = tmp.date(byAdding: .day, value: 7*i, to: selectedDate)!
                     let date = Date().mixDateAndTime(date: d, time: time)
-                    if mixedScheduleG.isExistsSchedule(date: d, time: timeNumList[selectedTimeIndex]) {
-                        bookingDateList.append(date)
-                    } else {
+                    let timeFrames = mixedScheduleG.searchSchedule(date: sentDate, time: timeNumList[selectedTimeIndex])
+                    if timeFrames.count == 0 {
                         saveDateList.append(date)
+                    } else if !timeFrames[0].isMyEvent && timeFrames[0].eventType == "hope"{
+                        saveDateList.append(date)
+                    } else{
+                        bookingDateList.append(date)
                     }
                 }
                 
@@ -165,13 +168,19 @@ extension TelectureEventViewController{
                 }
                 
             } else{
-                if mixedScheduleG.isExistsSchedule(date: sentDate, time: timeNumList[selectedTimeIndex]){
-                    showOkAlert(title: "注意", message: "予定が重複しています。")
-                } else{
+                let timeFrames = mixedScheduleG.searchSchedule(date: sentDate, time: timeNumList[selectedTimeIndex])
+                if timeFrames.count == 0 {
                     let tmp = Calendar(identifier: .gregorian)
                     let time = tmp.date(from: DateComponents(hour: timeNumList[selectedTimeIndex]))!
                     let date = Date().mixDateAndTime(date: sentDate, time: time)
                     saveLecture(saveDateList: [date])
+                } else if !timeFrames[0].isMyEvent && timeFrames[0].eventType == "hope"{
+                    let tmp = Calendar(identifier: .gregorian)
+                    let time = tmp.date(from: DateComponents(hour: timeNumList[selectedTimeIndex]))!
+                    let date = Date().mixDateAndTime(date: sentDate, time: time)
+                    saveLecture(saveDateList: [date])
+                } else{
+                    showOkAlert(title: "注意", message: "予定が重複しています。")
                 }
             }
         }
@@ -332,11 +341,30 @@ extension TelectureEventViewController{
     private func setTimeList(){
         timeTitleList = ["時間を選択"]
         timeNumList = [0]
+        var teacherTimeList = [Int]()
+        for s in currentUserG.youbiTimeList[selectedDate.weekId]{
+            let list = s.split(separator: ":")
+            teacherTimeList.append(Int(list.first!)!)
+        }
+        var studentTimeList = [Int]()
+        for s in student.youbiTimeList[selectedDate.weekId]{
+            let list = s.split(separator: ":")
+            studentTimeList.append(Int(list.first!)!)
+        }
         for i in businessHoursG[sentDate.weekId].first..<businessHoursG[sentDate.weekId].last{
-            if !mixedScheduleG.isExistsSchedule(date: sentDate, time: i){
-                timeTitleList.append(i.s02 + ":00 - " + (i+1).s02 + ":00")
-                timeNumList.append(i)
+            let timeFrames = mixedScheduleG.searchSchedule(date: sentDate, time: i)
+            if teacherTimeList.contains(i) && studentTimeList.contains(i){
+                if timeFrames.count == 0 {
+                    timeTitleList.append(i.s02 + ":00 - " + (i+1).s02 + ":00")
+                    timeNumList.append(i)
+                } else if !timeFrames[0].isMyEvent && timeFrames[0].eventType == "hope"{
+                    timeTitleList.append("☆" + i.s02 + ":00 - " + (i+1).s02 + ":00☆")
+                    timeNumList.append(i)
+                }
             }
+        }
+        if timeNumList.count == 1{
+            showOkAlert(title: "注意", message: "選択された日付はコマを追加することができません。")
         }
     }
 }

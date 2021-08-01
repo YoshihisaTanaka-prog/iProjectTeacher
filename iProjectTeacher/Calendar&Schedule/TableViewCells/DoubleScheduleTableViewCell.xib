@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="DoubleCell" rowHeight="90" id="KGk-i7-Jjw" customClass="DoubleScheduleTableViewCell" customModule="iProjectTeacher" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="90"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="90"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="20:00" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZqF-Fc-B8f">
+                        <rect key="frame" x="10" y="10" width="50" height="70"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="50" id="8Rh-S0-ozG"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jrm-qh-Ker">
+                        <rect key="frame" x="70" y="10" width="240" height="70"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Yoh-HR-CX0">
+                                <rect key="frame" x="115" y="0.0" width="10" height="70"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="10" id="9Gn-Cr-W4B"/>
+                                </constraints>
+                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dsf-ll-xhY">
+                                <rect key="frame" x="0.0" y="0.0" width="115" height="70"/>
+                                <state key="normal" title="Button"/>
+                                <connections>
+                                    <action selector="tappedWithSender:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="fhS-bV-yhB"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AG4-V0-aTD">
+                                <rect key="frame" x="125" y="0.0" width="115" height="70"/>
+                                <state key="normal" title="Button"/>
+                                <connections>
+                                    <action selector="tappedWithSender:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="dqz-Wp-y8P"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="AG4-V0-aTD" firstAttribute="leading" secondItem="Yoh-HR-CX0" secondAttribute="trailing" id="2QS-Gc-VgE"/>
+                            <constraint firstAttribute="bottom" secondItem="Yoh-HR-CX0" secondAttribute="bottom" id="6Vh-le-fyH"/>
+                            <constraint firstItem="dsf-ll-xhY" firstAttribute="top" secondItem="jrm-qh-Ker" secondAttribute="top" id="AAa-d8-Mht"/>
+                            <constraint firstItem="Yoh-HR-CX0" firstAttribute="top" secondItem="jrm-qh-Ker" secondAttribute="top" id="ATK-jz-xTv"/>
+                            <constraint firstItem="dsf-ll-xhY" firstAttribute="leading" secondItem="jrm-qh-Ker" secondAttribute="leading" id="AX5-hd-vNb"/>
+                            <constraint firstAttribute="bottom" secondItem="AG4-V0-aTD" secondAttribute="bottom" id="ICI-o6-D0u"/>
+                            <constraint firstItem="Yoh-HR-CX0" firstAttribute="centerX" secondItem="jrm-qh-Ker" secondAttribute="centerX" id="NwG-FQ-0oZ"/>
+                            <constraint firstItem="Yoh-HR-CX0" firstAttribute="leading" secondItem="dsf-ll-xhY" secondAttribute="trailing" id="SJr-jc-CQB"/>
+                            <constraint firstItem="AG4-V0-aTD" firstAttribute="top" secondItem="jrm-qh-Ker" secondAttribute="top" id="gST-RC-2oY"/>
+                            <constraint firstAttribute="bottom" secondItem="dsf-ll-xhY" secondAttribute="bottom" id="gYg-LO-rY9"/>
+                            <constraint firstAttribute="trailing" secondItem="AG4-V0-aTD" secondAttribute="trailing" id="vJc-cU-fxw"/>
+                        </constraints>
+                    </view>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="jrm-qh-Ker" firstAttribute="leading" secondItem="ZqF-Fc-B8f" secondAttribute="trailing" constant="10" id="DuG-Jh-3OD"/>
+                    <constraint firstItem="ZqF-Fc-B8f" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="IxU-hd-KsR"/>
+                    <constraint firstAttribute="bottom" secondItem="jrm-qh-Ker" secondAttribute="bottom" constant="10" id="McR-vJ-RKf"/>
+                    <constraint firstAttribute="bottom" secondItem="ZqF-Fc-B8f" secondAttribute="bottom" constant="10" id="QSR-nD-1lj"/>
+                    <constraint firstItem="jrm-qh-Ker" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="oj4-l0-t24"/>
+                    <constraint firstAttribute="trailing" secondItem="jrm-qh-Ker" secondAttribute="trailing" constant="10" id="qRV-GH-5YD"/>
+                    <constraint firstItem="ZqF-Fc-B8f" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="sdW-Er-kkR"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <connections>
+                <outlet property="myDetailButton" destination="dsf-ll-xhY" id="OuH-fl-faa"/>
+                <outlet property="timeLabel" destination="ZqF-Fc-B8f" id="cZI-A3-2ka"/>
+                <outlet property="yourDetailButton" destination="AG4-V0-aTD" id="DXj-fR-moY"/>
+            </connections>
+            <point key="canvasLocation" x="134.78260869565219" y="105.13392857142857"/>
+        </tableViewCell>
+    </objects>
+</document>

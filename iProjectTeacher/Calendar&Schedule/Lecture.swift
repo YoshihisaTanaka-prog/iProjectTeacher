@@ -17,8 +17,8 @@ class Lecture {
     var delegate: LectureDelegate?
     
     var ncmb: NCMBObject
-    var student: User?
-    var teacher: User?
+    var student: User
+    var teacher: User
     var timeList: [Date]
     var subject: String
     var subjectName: String
@@ -38,37 +38,11 @@ class Lecture {
         let studentId = ncmb.object(forKey: "studentId") as! String
         
         let teacherId = ncmb.object(forKey: "teacherId") as! String
+//        コピペ時注意
         isAbleToEdit = teacherId == currentUserG.userId
         
-        let query1 = NCMBQuery(className: "TeacherParameter")
-        query1?.whereKey("userId", equalTo: teacherId)
-        let result1 = try? query1?.findObjects()
-        if result1 == nil{
-            vc.showOkAlert(title: "Error", message: "教師が見つかりませんでした。")
-        } else{
-            let object = result1?.first as? NCMBObject
-            if object == nil{
-                vc.showOkAlert(title: "Error", message: "教師が見つかりませんでした。")
-            } else{
-                self.teacher = User(userId: teacherId, isNeedParameter: false, viewController: vc)
-                let _ = TeacherParameter(object!, user: &self.teacher!)
-            }
-        }
-        
-        let query2 = NCMBQuery(className: "StudentParameter")
-        query2?.whereKey("userId", equalTo: studentId)
-        let result2 = try? query2?.findObjects()
-        if result2 == nil{
-            vc.showOkAlert(title: "Error", message: "生徒が見つかりませんでした。")
-        } else{
-            let object = result2?.first as? NCMBObject
-            if object == nil{
-                vc.showOkAlert(title: "Error", message: "生徒が見つかりませんでした。")
-            } else{
-                self.student = User(userId: teacherId, isNeedParameter: false, viewController: vc)
-                let _ = StudentParameter(object!, user: &self.student!)
-            }
-        }
+        teacher = User(userId: teacherId, isNeedParameter: true, viewController: vc)
+        student = User(userId: studentId, isNeedParameter: true, viewController: vc)
     }
     
 //    初回登録用
@@ -76,7 +50,7 @@ class Lecture {
         isAbleToEdit = true
         ncmb = NCMBObject(className: "Lecture")!
         teacher = currentUserG
-        ncmb.setObject(teacher!.userId, forKey: "teacherId")
+        ncmb.setObject(teacher.userId, forKey: "teacherId")
         self.student = student
         
         ncmb.setObject(student.userId, forKey: "studentId")
@@ -108,17 +82,34 @@ class Lecture {
 
 //コマ生成用
 extension Lecture{
-    func timeFrame(date: Date) -> [TimeFrameUnit]{
-        var ret = [TimeFrameUnit]()
+    func timeFrame(date: Date) -> [String: [TimeFrameUnit]]{
+        var ret = [String:[TimeFrameUnit]]()
         let c = Calendar(identifier: .gregorian)
-        let tomorrow = c.date(byAdding: .day, value: 1, to: date)!
+        let firstDate = c.date(from: DateComponents(year: date.y, month: date.m, day: 1))!
+        let lastDate = c.date(from: DateComponents(year: date.y, month: date.m + 1, day: 1))!
+        print(self.subjectName)
         for time in self.timeList{
-            if date <= time && time < tomorrow && self.teacher != nil && self.student != nil{
+            if firstDate <= time && time < lastDate {
+                if ret[time.d.s] == nil{
+                    ret[time.d.s] = []
+                }
 //                コピペ時注意＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊
-                let t = TimeFrameUnit(time: time.h, title: self.subjectName, isAbleToShow: true, isMyEvent: self.teacher!.userId == currentUserG.userId)
-                t.lectureId = self.ncmb.objectId
-                t.eventType = "telecture"
-                ret.append(t)
+                print(time.m, time.d, time.h)
+                if self.teacher.userId == currentUserG.userId{
+                    let t1 = TimeFrameUnit(time: time.h, title: self.subjectName, isAbleToShow: true, isMyEvent: true)
+                    t1.lectureId = self.ncmb.objectId
+                    t1.eventType = "telecture"
+                    ret[time.d.s]!.append(t1)
+                    let t2 = TimeFrameUnit(time: time.h, title: self.subjectName, isAbleToShow: true, isMyEvent: false)
+                    t2.lectureId = self.ncmb.objectId
+                    t2.eventType = "telecture"
+                    ret[time.d.s]!.append(t2)
+                } else {
+                    let t2 = TimeFrameUnit(time: time.h, title: self.subjectName, isAbleToShow: true, isMyEvent: false)
+                    t2.lectureId = self.ncmb.objectId
+                    t2.eventType = "telecture"
+                    ret[time.d.s]!.append(t2)
+                }
             }
         }
         return ret

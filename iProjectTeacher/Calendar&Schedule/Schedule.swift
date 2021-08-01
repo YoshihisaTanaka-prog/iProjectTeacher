@@ -9,7 +9,13 @@
 import Foundation
 import NCMB
 
+protocol ScheduleClassDelegate {
+    func savedSchedule()
+}
+
 class Schedule{
+    
+    var delegate: ScheduleClassDelegate?
     
     var ncmb: NCMBObject
     
@@ -19,8 +25,7 @@ class Schedule{
     
     var isAbleToShow: Bool
     
-    var student: User
-    var teacher: User
+    var userId: String
     
     var detailTimeList: [[Date]]
     
@@ -31,18 +36,15 @@ class Schedule{
         detail = schedule.object(forKey: "detail") as? String ?? ""
         eventType = schedule.object(forKey: "eventType") as! String
         
-        let studentId = schedule.object(forKey: "studentId") as! String
-        student = User(userId: studentId, isNeedParameter: true, viewController: vc)
-        let teacherId = schedule.object(forKey: "teacherId") as! String
-        teacher = User(userId: teacherId, isNeedParameter: true, viewController: vc)
+        self.userId = schedule.object(forKey: "userId") as! String
+//        user = User(userId: userId, isNeedParameter: true, viewController: vc)
         let iATS = schedule.object(forKey: "isAbleToShow") as! Bool
-//        コピペ時注意＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊
-        isAbleToShow = teacherId == currentUserG.userId || iATS
+        isAbleToShow = userId == currentUserG.userId || iATS
         
         detailTimeList = schedule.object(forKey: "detailTimeList") as! [[Date]]
     }
     
-    init(title: String, detail: String, eventType: String, student: User, detailTimeList: [[Date]], _ vc: UIViewController){
+    init(title: String, detail: String, eventType: String, detailTimeList: [[Date]], isAbleToShow: Bool, _ vc: UIViewController){
         ncmb = NCMBObject(className: "Schedule")!
         
         self.title = title
@@ -51,13 +53,12 @@ class Schedule{
         ncmb.setObject(detail, forKey: "detail")
         self.eventType = eventType
         ncmb.setObject(eventType, forKey: "eventType")
+//        ＊＊＊＊＊＊＊＊＊＊コピペ時注意＊＊＊＊＊＊＊＊＊＊
+        self.userId = currentUserG.userId
+        ncmb.setObject(currentUserG.userId, forKey: "userId")
         
-        self.student = student
-        ncmb.setObject(student.userId, forKey: "studentId")
-        self.teacher = currentUserG
-        ncmb.setObject(teacher.userId, forKey: "teacherId")
-        
-        isAbleToShow = true
+        self.isAbleToShow = isAbleToShow
+        ncmb.setObject(isAbleToShow, forKey: "isAbleToShow")
         
         self.detailTimeList = detailTimeList
         ncmb.setObject(detailTimeList, forKey: "detailTimeList")
@@ -73,7 +74,9 @@ class Schedule{
                 }
             }
             ncmb.saveInBackground { error in
-                if error != nil{
+                if error == nil{
+                    self.delegate?.savedSchedule()
+                } else{
                     vc.showOkAlert(title: "Saving message error!", message: error!.localizedDescription)
                 }
             }
@@ -83,42 +86,70 @@ class Schedule{
 
 //コマ生成用
 extension Schedule{
-    func timeFrame(date: Date) -> [TimeFrameUnit]{
-        var ret = [TimeFrameUnit]()
+    func timeFrame(date: Date) -> [String:[TimeFrameUnit]]{
+        var ret = [String:[TimeFrameUnit]]()
         let c = Calendar(identifier: .gregorian)
-        let tomorrow = c.date(byAdding: .day, value: 1, to: date)!
+        let startMonth = c.date(from: DateComponents(year: date.y, month: date.m, day: 1))!
+        let endMonth = c.date(from: DateComponents(year: date.y, month: date.m + 1, day: 1))!
+        func isNeedToFinishLoop(date: Date, end: Date) -> Bool{
+            let d = c.date(from: DateComponents(year: date.y, month: date.m, day: date.d, hour: date.h + 1))!
+            return d >= end
+        }
         for times in self.detailTimeList{
-            if(times[0] < tomorrow || times[1] >= date){
-                var startTime = businessHoursG[date.weekId].first
-                var startMinute = 0
-                var endTime = businessHoursG[date.weekId].last
-                var endMinute = 0
-                if (date <= times[0] && times[0] < tomorrow) {
-                    let sTime = times[0].h
-                    startMinute = times[0].min
-                    startTime = max(startTime, sTime)
-                }
-                if (date <= times[1] && times[1] < tomorrow) {
-                    var eTime = times[1].h
-                    if times[1].min != 0{
-                        eTime += 1
-                        endMinute = times[1].min
-                    }
-                    endTime = min(endTime, eTime)
-                }
-                if(startTime < endTime){
-                    for i in startTime..<endTime{
-//                        コピペ時注意＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊
-                        let t = TimeFrameUnit(time: i, title: self.title, isAbleToShow: self.isAbleToShow, isMyEvent: teacher.userId == currentUserG.userId)
-                        t.firstTime = t.time + startMinute
-                        t.lastTime = t.time + endMinute
-                        t.scheduleId = self.ncmb.objectId
-                        t.eventType = self.eventType
-                        ret.append(t)
+            if(times[0] < endMonth && times[1] >= startMonth){
+                var d = times[0]
+                let end = times[1]
+                while d < endMonth {
+                    if d >= startMonth{
+                        if ret[d.d.s] == nil{
+                            ret[d.d.s] = []
+                        }
+                        let range = TimeRange(first: businessHoursG[d.weekId].first, last: businessHoursG[d.weekId].last)
+                        let startHour = c.date(from: DateComponents(year: d.y, month: d.m, day: d.d, hour: range.first))!
+                        let endHour = c.date(from: DateComponents(year: d.y, month: d.m, day: d.d, hour: range.last))!
+                        if startHour <= d && d < endHour{
+                            if isNeedToFinishLoop(date: d, end: end){
+                                if d == times[0]{
+                                    let t = TimeFrameUnit(firstHour: d.h, firstMinute: d.m, lastHour: end.h, lastMinute: end.m, title: self.title, isAbleToShow: self.isAbleToShow, isMyEvent: self.userId == currentUserG.userId)
+                                    t.eventType = self.eventType
+                                    t.scheduleIds.append(self.ncmb.objectId)
+                                    ret[d.d.s]!.append(t)
+                                    
+                                } else{
+                                    let t = TimeFrameUnit(firstHour: d.h, firstMinute: 0, lastHour: end.h, lastMinute: end.m, title: self.title, isAbleToShow: self.isAbleToShow, isMyEvent: self.userId == currentUserG.userId)
+                                    t.eventType = self.eventType
+                                    t.scheduleIds.append(self.ncmb.objectId)
+                                    ret[d.d.s]!.append(t)
+                                }
+                                break
+                            } else{
+                                if d == times[0]{
+                                    let t = TimeFrameUnit(firstHour: d.h, firstMinute: d.m, lastHour: d.h + 1, lastMinute: 0, title: self.title, isAbleToShow: self.isAbleToShow, isMyEvent: self.userId == currentUserG.userId)
+                                    t.eventType = self.eventType
+                                    t.scheduleIds.append(self.ncmb.objectId)
+                                    ret[d.d.s]!.append(t)
+
+                                } else{
+                                    let t = TimeFrameUnit(firstHour: d.h, firstMinute: 0, lastHour: d.h + 1, lastMinute: 0, title: self.title, isAbleToShow: self.isAbleToShow, isMyEvent: self.userId == currentUserG.userId)
+                                    t.eventType = self.eventType
+                                    t.scheduleIds.append(self.ncmb.objectId)
+                                    ret[d.d.s]!.append(t)
+                                }
+                                d = c.date(byAdding: .hour, value: 1, to: d)!
+                            }
+                        } else if d >= endHour{
+                            d = c.date(from: DateComponents(year: d.y, month: d.m, day: d.d + 1, hour: businessHoursG[(d.weekId + 1) % 7].first))!
+                            if d > end{
+                                break
+                            }
+                        } else{
+                            d = c.date(byAdding: .hour, value: 1, to: d)!
+                        }
                     }
                 }
             }
         }
         return ret
     }
+    
 }

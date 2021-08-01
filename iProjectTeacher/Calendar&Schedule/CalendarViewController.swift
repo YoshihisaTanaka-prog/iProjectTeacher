@@ -16,10 +16,10 @@ class CalendarViewController: UIViewController, UITableViewDataSource, UITableVi
     var student: User?
     
     private var selectedDate: Date!
+    private var isFirstTime = true
     private var selectedEventType = ""
     private var currentMonth: Int!
     private var schedules: [[TimeFrameUnit]] = []
-    private var scheduleObject: Schedules!
     private var userIds:[String] = []
     
     @IBOutlet private var tableView: UITableView!  //スケジュール内容
@@ -33,6 +33,12 @@ class CalendarViewController: UIViewController, UITableViewDataSource, UITableVi
         tableView.dataSource = self
         tableView.delegate = self
         tableView.tableFooterView = UIView()
+        tableView.rowHeight = 90.f
+        tableView.allowsSelection = false
+        let nib1 = UINib(nibName: "SingleScheduleTableViewCell", bundle: Bundle.main)
+        let nib2 = UINib(nibName: "DoubleScheduleTableViewCell", bundle: Bundle.main)
+        tableView.register(nib1, forCellReuseIdentifier: "SingleCell")
+        tableView.register(nib2, forCellReuseIdentifier: "DoubleCell")
         setBackGround(true, true)
         calenderView.setToJapanise()
         let tmpCalendar = Calendar(identifier: .gregorian)
@@ -45,19 +51,25 @@ class CalendarViewController: UIViewController, UITableViewDataSource, UITableVi
             self.navigationItem.title = student!.userName + "さんとのスケジュール"
             userIds.append(student!.userId)
         }
-        tableView.allowsSelection = false
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        if student == nil{
-            scheduleObject = myScheduleG
-        } else {
-            scheduleObject = mixedScheduleG
-        }
-        scheduleObject.delegate = self
-        scheduleObject.loadSchedule(date: selectedDate, userIds: userIds, self)
-        datelabel.text = selectedDate.ymdJp
         loadEvent(selectedDate)
+        datelabel.text = selectedDate.ymdJp
+        if isFirstTime{
+            isFirstTime = false
+            if student == nil{
+                myScheduleG.delegate = self
+            } else{
+                mixedScheduleG.delegate = self
+            }
+        } else{
+            if student == nil{
+                myScheduleG.loadSchedule(date: selectedDate, userIds: userIds, self)
+            } else {
+                mixedScheduleG.loadSchedule(date: selectedDate, userIds: userIds, self)
+            }
+        }
     }
 }
 
@@ -66,14 +78,36 @@ extension CalendarViewController{
     @IBAction func tappedPlus(){
         let alertController = UIAlertController(title: "予定の種類を選択", message: "", preferredStyle: .actionSheet)
         if( student != nil){
-            let telectureSchedule = UIAlertAction(title: "Telecture", style: .default) { (action) in
-                self.performSegue(withIdentifier: "Telecture", sender: nil)
-                alertController.dismiss(animated: true, completion: nil)
+            var numOfTeacherTimeFrames = 0
+            for y in currentUserG!.youbiTimeList{
+                numOfTeacherTimeFrames += y.count
             }
-            alertController.addAction(telectureSchedule)
+            var numOfStudentTimeFrames = 0
+            for y in student!.youbiTimeList{
+                numOfStudentTimeFrames += y.count
+            }
+            if numOfTeacherTimeFrames == 0{
+                let telectureSchedule = UIAlertAction(title: "Telecture", style: .default) { (action) in
+                    alertController.dismiss(animated: true, completion: nil)
+                    self.showOkAlert(title: "注意", message: "指導可能時間が未設定です。\n設定してください。")
+                }
+                alertController.addAction(telectureSchedule)
+            } else if numOfStudentTimeFrames == 0{
+                let telectureSchedule = UIAlertAction(title: "Telecture", style: .default) { (action) in
+                    alertController.dismiss(animated: true, completion: nil)
+                    self.showOkAlert(title: "注意", message: "指導希望時間が未設定です。\n生徒に設定させてください。")
+                }
+                alertController.addAction(telectureSchedule)
+            } else{
+                let telectureSchedule = UIAlertAction(title: "Telecture", style: .default) { (action) in
+                    self.performSegue(withIdentifier: "Telecture", sender: nil)
+                    alertController.dismiss(animated: true, completion: nil)
+                }
+                alertController.addAction(telectureSchedule)
+            }
         }
         let collageSchedule = UIAlertAction(title: "大学の予定", style: .default) { (action) in
-            self.selectedEventType = "School"
+            self.selectedEventType = "school"
             self.performSegue(withIdentifier: "Normal", sender: nil)
             alertController.dismiss(animated: true, completion: nil)
         }
@@ -93,7 +127,7 @@ extension CalendarViewController{
 }
 
 //イベントの取得と表示
-extension CalendarViewController{
+extension CalendarViewController: ScheduleTableViewCellDelegate{
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return max(schedules.count,1)
@@ -101,64 +135,64 @@ extension CalendarViewController{
     
 //    テーブルビューセルの表示
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell")!
-        cell.backgroundColor = .clear
-        if(schedules.count == 0){
-            cell.textLabel?.text = "予定はありません"
-            cell.textLabel?.textColor = .gray
+        if(student == nil){
+            let cell = tableView.dequeueReusableCell(withIdentifier: "SingleCell") as! SingleScheduleTableViewCell
+            cell.delegate = self
+            cell.timeFrame = schedules[indexPath.row][0]
+            cell.setUpUI()
+            return cell
         }
         else{
-            let time = businessHoursG[(getWeekIdx(selectedDate) + 5) % 7].first + indexPath.row
-            cell.textLabel?.text = time.s02 + ":00-" + (time + 1).s02 + ":00  " + schedules[indexPath.row][0].title
-            cell.textLabel?.textColor = .black
+            func normal() -> UITableViewCell{
+                let cell = tableView.dequeueReusableCell(withIdentifier: "DoubleCell") as! DoubleScheduleTableViewCell
+                cell.delegate = self
+                cell.myTimeFrame = schedules[indexPath.row][0]
+                cell.yourTimeFrame = schedules[indexPath.row][1]
+                cell.setUpUI()
+                return cell
+            }
+            let ss = schedules[indexPath.row]
+            if ss[0].eventType == "telecture" && ss[1].eventType == "telecture" {
+                let cell = tableView.dequeueReusableCell(withIdentifier: "SingleCell") as! SingleScheduleTableViewCell
+                cell.delegate = self
+                cell.timeFrame = schedules[indexPath.row][0]
+                cell.setUpUI()
+                
+                return cell
+            }
+            return normal()
         }
-        return cell
     }
     
 //    テーブルビューセル選択時の処理
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        tableView.cellForRow(at: indexPath)?.backgroundColor = .none
-//        if(schedules.count != 0){
-//            let alertController = UIAlertController(title: "確認", message: "このイベントを削除しますか？", preferredStyle: .actionSheet)
-//            let alertOkAction = UIAlertAction(title: "削除", style: .destructive) { (action) in
-//                self.schedules[indexPath.row][0].ncmb?.deleteInBackground({ error in
-//                    if error != nil{
-//                        self.showOkAlert(title: "Error", message: error!.localizedDescription)
-//                    }
-//                })
-//                alertController.dismiss(animated: true, completion: nil)
-//                self.loadEvent(self.selectedDate)
-//            }
-//            let cancelAction = UIAlertAction(title: "キャンセル", style: .cancel) { (action) in
-//                alertController.dismiss(animated: true, completion: nil)
-//            }
-//            alertController.addAction(alertOkAction)
-//            alertController.addAction(cancelAction)
-//            self.present(alertController, animated: true, completion: nil)
-//        }
         self.tableView.reloadData()
     }
     
     func loadEvent(_ date: Date) {
         //予定がある場合、スケジュールをDBから取得・表示する。
-        schedules = scheduleObject.showTimeFrame(date: date)
+        if student == nil{
+            schedules = myScheduleG.showTimeFrame(date: date)
+        } else{
+            schedules = mixedScheduleG.showTimeFrame(date: date)
+        }
         for s in schedules{
             print("0 >>", s[0].time, s[0].title, s[0].isMyEvent, "1 >>", s[1].time, s[1].title, s[1].isMyEvent)
         }
         tableView.reloadData()
     }
+    
+    func tappedScheduleButton(timeFrame: TimeFrameUnit) {
+    }
+    
 }
     
 //カレンダー関係
 extension CalendarViewController: ScheduleDelegate{
     func allSchedulesDidLoaded() {
-        calenderView.reloadData()
-        if student == nil{
-            myScheduleG = scheduleObject
-        } else{
-            mixedScheduleG = scheduleObject
-        }
+//        tableView
         loadEvent(selectedDate)
+        calenderView.reloadData()
     }
     
     func schedulesDidLoaded() {}
@@ -215,31 +249,45 @@ extension CalendarViewController: ScheduleDelegate{
     //カレンダーで日付を選択された時の処理(スケジュール表示処理)
     func calendar(_ calendar: FSCalendar, didSelect date: Date, at monthPosition: FSCalendarMonthPosition){
         let inputMonth = date.m
-        selectedDate = date
-        datelabel.text = date.ymdJp
-        loadEvent(selectedDate)
 //        他の月を選んだ時に移動する
         if(currentMonth != inputMonth){
             calenderView.setCurrentPage(date, animated: true)
-            scheduleObject.loadSchedule(date: selectedDate, userIds: userIds, self)
+        }
+        selectedDate = date
+        datelabel.text = date.ymdJp
+        loadEvent(selectedDate)
+        DispatchQueue.main.async {
+            self.tableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: UITableView.ScrollPosition.top, animated: false)
         }
     }
     
     func calendar(_ calendar: FSCalendar, numberOfEventsFor date: Date) -> Int {
-        if scheduleObject.isExistsSchedule(date: date) {
-            return 1
-        } else {
-            return 0
+        if student == nil{
+            if myScheduleG.isExistsSchedule(date: date) {
+                return 1
+            } else {
+                return 0
+            }
+        } else{
+            if mixedScheduleG.isExistsSchedule(date: date) {
+                return 1
+            } else {
+                return 0
+            }
         }
     }
     
     func calendarCurrentPageDidChange(_ calendar: FSCalendar) {
+        loadEvent(selectedDate)
         let tmpCalendar = Calendar(identifier: .gregorian)
         let date = tmpCalendar.date(from: DateComponents(year: calendar.currentPage.y, month: calendar.currentPage.m, day: 1))!
-        scheduleObject.loadSchedule(date: date, userIds: userIds, self)
         currentMonth = tmpCalendar.component(.month, from: calendar.currentPage)
         calenderView.reloadData()
-        loadEvent(selectedDate)
+        if student == nil{
+            myScheduleG.loadSchedule(date: date, userIds: userIds, self)
+        } else {
+            mixedScheduleG.loadSchedule(date: date, userIds: userIds, self)
+        }
     }
     
 }

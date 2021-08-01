@@ -115,7 +115,7 @@ class QuestionnaireViewController: UIViewController {
             object?.setObject(collageName, forKey: "collage")
             object?.setObject(domain, forKey: "domain")
             object?.setObject("", forKey: "furigana")
-            object?.setObject(0, forKey: "grade")
+            object?.setObject("0", forKey: "grade")
             object?.setObject("", forKey: "introduction")
             object?.setObject(nil, forKey: "imageName")
             object?.setObject(false, forKey: "isAbleToTeach")
@@ -149,8 +149,12 @@ class QuestionnaireViewController: UIViewController {
                     NCMBUser.current()?.signUpInBackground({ (error) in
                         if(error == nil){
                             let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
-                            let rootViewController = storyboard.instantiateViewController(withIdentifier: "RootTabBarController")
-                            currentUserG = User(NCMBUser.current()!)
+                            let rootViewController = storyboard.instantiateViewController(identifier: "RootTabBarController") as! UITabBarController
+                            let nextNC = rootViewController.viewControllers!.first! as! UINavigationController
+                            let nextVC = nextNC.viewControllers.first!
+                            self.present(rootViewController, animated: true, completion: nil)
+                            currentUserG = User(userId: NCMBUser.current()!.objectId, isNeedParameter: true, viewController: nextVC)
+                            myScheduleG.loadSchedule(date: Date(), userIds: [currentUserG.userId], nextVC)
                             self.present(rootViewController, animated: false, completion: nil)
                         }
                         else{

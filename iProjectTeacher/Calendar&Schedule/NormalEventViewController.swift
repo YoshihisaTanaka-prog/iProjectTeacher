@@ -27,6 +27,7 @@ class NormalEventViewController: UIViewController, UITextFieldDelegate {
     private var isShownTableView = true
     private var dateTableView = UITableView()
     private var savedDate: [[Date]] = []
+    private var alert: UIAlertController?
     @IBOutlet private var titleTextField: UITextField!
     @IBOutlet private var textTextView: UITextView!
     @IBOutlet private var firstDateTextField: UITextField!
@@ -55,7 +56,7 @@ class NormalEventViewController: UIViewController, UITextFieldDelegate {
         endTime = end
         
         switch eventType {
-        case "School":
+        case "school":
             self.navigationItem.title = "大学の予定を追加"
         case "private":
             self.navigationItem.title = "個人的な予定を追加"
@@ -91,13 +92,91 @@ class NormalEventViewController: UIViewController, UITextFieldDelegate {
 }
 
 //NCMBへの保存部分
-extension NormalEventViewController{
+extension NormalEventViewController: ScheduleClassDelegate{
+    
+    func savedSchedule() {
+        alert?.dismiss(animated: true, completion: {
+            self.navigationController?.popViewController(animated: true)
+        })
+    }
+    
     @IBAction private func save(){
-        let object = NCMBObject(className: "")
-        object?.objectId = ""
-        if isShownTableView{} else{
-            
+        if titleTextField.text!.count == 0{
+            showOkAlert(title: "注意", message: "予定のタイトルを入力してください。")
+        } else{
+            if isShownTableView{
+                var detailTimeList = [[Date]]()
+                for dlist in savedDate{
+                    let d1 = Date().mixDateAndTime(date: dlist[0], time: dlist[1])
+                    let d2 = Date().mixDateAndTime(date: dlist[0], time: dlist[2])
+                    detailTimeList.append([d1,d2])
+                }
+                if searchBookingList(dateList: detailTimeList).count == 0 {
+                    showWaitingAlert()
+                    let s = Schedule(title: titleTextField.text!, detail: textTextView.text!, eventType: eventType, detailTimeList: detailTimeList, isAbleToShow: true, self)
+                    s.delegate = self
+                }
+            } else{
+                let first = firstDate.mixDateAndTime(date: firstDate, time: firstTime)
+                let end = endDate.mixDateAndTime(date: endDate, time: endTime)
+                let detailTimeList = [[first,end]]
+                if searchBookingList(dateList: detailTimeList).count == 0 {
+                    showWaitingAlert()
+                    let s = Schedule(title: titleTextField.text!, detail: textTextView.text!, eventType: eventType, detailTimeList: detailTimeList, isAbleToShow: true, self)
+                    s.delegate = self
+                }
+            }
         }
+    }
+    
+    private func searchBookingList(dateList: [[Date]]) -> [(dates: [Date], timeFrame: TimeFrame)] {
+        let c = Calendar(identifier: .gregorian)
+        var ret: [(dates: [Date], timeFrame: TimeFrame)] = []
+        for dList in dateList{
+            var dStart = dList[0]
+            var dEnd = c.date(from: DateComponents(year: dStart.y, month: dStart.m, day: dStart.d + 1))!
+            if dEnd > dList[1]{
+                dEnd = dList[1]
+            }
+            while(dStart < dList[1]){
+                for s in cachedScheduleG.values {
+                    if s.userId == currentUserG.userId{
+                        for times in s.detailTimeList{
+                            let start = times[0]
+                            let end = times[1]
+                            if (start < dEnd && dStart < end){
+                                let t = TimeFrame(firstTime: start, lastTime: end, title: s.title, eventType: s.eventType)
+                                t.scheduleIds.append(s.ncmb.objectId)
+                                ret.append((dates: [start,end], timeFrame: t))
+                            }
+                        }
+                    }
+                }
+                for l in cachedLectureG.values {
+                    if l.teacher.userId == currentUserG.userId{
+                        for start in l.timeList{
+                            let end = c.date(from: DateComponents(year: start.y, month: start.m, day: start.d, hour: start.h + 1))!
+                            if (start < dEnd && dStart < end){
+                                let t = TimeFrame(firstTime: start, lastTime: end, title: l.subjectName + "/" + l.teacher.userName + "/" + l.student.userName, eventType: "telecture")
+                                t.lectureId = l.ncmb.objectId
+                                ret.append((dates: [start,end], timeFrame: t))
+                            }
+                        }
+                    }
+                }
+                dStart = c.date(from: DateComponents(year: dStart.y, month: dStart.m, day: dStart.d + 1))!
+                dEnd = c.date(from: DateComponents(year: dStart.y, month: dStart.m, day: dStart.d + 1))!
+                if dEnd > dList[1]{
+                    dEnd = dList[1]
+                }
+            }
+        }
+        return ret
+    }
+    
+    private func showWaitingAlert(){
+        alert = UIAlertController(title: "保存中", message: "データを保存しています。", preferredStyle: .alert)
+        self.present(alert!, animated: true, completion: nil)
     }
 }
 
@@ -176,7 +255,7 @@ extension NormalEventViewController: UITableViewDataSource, UITableViewDelegate,
 
 //    セル内のテキストフィールドが上書きされた時の処理
     func didSelected(cellId: Int, tag: Int, selectedDate: Date) {
-        if selectedDate < limitDate {
+        if tag == 0 && selectedDate < limitDate {
             self.showOkAlert(title: "注意", message: limitDate.ymdJp + "以降の予定しか追加できません。")
             dateTableView.reloadData()
         } else {

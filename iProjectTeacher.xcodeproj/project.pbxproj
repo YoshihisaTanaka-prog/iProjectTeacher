@@ -30,6 +30,10 @@
 		0459388B25D149C600A0E3C8 /* creating.png in Resources */ = {isa = PBXBuildFile; fileRef = 0459388A25D149C100A0E3C8 /* creating.png */; };
 		0459388D25D149C900A0E3C8 /* studentNoImage.png in Resources */ = {isa = PBXBuildFile; fileRef = 0459388925D149C100A0E3C8 /* studentNoImage.png */; };
 		0459388F25D149CC00A0E3C8 /* teacherNoImage.png in Resources */ = {isa = PBXBuildFile; fileRef = 0459388825D149C100A0E3C8 /* teacherNoImage.png */; };
+		045F6E9F26ADB3D9001B56F9 /* SingleScheduleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 045F6E9D26ADB3D9001B56F9 /* SingleScheduleTableViewCell.swift */; };
+		045F6EA026ADB3D9001B56F9 /* SingleScheduleTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 045F6E9E26ADB3D9001B56F9 /* SingleScheduleTableViewCell.xib */; };
+		045F6EA326ADB3F1001B56F9 /* DoubleScheduleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 045F6EA126ADB3F1001B56F9 /* DoubleScheduleTableViewCell.swift */; };
+		045F6EA426ADB3F1001B56F9 /* DoubleScheduleTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 045F6EA226ADB3F1001B56F9 /* DoubleScheduleTableViewCell.xib */; };
 		0461B68F26972DE70097FD2C /* TelectureEventViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0461B68E26972DE70097FD2C /* TelectureEventViewController.swift */; };
 		0479D2D526A06FAE00294DFB /* PlusTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0479D2D326A06FAE00294DFB /* PlusTableViewCell.swift */; };
 		0479D2D626A06FAE00294DFB /* PlusTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0479D2D426A06FAE00294DFB /* PlusTableViewCell.xib */; };
@@ -117,6 +121,10 @@
 		0459388825D149C100A0E3C8 /* teacherNoImage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = teacherNoImage.png; sourceTree = "<group>"; };
 		0459388925D149C100A0E3C8 /* studentNoImage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = studentNoImage.png; sourceTree = "<group>"; };
 		0459388A25D149C100A0E3C8 /* creating.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = creating.png; sourceTree = "<group>"; };
+		045F6E9D26ADB3D9001B56F9 /* SingleScheduleTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleScheduleTableViewCell.swift; sourceTree = "<group>"; };
+		045F6E9E26ADB3D9001B56F9 /* SingleScheduleTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SingleScheduleTableViewCell.xib; sourceTree = "<group>"; };
+		045F6EA126ADB3F1001B56F9 /* DoubleScheduleTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoubleScheduleTableViewCell.swift; sourceTree = "<group>"; };
+		045F6EA226ADB3F1001B56F9 /* DoubleScheduleTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DoubleScheduleTableViewCell.xib; sourceTree = "<group>"; };
 		0461B68E26972DE70097FD2C /* TelectureEventViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TelectureEventViewController.swift; sourceTree = "<group>"; };
 		0479D2D326A06FAE00294DFB /* PlusTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlusTableViewCell.swift; sourceTree = "<group>"; };
 		0479D2D426A06FAE00294DFB /* PlusTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PlusTableViewCell.xib; sourceTree = "<group>"; };
@@ -223,6 +231,10 @@
 				0479D2D426A06FAE00294DFB /* PlusTableViewCell.xib */,
 				0479D2D926A06FD800294DFB /* DateTableViewCell.swift */,
 				0479D2DA26A06FD800294DFB /* DateTableViewCell.xib */,
+				045F6E9D26ADB3D9001B56F9 /* SingleScheduleTableViewCell.swift */,
+				045F6E9E26ADB3D9001B56F9 /* SingleScheduleTableViewCell.xib */,
+				045F6EA126ADB3F1001B56F9 /* DoubleScheduleTableViewCell.swift */,
+				045F6EA226ADB3F1001B56F9 /* DoubleScheduleTableViewCell.xib */,
 			);
 			path = TableViewCells;
 			sourceTree = "<group>";
@@ -496,10 +508,12 @@
 				0459388D25D149C900A0E3C8 /* studentNoImage.png in Resources */,
 				1BA0CFC025E7D8B80008FF43 /* Icon-App-29x29@1x.png in Resources */,
 				1BA0CFCF25E7D8B80008FF43 /* iTunesArtwork@2x.png in Resources */,
+				045F6EA026ADB3D9001B56F9 /* SingleScheduleTableViewCell.xib in Resources */,
 				1F08D94525E69F920002E0AA /* Questionnaire.storyboard in Resources */,
 				0433E3AA25D54B09002A6BE5 /* ReportTableViewCell.xib in Resources */,
 				1BA0CFC825E7D8B80008FF43 /* Icon-App-29x29@3x.png in Resources */,
 				1F08D95025E6A0890002E0AA /* Opening.storyboard in Resources */,
+				045F6EA426ADB3F1001B56F9 /* DoubleScheduleTableViewCell.xib in Resources */,
 				1BA0CFC625E7D8B80008FF43 /* Contents.json in Resources */,
 				1BA0CFBE25E7D8B80008FF43 /* iTunesArtwork@1x.png in Resources */,
 				1BA0CFC325E7D8B80008FF43 /* Icon-App-83.5x83.5@2x.png in Resources */,
@@ -570,6 +584,7 @@
 				1B55D80725D40008006BAE51 /* CalendarViewController.swift in Sources */,
 				1F08D94F25E6A0890002E0AA /* Opening2ViewController.swift in Sources */,
 				1F3603E6269729B400B78DB6 /* StudentTableViewCell.swift in Sources */,
+				045F6EA326ADB3F1001B56F9 /* DoubleScheduleTableViewCell.swift in Sources */,
 				043A9DB625D80D1600587B0E /* UserPageViewController.swift in Sources */,
 				04BD63F3269072C800A45ADD /* Lecture.swift in Sources */,
 				04ACB8B525DB2A7200916C15 /* GlobalParameters.swift in Sources */,
@@ -597,6 +612,7 @@
 				043079B6266A493600247080 /* RailsExtensions.swift in Sources */,
 				1F08D94325E69F920002E0AA /* Questionnaire_subViewController.swift in Sources */,
 				0479D2D526A06FAE00294DFB /* PlusTableViewCell.swift in Sources */,
+				045F6E9F26ADB3D9001B56F9 /* SingleScheduleTableViewCell.swift in Sources */,
 				04B39D1925D43D57003EDECE /* StudentDetailViewController.swift in Sources */,
 				0433E3AE25D5584B002A6BE5 /* StudentViewController.swift in Sources */,
 				1F08D94D25E6A0890002E0AA /* ScreenSize.swift in Sources */,
@@ -750,6 +766,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 939YVKTKUP;
 				INFOPLIST_FILE = iProjectTeacher/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.5;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -769,6 +786,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 939YVKTKUP;
 				INFOPLIST_FILE = iProjectTeacher/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.5;
 				LD_RUNPATH_SEARCH_PATHS = (

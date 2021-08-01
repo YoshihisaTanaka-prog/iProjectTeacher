@@ -43,7 +43,8 @@ class Opening1ViewController: UIViewController {
                                 isLogInG = true
                                 currentUserG = User(user!)
                                 self.loadFollowList()
-                                myScheduleG.loadSchedule(date: Date(), userIds: [currentUserG.userId], self)
+                            } else {
+                                print(error!.localizedDescription)
                             }
                         }
                     } else{

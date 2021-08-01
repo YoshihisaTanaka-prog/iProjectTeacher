@@ -31,6 +31,7 @@ class Schedules: ScheduleMonthDelegate {
     func loadSchedule(date: Date, userIds: [String], _ vc: UIViewController){
         self.userIds = userIds
         self.vc = vc
+        delete()
         dateList = []
         dateList.append(date)
         load(date: date, userIds: userIds, vc)
@@ -95,12 +96,39 @@ class Schedules: ScheduleMonthDelegate {
         var ret = [[TimeFrameUnit]]()
         let ym = date.y.s + date.m.s02
         let d = date.d.s
-        if(self.monthDic[ym]?.dateDic[d] == nil){
+        
+        var teacherTimeList = [Int]()
+        for s in currentUserG.youbiTimeList[date.weekId]{
+            let list = s.split(separator: ":")
+            teacherTimeList.append(Int(list.first!)!)
+        }
+        var studentId = ""
+        for u in userIds{
+            if u != currentUserG.userId{
+                studentId = u
+            }
+        }
+        var studentTimeList = [Int]()
+        var student = User(userId: "", isNeedParameter: false, viewController: vc)
+        if studentId != "" {
+            let students = vc.mixFollowList()
+            for s in students{
+                if s.userId == studentId{
+                    student = s
+                    for ytl in student.youbiTimeList[date.weekId]{
+                        let list = ytl.split(separator: ":")
+                        studentTimeList.append(Int(list.first ?? "0") ?? 0)
+                    }
+                    break
+                }
+            }
+        }
+        
+        if(self.monthDic[ym]?.dateDic[d] == nil || self.monthDic[ym]!.dateDic[d]!.count == 0){
             for i in businessHoursG[date.weekId].first..<businessHoursG[date.weekId].last{
                 var tfus = [TimeFrameUnit]()
-                for j in 0...1{
-                    tfus.append(TimeFrameUnit(time: i, isMyEvent: j == 0))
-                }
+                tfus.append(TimeFrameUnit(time: i, isMyEvent: true, shiftTimes: teacherTimeList))
+                tfus.append(TimeFrameUnit(time: i, isMyEvent: false, shiftTimes: studentTimeList))
                 ret.append(tfus)
             }
             return ret
@@ -121,26 +149,27 @@ class Schedules: ScheduleMonthDelegate {
                                     tfus.append(timeFrameList[k])
                                     k += 1
                                 } else{
-                                    tfus.append( TimeFrameUnit(time: i, isMyEvent: false) )
+                                    tfus.append( TimeFrameUnit(time: i, isMyEvent: false, shiftTimes: studentTimeList) )
                                 }
                             } else{
-                                tfus.append( TimeFrameUnit(time: i, isMyEvent: false) )
+                                tfus.append( TimeFrameUnit(time: i, isMyEvent: false, shiftTimes: studentTimeList) )
                             }
                         } else{
-                            tfus.append( TimeFrameUnit(time: i, isMyEvent: true) )
+                            tfus.append( TimeFrameUnit(time: i, isMyEvent: true, shiftTimes: teacherTimeList) )
                             tfus.append(timeFrameList[k])
                             k += 1
                         }
-                    } else{
-                        for j in 0...1{
-                            tfus.append(TimeFrameUnit(time: i, isMyEvent: j == 0))
+                        while k < timeFrameList.count && timeFrameList[k].time == i * 100 {
+                            k += 1
                         }
+                    } else{
+                        tfus.append(TimeFrameUnit(time: i, isMyEvent: true, shiftTimes: teacherTimeList))
+                        tfus.append(TimeFrameUnit(time: i, isMyEvent: false, shiftTimes: studentTimeList))
                     }
                 } else{
 //                    予定が終わったら空きコマのみ追加
-                    for j in 0...1{
-                        tfus.append(TimeFrameUnit(time: i, isMyEvent: j == 0))
-                    }
+                    tfus.append(TimeFrameUnit(time: i, isMyEvent: true, shiftTimes: teacherTimeList))
+                    tfus.append(TimeFrameUnit(time: i, isMyEvent: false, shiftTimes: studentTimeList))
                 }
                 ret.append(tfus)
             }
@@ -157,12 +186,30 @@ class Schedules: ScheduleMonthDelegate {
         self.monthDic[ym]?.loadSchedule(date: date, userIds: userIds, vc)
     }
     
+    func overwriteLectureInfo(lecture: Lecture){
+        for mKey in self.monthDic.keys{
+            for dKey in self.monthDic[mKey]!.dateDic.keys{
+                let timeFrames = self.monthDic[mKey]!.dateDic[dKey]!
+                if timeFrames.count != 0{
+                    for i in 0..<timeFrames.count{
+                        if timeFrames[i].lectureId != nil{
+                            if timeFrames[i].lectureId == lecture.ncmb.objectId{
+                                timeFrames[i].title += "\n" + lecture.teacher.userName + "先生\n" + lecture.student.userName + "さん"
+                            }
+                        }
+                    }
+                }
+                self.monthDic[mKey]!.dateDic[dKey] = timeFrames
+            }
+        }
+    }
+    
     func schedulesDidLoaded(date: Date) {
         if index == 0 {
             self.delegate?.schedulesDidLoaded()
         }
         index += 1
-        if index == dateList.count{
+        if index >= dateList.count{
             self.delegate?.allSchedulesDidLoaded()
             index = 0
         } else{
@@ -186,63 +233,53 @@ class ScheduleMonth {
         let nextMonth = calendar.date(byAdding: .month, value: 1, to: date)!
         let endDay = calendar.date(from: DateComponents(year: nextMonth.y, month: nextMonth.m, day: 1))!
         
-        let scheduleQuery = query(className: "Schedule", userIds: userIds)
+        let scheduleQuery = NCMBQuery(className: "Schedule")!
+        scheduleQuery.whereKey("userId", containedIn: userIds)
         scheduleQuery.whereKey("endTime", greaterThanOrEqualTo: startDay)
         scheduleQuery.whereKey("startTime", lessThan: endDay)
         scheduleQuery.findObjectsInBackground({ result, error in
             if error == nil{
-                self.dateDic.removeAll()
-//                ここに普通のスケジュールを追加するための処理を書く
+//                self.dateDic.removeAll()
                 let objects = result as! [NCMBObject]
                 for o in objects{
                     let schedule = Schedule(schedule: o, vc)
                     cachedScheduleG[o.objectId] = schedule
-                    for i in 0..<self.startDay.maxDate{
-                        let day = calendar.date(byAdding: .day, value: i, to: self.startDay)!
-                        let d = day.d.s
+                    let timeFrameDic = schedule.timeFrame(date: self.startDay)
+                    for i in 1...self.startDay.maxDate{
+                        let d = i.s
                         if self.dateDic[d] == nil{
-                            self.dateDic[d] = schedule.timeFrame(date: day)
-                        } else{
-                            self.dateDic[d]! += schedule.timeFrame(date: day)
+                            self.dateDic[d] = []
                         }
+                        self.dateDic[d]! += timeFrameDic[d] ?? []
                     }
                 }
-                self.sort()
-                
-                let lectureQuery = self.query(className: "Lecture", userIds: userIds)
-                lectureQuery.whereKey("endTime", greaterThanOrEqualTo: self.startDay)
-                lectureQuery.whereKey("startTime", lessThan: endDay)
-                lectureQuery.findObjectsInBackground { result, error in
-                    if error == nil{
-                        let objects = result as! [NCMBObject]
-                        for o in objects{
-                            let lecture = Lecture(lecture: o, vc)
-                            cachedLectureG[o.objectId] = lecture
-                            let teacherId = o.object(forKey: "teacherId") as! String
-                            let studentId = o.object(forKey: "studentId") as! String
-                            for i in 0..<self.startDay.maxDate{
-                                let day = calendar.date(byAdding: .day, value: i, to: self.startDay)!
-                                let d = day.d.s
-                                if self.dateDic[d] == nil{
-                                    self.dateDic[d] = []
-                                }
-//                                ＊＊＊＊＊＊＊＊＊＊コピペ時注意＊＊＊＊＊＊＊＊＊＊
-                                if userIds.contains(teacherId){
-                                    self.dateDic[d]! += lecture.timeFrame(date: day)
-                                }
-                                if userIds.contains(studentId){
-                                    self.dateDic[d]! += lecture.timeFrame(date: day)
-                                    if (self.dateDic[d]!.count != 0) {
-                                        self.dateDic[d]!.last!.isMyEvent = false
+                self.scheduleSort()
+                DispatchQueue.main.async {
+                    let lectureQuery = self.query(className: "Lecture", userIds: userIds)
+                    lectureQuery.whereKey("endTime", greaterThanOrEqualTo: self.startDay)
+                    lectureQuery.whereKey("startTime", lessThan: endDay)
+                    lectureQuery.findObjectsInBackground { result, error in
+                        if error == nil{
+                            let objects = result as! [NCMBObject]
+                            for o in objects{
+                                let lecture = Lecture(lecture: o, vc)
+                                cachedLectureG[o.objectId] = lecture
+//                                ここのループをもっと上手くすること。
+                                let timeFrameDic = lecture.timeFrame(date: self.startDay)
+                                for i in 0..<self.startDay.maxDate{
+                                    let d = (i+1).s
+                                    if self.dateDic[d] == nil{
+                                        self.dateDic[d] = []
                                     }
+                                    self.dateDic[d]! += timeFrameDic[d] ?? []
                                 }
                             }
+                            self.lectureSort()
+                            self.delegate?.schedulesDidLoaded(date: self.startDay)
+                        } else {
+                            print("Loading telecture class schedule error!", error!.localizedDescription)
+                            vc.showOkAlert(title: "Loading telecture class schedule error!", message: error!.localizedDescription)
                         }
-                        self.sort()
-                        self.delegate?.schedulesDidLoaded(date: self.startDay)
-                    } else {
-                        print("Loading telecture class schedule error!", error!.localizedDescription)
-                        vc.showOkAlert(title: "Loading telecture class schedule error!", message: error!.localizedDescription)
                     }
                 }
             } else {
@@ -263,19 +300,44 @@ class ScheduleMonth {
         return NCMBQuery.orQuery(withSubqueries: queries)
     }
     
-    private func sort(){
+    private func scheduleSort(){
         for (key, value) in self.dateDic{
             var v = value
             v = v.sorted { a, b in
-                a.time < b.time
+                if a.time == b.time{
+                    return a.firstTime < b.firstTime
+                } else{
+                    return a.time < b.time
+                }
             }
-            if v.count != 0{
-                for i in 0..<( v.count - 1 ){
-                    if v[i].time == v[i+1].time && !v[i].isMyEvent {
-                        let u = v[i]
-                        v[i] = v[i+1]
-                        v[i+1] = u
+            var i = 0
+            var length = v.count - 1
+            while i < length{
+                if v[i].time == v[i+1].time {
+                    v[i].lastTime = v[i+1].lastTime
+                    v[i].title += "/" + v[i+1].title
+                    v.remove(at: i+1)
+                    length -= 1
+                }
+                i += 1
+            }
+            self.dateDic[key] = v
+        }
+    }
+    
+    private func lectureSort(){
+        for (key, value) in self.dateDic{
+            var v = value
+            v = v.sorted { a, b in
+                if a.time == b.time{
+//                    ＊＊＊＊＊＊＊＊＊＊コピペ時注意＊＊＊＊＊＊＊＊＊＊＊
+                    if a.isMyEvent || b.isMyEvent {
+                        return a.isMyEvent
+                    } else{
+                        return a.lectureId != nil
                     }
+                } else {
+                    return a.time < b.time
                 }
             }
             self.dateDic[key] = v

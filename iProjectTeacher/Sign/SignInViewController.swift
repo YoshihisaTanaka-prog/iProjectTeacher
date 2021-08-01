@@ -37,6 +37,7 @@ class SignInViewController: UIViewController, UITextFieldDelegate {
             NCMBUser.logInWithMailAddress(inBackground: emailTextField.text!, password: passwordTextField.text!) { (user, error) in
                 if error != nil{
                     //エラーがあった場合
+                    print(error!.localizedDescription)
                     self.showOkAlert(title: "Error", message: error!.localizedDescription)
                 } else {
                     //ログイン成功
@@ -83,8 +84,11 @@ class SignInViewController: UIViewController, UITextFieldDelegate {
                             DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
                                 alertController.dismiss(animated: true, completion: nil)
                                 let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
-                                let rootViewController = storyboard.instantiateViewController(identifier: "RootTabBarController")
+                                let rootViewController = storyboard.instantiateViewController(identifier: "RootTabBarController") as! UITabBarController
+                                let nextNC = rootViewController.viewControllers!.first! as! UINavigationController
+                                let nextVC = nextNC.viewControllers.first!
                                 self.present(rootViewController, animated: true, completion: nil)
+                                myScheduleG.loadSchedule(date: Date(), userIds: [currentUserG.userId], nextVC)
                             }
                             //ログイン状態の保持
                             let ud = UserDefaults.standard

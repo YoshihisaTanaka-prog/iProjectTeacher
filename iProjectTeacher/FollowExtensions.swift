@@ -43,9 +43,11 @@ extension UIViewController{
                                 favoriteUserListG.append(u)
                             default:
                                 break
+                            }
                         }
                     }
-                }
+                } else{
+                    print(error!.localizedDescription)
                 }
                 
             })

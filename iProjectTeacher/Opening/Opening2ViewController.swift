@@ -45,8 +45,11 @@ class Opening2ViewController: UIViewController {
 //                let storyboard = UIStoryboard(name: "Student", bundle: Bundle.main)
 //                let rootViewController = storyboard.instantiateViewController(identifier: "first")
                 let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
-                let rootViewController = storyboard.instantiateViewController(identifier: "RootTabBarController")
+                let rootViewController = storyboard.instantiateViewController(identifier: "RootTabBarController") as! UITabBarController
+                let nextNC = rootViewController.viewControllers!.first! as! UINavigationController
+                let nextVC = nextNC.viewControllers.first!
                 self.present(rootViewController, animated: true, completion: nil)
+                myScheduleG.loadSchedule(date: Date(), userIds: [currentUserG.userId], nextVC)
 
             } else {
                 // ログインしていなかったら

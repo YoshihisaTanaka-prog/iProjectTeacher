@@ -9,6 +9,7 @@ import Foundation
 import UIKit
 import NCMB
 
+
 class User {
     var userId: String
     var userName = ""
@@ -46,6 +47,7 @@ class User {
                         self.teacherParameter = TeacherParameter(param, userId: self.userId, userName: &self.userName, furigana: &self.furigana, grade: &self.grade, selection: &self.selection, introduction: &self.introduction, youbiTimeList: &self.youbiTimeList)
                     }
                 } else {
+                    print("loading parameter error >>", error!.localizedDescription)
                     viewController.showOkAlert(title: "Error", message: error!.localizedDescription)
                 }
             })
@@ -58,6 +60,7 @@ class User {
                         self.studentParameter = StudentParameter(param, userId: self.userId, userName: &self.userName, furigana: &self.furigana, grade: &self.grade, selection: &self.selection, introduction: &self.introduction, youbiTimeList: &self.youbiTimeList)
                     }
                 } else {
+                    print("loading parameter error >>", error!.localizedDescription)
                     viewController.showOkAlert(title: "User Class Error", message: error!.localizedDescription)
                 }
             })
@@ -91,6 +94,7 @@ class Parameter{
                             userImagesCacheG[userId] = image
                         }
                     } else {
+                        print("loading image error >>", error!.localizedDescription)
                         self.setNoImage(userId)
                     }
                 }

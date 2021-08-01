@@ -45,15 +45,15 @@ class Radiobutton {
             
             //ボタンの設定
             let button = UIButton(frame: CGRect(x: 10.f, y: height, width: 20.f, height: 20.f))
-            button.setTitle("○", for: .normal)
-            button.setTitleColor(UIColor(red: 0.f, green: 0.f, blue: 0.5.f, alpha: 1.f), for: .normal)
-            button.tag = i
-            button.addTarget(self, action: #selector(tapped(sender:)), for: .touchUpInside)
-            
             radioButtonButtons.append(button)
+            radioButtonButtons.last!.setTitle("○", for: .normal)
+            radioButtonButtons.last!.setTitleColor(UIColor(red: 0.f, green: 0.f, blue: 0.5.f, alpha: 1.f), for: .normal)
+            radioButtonButtons.last!.tag = i
+            radioButtonButtons.last!.addTarget(self, action: #selector(tapped(sender:)), for: .touchUpInside)
+            
             //addSubviewは，その前のViewに（）内のViewを追加する
-            self.mainView.addSubview(button)
             self.mainView.addSubview(label)
+            self.mainView.addSubview(radioButtonButtons.last!)
             
             height += 25.f
         }
@@ -71,7 +71,7 @@ class Radiobutton {
         
         for i in 0..<self.radioButtonKeys.count{
             if( selectedText == radioButtonLabels[i].text! ){
-                radioButtonButtons[i].setTitle("●", for: .normal)
+                radioButtonButtons[i].setTitle("◉", for: .normal)
             }
         }
     }
@@ -82,7 +82,7 @@ class Radiobutton {
         
         for i in 0..<self.radioButtonKeys.count{
             if( selectedKey == radioButtonKeys[i] ){
-                radioButtonButtons[i].setTitle("●", for: .normal)
+                radioButtonButtons[i].setTitle("◉", for: .normal)
             }
         }
     }

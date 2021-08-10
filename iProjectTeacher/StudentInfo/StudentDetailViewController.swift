@@ -50,7 +50,7 @@ class StudentDetailViewController: UIViewController, UITableViewDelegate, UITabl
             return 530.f
         }
         else{
-            return 44.f
+            return 95.f
         }
     }
     
@@ -60,6 +60,7 @@ class StudentDetailViewController: UIViewController, UITableViewDelegate, UITabl
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if(indexPath.row == 0){
+            //ユーザー情報のセル
             let cell = tableView.dequeueReusableCell(withIdentifier: "StudentInfo") as! StudentInfoTableViewCell
             cell.userimage.image = userImagesCacheG[student.userId]
             cell.userNameLabel.text = student.userName
@@ -74,8 +75,11 @@ class StudentDetailViewController: UIViewController, UITableViewDelegate, UITabl
             return cell
         }
         else{
+            //レポートのセル
             let cell = tableView.dequeueReusableCell(withIdentifier: "Report") as! ReportTableViewCell
-            cell.titleLabel.text = reportList[indexPath.row - 1].studentId
+            cell.userNameLabel.text = reportList[indexPath.row - 1].student.userName
+            cell.subject.text = reportList[indexPath.row - 1].subject
+            cell.userimage.image = userImagesCacheG[reportList[indexPath.row  - 1].studentId]
             cell.selectionStyle = .default
             cell.setFontColor()
             cell.backgroundColor = dColor.base
@@ -89,7 +93,7 @@ class StudentDetailViewController: UIViewController, UITableViewDelegate, UITabl
         //上から何番目か
         if indexPath.row != 0 {
             selectedReport = reportList[indexPath.row - 1]
-//            self.performSegue(withIdentifier: "", sender: nil)
+            self.performSegue(withIdentifier: "Report", sender: nil)
         }
         tableView.reloadData()
     }
@@ -143,7 +147,7 @@ class StudentDetailViewController: UIViewController, UITableViewDelegate, UITabl
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         switch segue.identifier! {
-        case "Detail":
+        case "Report":
             let view2 = segue.destination as! ReportViewController
             view2.report = selectedReport
         case "Schedule":

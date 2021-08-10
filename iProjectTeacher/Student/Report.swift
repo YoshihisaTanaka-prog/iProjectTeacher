@@ -16,7 +16,9 @@ protocol ReportDelegate {
 class Report{
     var ncmb: NCMBObject
     var studentId: String
+    var student: User
     var teacherId: String
+    var teacher: User
     var subject: String
     var unit: String
     var attitude: String
@@ -31,7 +33,8 @@ class Report{
         self.ncmb = report
         self.studentId = report.object(forKey: "studentId") as! String
         self.teacherId = report.object(forKey: "teacherId") as! String
-        
+        self.student = User(userId: studentId, isNeedParameter: true, viewController: UIViewController())
+        self.teacher = User(userId: teacherId, isNeedParameter: true, viewController: UIViewController())
         self.subject = report.object(forKey: "subject") as! String
         self.unit = report.object(forKey: "unit") as! String
         self.attitude = report.object(forKey: "attitude") as! String
@@ -45,7 +48,9 @@ class Report{
     init(studentId: String, teacherId: String, subject: String, unit: String, attitude: String, homework: String, nextUnit: String, messageToParents: String, messageToTeacher: String){
         self.ncmb = NCMBObject(className: "Report")!
         self.studentId = studentId
+        self.student = User(userId: studentId, isNeedParameter: true, viewController: UIViewController())
         self.teacherId = teacherId
+        self.teacher = User(userId: teacherId, isNeedParameter: true, viewController: UIViewController())
         self.subject = subject
         self.unit = unit
         self.attitude = attitude

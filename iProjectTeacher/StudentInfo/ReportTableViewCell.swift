@@ -10,7 +10,12 @@ import UIKit
 
 class ReportTableViewCell: UITableViewCell {
     
-    @IBOutlet var titleLabel: UILabel!
+    //@IBOutlet var titleLabel: UILabel!
+    @IBOutlet weak var userimage: UIImageView!
+    @IBOutlet weak var userNameLabel: UILabel!
+    @IBOutlet var subject: UILabel!
+    
+
 
     override func awakeFromNib() {
         super.awakeFromNib()

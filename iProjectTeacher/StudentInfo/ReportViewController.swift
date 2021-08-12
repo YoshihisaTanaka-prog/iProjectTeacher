@@ -10,71 +10,57 @@ import UIKit
 import Cosmos
 import NCMB
 
-class ReportViewController: UIViewController {
+class ReportViewController: UIViewController,ReportDelegate {
+    func imagesDidLoad(images: [UIImage]) {
+        self.images = images
+    }
     
-    var lesson: String?
-    var report: Report?
     
-    private var subjectLabel: UILabel!
-    private var unitLabel: UILabel!
-    private var attitude = 0
-    private var homeworkTextField: UITextField!
-    private var nextUnitPickerView: UIPickerView!
+    var report: Report!
+    
+    @IBOutlet private var subjectLabel: UILabel!
+    @IBOutlet private var unitLabel: UILabel!
+    @IBOutlet private var attitudeLabel: UILabel!
+    //private var attitude = 0
+    @IBOutlet private var homeworkLabel: UILabel!
+    @IBOutlet private var nextUnitLabel: UILabel!
     private var nextUnitList:[[String]] = []
     private var selectedNextUnit = ""
-    private var messageToParentsTextField: UITextField!
-    private var messageToTeacherTextField: UITextField!
+    @IBOutlet private var messageToParentsLabel: UILabel!
+    @IBOutlet private var messageToTeacherLabel: UILabel!
     private var nextLesson: String?
     
-    private var cosmos: CosmosView!
+    @IBOutlet private var file: UIButton!
+    private var images = [UIImage]()
+    
+    
+    //@IBOutlet var cosmos: CosmosView!
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        subjectLabel.text = report.subject
+        unitLabel.text = report.unit
+        attitudeLabel.text = report.attitude
+        homeworkLabel.text = report.homework
+        nextUnitLabel.text = report.nextUnit
+        messageToParentsLabel.text = report.messageToParents
+        messageToTeacherLabel.text = report.messageToTeacher
 
+        if report.fileNames.count == 0 {
+            file.isHidden = true
+        }
+        
+        
         // Do any additional setup after loading the view.
-        cosmos.didTouchCosmos = { rating in
-            self.attitude = rating.i
-        }
+//        cosmos.didTouchCosmos = { rating in
+//            self.attitude = rating.i
+//        }
         // ビューから指を離した時に呼ばれる
-        cosmos.didFinishTouchingCosmos = { rating in
-            self.attitude = rating.i
-        }
+//        cosmos.didFinishTouchingCosmos = { rating in
+//            self.attitude = rating.i
+//        }
     }
     
-    func save() {
-        if report == nil{
-            let object = NCMBObject(className: "Report")
-            object?.setObject(subjectLabel.text, forKey: "subject")
-            object?.setObject(unitLabel.text, forKey: "unit")
-            object?.setObject(attitude, forKey: "attitude")
-            object?.setObject(homeworkTextField.text, forKey: "homework")
-            object?.setObject(selectedNextUnit, forKey: "nextUnit")
-            object?.setObject(messageToParentsTextField.text, forKey: "messageToParents")
-            object?.setObject(messageToTeacherTextField.text, forKey: "messageToTeacher")
-            object?.saveInBackground({ (error) in
-                if(error == nil){
-//                    ページ遷移
-                } else {
-                    self.showOkAlert(title: "Error", message: error!.localizedDescription)
-                }
-            })
-//            メールを送信
-        }
-        else{
-//            これいる？
-            let object = report?.ncmb
-            object?.setObject(attitude, forKey: "attitude")
-            object?.setObject(homeworkTextField.text, forKey: "homework")
-            object?.setObject(messageToParentsTextField.text, forKey: "messageToParents")
-            object?.setObject(messageToTeacherTextField.text, forKey: "messageToTeacher")
-            object?.saveInBackground({ (error) in
-                if(error == nil){
-//                    ページ遷移
-                } else {
-                    self.showOkAlert(title: "Error", message: error!.localizedDescription)
-                }
-            })
-        }
-    }
 
 }

@@ -150,6 +150,7 @@ class StudentDetailViewController: UIViewController, UITableViewDelegate, UITabl
         case "Report":
             let view2 = segue.destination as! ReportViewController
             view2.report = selectedReport
+            view2.report.delegate = view2
         case "Schedule":
             let view2 = segue.destination as! CalendarViewController
             view2.student = student

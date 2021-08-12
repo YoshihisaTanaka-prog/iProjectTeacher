@@ -85,6 +85,7 @@
 		1F08D95025E6A0890002E0AA /* Opening.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1F08D94C25E6A0890002E0AA /* Opening.storyboard */; };
 		1F0D921125E14A4C00503048 /* ForgetPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F0D921025E14A4C00503048 /* ForgetPasswordViewController.swift */; };
 		1F185222265F917E005666DE /* RadioButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F185221265F917E005666DE /* RadioButton.swift */; };
+		1F1DBBA826C5490B00EF92D4 /* OriginalTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1DBBA726C5490B00EF92D4 /* OriginalTabBarController.swift */; };
 		1F2D2CC1264D4840008C9E30 /* Student.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1F2D2CC0264D4840008C9E30 /* Student.storyboard */; };
 		1F2D2CC4264D5325008C9E30 /* ReportDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F2D2CC3264D5325008C9E30 /* ReportDetailViewController.swift */; };
 		1F3603E6269729B400B78DB6 /* StudentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F3603E4269729B400B78DB6 /* StudentTableViewCell.swift */; };
@@ -178,6 +179,7 @@
 		1F08D94C25E6A0890002E0AA /* Opening.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Opening.storyboard; sourceTree = "<group>"; };
 		1F0D921025E14A4C00503048 /* ForgetPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgetPasswordViewController.swift; sourceTree = "<group>"; };
 		1F185221265F917E005666DE /* RadioButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RadioButton.swift; sourceTree = "<group>"; };
+		1F1DBBA726C5490B00EF92D4 /* OriginalTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OriginalTabBarController.swift; sourceTree = "<group>"; };
 		1F2D2CC0264D4840008C9E30 /* Student.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Student.storyboard; sourceTree = "<group>"; };
 		1F2D2CC3264D5325008C9E30 /* ReportDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportDetailViewController.swift; sourceTree = "<group>"; };
 		1F3603E4269729B400B78DB6 /* StudentTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentTableViewCell.swift; sourceTree = "<group>"; };
@@ -282,6 +284,7 @@
 				04A7E96B25AF2B4900C0F43C /* AppDelegate.swift */,
 				04A7E96D25AF2B4900C0F43C /* SceneDelegate.swift */,
 				04A7E96F25AF2B4900C0F43C /* ViewController.swift */,
+				1F1DBBA726C5490B00EF92D4 /* OriginalTabBarController.swift */,
 				04EA678E25BC8A8F005F0D06 /* User.swift */,
 				04ACB8B425DB2A7200916C15 /* GlobalParameters.swift */,
 				1F947C492684A555007F2FC7 /* TimeRange.swift */,
@@ -586,6 +589,7 @@
 				1F3603E6269729B400B78DB6 /* StudentTableViewCell.swift in Sources */,
 				045F6EA326ADB3F1001B56F9 /* DoubleScheduleTableViewCell.swift in Sources */,
 				043A9DB625D80D1600587B0E /* UserPageViewController.swift in Sources */,
+				1F1DBBA826C5490B00EF92D4 /* OriginalTabBarController.swift in Sources */,
 				04BD63F3269072C800A45ADD /* Lecture.swift in Sources */,
 				04ACB8B525DB2A7200916C15 /* GlobalParameters.swift in Sources */,
 				1F08D94425E69F920002E0AA /* Questionnaire.swift in Sources */,

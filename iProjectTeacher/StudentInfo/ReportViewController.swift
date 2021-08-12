@@ -26,11 +26,11 @@ class ReportViewController: UIViewController,ReportDelegate {
     @IBOutlet private var nextUnitLabel: UILabel!
     private var nextUnitList:[[String]] = []
     private var selectedNextUnit = ""
-    @IBOutlet private var messageToParentsLabel: UILabel!
+    //@IBOutlet private var messageToParentsLabel: UILabel!
     @IBOutlet private var messageToTeacherLabel: UILabel!
     private var nextLesson: String?
     
-    @IBOutlet private var file: UIButton!
+    @IBOutlet private var fileButton: UIButton!
     private var images = [UIImage]()
     
     
@@ -44,11 +44,12 @@ class ReportViewController: UIViewController,ReportDelegate {
         attitudeLabel.text = report.attitude
         homeworkLabel.text = report.homework
         nextUnitLabel.text = report.nextUnit
-        messageToParentsLabel.text = report.messageToParents
+        //messageToParentsLabel.text = report.messageToParents
         messageToTeacherLabel.text = report.messageToTeacher
 
+        report.loadImage(vc: self)
         if report.fileNames.count == 0 {
-            file.isHidden = true
+            fileButton.isHidden = true
         }
         
         
@@ -62,5 +63,11 @@ class ReportViewController: UIViewController,ReportDelegate {
 //        }
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
 
+            let view2 = segue.destination as! ReportImageViewController
+        view2.selectedImages = images
+        
+    }
+    
 }

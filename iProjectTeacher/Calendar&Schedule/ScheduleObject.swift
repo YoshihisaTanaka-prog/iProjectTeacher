@@ -30,6 +30,15 @@ class Schedules: ScheduleMonthDelegate {
 
     func loadSchedule(date: Date, userIds: [String], _ vc: UIViewController){
         self.userIds = userIds
+        
+        if userIds.count == 2{
+            if userIds[0] != currentUserG.userId{
+                let ui = userIds[0]
+                self.userIds[0] = userIds[1]
+                self.userIds[1] = ui
+            }
+        }
+        
         self.vc = vc
         delete()
         dateList = []
@@ -265,7 +274,7 @@ class ScheduleMonth {
                                 let lecture = Lecture(lecture: o, vc)
                                 cachedLectureG[o.objectId] = lecture
 //                                ここのループをもっと上手くすること。
-                                let timeFrameDic = lecture.timeFrame(date: self.startDay)
+                                let timeFrameDic = lecture.timeFrame(date: self.startDay, studentId: userIds.last!)
                                 for i in 0..<self.startDay.maxDate{
                                     let d = (i+1).s
                                     if self.dateDic[d] == nil{

@@ -82,7 +82,7 @@ class Lecture {
 
 //コマ生成用
 extension Lecture{
-    func timeFrame(date: Date) -> [String: [TimeFrameUnit]]{
+    func timeFrame(date: Date, studentId: String) -> [String: [TimeFrameUnit]]{
         var ret = [String:[TimeFrameUnit]]()
         let c = Calendar(identifier: .gregorian)
         let firstDate = c.date(from: DateComponents(year: date.y, month: date.m, day: 1))!
@@ -95,7 +95,7 @@ extension Lecture{
                 }
 //                コピペ時注意＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊
                 print(time.m, time.d, time.h)
-                if self.teacher.userId == currentUserG.userId{
+                if self.teacher.userId == currentUserG.userId && self.student.userId == studentId {
                     let t1 = TimeFrameUnit(time: time.h, title: self.subjectName, isAbleToShow: true, isMyEvent: true)
                     t1.lectureId = self.ncmb.objectId
                     t1.eventType = "telecture"
@@ -104,7 +104,12 @@ extension Lecture{
                     t2.lectureId = self.ncmb.objectId
                     t2.eventType = "telecture"
                     ret[time.d.s]!.append(t2)
-                } else {
+                } else if self.teacher.userId == currentUserG.userId {
+                    let t1 = TimeFrameUnit(time: time.h, title: self.subjectName, isAbleToShow: true, isMyEvent: true)
+                    t1.lectureId = self.ncmb.objectId
+                    t1.eventType = "telecture"
+                    ret[time.d.s]!.append(t1)
+                } else{
                     let t2 = TimeFrameUnit(time: time.h, title: self.subjectName, isAbleToShow: true, isMyEvent: false)
                     t2.lectureId = self.ncmb.objectId
                     t2.eventType = "telecture"

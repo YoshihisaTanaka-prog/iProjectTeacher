@@ -107,7 +107,11 @@ class ReportDetailViewController: UIViewController, UITextFieldDelegate, UITextV
                 if error != nil {
                     self.showOkAlert(title: "Error", message: error!.localizedDescription)
                 } else {
-                    self.showOkAlert(title: "報告書の保存", message: "保護者様に送信いたします。")
+                    self.showOkAlert(title: "報告書の保存", message: "保護者様に送信いたします。"){
+                        let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
+                        let rootViewController = storyboard.instantiateViewController(identifier: "RootTabBarController")
+                        self.present(rootViewController, animated: true, completion: nil)
+                    }
                     self.sendReportEmailToParent(object.objectId)
                 }
             }

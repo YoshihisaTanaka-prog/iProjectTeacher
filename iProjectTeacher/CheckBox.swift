@@ -26,7 +26,7 @@ class CheckBox {
             height += 25.f
         }
         self.mainView.frame = CGRect(x: 0, y: 60, width: self.width, height: self.height)
-        print(height)
+//        print(height)
         let length = Int(height / 17.f + 0.5.f) + 1
         for _ in 0..<length{
             msg += "\n"

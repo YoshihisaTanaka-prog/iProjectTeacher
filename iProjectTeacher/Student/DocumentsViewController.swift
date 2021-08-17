@@ -12,13 +12,41 @@ import NCMB
 class DocumentsViewController: UIViewController, UITextFieldDelegate, UITextViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     @IBOutlet private var documentImage: UIImageView!
+    @IBOutlet private var pageLabel: UILabel!
+    @IBOutlet private var pulusButton: UIButton!
+    @IBOutlet private var minusButton: UIButton!
+    
     private var selectedImages: [UIImage] = []
+    private var pageNum = -1
+    private var maxPageNum = 0
     var report: Report!
 
     override func viewDidLoad() {
+        let object = report.ncmb
+        object.setObject(report.studentId, forKey: "studentId")
+        object.setObject(report.teacherId, forKey: "teacherId")
+        object.setObject(report.subject, forKey: "subject")
+        object.setObject(report.unit, forKey: "unit")
+        object.setObject(report.attitude, forKey: "attitude")
+        object.setObject(report.homework, forKey: "homework")
+        object.setObject(report.nextUnit, forKey: "nextUnit")
+        object.setObject(report.messageToParents, forKey: "messageToParents")
+        object.setObject(report.messageToTeacher, forKey: "messageToTeacher")
+        object.saveInBackground { error in
+            if error == nil{
+                self.report = Report(object)
+            } else {
+                self.showOkAlert(title: "Error", message: error!.localizedDescription)
+            }
+        }
         super.viewDidLoad()
-
         // Do any additional setup after loading the view.
+        setBackGround(true, false)
+        
+        pulusButton.alpha = 0.5.f
+        pulusButton.isEnabled = false
+        minusButton.alpha = 0.5.f
+        minusButton.isEnabled = false
     }
     
 
@@ -55,6 +83,28 @@ class DocumentsViewController: UIViewController, UITextFieldDelegate, UITextView
         self.present(actionController, animated: true, completion: nil)
     }
     
+    @IBAction func tappedPlus(){
+        pageNum += 1
+        minusButton.alpha = 1.f
+        minusButton.isEnabled = true
+        setPage(pageNum: pageNum)
+        if pageNum == maxPageNum - 1{
+            pulusButton.alpha = 0.5.f
+            pulusButton.isEnabled = false
+        }
+    }
+    
+    @IBAction func tappedMinus(){
+        pageNum -= 1
+        pulusButton.alpha = 1.f
+        pulusButton.isEnabled = true
+        setPage(pageNum: pageNum)
+        if pageNum == 0{
+            minusButton.alpha = 0.5.f
+            minusButton.isEnabled = false
+        }
+    }
+    
     @IBAction func saveUserInfo(){
         
         if selectedImages.count != 0 {
@@ -65,8 +115,7 @@ class DocumentsViewController: UIViewController, UITextFieldDelegate, UITextView
                 let scale = Float(sqrt(min(1.d, 200000.d / size)))
                 let resizedImage = photo.scale(byFactor: scale)
                 let data = UIImage.pngData(resizedImage!)
-                let date = Date()
-                let fileName = date.y.s + "-" + date.m.s + "-" + date.d.s + "-" + currentUserG.userId + "-" + String(i+1)
+                let fileName = report.ncmb.objectId + "-" + String(i+1) + ".png"
                 report.fileNames.append(fileName)
                 let file = NCMBFile.file(withName: fileName, data: data()) as! NCMBFile
                 file.saveInBackground { (error) in
@@ -82,20 +131,16 @@ class DocumentsViewController: UIViewController, UITextFieldDelegate, UITextView
         }
         
         let object = report.ncmb
-        object.setObject(report.studentId, forKey: "studentId")
-        object.setObject(report.teacherId, forKey: "teacherId")
-        object.setObject(report.subject, forKey: "subject")
-        object.setObject(report.unit, forKey: "unit")
-        object.setObject(report.attitude, forKey: "attitude")
-        object.setObject(report.homework, forKey: "homework")
-        object.setObject(report.nextUnit, forKey: "nextUnit")
-        object.setObject(report.messageToParents, forKey: "messageToParents")
-        object.setObject(report.messageToTeacher, forKey: "messageToTeacher")
         object.setObject(report.fileNames, forKey: "fileNames")
         object.saveInBackground{ (error) in
             if error != nil {
                 self.showOkAlert(title: "Error", message: error!.localizedDescription)
             } else {
+                self.showOkAlert(title: "報告書の保存", message: "保護者様に送信いたします。"){
+                    let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
+                    let rootViewController = storyboard.instantiateViewController(identifier: "RootTabBarController")
+                    self.present(rootViewController, animated: true, completion: nil)
+                }
                 self.sendReportEmailToParent(object.objectId)
             }
         }
@@ -105,9 +150,35 @@ class DocumentsViewController: UIViewController, UITextFieldDelegate, UITextView
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         let selectedImage = info[UIImagePickerController.InfoKey.originalImage] as! UIImage
-        self.documentImage.image = selectedImage
         selectedImages.append(selectedImage)
+        setPage()
         picker.dismiss(animated: true, completion: nil)
+    }
+    
+    private func setPage(){
+        maxPageNum = selectedImages.count
+        pageNum = maxPageNum - 1
+        if pageNum == -1{
+            documentImage.image = nil
+        } else {
+            documentImage.image = selectedImages[pageNum]
+            pageLabel.text = (pageNum + 1).s + "/" + maxPageNum.s
+        }
+        if maxPageNum < 2{
+            pulusButton.alpha = 0.5.f
+            pulusButton.isEnabled = false
+            minusButton.alpha = 0.5.f
+            minusButton.isEnabled = false
+        } else{
+            minusButton.alpha = 1.f
+            minusButton.isEnabled = true
+        }
+    }
+    
+    private func setPage(pageNum: Int){
+        self.pageNum = pageNum
+        documentImage.image = selectedImages[pageNum]
+        pageLabel.text = (pageNum + 1).s + "/" + maxPageNum.s
     }
     
 }

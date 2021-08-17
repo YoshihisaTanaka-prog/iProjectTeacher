@@ -44,16 +44,17 @@ class Radiobutton {
             }
             
             //ボタンの設定
-            let button = UIButton(frame: CGRect(x: 10.f, y: height, width: 20.f, height: 20.f))
-            radioButtonButtons.append(button)
-            radioButtonButtons.last!.setTitle("○", for: .normal)
-            radioButtonButtons.last!.setTitleColor(UIColor(red: 0.f, green: 0.f, blue: 0.5.f, alpha: 1.f), for: .normal)
-            radioButtonButtons.last!.tag = i
-            radioButtonButtons.last!.addTarget(self, action: #selector(tapped(sender:)), for: .touchUpInside)
+            radioButtonButtons.append(UIButton(frame: CGRect(x: 10.f, y: height, width: 20.f, height: 20.f)))
+            radioButtonButtons[i].setTitle("○", for: .normal)
+            radioButtonButtons[i].setTitleColor(UIColor(red: 0.f, green: 0.f, blue: 0.5.f, alpha: 1.f), for: .normal)
+            radioButtonButtons[i].tag = i
+            radioButtonButtons[i].addTarget(self, action: #selector(self.tapped(_:)), for: .touchUpInside)
+//            radioButtonButtons.last!.isEnabled = true
+            radioButtonButtons[i].setTitle("押", for: .highlighted)
             
             //addSubviewは，その前のViewに（）内のViewを追加する
             self.mainView.addSubview(label)
-            self.mainView.addSubview(radioButtonButtons.last!)
+            self.mainView.addSubview(radioButtonButtons[i])
             
             height += 25.f
         }
@@ -87,14 +88,13 @@ class Radiobutton {
         }
     }
     
-    @objc func tapped(sender:UIButton){
+    @objc func tapped(_ sender:UIButton){
         print(sender.tag)
         for i in 0..<radioButtonButtons.count {
             if i == sender.tag{
                 radioButtonButtons[i].setTitle("◉", for: .normal)
                 self.selectedText = radioButtonLabels[i].text
                 self.selectedKey = radioButtonKeys[i]
-                
             } else {
                 radioButtonButtons[i].setTitle("○", for: .normal)
             }

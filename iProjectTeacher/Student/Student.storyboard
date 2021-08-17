@@ -178,9 +178,50 @@
                                     <action selector="selectImage" destination="Ran-lK-urj" eventType="touchUpInside" id="H1c-jo-UlK"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zCv-hc-gQv">
+                                <rect key="frame" x="28" y="115" width="30" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="MN8-CP-OgZ"/>
+                                    <constraint firstAttribute="width" constant="30" id="xGA-JE-1Vd"/>
+                                </constraints>
+                                <state key="normal" title="&lt;"/>
+                                <connections>
+                                    <action selector="tappedMinus" destination="Ran-lK-urj" eventType="touchUpInside" id="msM-lZ-lqC"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Dbb-Qc-cft">
+                                <rect key="frame" x="358" y="115" width="30" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="Pmt-J3-SJW"/>
+                                    <constraint firstAttribute="width" constant="30" id="jOD-lN-C9G"/>
+                                </constraints>
+                                <state key="normal" title="&gt;"/>
+                                <connections>
+                                    <action selector="tappedPlus" destination="Ran-lK-urj" eventType="touchUpInside" id="Rt7-8T-eF5"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AXL-2x-fqC">
+                                <rect key="frame" x="157" y="119.5" width="100" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="21" id="N98-0m-40r"/>
+                                    <constraint firstAttribute="width" constant="100" id="cy8-Hz-UPl"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="MVp-r6-2JL"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="AXL-2x-fqC" firstAttribute="centerX" secondItem="FbY-M2-Svg" secondAttribute="centerX" id="0gy-ZR-EER"/>
+                            <constraint firstItem="Dbb-Qc-cft" firstAttribute="leading" secondItem="zCv-hc-gQv" secondAttribute="trailing" constant="300" id="4tK-QC-IDi"/>
+                            <constraint firstItem="zCv-hc-gQv" firstAttribute="leading" secondItem="MVp-r6-2JL" secondAttribute="leading" constant="28" id="Bqx-5K-r02"/>
+                            <constraint firstItem="MVp-r6-2JL" firstAttribute="trailing" secondItem="Dbb-Qc-cft" secondAttribute="trailing" constant="26" id="CF9-iG-Idg"/>
+                            <constraint firstItem="zCv-hc-gQv" firstAttribute="top" secondItem="MVp-r6-2JL" secondAttribute="top" constant="27" id="xLM-0y-kJ8"/>
+                            <constraint firstItem="AXL-2x-fqC" firstAttribute="centerY" secondItem="zCv-hc-gQv" secondAttribute="centerY" id="yV4-Ac-OMJ"/>
+                            <constraint firstItem="Dbb-Qc-cft" firstAttribute="top" secondItem="zCv-hc-gQv" secondAttribute="top" id="zr1-1v-1jb"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="u3B-j8-Cca">
                         <barButtonItem key="rightBarButtonItem" title="完了" id="rGq-7U-CNa">
@@ -191,6 +232,9 @@
                     </navigationItem>
                     <connections>
                         <outlet property="documentImage" destination="lYy-pi-h5z" id="8Ji-zL-1dT"/>
+                        <outlet property="minusButton" destination="zCv-hc-gQv" id="JoE-Cx-5IU"/>
+                        <outlet property="pageLabel" destination="AXL-2x-fqC" id="4oK-UA-NXE"/>
+                        <outlet property="pulusButton" destination="Dbb-Qc-cft" id="tF5-D8-9Tm"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gEa-uR-inS" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

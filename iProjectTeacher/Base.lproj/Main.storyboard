@@ -477,12 +477,6 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="学部・学科" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Djt-wa-OEW">
-                                <rect key="frame" x="103" y="404" width="214" height="34"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
                             <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="通っている大学名" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="fIb-Qz-W0n">
                                 <rect key="frame" x="103" y="320" width="214" height="34"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -528,27 +522,22 @@
                                     <action selector="selectclass" destination="imA-Ww-owL" eventType="touchUpInside" id="t13-01-Xbl"/>
                                 </connections>
                             </button>
+                            <pickerView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="LMT-TW-lzt">
+                                <rect key="frame" x="103" y="356" width="214" height="46"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                            </pickerView>
+                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="学部・学科" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Djt-wa-OEW">
+                                <rect key="frame" x="103" y="410" width="214" height="34"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
                             <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="メールアドレス" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="SaS-cX-aUL">
-                                <rect key="frame" x="103" y="446" width="214" height="34"/>
+                                <rect key="frame" x="103" y="452" width="214" height="34"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="学年" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="COv-Ml-T8b">
-                                <rect key="frame" x="103" y="360" width="214" height="34"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Tk6-Z6-Ug4">
-                                <rect key="frame" x="325" y="362" width="31" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="変更"/>
-                                <connections>
-                                    <action selector="selectgrade" destination="imA-Ww-owL" eventType="touchUpInside" id="v31-yZ-0Ed"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="mXL-3A-S9A"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -567,8 +556,8 @@
                     </navigationItem>
                     <connections>
                         <outlet property="emailTextField" destination="SaS-cX-aUL" id="xCK-gg-1oN"/>
-                        <outlet property="gradeTextField" destination="COv-Ml-T8b" id="fbe-3u-NJ2"/>
                         <outlet property="introductionTextView" destination="8lD-9r-opv" id="Lgd-sQ-3Di"/>
+                        <outlet property="pickerView1" destination="LMT-TW-lzt" id="4yv-ax-BIC"/>
                         <outlet property="schoolTextField" destination="fIb-Qz-W0n" id="E1f-sY-XBf"/>
                         <outlet property="selectionTextField" destination="Djt-wa-OEW" id="qhC-JE-XVn"/>
                         <outlet property="userIdFuriganaTextField" destination="MNu-j5-ehv" id="pEL-0v-gy5"/>
@@ -578,7 +567,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HPc-Bm-kAj" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2952" y="-258"/>
+            <point key="canvasLocation" x="2950.7246376811595" y="-258.48214285714283"/>
         </scene>
         <!--スケジュール-->
         <scene sceneID="3eh-dI-cX8">

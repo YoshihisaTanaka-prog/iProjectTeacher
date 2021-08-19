@@ -60,7 +60,8 @@ class UserPageViewController: UIViewController, UITextFieldDelegate, UITextViewD
         userIdFuriganaTextField.text = currentUserG.furigana
         schoolTextField.text = currentUserG.teacherParameter?.collage
         
-        gradeTextField.text = transformGrade(currentUserG.grade)
+        gradeTextField.text = currentUserG.grade
+        //gradeTextField.text = transformGrade(currentUserG.grade)
         //choiceTextField.text = user.teacherParameter?.choice
         selectionTextField.text = currentUserG.selection
         //parentsEmailTextField.text = user.studentParameter?.parentEmailAdress

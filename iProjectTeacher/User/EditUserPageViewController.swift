@@ -16,16 +16,18 @@ class EditUserPageViewController: UIViewController, UITextFieldDelegate, UITextV
     @IBOutlet var userIdTextField: UITextField!
     @IBOutlet var userIdFuriganaTextField: UITextField!
     @IBOutlet var schoolTextField: UITextField!
-    @IBOutlet var gradeTextField: UITextField!
+    //@IBOutlet var gradeTextField: UITextField!
     @IBOutlet var emailTextField: UITextField!
     @IBOutlet var selectionTextField: UITextField!
     @IBOutlet var introductionTextView: UITextView!
+    @IBOutlet var pickerView1: UIPickerView!
     
     let kamokuAlertController = UIAlertController(title: "教科を選んでください。", message: "", preferredStyle: .actionSheet)
     let youbiAlertController = UIAlertController(title: "曜日を選んでください。", message: "", preferredStyle: .actionSheet)
     var imageName: String?
     var selected: String?
     let bunri = ["文理選択","文系","理系","その他"]
+    let grade = ["学部1年生","学部2年生","学部3年生","学部4年生","修士1年生","修士2年生","博士1年生","博士2年生","博士3年生","博士4年生","その他"]
     var kamokuCheckBox: CheckBox!
 
     var kamokuCheckBoxList: [CheckBox] = []
@@ -103,11 +105,11 @@ class EditUserPageViewController: UIViewController, UITextFieldDelegate, UITextV
         userIdTextField.delegate = self
         userIdFuriganaTextField.delegate = self
         schoolTextField.delegate = self
-        gradeTextField.text = transformGrade(currentUserG.grade)
+        //gradeTextField.text = transformGrade(currentUserG.grade)
         emailTextField.delegate = self
         selectionTextField.delegate = self
-        //pickerView1.delegate = self
-        //pickerView1.dataSource = self
+        pickerView1.delegate = self
+        pickerView1.dataSource = self
         //choiceTextField.delegate = self
         introductionTextView.delegate = self
         
@@ -118,7 +120,7 @@ class EditUserPageViewController: UIViewController, UITextFieldDelegate, UITextV
         //gradeTextField.text = user_.teacherParameter?.grade
         //gradeTextField.text = currentUserG.grade
         introductionTextView.text = currentUserG.introduction
-        //pickerView1.selectRow(getSelectionNum(selesction: user_.studentParameter?.selection), inComponent: 0, animated: false)
+        pickerView1.selectRow(getSelectionNum(selesction: currentUserG.grade), inComponent: 0, animated: false)
         //choiceTextField.text = user_.teacherParameter?.choice
         
         selectionTextField.text = currentUserG.selection
@@ -168,22 +170,44 @@ class EditUserPageViewController: UIViewController, UITextFieldDelegate, UITextV
         return 1
     }
     
+//    // UIPickerViewの行数、リストの数
+//    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+//        return bunri.count
+//
+//    }
+//
+//    // UIPickerViewの最初の表示
+//    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+//        return bunri[row]
+//
+//    }
+//
+//    // UIPickerViewのRowが選択された時の挙動
+//    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+//        if row != 0 {
+//            selected = bunri[row]
+//        } else {
+//            selected = nil
+//        }
+//    }
+
+    
     // UIPickerViewの行数、リストの数
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return bunri.count
+        return grade.count
         
     }
     
     // UIPickerViewの最初の表示
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return bunri[row]
+        return grade[row]
         
     }
     
     // UIPickerViewのRowが選択された時の挙動
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         if row != 0 {
-            selected = bunri[row]
+            selected = grade[row]
         } else {
             selected = nil
         }
@@ -207,7 +231,7 @@ class EditUserPageViewController: UIViewController, UITextFieldDelegate, UITextV
         param.setObject(userIdFuriganaTextField.text, forKey: "furigana")
         param.setObject(selectionTextField.text, forKey: "selection")
         if(selected != nil){
-            param.setObject(selected!, forKey: "selection")
+            param.setObject(selected!, forKey: "grade")
         }
         param.setObject(introductionTextView.text, forKey: "introduction")
 
@@ -282,16 +306,16 @@ class EditUserPageViewController: UIViewController, UITextFieldDelegate, UITextV
         self.present(actionController, animated: true, completion: nil)
     }
     
-    @IBAction func selectgrade(){
-        let alertController = UIAlertController(title: "学年を選んでください。", message: gradeRadioButton.msg, preferredStyle: .alert)
-        let alertOkAction = UIAlertAction(title: "選択完了", style: .default) { (action) in
-            self.gradeRadioButton.mainView.removeFromSuperview()
-            alertController.dismiss(animated: true, completion: nil)
-        }
-        alertController.view.addSubview(gradeRadioButton.mainView)
-        alertController.addAction(alertOkAction)
-        self.present(alertController, animated: true, completion: nil)
-    }
+//    @IBAction func selectgrade(){
+//        let alertController = UIAlertController(title: "学年を選んでください。", message: gradeRadioButton.msg, preferredStyle: .alert)
+//        let alertOkAction = UIAlertAction(title: "選択完了", style: .default) { (action) in
+//            self.gradeRadioButton.mainView.removeFromSuperview()
+//            alertController.dismiss(animated: true, completion: nil)
+//        }
+//        alertController.view.addSubview(gradeRadioButton.mainView)
+//        alertController.addAction(alertOkAction)
+//        self.present(alertController, animated: true, completion: nil)
+//    }
     
     @IBAction func selectWeek(){
         var alertOkActionList = [UIAlertAction(title: "終了", style: .cancel) { (action) in
@@ -379,11 +403,21 @@ class EditUserPageViewController: UIViewController, UITextFieldDelegate, UITextV
         self.present(alertController, animated: true, completion: nil)
     }
     
+//    func getSelectionNum(selesction: String?) -> Int {
+//        if(selesction == nil){
+//            return 0
+//        }
+//        let i = bunri.firstIndex(of: selesction!)
+//        if i == nil {
+//            return 0
+//        }
+//        return i!
+//    }
     func getSelectionNum(selesction: String?) -> Int {
         if(selesction == nil){
             return 0
         }
-        let i = bunri.firstIndex(of: selesction!)
+        let i = grade.firstIndex(of: selesction!)
         if i == nil {
             return 0
         }

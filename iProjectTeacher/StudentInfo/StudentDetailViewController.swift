@@ -59,10 +59,11 @@ class StudentDetailViewController: UIViewController, UITableViewDelegate, UITabl
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let ud = UserDefaults.standard
         if(indexPath.row == 0){
             //ユーザー情報のセル
             let cell = tableView.dequeueReusableCell(withIdentifier: "StudentInfo") as! StudentInfoTableViewCell
-            cell.userimage.image = userImagesCacheG[student.userId]
+            cell.userimage.image = ud.image(forKey: student.userId)
             cell.userNameLabel.text = student.userName
             cell.delegate = self
             cell.student = student
@@ -79,7 +80,7 @@ class StudentDetailViewController: UIViewController, UITableViewDelegate, UITabl
             let cell = tableView.dequeueReusableCell(withIdentifier: "Report") as! ReportTableViewCell
             cell.userNameLabel.text = reportList[indexPath.row - 1].student.userName
             cell.subject.text = reportList[indexPath.row - 1].subject
-            cell.userimage.image = userImagesCacheG[reportList[indexPath.row  - 1].studentId]
+            cell.userimage.image = ud.image(forKey: reportList[indexPath.row  - 1].studentId)
             cell.selectionStyle = .default
             cell.setFontColor()
             cell.backgroundColor = dColor.base
@@ -119,7 +120,8 @@ class StudentDetailViewController: UIViewController, UITableViewDelegate, UITabl
     }
     
     func tappedChat() {
-        
+//        let chatRoom = ChatRoom(user: student)
+        self.performSegue(withIdentifier: "GoToChat", sender: nil)
     }
     
     func tappedChangeStatus() {
@@ -154,6 +156,12 @@ class StudentDetailViewController: UIViewController, UITableViewDelegate, UITabl
         case "Schedule":
             let view2 = segue.destination as! CalendarViewController
             view2.student = student
+        case "GoToChat":
+            let view2 = segue.destination as! ChatViewController
+            let chatRoom = ChatRoom(user: student)
+            chatRoom.loadChats()
+            chatRoom.delegate = view2
+            view2.sentChatRoom = chatRoom
         default:
             break
         }

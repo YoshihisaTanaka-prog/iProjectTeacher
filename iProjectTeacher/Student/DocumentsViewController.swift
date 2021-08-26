@@ -15,6 +15,7 @@ class DocumentsViewController: UIViewController, UITextFieldDelegate, UITextView
     @IBOutlet private var pageLabel: UILabel!
     @IBOutlet private var pulusButton: UIButton!
     @IBOutlet private var minusButton: UIButton!
+    @IBOutlet private var item: UIBarButtonItem!
     
     private var selectedImages: [UIImage] = []
     private var pageNum = -1
@@ -106,7 +107,7 @@ class DocumentsViewController: UIViewController, UITextFieldDelegate, UITextView
     }
     
     @IBAction func saveUserInfo(){
-        
+        item.isEnabled = false
         if selectedImages.count != 0 {
             let photos = selectedImages
             for i in 0..<photos.count {
@@ -135,6 +136,7 @@ class DocumentsViewController: UIViewController, UITextFieldDelegate, UITextView
         object.saveInBackground{ (error) in
             if error != nil {
                 self.showOkAlert(title: "Error", message: error!.localizedDescription)
+                self.item.isEnabled = true
             } else {
                 self.showOkAlert(title: "報告書の保存", message: "保護者様に送信いたします。"){
                     let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
@@ -146,7 +148,16 @@ class DocumentsViewController: UIViewController, UITextFieldDelegate, UITextView
         }
     }
     
-    
+    @IBAction func tappedBack(){
+        if selectedImages.count == 0{
+            self.navigationController?.popViewController(animated: true)
+        } else{
+            showOkCancelAlert(title: "注意", message: "画像の保存を中止しますか？", okAction: {
+                self.navigationController?.popViewController(animated: true)
+            }, cancelAction: {
+            })
+        }
+    }
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         let selectedImage = info[UIImagePickerController.InfoKey.originalImage] as! UIImage

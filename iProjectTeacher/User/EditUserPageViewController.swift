@@ -27,7 +27,7 @@ class EditUserPageViewController: UIViewController, UITextFieldDelegate, UITextV
     var imageName: String?
     var selected: String?
     let bunri = ["文理選択","文系","理系","その他"]
-    let grade = ["学部1年生","学部2年生","学部3年生","学部4年生","修士1年生","修士2年生","博士1年生","博士2年生","博士3年生","博士4年生","その他"]
+    let grade = [["学部1年生","B1"],["学部2年生","B2"],["学部3年生","B3"],["学部4年生","B4"],["修士1年生","M1"],["修士2年生","M2"],["博士1年生","D1"],["博士2年生","D2"],["博士3年生","D3"],["その他","0"]]
     var kamokuCheckBox: CheckBox!
 
     var kamokuCheckBoxList: [CheckBox] = []
@@ -120,12 +120,12 @@ class EditUserPageViewController: UIViewController, UITextFieldDelegate, UITextV
         //gradeTextField.text = user_.teacherParameter?.grade
         //gradeTextField.text = currentUserG.grade
         introductionTextView.text = currentUserG.introduction
-        pickerView1.selectRow(getSelectionNum(selesction: currentUserG.grade), inComponent: 0, animated: false)
+        pickerView1.selectRow(getGradeIndexNum(selesction: currentUserG.grade), inComponent: 0, animated: false)
         //choiceTextField.text = user_.teacherParameter?.choice
         
         selectionTextField.text = currentUserG.selection
-        
-        userImageView.image = userImagesCacheG[currentUserG.userId]
+        let ud = UserDefaults.standard
+        userImageView.image = ud.image(forKey: currentUserG.userId)
         gradeRadioButton = Radiobutton(gradeList, selectedKey: currentUserG.grade)
     }
     
@@ -155,7 +155,6 @@ class EditUserPageViewController: UIViewController, UITextFieldDelegate, UITextV
                 self.showOkAlert(title: "Error", message: error!.localizedDescription)
             } else {
                 self.userImageView.image = selectedImage
-                userImagesCacheG[currentUserG.userId] = resizedImage
                 self.imageName = currentUserG.userId
             }
         } progressBlock: { (progress) in
@@ -200,14 +199,14 @@ class EditUserPageViewController: UIViewController, UITextFieldDelegate, UITextV
     
     // UIPickerViewの最初の表示
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return grade[row]
+        return grade[row][0]
         
     }
     
     // UIPickerViewのRowが選択された時の挙動
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         if row != 0 {
-            selected = grade[row]
+            selected = grade[row][1]
         } else {
             selected = nil
         }
@@ -223,6 +222,9 @@ class EditUserPageViewController: UIViewController, UITextFieldDelegate, UITextV
         let im = param.object(forKey: "imageName")
         if im == nil{
             param.setObject(imageName, forKey: "imageName")
+        } else if self.imageName != nil{
+            let ud = UserDefaults.standard
+            ud.saveImage(image: userImageView.image, forKey: currentUserG.userId)
         }
         param.setObject(userIdTextField.text, forKey: "userName")
         param.setObject(userIdFuriganaTextField.text, forKey: "furigana")
@@ -260,10 +262,8 @@ class EditUserPageViewController: UIViewController, UITextFieldDelegate, UITextV
 
         param.saveInBackground { (error) in
             if error == nil{
-                currentUserG = User(NCMBUser.current()!)
-                DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
-                    self.navigationController?.popViewController(animated: true)
-                }
+                currentUserG.teacherParameter = TeacherParameter(param)
+                self.navigationController?.popViewController(animated: true)
             }
             else{
                 self.showOkAlert(title: "Error", message: error!.localizedDescription)
@@ -403,25 +403,16 @@ class EditUserPageViewController: UIViewController, UITextFieldDelegate, UITextV
         self.present(alertController, animated: true, completion: nil)
     }
     
-//    func getSelectionNum(selesction: String?) -> Int {
-//        if(selesction == nil){
-//            return 0
-//        }
-//        let i = bunri.firstIndex(of: selesction!)
-//        if i == nil {
-//            return 0
-//        }
-//        return i!
-//    }
-    func getSelectionNum(selesction: String?) -> Int {
+    func getGradeIndexNum(selesction: String?) -> Int {
         if(selesction == nil){
-            return 0
+            return grade.count - 1
         }
-        let i = grade.firstIndex(of: selesction!)
-        if i == nil {
-            return 0
+        for i in 0..<grade.count{
+            if grade[i][1] == selesction{
+                return i
+            }
         }
-        return i!
+        return grade.count - 1
     }
 
 }

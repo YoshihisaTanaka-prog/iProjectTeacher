@@ -120,3 +120,16 @@ extension Lecture{
         return ret
     }
 }
+
+
+class LectureTimeObject{
+    let id: String
+    let startTime: Date
+    let endTime: Date
+    init(id: String, startTime: Date){
+        self.id = id
+        self.startTime = startTime
+        let c = Calendar(identifier: .gregorian)
+        endTime = c.date(from: DateComponents(year: startTime.y, month: startTime.m, day: startTime.d, hour: startTime.h + 1, minute: startTime.min))!
+    }
+}

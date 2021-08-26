@@ -195,27 +195,29 @@ class Schedules: ScheduleMonthDelegate {
         self.monthDic[ym]?.loadSchedule(date: date, userIds: userIds, vc)
     }
     
-    func overwriteLectureInfo(lecture: Lecture){
-        for mKey in self.monthDic.keys{
-            for dKey in self.monthDic[mKey]!.dateDic.keys{
-                let timeFrames = self.monthDic[mKey]!.dateDic[dKey]!
-                if timeFrames.count != 0{
-                    for i in 0..<timeFrames.count{
-                        if timeFrames[i].lectureId != nil{
-                            if timeFrames[i].lectureId == lecture.ncmb.objectId{
-                                timeFrames[i].title += "\n" + lecture.teacher.userName + "先生\n" + lecture.student.userName + "さん"
-                            }
-                        }
-                    }
-                }
-                self.monthDic[mKey]!.dateDic[dKey] = timeFrames
-            }
-        }
-    }
+//    func overwriteLectureInfo(lecture: Lecture){
+//        for mKey in self.monthDic.keys{
+//            for dKey in self.monthDic[mKey]!.dateDic.keys{
+//                let timeFrames = self.monthDic[mKey]!.dateDic[dKey]!
+//                if timeFrames.count != 0{
+//                    for i in 0..<timeFrames.count{
+//                        if timeFrames[i].lectureId != nil{
+//                            if timeFrames[i].lectureId == lecture.ncmb.objectId{
+//                                timeFrames[i].title += "\n" + lecture.teacher.userName + "先生\n" + lecture.student.userName + "さん"
+//                            }
+//                        }
+//                    }
+//                }
+//                self.monthDic[mKey]!.dateDic[dKey] = timeFrames
+//            }
+//        }
+//    }
     
     func schedulesDidLoaded(date: Date) {
         if index == 0 {
             self.delegate?.schedulesDidLoaded()
+            getTodaysLectureTimeList()
+            judgeIsNeedToGoLecturePage()
         }
         index += 1
         if index >= dateList.count{

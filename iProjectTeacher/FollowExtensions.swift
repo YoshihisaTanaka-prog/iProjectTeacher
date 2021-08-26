@@ -28,12 +28,14 @@ extension UIViewController{
                     for follow in result as! [NCMBObject]{
                         let userId = follow.object(forKey: "toUserId") as! String
                         let status = follow.object(forKey: "status") as! Int
+                        let chatRoomId = follow.object(forKey: "chatRoomId") as! String
                         if(status < 0){
                             blockedUserIdListG.append(userId)
                         }
                         else{
                             let u = User(userId: userId, isNeedParameter: true, viewController: self)
                             u.status = status
+                            u.chatRoomId = chatRoomId
                             switch status {
                             case 0:
                                 waitingUserListG.append(u)

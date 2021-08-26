@@ -20,6 +20,9 @@ class StudentTableViewCell: UITableViewCell {
         // Initialization code
         let size = screenSizeG["EnEt"]!
         self.contentView.frame = CGRect(x: 0.f, y: 0.f, width: size.width, height: size.viewHeight)
+        userimage.layer.cornerRadius = userimage.frame.width / 2.f
+        userimage.clipsToBounds = true
+        self.backgroundColor = dColor.base
     }
 
 

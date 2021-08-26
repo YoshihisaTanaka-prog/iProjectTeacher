@@ -64,7 +64,8 @@ class StudentViewController: UIViewController, UITableViewDataSource, UITableVie
 //        cell.highSchool.numberOfLines = 0
         cell.userNameLabel.text = students[indexPath.row].userName
 //        cell.userNameFuriganaLabel.text = students[indexPath.row].furigana
-        cell.userimage.image = userImagesCacheG[students[indexPath.row].userId]  //ユーザー画像を設定
+        let ud = UserDefaults.standard
+        cell.userimage.image = ud.image(forKey: students[indexPath.row].userId)  //ユーザー画像を設定
         
         cell.setFontColor()
         return cell

@@ -51,21 +51,11 @@ class ReportViewController: UIViewController,ReportDelegate {
         if report.fileNames.count == 0 {
             fileButton.isHidden = true
         }
-        
-        
-        // Do any additional setup after loading the view.
-//        cosmos.didTouchCosmos = { rating in
-//            self.attitude = rating.i
-//        }
-        // ビューから指を離した時に呼ばれる
-//        cosmos.didFinishTouchingCosmos = { rating in
-//            self.attitude = rating.i
-//        }
+        setBackGround(true, true)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-
-            let view2 = segue.destination as! ReportImageViewController
+        let view2 = segue.destination as! ReportImageViewController
         view2.selectedImages = images
         
     }

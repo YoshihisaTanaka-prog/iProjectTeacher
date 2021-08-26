@@ -166,6 +166,14 @@ extension Date{
         let c = Calendar.current
         return c.component(.minute, from: self)
     }
+    public var s: Int{
+        let c = Calendar.current
+        return c.component(.second, from: self)
+    }
+    public var ns: Int{
+        let c = Calendar.current
+        return c.component(.nanosecond, from: self)
+    }
     public var weekId: Int{
         let holiday = CalculateCalendarLogic()
         if (holiday.judgeJapaneseHoliday(year: self.y, month: self.m, day: self.d)){

@@ -60,13 +60,14 @@ class UserPageViewController: UIViewController, UITextFieldDelegate, UITextViewD
         userIdFuriganaTextField.text = currentUserG.furigana
         schoolTextField.text = currentUserG.teacherParameter?.collage
         
-        gradeTextField.text = currentUserG.grade
+        gradeTextField.text = transformGrade(currentUserG.grade)
         //gradeTextField.text = transformGrade(currentUserG.grade)
         //choiceTextField.text = user.teacherParameter?.choice
         selectionTextField.text = currentUserG.selection
         //parentsEmailTextField.text = user.studentParameter?.parentEmailAdress
         introductionTextView.text = currentUserG.introduction
-        userImageView.image = userImagesCacheG[currentUserG.userId]
+        let ud = UserDefaults.standard
+        userImageView.image = ud.image(forKey: currentUserG.userId)
     }
     
     @IBAction func showMenu(){

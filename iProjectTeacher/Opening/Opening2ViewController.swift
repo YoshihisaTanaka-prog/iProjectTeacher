@@ -11,7 +11,8 @@ import NCMB
 
 class Opening2ViewController: UIViewController {
     
-    @IBOutlet var label: UILabel!
+    private var baceView: UIView!
+    private var imageView: UIImageView!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -19,11 +20,27 @@ class Opening2ViewController: UIViewController {
         // Do any additional setup after loading the view.
         self.view.backgroundColor = dColor.opening
         
-        self.tabBarController?.tabBar.alpha = 0.f
-        self.navigationController?.navigationBar.alpha = 0.f
+        
+        let x = screenSizeG["NnNt"]!.width
+        let y = screenSizeG["NnNt"]!.screenHeight
+        
+        baceView = UIView(frame: CGRect(x: 0, y: 0, width: x*0.8.f, height: x*0.8.f) )
+        baceView.center = CGPoint(x: x / 2.f, y: y / 2.f)
+        baceView.layer.cornerRadius = x / 10.f
+        baceView.clipsToBounds = true
+        
+        imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: x*1.6.f, height: x*0.8.f) )
+        imageView.image = UIImage(named: "iconT.png")
+        baceView.addSubview(imageView)
+        
+        self.view.addSubview(baceView)
+        
     }
     
     override func viewDidAppear(_ animated: Bool) {
+        
+        self.tabBarController?.tabBar.alpha = 0.f
+        self.navigationController?.navigationBar.alpha = 0.f
 //        TabBarやNavigationBarがある時の画面サイズの取得
         let size = screenSizeG["NnNt"]!
         
@@ -34,9 +51,9 @@ class Opening2ViewController: UIViewController {
         print("EnNt", screenSizeG["EnNt"]!.viewHeight)
         print("EnEt", screenSizeG["EnEt"]!.viewHeight)
         
-        label.textColor = .black
         UIView.animate(withDuration: 0.8, animations: {
-            self.label.textColor = .red
+            let x = screenSizeG["NnNt"]!.width
+            self.imageView.center = CGPoint(x: 0, y: x*0.4.f)
         }) { _ in
             if isLogInG {
                 // ログイン中だったら

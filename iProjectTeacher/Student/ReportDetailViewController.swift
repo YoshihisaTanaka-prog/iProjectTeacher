@@ -11,7 +11,11 @@ import NCMB
 import NYXImagesKit
 
 class ReportDetailViewController: UIViewController, UITextFieldDelegate, UITextViewDelegate, UIPickerViewDelegate, UIPickerViewDataSource, UINavigationControllerDelegate {
+    
+    var lecture: Lecture!
 
+    @IBOutlet private var studentNameLabel: UILabel!
+    @IBOutlet private var subjectNameLabel: UILabel!
     @IBOutlet private var tangenTextField: UITextField!
     @IBOutlet private var pickerView1: UIPickerView!
     @IBOutlet private var homeworkTextView: UITextView!
@@ -39,6 +43,9 @@ class ReportDetailViewController: UIViewController, UITextFieldDelegate, UITextV
         pearentMessageTextView.delegate = self
         otherTeachersMessageTextView.delegate = self
 
+        studentNameLabel.text = lecture.student.userName
+        subjectNameLabel.text = lecture.subjectName
+        
         tangenTextField.text = ""
         homeworkTextView.text = ""
         nextplanTextView.text = ""
@@ -120,7 +127,7 @@ class ReportDetailViewController: UIViewController, UITextFieldDelegate, UITextV
     
     @IBAction func createReport(){
 //        if(selected != nil){
-            report = Report(studentId: "UfDI1Re0cx4P1Ikm", teacherId: currentUserG.userId, subject: transformSubject("math1a"), unit: tangenTextField.text ?? "", attitude: selected ?? "", homework: homeworkTextView.text ?? "", nextUnit: nextplanTextView.text, messageToParents: pearentMessageTextView.text ?? "", messageToTeacher: otherTeachersMessageTextView.text ?? "")
+        report = Report(studentId: lecture.student.userId, teacherId: currentUserG.userId, subject: lecture.subjectName, unit: tangenTextField.text ?? "", attitude: selected ?? "", homework: homeworkTextView.text ?? "", nextUnit: nextplanTextView.text, messageToParents: pearentMessageTextView.text ?? "", messageToTeacher: otherTeachersMessageTextView.text ?? "")
 //        }
     }
     

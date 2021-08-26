@@ -17,18 +17,27 @@
                 <rect key="frame" x="0.0" y="0.0" width="431" height="120"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ri3-D3-16h">
-                        <rect key="frame" x="0.0" y="0.0" width="131" height="121"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" adjustsImageSizeForAccessibilityContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ri3-D3-16h">
+                        <rect key="frame" x="20" y="20" width="80" height="80"/>
+                        <constraints>
+                            <constraint firstAttribute="width" secondItem="Ri3-D3-16h" secondAttribute="height" multiplier="1:1" id="CAQ-pU-vrD"/>
+                        </constraints>
                     </imageView>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="氏名" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NWn-6I-Bd1">
-                        <rect key="frame" x="165" y="22" width="193" height="56"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="氏名" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NWn-6I-Bd1">
+                        <rect key="frame" x="120" y="43.5" width="291" height="33.5"/>
                         <fontDescription key="fontDescription" type="system" pointSize="28"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                 </subviews>
+                <constraints>
+                    <constraint firstItem="Ri3-D3-16h" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="20" id="42o-xd-o5h"/>
+                    <constraint firstItem="Ri3-D3-16h" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="20" id="A0s-fw-Wxv"/>
+                    <constraint firstAttribute="bottom" secondItem="Ri3-D3-16h" secondAttribute="bottom" constant="20" id="Hw5-Bo-MBm"/>
+                    <constraint firstItem="NWn-6I-Bd1" firstAttribute="leading" secondItem="Ri3-D3-16h" secondAttribute="trailing" constant="20" id="JoK-uE-tyy"/>
+                    <constraint firstAttribute="trailing" secondItem="NWn-6I-Bd1" secondAttribute="trailing" constant="20" id="c4C-Ov-ObX"/>
+                    <constraint firstItem="NWn-6I-Bd1" firstAttribute="centerY" secondItem="Ri3-D3-16h" secondAttribute="centerY" id="nKG-Kg-GGo"/>
+                </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>

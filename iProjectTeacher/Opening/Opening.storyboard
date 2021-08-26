@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="WqB-Uu-3ug">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="WqB-Uu-3ug">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -12,32 +12,15 @@
         <!--Opening1 View Controller-->
         <scene sceneID="w2x-Jy-SYc">
             <objects>
-                <viewController storyboardIdentifier="OpningRootViewController" id="WqB-Uu-3ug" customClass="Opening1ViewController" customModule="iProjectStudent" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="OpningRootViewController" id="WqB-Uu-3ug" customClass="Opening1ViewController" customModule="iProjectTeacher" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="9lG-gT-3x2">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="オープニング画面アイコンを見せながら画面サイズの取得とログイン判定を行います。" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7aF-FH-xxU">
-                                <rect key="frame" x="87" y="74" width="240" height="758"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="240" id="UQc-tp-xEQ"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="30"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                        </subviews>
                         <viewLayoutGuide key="safeArea" id="C7J-MW-XSK"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                        <constraints>
-                            <constraint firstItem="7aF-FH-xxU" firstAttribute="centerX" secondItem="9lG-gT-3x2" secondAttribute="centerX" id="ePr-CN-2Du"/>
-                            <constraint firstItem="7aF-FH-xxU" firstAttribute="top" secondItem="C7J-MW-XSK" secondAttribute="top" constant="30" id="fgJ-au-Fbr"/>
-                            <constraint firstItem="C7J-MW-XSK" firstAttribute="bottom" secondItem="7aF-FH-xxU" secondAttribute="bottom" constant="30" id="jM9-oo-DeP"/>
-                        </constraints>
                     </view>
                     <connections>
-                        <outlet property="label" destination="7aF-FH-xxU" id="tDn-kd-K84"/>
-                        <segue destination="pJM-Nk-TGq" kind="show" identifier="GoTo2nd" id="Sr5-ZF-1JJ"/>
+                        <segue destination="pJM-Nk-TGq" kind="presentation" identifier="GoTo2nd" id="Sr5-ZF-1JJ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="e67-Qs-qcc" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -47,33 +30,14 @@
         <!--Opening2 View Controller-->
         <scene sceneID="NPc-Pn-Oc9">
             <objects>
-                <viewController storyboardIdentifier="Opning2ndViewController" modalTransitionStyle="flipHorizontal" modalPresentationStyle="fullScreen" id="Awg-rD-ODD" customClass="Opening2ViewController" customModule="iProjectStudent" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="Opning2ndViewController" modalTransitionStyle="flipHorizontal" modalPresentationStyle="fullScreen" id="Awg-rD-ODD" customClass="Opening2ViewController" customModule="iProjectTeacher" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Khh-YV-5xs">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="オープニング画面アイコンを見せながら画面サイズの取得とログイン判定を行います。" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IlA-hj-Jbg">
-                                <rect key="frame" x="87" y="86" width="240" height="643"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="240" id="1WB-7i-8jU"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="30"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                        </subviews>
                         <viewLayoutGuide key="safeArea" id="afv-oT-ORY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                        <constraints>
-                            <constraint firstItem="afv-oT-ORY" firstAttribute="bottom" secondItem="IlA-hj-Jbg" secondAttribute="bottom" constant="30" id="EnC-VC-iPm"/>
-                            <constraint firstItem="IlA-hj-Jbg" firstAttribute="centerX" secondItem="Khh-YV-5xs" secondAttribute="centerX" id="F4S-XD-OS9"/>
-                            <constraint firstItem="IlA-hj-Jbg" firstAttribute="top" secondItem="afv-oT-ORY" secondAttribute="top" constant="30" id="LWT-eL-aHE"/>
-                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="SGS-9b-Xd2"/>
-                    <connections>
-                        <outlet property="label" destination="IlA-hj-Jbg" id="97m-fR-S4S"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Sky-Lt-e6M" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -86,7 +50,7 @@
                     <tabBarItem key="tabBarItem" title="" id="NG4-yf-JMC"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="7uM-7m-xQA">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="56"/>
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>

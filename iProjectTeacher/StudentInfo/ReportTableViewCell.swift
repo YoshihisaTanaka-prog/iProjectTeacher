@@ -20,6 +20,8 @@ class ReportTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+        userimage.layer.cornerRadius = userimage.frame.width / 2.f
+        userimage.clipsToBounds = true
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

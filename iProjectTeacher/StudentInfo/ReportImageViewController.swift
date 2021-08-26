@@ -29,8 +29,7 @@ class ReportImageViewController: UIViewController,UIImagePickerControllerDelegat
             plusButton.alpha = 0.5.f
             plusButton.isEnabled = false
         }
-
-        // Do any additional setup after loading the view.
+        setBackGround(true, true)
     }
   
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {

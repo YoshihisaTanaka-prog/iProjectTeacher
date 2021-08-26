@@ -151,6 +151,8 @@
                         <outlet property="otherTeachersMessageTextView" destination="rSU-JJ-zrG" id="Yps-rU-tqY"/>
                         <outlet property="pearentMessageTextView" destination="MKe-WM-6Yb" id="SNw-p7-cCV"/>
                         <outlet property="pickerView1" destination="792-Yb-yqO" id="PZv-td-Kbc"/>
+                        <outlet property="studentNameLabel" destination="rjh-7Y-Izj" id="Kq0-l0-pqU"/>
+                        <outlet property="subjectNameLabel" destination="qy2-Ye-20o" id="8xw-XP-K7S"/>
                         <outlet property="tangenTextField" destination="Xnw-zb-h4V" id="M3E-sf-yf1"/>
                     </connections>
                 </viewController>
@@ -173,7 +175,7 @@
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="o7j-1Y-LWu">
                                 <rect key="frame" x="62" y="706" width="310" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="資料画像のアップロード"/>
+                                <state key="normal" title="資料画像の選択"/>
                                 <connections>
                                     <action selector="selectImage" destination="Ran-lK-urj" eventType="touchUpInside" id="H1c-jo-UlK"/>
                                 </connections>
@@ -224,6 +226,11 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="u3B-j8-Cca">
+                        <barButtonItem key="leftBarButtonItem" title="&lt; Back" id="BRi-F1-FOB">
+                            <connections>
+                                <action selector="tappedBack" destination="Ran-lK-urj" id="eVj-FG-GCa"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="完了" id="rGq-7U-CNa">
                             <connections>
                                 <action selector="saveUserInfo" destination="Ran-lK-urj" id="yuT-Sy-p0u"/>
@@ -232,6 +239,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="documentImage" destination="lYy-pi-h5z" id="8Ji-zL-1dT"/>
+                        <outlet property="item" destination="rGq-7U-CNa" id="z6p-Op-vok"/>
                         <outlet property="minusButton" destination="zCv-hc-gQv" id="JoE-Cx-5IU"/>
                         <outlet property="pageLabel" destination="AXL-2x-fqC" id="4oK-UA-NXE"/>
                         <outlet property="pulusButton" destination="Dbb-Qc-cft" id="tF5-D8-9Tm"/>

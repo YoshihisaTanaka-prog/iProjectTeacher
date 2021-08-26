@@ -93,6 +93,7 @@ class IgnoreView: UIView {}
 
 extension UIViewController{
     func setBackGround(_ isExistsNavigationBar: Bool, _ isExistsTabBar: Bool) {
+        currentVC = self
         let _ = BackGrounvView(isExistsNavigationBar, isExistsTabBar, mainView: &self.view)
         self.view.setFontColor()
         

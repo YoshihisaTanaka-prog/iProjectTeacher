@@ -12,11 +12,12 @@ import Kingfisher
 
 extension UIViewController{
     func setUserImage(_ imageView: inout UIImageView, _ user: User){
+        let ud = UserDefaults.standard
         if user.teacherParameter == nil{
-            imageView.image = userImagesCacheG[user.userId] ?? UIImage(named: "studentNoImage.png")
+            imageView.image = ud.image(forKey: user.userId) ?? UIImage(named: "studentNoImage.png")
         }
         else{
-            imageView.image = userImagesCacheG[user.userId] ?? UIImage(named: "teacherNoImage.png")
+            imageView.image = ud.image(forKey: user.userId) ?? UIImage(named: "teacherNoImage.png")
         }
         /*
         if user.imageName != nil {

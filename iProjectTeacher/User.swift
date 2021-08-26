@@ -16,7 +16,7 @@ class User {
     var furigana = ""
     var mailAddress = ""
     var grade = "0"
-    var oneOnOneSerch: String
+    var chatRoomId = ""
     var selection = ""
     var introduction = ""
     var youbiTimeList: [[String]] = []
@@ -26,14 +26,6 @@ class User {
     
     init(userId: String, isNeedParameter: Bool, viewController: UIViewController){
         self.userId = userId
-        
-//        個人チャットを検索するためのパラメータ
-        if (NCMBUser.current()?.objectId)! < self.userId {
-            oneOnOneSerch = (NCMBUser.current()?.objectId)! + "-" + self.userId
-        }
-        else{
-            oneOnOneSerch = self.userId + "-" + (NCMBUser.current()?.objectId)!
-        }
         
 //        ユーザの詳細データ
         
@@ -80,7 +72,12 @@ class Parameter{
         let imageName = parameter.object(forKey: "imageName") as? String
         let userId = parameter.object(forKey: "userId") as! String
         
-        if userImagesCacheG[userId] == nil{
+        let ud = UserDefaults.standard
+        if(userId == currentUserG.userId && ud.image(forKey: currentUserG.userId) ==  nil){
+            ud.saveImage(image: UIImage(named: "teacherNoImage.png"), forKey: userId)
+        }
+        
+        if ( userId != currentUserG.userId ){
             if imageName == nil {
                 setNoImage(userId)
             } else {
@@ -91,7 +88,8 @@ class Parameter{
                             self.setNoImage(userId)
                         } else {
                             let image = UIImage(data: data!)
-                            userImagesCacheG[userId] = image
+                            let us = UserDefaults.standard
+                            us.saveImage(image: image, forKey: userId)
                         }
                     } else {
                         print("loading image error >>", error!.localizedDescription)
@@ -103,10 +101,11 @@ class Parameter{
     }
     
     private func setNoImage(_ userId: String){
+        let ud = UserDefaults.standard
         if self.ncmb.ncmbClassName == "TeacherParameter" {
-            userImagesCacheG[userId] = UIImage(named: "teacherNoImage.png")
+            ud.saveImage(image: UIImage(named: "teacherNoImage.png"), forKey: userId)
         } else {
-            userImagesCacheG[userId] = UIImage(named: "studentNoImage.png")
+            ud.saveImage(image: UIImage(named: "studentNoImage.png"), forKey: userId)
         }
     }
     

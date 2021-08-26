@@ -40,6 +40,8 @@ class StudentInfoTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         size = screenSizeG["NnNt"]!
+        userimage.layer.cornerRadius = userimage.frame.width / 2.f
+        userimage.clipsToBounds = true
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

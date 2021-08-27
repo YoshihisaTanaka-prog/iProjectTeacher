@@ -154,7 +154,7 @@ class EditUserPageViewController: UIViewController, UITextFieldDelegate, UITextV
             if error != nil{
                 self.showOkAlert(title: "Error", message: error!.localizedDescription)
             } else {
-                self.userImageView.image = selectedImage
+                self.userImageView.image = resizedImage
                 self.imageName = currentUserG.userId
             }
         } progressBlock: { (progress) in
@@ -168,27 +168,6 @@ class EditUserPageViewController: UIViewController, UITextFieldDelegate, UITextV
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
     }
-    
-//    // UIPickerViewの行数、リストの数
-//    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-//        return bunri.count
-//
-//    }
-//
-//    // UIPickerViewの最初の表示
-//    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-//        return bunri[row]
-//
-//    }
-//
-//    // UIPickerViewのRowが選択された時の挙動
-//    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-//        if row != 0 {
-//            selected = bunri[row]
-//        } else {
-//            selected = nil
-//        }
-//    }
 
     
     // UIPickerViewの行数、リストの数

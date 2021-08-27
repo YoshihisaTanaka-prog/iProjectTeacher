@@ -54,6 +54,7 @@ class SignInViewController: UIViewController, UITextFieldDelegate {
                                 
                                 //ログイン状態の保持
                                 let ud = UserDefaults.standard
+                                ud.saveImage(image: UIImage(named: "teacherNoImage.png"), forKey: user!.objectId)
                                 ud.set(true, forKey: "isLogin")
                                 ud.set(self.passwordTextField.text!, forKey: mail)
                                 ud.set(Date(), forKey: mail + "time")

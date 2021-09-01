@@ -156,6 +156,7 @@ class QuestionnaireViewController: UIViewController {
                             currentUserG = User(userId: NCMBUser.current()!.objectId, isNeedParameter: true, viewController: nextVC)
                             myScheduleG.loadSchedule(date: Date(), userIds: [currentUserG.userId], nextVC)
                             self.present(rootViewController, animated: false, completion: nil)
+                            self.createUserInRails(id: NCMBUser.current()!.objectId)
                         }
                         else{
                             self.showOkAlert(title: "Error", message: error!.localizedDescription)

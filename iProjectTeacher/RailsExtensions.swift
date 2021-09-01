@@ -30,6 +30,16 @@ extension UIViewController{
     }
     
     func sendReportEmailToParent(_ reportId: String){
-        sendToRailsServer(message: "id=" + reportId, path: "/app/user/report")
+        sendToRailsServer(message: "id=" + reportId, path: "/app/report/mail")
+    }
+    
+    func reportToRailsServer(className: String, objectId: String){
+        let message = "className=" + className + "&objectId=" + objectId + "&userId=" + currentUserG.userId
+        sendToRailsServer(message: message, path: "/app/report/object")
+    }
+    
+    func createUserInRails(id: String){
+        let message = "userId" + id +  "role=teacher"
+        sendToRailsServer(message: message, path: "/app/user")
     }
 }

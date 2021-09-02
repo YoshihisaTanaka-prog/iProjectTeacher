@@ -25,7 +25,7 @@ class EditUserPageViewController: UIViewController, UITextFieldDelegate, UITextV
     let kamokuAlertController = UIAlertController(title: "教科を選んでください。", message: "", preferredStyle: .actionSheet)
     let youbiAlertController = UIAlertController(title: "曜日を選んでください。", message: "", preferredStyle: .actionSheet)
     var imageName: String?
-    var selected: String?
+    var selected: String!
     let bunri = ["文理選択","文系","理系","その他"]
     let grade = [["学部1年生","B1"],["学部2年生","B2"],["学部3年生","B3"],["学部4年生","B4"],["修士1年生","M1"],["修士2年生","M2"],["博士1年生","D1"],["博士2年生","D2"],["博士3年生","D3"],["その他","0"]]
     var kamokuCheckBox: CheckBox!
@@ -127,6 +127,7 @@ class EditUserPageViewController: UIViewController, UITextFieldDelegate, UITextV
         let ud = UserDefaults.standard
         userImageView.image = ud.image(forKey: currentUserG.userId)
         gradeRadioButton = Radiobutton(gradeList, selectedKey: currentUserG.grade)
+        selected = currentUserG.grade
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
@@ -198,7 +199,7 @@ class EditUserPageViewController: UIViewController, UITextFieldDelegate, UITextV
     
     @IBAction func saveUserInfo(){
         let param = currentUserG.teacherParameter!.ncmb
-        let im = param.object(forKey: "imageName")
+        let im = param.object(forKey: "imageName") as? String
         if im == nil{
             param.setObject(imageName, forKey: "imageName")
         } else if self.imageName != nil{
@@ -211,9 +212,7 @@ class EditUserPageViewController: UIViewController, UITextFieldDelegate, UITextV
         param.setObject(userIdTextField.text, forKey: "userName")
         param.setObject(userIdFuriganaTextField.text, forKey: "furigana")
         param.setObject(selectionTextField.text, forKey: "selection")
-        if(selected != nil){
-            param.setObject(selected!, forKey: "grade")
-        }
+        param.setObject(selected, forKey: "grade")
         param.setObject(introductionTextView.text, forKey: "introduction")
 
         for k in kamokuCheckBoxList{
@@ -241,6 +240,11 @@ class EditUserPageViewController: UIViewController, UITextFieldDelegate, UITextV
 
         param.saveInBackground { (error) in
             if error == nil{
+                currentUserG.userName = self.userIdTextField.text ?? ""
+                currentUserG.furigana = self.userIdFuriganaTextField.text ?? ""
+                currentUserG.grade = self.selected
+                currentUserG.selection = self.selectionTextField.text ?? "???"
+                currentUserG.introduction = self.introductionTextView.text ?? ""
                 currentUserG.teacherParameter = TeacherParameter(param)
                 self.navigationController?.popViewController(animated: true)
             }
@@ -284,17 +288,6 @@ class EditUserPageViewController: UIViewController, UITextFieldDelegate, UITextV
         actionController.addAction(cancelAction)
         self.present(actionController, animated: true, completion: nil)
     }
-    
-//    @IBAction func selectgrade(){
-//        let alertController = UIAlertController(title: "学年を選んでください。", message: gradeRadioButton.msg, preferredStyle: .alert)
-//        let alertOkAction = UIAlertAction(title: "選択完了", style: .default) { (action) in
-//            self.gradeRadioButton.mainView.removeFromSuperview()
-//            alertController.dismiss(animated: true, completion: nil)
-//        }
-//        alertController.view.addSubview(gradeRadioButton.mainView)
-//        alertController.addAction(alertOkAction)
-//        self.present(alertController, animated: true, completion: nil)
-//    }
     
     @IBAction func selectWeek(){
         var alertOkActionList = [UIAlertAction(title: "終了", style: .cancel) { (action) in

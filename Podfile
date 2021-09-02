@@ -20,5 +20,7 @@ target 'iProjectTeacher' do
   pod 'RealmSwift'
 
   pod 'Kingfisher'
+  
+  pod 'SkyWay'
 
 end

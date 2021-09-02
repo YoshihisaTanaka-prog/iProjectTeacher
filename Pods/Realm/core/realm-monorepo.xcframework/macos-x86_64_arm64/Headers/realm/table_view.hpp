@@ -162,7 +162,6 @@ class ConstTableView : public ObjList {
 public:
     /// Construct null view (no memory allocated).
     ConstTableView()
-        : m_key_values(Allocator::get_default())
     {
     }
 
@@ -183,12 +182,10 @@ public:
     ConstTableView& operator=(const ConstTableView&);
     ConstTableView& operator=(ConstTableView&&) noexcept;
 
-    ConstTableView(const ConstTableView& source, Transaction* tr, PayloadPolicy mode);
     ConstTableView(ConstTableView& source, Transaction* tr, PayloadPolicy mode);
 
     ~ConstTableView()
     {
-        m_key_values.destroy(); // Shallow
     }
 
     TableRef get_target_table() const override
@@ -243,10 +240,15 @@ public:
         return std::unique_ptr<ConstTableView>(new ConstTableView(*this));
     }
 
+    LinkCollectionPtr clone_obj_list() const final
+    {
+        return std::unique_ptr<ConstTableView>(new ConstTableView(*this));
+    }
+
     // import_copy_of() machinery entry points based on dynamic type. These methods:
     // a) forward their calls to the static type entry points.
     // b) new/delete patch data structures.
-    std::unique_ptr<ConstTableView> clone_for_handover(Transaction* tr, PayloadPolicy mode) const
+    std::unique_ptr<ConstTableView> clone_for_handover(Transaction* tr, PayloadPolicy mode)
     {
         std::unique_ptr<ConstTableView> retval(new ConstTableView(*this, tr, mode));
         return retval;
@@ -283,6 +285,12 @@ public:
     Decimal128 minimum_decimal(ColKey column_key, ObjKey* return_key = nullptr) const;
     Decimal128 average_decimal(ColKey column_key, size_t* value_count = nullptr) const;
     size_t count_decimal(ColKey column_key, Decimal128 target) const;
+
+    Decimal128 sum_mixed(ColKey column_key) const;
+    Mixed maximum_mixed(ColKey column_key, ObjKey* return_key = nullptr) const;
+    Mixed minimum_mixed(ColKey column_key, ObjKey* return_key = nullptr) const;
+    Decimal128 average_mixed(ColKey column_key, size_t* value_count = nullptr) const;
+    size_t count_mixed(ColKey column_key, Mixed target) const;
 
     /// Search this view for the specified key. If found, the index of that row
     /// within this view is returned, otherwise `realm::not_found` is returned.
@@ -408,8 +416,26 @@ protected:
     size_t m_end = size_t(-1);
     size_t m_limit = size_t(-1);
 
+    // FIXME: This class should eventually be replaced by std::vector<ObjKey>
+    // It implements a vector of ObjKey, where the elements are held in the
+    // heap (default allocator is the only option)
+    class KeyValues : public KeyColumn {
+    public:
+        KeyValues()
+            : KeyColumn(Allocator::get_default())
+        {
+        }
+        KeyValues(const KeyValues&) = delete;
+        ~KeyValues()
+        {
+            destroy();
+        }
+        void move_from(KeyValues&);
+        void copy_from(const KeyValues&);
+    };
+
     mutable TableVersions m_last_seen_versions;
-    KeyColumn m_key_values;
+    KeyValues m_key_values;
 
 private:
     ObjKey find_first_integer(ColKey column_key, int64_t value) const;
@@ -474,7 +500,7 @@ public:
         return std::unique_ptr<TableView>(new TableView(*this));
     }
 
-    std::unique_ptr<TableView> clone_for_handover(Transaction* tr, PayloadPolicy policy) const
+    std::unique_ptr<TableView> clone_for_handover(Transaction* tr, PayloadPolicy policy)
     {
         std::unique_ptr<TableView> retval(new TableView(*this, tr, policy));
         return retval;
@@ -497,7 +523,6 @@ private:
 
 inline ConstTableView::ConstTableView(ConstTableRef parent)
     : m_table(parent) // Throws
-    , m_key_values(Allocator::get_default())
 {
     m_key_values.create();
     if (m_table) {
@@ -511,7 +536,6 @@ inline ConstTableView::ConstTableView(ConstTableRef parent, Query& query, size_t
     , m_start(start)
     , m_end(end)
     , m_limit(lim)
-    , m_key_values(Allocator::get_default())
 {
     m_key_values.create();
 }
@@ -521,7 +545,6 @@ inline ConstTableView::ConstTableView(ConstTableRef src_table, ColKey src_column
     , m_source_column_key(src_column_key)
     , m_linked_obj_key(obj.get_key())
     , m_linked_table(obj.get_table())
-    , m_key_values(Allocator::get_default())
 {
     m_key_values.create();
     if (m_table) {
@@ -533,7 +556,6 @@ inline ConstTableView::ConstTableView(ConstTableRef src_table, ColKey src_column
 inline ConstTableView::ConstTableView(ConstTableRef parent, LnkLstPtr link_list)
     : m_table(parent) // Throws
     , m_linklist_source(std::move(link_list))
-    , m_key_values(Allocator::get_default())
 {
     REALM_ASSERT(m_linklist_source);
     m_key_values.create();
@@ -545,7 +567,6 @@ inline ConstTableView::ConstTableView(ConstTableRef parent, LnkLstPtr link_list)
 inline ConstTableView::ConstTableView(ConstTableRef parent, LnkSetPtr link_set)
     : m_table(parent) // Throws
     , m_linkset_source(std::move(link_set))
-    , m_key_values(Allocator::get_default())
 {
     REALM_ASSERT(m_linkset_source);
     m_key_values.create();
@@ -567,8 +588,8 @@ inline ConstTableView::ConstTableView(const ConstTableView& tv)
     , m_end(tv.m_end)
     , m_limit(tv.m_limit)
     , m_last_seen_versions(tv.m_last_seen_versions)
-    , m_key_values(tv.m_key_values)
 {
+    m_key_values.copy_from(tv.m_key_values);
     m_limit_count = tv.m_limit_count;
 }
 
@@ -587,8 +608,8 @@ inline ConstTableView::ConstTableView(ConstTableView&& tv) noexcept
     // if we are created from a table view which is outdated, take care to use the outdated
     // version number so that we can later trigger a sync if needed.
     , m_last_seen_versions(std::move(tv.m_last_seen_versions))
-    , m_key_values(std::move(tv.m_key_values))
 {
+    m_key_values.move_from(tv.m_key_values);
     m_limit_count = tv.m_limit_count;
 }
 
@@ -596,7 +617,7 @@ inline ConstTableView& ConstTableView::operator=(ConstTableView&& tv) noexcept
 {
     m_table = std::move(tv.m_table);
 
-    m_key_values = std::move(tv.m_key_values);
+    m_key_values.move_from(tv.m_key_values);
     m_query = std::move(tv.m_query);
     m_last_seen_versions = tv.m_last_seen_versions;
     m_start = tv.m_start;
@@ -618,7 +639,7 @@ inline ConstTableView& ConstTableView::operator=(const ConstTableView& tv)
     if (this == &tv)
         return *this;
 
-    m_key_values = tv.m_key_values;
+    m_key_values.copy_from(tv.m_key_values);
 
     m_query = tv.m_query;
     m_last_seen_versions = tv.m_last_seen_versions;

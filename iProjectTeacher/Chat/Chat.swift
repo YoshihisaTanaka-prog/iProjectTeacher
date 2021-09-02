@@ -69,6 +69,8 @@ class Chat{
                             self.delegate?.showOkAlertC(title: "Saving message sent time error", message: error!.localizedDescription)
                         }
                     })
+                } else {
+                    self.delegate?.didFinishSendingMessage()
                 }
             } else{
                 self.delegate?.showOkAlertC(title: "Sending message error", message: error!.localizedDescription)

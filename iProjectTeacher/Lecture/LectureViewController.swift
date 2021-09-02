@@ -32,7 +32,7 @@ class LectureViewController: UIViewController {
     private var cameraButton = UIButton()
     private var subview = UIView()
     private var tabView = UIView()
-    private var whiteBoard = UILabel()
+    private var whiteBoard = UIImageView()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -214,8 +214,7 @@ extension LectureViewController{
         whiteBoard.backgroundColor = .white
         whiteBoard.layer.borderWidth = 1
         whiteBoard.layer.borderColor = CGColor(red: 0, green: 0, blue: 0, alpha: 1)
-        whiteBoard.text = "ホワイトボード"
-        whiteBoard.textAlignment = .center
+        whiteBoard.image = UIImage(named: "creating.png")
         
         tabView.frame = CGRect(x: 0, y: 0, width: 2.f * x / 3.f - 10.f , height: y / 6.f - 10.f)
         tabView.center = CGPoint(x: x / 3.f, y: y / 6.f)

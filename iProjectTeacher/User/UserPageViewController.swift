@@ -11,7 +11,6 @@ import NCMB
 import NYXImagesKit
 
 class UserPageViewController: UIViewController, UITextFieldDelegate, UITextViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
-
     
     @IBOutlet var userImageView: UIImageView!
     

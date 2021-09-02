@@ -24,7 +24,7 @@ class ForgetPasswordViewController: UIViewController, UITextFieldDelegate {
     }
     @IBAction func signUp() {
     
-        let Forgetemail = ForgetemailTextField.text
+        let Forgetemail = ForgetemailTextField.text?.lowercased()
 
         NCMBUser.requestPasswordResetForEmail(inBackground: Forgetemail, block: {(error) in
           if (error != nil) {

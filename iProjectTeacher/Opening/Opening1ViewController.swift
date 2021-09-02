@@ -20,6 +20,12 @@ class Opening1ViewController: UIViewController {
         
         isLogInG = false
         let ud = UserDefaults.standard
+        
+        if ud.bool(forKey: "didSetUp-v1.0.0"){
+            ud.setValue(true, forKey: "didSetUp-v1.0.0")
+            ud.saveImage(image: UIImage(named: "iconN.png"), forKey: "sapo-to")
+        }
+        
         let isLogin = ud.bool(forKey: "isLogin")
         if ud.image(forKey: "sapo-to") == nil{
             ud.saveImage(image: UIImage(named: "iconN.png"), forKey: "sapo-to")

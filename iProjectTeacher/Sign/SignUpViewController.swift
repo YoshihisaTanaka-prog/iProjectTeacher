@@ -49,7 +49,7 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
     
     @IBAction func signUp() {
         var error: NSError? = nil
-        let mail = emailunivTextField.text!
+        let mail = emailunivTextField.text!.lowercased()
         NCMBUser.requestAuthenticationMail(mail, error: &error)
         if(error == nil){
             self.showOkDismissAlert(title: "報告", message: "本人確認用のメールアドレスを送信いたします。しばらくお待ちください。")

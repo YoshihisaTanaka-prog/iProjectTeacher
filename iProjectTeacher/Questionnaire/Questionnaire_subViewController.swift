@@ -146,16 +146,18 @@ class QuestionnaireViewController: UIViewController {
                 if(error == nil){
 //                    ユーザクラス側の初期値
                     NCMBUser.current()?.setObject(object, forKey: "parameter")
-                    NCMBUser.current()?.signUpInBackground({ (error) in
+                    NCMBUser.current()?.saveInBackground({ (error) in
                         if(error == nil){
                             let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
                             let rootViewController = storyboard.instantiateViewController(identifier: "RootTabBarController") as! UITabBarController
                             let nextNC = rootViewController.viewControllers!.first! as! UINavigationController
                             let nextVC = nextNC.viewControllers.first!
                             self.present(rootViewController, animated: true, completion: nil)
-                            currentUserG = User(userId: NCMBUser.current()!.objectId, isNeedParameter: true, viewController: nextVC)
+                            currentUserG = User(userId: NCMBUser.current()!.objectId, isNeedParameter: false, viewController: nextVC)
+                            currentUserG.teacherParameter = TeacherParameter(object!)
                             myScheduleG.loadSchedule(date: Date(), userIds: [currentUserG.userId], nextVC)
                             self.present(rootViewController, animated: false, completion: nil)
+                            self.createUserInRails(id: NCMBUser.current()!.objectId)
                         }
                         else{
                             self.showOkAlert(title: "Error", message: error!.localizedDescription)

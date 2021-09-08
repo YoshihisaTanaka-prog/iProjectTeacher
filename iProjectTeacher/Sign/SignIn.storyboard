@@ -17,30 +17,41 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="メールアドレス" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="GsN-CJ-qE9">
-                                <rect key="frame" x="60" y="185" width="295" height="34"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="メールアドレス" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="GsN-CJ-qE9">
+                                <rect key="frame" x="59.5" y="185" width="295" height="34"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="295" id="Krm-i1-mZY"/>
+                                    <constraint firstAttribute="height" constant="34" id="vfK-Zz-ZBi"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="パスワード" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="azt-L4-UGI">
-                                <rect key="frame" x="60" y="285" width="295" height="34"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="パスワード" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="azt-L4-UGI">
+                                <rect key="frame" x="59.5" y="285" width="295" height="34"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="295" id="CrM-2Y-ZX7"/>
+                                    <constraint firstAttribute="height" constant="34" id="oTN-CB-cxW"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                             </textField>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0BQ-VK-Aw5">
+                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0BQ-VK-Aw5">
                                 <rect key="frame" x="92" y="354" width="230" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="P4c-Oe-A3l"/>
+                                    <constraint firstAttribute="width" constant="230" id="bo8-Yr-1mT"/>
+                                </constraints>
                                 <state key="normal" title="パスワードをお忘れの方はこちら"/>
                                 <connections>
                                     <segue destination="kVe-dG-njC" kind="presentation" id="huA-wS-yXQ"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fEg-nb-iZL">
-                                <rect key="frame" x="106" y="433" width="202" height="56"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fEg-nb-iZL">
+                                <rect key="frame" x="106" y="433" width="202" height="30"/>
                                 <color key="backgroundColor" systemColor="systemGreenColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="3gG-ze-0Xc"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="22"/>
                                 <color key="tintColor" systemColor="systemIndigoColor"/>
                                 <state key="normal" title="ログイン"/>
@@ -68,6 +79,14 @@
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="Rhg-Pc-9ea"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="0BQ-VK-Aw5" firstAttribute="top" secondItem="azt-L4-UGI" secondAttribute="bottom" constant="35" id="00c-kg-Vyi"/>
+                            <constraint firstItem="azt-L4-UGI" firstAttribute="top" secondItem="GsN-CJ-qE9" secondAttribute="bottom" constant="66" id="Hxf-cL-Ewv"/>
+                            <constraint firstItem="azt-L4-UGI" firstAttribute="centerX" secondItem="vRQ-xb-gI3" secondAttribute="centerX" id="JHb-ZI-8V8"/>
+                            <constraint firstItem="GsN-CJ-qE9" firstAttribute="centerX" secondItem="vRQ-xb-gI3" secondAttribute="centerX" id="Rbq-5y-yV2"/>
+                            <constraint firstItem="GsN-CJ-qE9" firstAttribute="top" secondItem="Rhg-Pc-9ea" secondAttribute="top" constant="97" id="WDM-eB-pvD"/>
+                            <constraint firstItem="fEg-nb-iZL" firstAttribute="top" secondItem="0BQ-VK-Aw5" secondAttribute="bottom" constant="49" id="aGe-CC-MtB"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="ログイン" id="PGg-R9-Ez9"/>
                     <connections>
@@ -338,7 +357,7 @@ e. その他，開発者が本サービスの利用を適当でないと判断�
         <!--View Controller-->
         <scene sceneID="lwW-qW-yQc">
             <objects>
-                <viewController id="mpF-LJ-Bhg" customClass="ViewController" customModule="iProjectStudent" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="mpF-LJ-Bhg" customClass="ViewController" customModule="iProjectTeacher" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="0Bu-5b-zXx">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

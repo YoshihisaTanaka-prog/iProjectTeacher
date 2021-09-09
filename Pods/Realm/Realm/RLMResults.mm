@@ -220,6 +220,25 @@ static inline void RLMResultsValidateInWriteTransaction(__unsafe_unretained RLMR
     });
 }
 
+- (NSArray *)objectsAtIndexes:(NSIndexSet *)indexes {
+    if (!_info) {
+        return nil;
+    }
+    size_t c = self.count;
+    NSMutableArray *result = [[NSMutableArray alloc] initWithCapacity:indexes.count];
+    NSUInteger i = [indexes firstIndex];
+    RLMAccessorContext context(*_info);
+    while (i != NSNotFound) {
+        if (i >= 0 && i < c) {
+            [result addObject:_results.get(context, i)];
+        } else {
+            return nil;
+        }
+        i = [indexes indexGreaterThanIndex:i];
+    }
+    return result;
+}
+
 - (id)firstObject {
     if (!_info) {
         return nil;
@@ -530,10 +549,20 @@ static inline void RLMResultsValidateInWriteTransaction(__unsafe_unretained RLMR
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wmismatched-parameter-types"
 - (RLMNotificationToken *)addNotificationBlock:(void (^)(RLMResults *, RLMCollectionChange *, NSError *))block {
-    return RLMAddNotificationBlock(self, block, nil);
+    return RLMAddNotificationBlock(self, block, nil, nil);
 }
 - (RLMNotificationToken *)addNotificationBlock:(void (^)(RLMResults *, RLMCollectionChange *, NSError *))block queue:(dispatch_queue_t)queue {
-    return RLMAddNotificationBlock(self, block, queue);
+    return RLMAddNotificationBlock(self, block, nil, queue);
+}
+
+- (RLMNotificationToken *)addNotificationBlock:(void (^)(RLMResults *, RLMCollectionChange *, NSError *))block keyPaths:(NSArray<NSString *> *)keyPaths {
+    return RLMAddNotificationBlock(self, block, keyPaths, nil);
+}
+
+- (RLMNotificationToken *)addNotificationBlock:(void (^)(RLMResults *, RLMCollectionChange *, NSError *))block
+                                      keyPaths:(NSArray<NSString *> *)keyPaths
+                                         queue:(dispatch_queue_t)queue {
+    return RLMAddNotificationBlock(self, block, keyPaths, queue);
 }
 #pragma clang diagnostic pop
 

@@ -23,6 +23,7 @@ var favoriteUserListG: [User] = []
 let eventTypeRankG: [String: Int] = ["non": 0, "hope": 1, "telecture": 2, "private": 3, "school": 4]
 var cachedScheduleG = [String: Schedule]()
 var cachedLectureG = [String: Lecture]()
+var cachedLecturesG = [String: Lectures]()
 var myScheduleG = Schedules()
 var mixedScheduleG = Schedules()
 

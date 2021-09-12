@@ -14,6 +14,7 @@ class NormalEventViewController: UIViewController, UITextFieldDelegate {
     
     var sentDate: Date!
     var eventType: String!
+    var calenderVC: CalendarViewController!
     
     private var size: Size!
     private var toolBar:UIToolbar!
@@ -96,6 +97,13 @@ extension NormalEventViewController: ScheduleClassDelegate{
     
     func savedSchedule() {
         alert?.dismiss(animated: true, completion: {
+            if let studentId = self.calenderVC.student?.userId{
+                mixedScheduleG.delegate = self.calenderVC
+                mixedScheduleG.loadSchedule(date: self.sentDate, userIds: [currentUserG.userId, studentId], self.calenderVC)
+            } else{
+                myScheduleG.delegate = self.calenderVC
+            }
+            myScheduleG.loadSchedule(date: self.sentDate, userIds: [currentUserG.userId], self.calenderVC)
             self.navigationController?.popViewController(animated: true)
         })
     }
@@ -154,13 +162,12 @@ extension NormalEventViewController: ScheduleClassDelegate{
                 }
                 for l in cachedLectureG.values {
                     if l.teacher.userId == currentUserG.userId{
-                        for start in l.timeList{
-                            let end = c.date(from: DateComponents(year: start.y, month: start.m, day: start.d, hour: start.h + 1))!
-                            if (start < dEnd && dStart < end){
-                                let t = TimeFrame(firstTime: start, lastTime: end, title: l.subjectName + "/" + l.teacher.userName + "/" + l.student.userName, eventType: "telecture")
-                                t.lectureId = l.ncmb.objectId
-                                ret.append((dates: [start,end], timeFrame: t))
-                            }
+                        let start = l.startTime
+                        let end = c.date(from: DateComponents(year: start.y, month: start.m, day: start.d, hour: start.h + 1))!
+                        if (start < dEnd && dStart < end){
+                            let t = TimeFrame(firstTime: start, lastTime: end, title: l.subjectName + "/" + l.teacher.userName + "/" + l.student.userName, eventType: "telecture")
+                            t.lectureId = l.objectId
+                            ret.append((dates: [start,end], timeFrame: t))
                         }
                     }
                 }

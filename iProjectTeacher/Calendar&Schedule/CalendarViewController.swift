@@ -301,10 +301,12 @@ extension CalendarViewController {
             let view2 = segue.destination as! TelectureEventViewController
             view2.sentDate = selectedDate
             view2.student = student!
+            view2.calenderVC = self
         case "Normal":
             let view2 = segue.destination as! NormalEventViewController
             view2.sentDate = selectedDate
             view2.eventType = selectedEventType
+            view2.calenderVC = self
         default:
             break
         }

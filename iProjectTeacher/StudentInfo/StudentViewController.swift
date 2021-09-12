@@ -27,7 +27,7 @@ class StudentViewController: UIViewController, UITableViewDataSource, UITableVie
         tableView.delegate = self
         tableView.dataSource = self
         tableView.tableFooterView = UIView()
-        tableView.rowHeight = 100.f
+        tableView.rowHeight = 120.f
         
         let nib = UINib(nibName: "StudentTableViewCell", bundle: Bundle.main)
         tableView.register(nib, forCellReuseIdentifier: "Cell2")

@@ -195,24 +195,6 @@ class Schedules: ScheduleMonthDelegate {
         self.monthDic[ym]?.loadSchedule(date: date, userIds: userIds, vc)
     }
     
-//    func overwriteLectureInfo(lecture: Lecture){
-//        for mKey in self.monthDic.keys{
-//            for dKey in self.monthDic[mKey]!.dateDic.keys{
-//                let timeFrames = self.monthDic[mKey]!.dateDic[dKey]!
-//                if timeFrames.count != 0{
-//                    for i in 0..<timeFrames.count{
-//                        if timeFrames[i].lectureId != nil{
-//                            if timeFrames[i].lectureId == lecture.ncmb.objectId{
-//                                timeFrames[i].title += "\n" + lecture.teacher.userName + "先生\n" + lecture.student.userName + "さん"
-//                            }
-//                        }
-//                    }
-//                }
-//                self.monthDic[mKey]!.dateDic[dKey] = timeFrames
-//            }
-//        }
-//    }
-    
     func schedulesDidLoaded(date: Date) {
         if index == 0 {
             self.delegate?.schedulesDidLoaded()
@@ -267,22 +249,23 @@ class ScheduleMonth {
                 self.scheduleSort()
                 DispatchQueue.main.async {
                     let lectureQuery = self.query(className: "Lecture", userIds: userIds)
-                    lectureQuery.whereKey("endTime", greaterThanOrEqualTo: self.startDay)
+                    lectureQuery.whereKey("startTime", greaterThanOrEqualTo: self.startDay)
                     lectureQuery.whereKey("startTime", lessThan: endDay)
                     lectureQuery.findObjectsInBackground { result, error in
                         if error == nil{
                             let objects = result as! [NCMBObject]
                             for o in objects{
-                                let lecture = Lecture(lecture: o, vc)
-                                cachedLectureG[o.objectId] = lecture
-//                                ここのループをもっと上手くすること。
-                                let timeFrameDic = lecture.timeFrame(date: self.startDay, studentId: userIds.last!)
-                                for i in 0..<self.startDay.maxDate{
-                                    let d = (i+1).s
-                                    if self.dateDic[d] == nil{
-                                        self.dateDic[d] = []
+                                if let lecture = Lecture(lecture: o, vc){
+                                    cachedLectureG[o.objectId] = lecture
+    //                                ここのループをもっと上手くすること。
+                                    let timeFrameDic = lecture.timeFrame(date: self.startDay, studentId: userIds.last!)
+                                    for i in 0..<self.startDay.maxDate{
+                                        let d = (i+1).s
+                                        if self.dateDic[d] == nil{
+                                            self.dateDic[d] = []
+                                        }
+                                        self.dateDic[d]! += timeFrameDic[d] ?? []
                                     }
-                                    self.dateDic[d]! += timeFrameDic[d] ?? []
                                 }
                             }
                             self.lectureSort()

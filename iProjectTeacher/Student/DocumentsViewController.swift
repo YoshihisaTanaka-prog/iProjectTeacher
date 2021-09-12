@@ -21,6 +21,7 @@ class DocumentsViewController: UIViewController, UITextFieldDelegate, UITextView
     private var pageNum = -1
     private var maxPageNum = 0
     var report: Report!
+    var lectureId: String!
 
     override func viewDidLoad() {
         let object = report.ncmb
@@ -138,12 +139,20 @@ class DocumentsViewController: UIViewController, UITextFieldDelegate, UITextView
                 self.showOkAlert(title: "Error", message: error!.localizedDescription)
                 self.item.isEnabled = true
             } else {
-                self.showOkAlert(title: "報告書の保存", message: "保護者様に送信いたします。"){
-                    let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
-                    let rootViewController = storyboard.instantiateViewController(identifier: "RootTabBarController")
-                    self.present(rootViewController, animated: true, completion: nil)
-                }
-                self.sendReportEmailToParent(object.objectId)
+                let lectureObject = NCMBObject(className: "Lecture", objectId: self.lectureId)
+                lectureObject?.setObject(object.objectId, forKey: "reportId")
+                lectureObject?.saveInBackground({ error in
+                    if error == nil{
+                        self.showOkAlert(title: "報告", message: "保護者様に送信いたします。"){
+                            self.sendReportEmailToParent(object.objectId)
+                            let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
+                            let rootViewController = storyboard.instantiateViewController(identifier: "RootTabBarController")
+                            self.present(rootViewController, animated: true, completion: nil)
+                        }
+                    } else{
+                        self.showOkAlert(title: "Error", message: error!.localizedDescription)
+                    }
+                })
             }
         }
     }

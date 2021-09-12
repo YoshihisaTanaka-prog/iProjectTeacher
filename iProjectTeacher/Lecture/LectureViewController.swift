@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import NCMB
 import SkyWay
 
 class LectureViewController: UIViewController {
@@ -21,7 +22,9 @@ class LectureViewController: UIViewController {
     private var size: Size!
     private var isAudioOn = true
     private var isCameraOn = true
-    
+    private var timer: Timer!
+    private var isAbleToStartTimer = true
+    private var attendanceTime = 0
     
     private var mainView = UIView()
     private var waitingLabel = UILabel()
@@ -42,29 +45,11 @@ class LectureViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         
-        self.setup()
+        attendanceTime = lecture.teacherAttendanceTime
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
-            let object = self.lecture.student.studentParameter!.ncmb
-            object.fetchInBackground({ (error) in
-                if(error == nil){
-                    let peerId = object.object(forKey: "peerId") as? String
-                    if(peerId == nil || peerId == ""){
-                        DispatchQueue.main.async {
-                            self.mainView.addSubview(self.waitingLabel)
-                        }
-                    }
-                    else{
-                        DispatchQueue.main.async {
-                            self.call(targetPeerId: peerId!)
-                        }
-                    }
-                }
-                else{
-                    self.showOkAlert(title: "Error", message: error!.localizedDescription)
-                }
-            })
-        }
+        self.setup()
+        mainView.addSubview(waitingLabel)
+        startSearchPeerId()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -72,14 +57,7 @@ class LectureViewController: UIViewController {
         
         self.mediaConnection?.close(true)
         self.peer?.destroy()
-        
-//        コピペ時注意＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊
-        currentUserG.teacherParameter?.ncmb.setObject(nil, forKey: "peerId")
-        currentUserG.teacherParameter?.ncmb.saveInBackground { (error) in
-            if(error != nil){
-                self.showOkAlert(title: "Error", message: error!.localizedDescription)
-            }
-        }
+        stopCountLectureTime()
     }
 
     override func didReceiveMemoryWarning() {
@@ -101,13 +79,15 @@ extension LectureViewController{
     }
 
     @objc private func tapEndCall(){
-        
         let alertController = UIAlertController(title: "", message: "本当に退出しますか？", preferredStyle: .alert)
         let alertOkAction = UIAlertAction(title: "OK", style: .default) { (action) in
             alertController.dismiss(animated: true, completion: nil)
             self.mediaConnection?.close(true)
             self.changeConnectionStatusUI(connected: false)
             self.performSegue(withIdentifier: "WriteReport", sender: nil)
+            let object = NCMBObject(className: "Lecture", objectId: self.lecture.objectId)
+            object?.setObject(true, forKey: "isFinished")
+            object?.saveInBackground({ _ in })
         }
         let canselAction = UIAlertAction(title: "Cansel", style: .cancel) { (action) in
             alertController.dismiss(animated: true, completion: nil)
@@ -148,6 +128,7 @@ extension LectureViewController{
 
     private func changeConnectionStatusUI(connected:Bool){
         if connected {
+            startCountLectureTime()
             if(mainView.subviews.contains(waitingLabel)){
                 waitingLabel.removeFromSuperview()
             }
@@ -156,6 +137,25 @@ extension LectureViewController{
                 self.mainView.addSubview(self.waitingLabel)
             }
         }
+    }
+    
+    func setAppFinishIvent(){
+        let notificationCenter1 = NotificationCenter.default
+        notificationCenter1.addObserver(
+            self,
+            selector: #selector(self.finnished),
+            name:UIApplication.willTerminateNotification,
+            object: nil)
+        let notificationCenter2 = NotificationCenter.default
+        notificationCenter2.addObserver(
+            self,
+            selector: #selector(self.finnished),
+            name:UIApplication.didEnterBackgroundNotification,
+            object: nil)
+    }
+    
+    @objc private func finnished(){
+        stopCountLectureTime()
     }
 }
 
@@ -250,7 +250,6 @@ extension LectureViewController{
         }
         
         setAppFinishIvent()
-        
     }
     
     func setupStream(peer:SKWPeer){
@@ -271,28 +270,6 @@ extension LectureViewController{
             print("failed to call :\(targetPeerId)")
         }
     }
-    
-    func setAppFinishIvent(){
-        let notificationCenter1 = NotificationCenter.default
-        notificationCenter1.addObserver(
-            self,
-            selector: #selector(self.finnished),
-            name:UIApplication.willTerminateNotification,
-            object: nil)
-        let notificationCenter2 = NotificationCenter.default
-        notificationCenter2.addObserver(
-            self,
-            selector: #selector(self.finnished),
-            name:UIApplication.didEnterBackgroundNotification,
-            object: nil)
-    }
-    
-    @objc private func finnished(){
-        let obj = currentUserG.teacherParameter!.ncmb
-        obj.setObject(nil, forKey: "peerId")
-        let error = NSErrorPointer(nilLiteral: ())
-        obj.save(error)
-    }
 }
 
 // MARK: skyway callbacks
@@ -309,16 +286,6 @@ extension LectureViewController{
         // MARK: PEER_EVENT_OPEN
         peer.on(SKWPeerEventEnum.PEER_EVENT_OPEN,callback:{ (obj) -> Void in
             if let peerId = obj as? String{
-                DispatchQueue.main.async {
-//                    コピペ時注意＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊
-                    let object = currentUserG.teacherParameter?.ncmb
-                    object?.setObject(peerId, forKey: "peerId")
-                    object?.saveInBackground { (error) in
-                        if(error != nil){
-                            self.showOkAlert(title: "Error", message: error!.localizedDescription)
-                        }
-                    }
-                }
                 print("your peerId: \(peerId)")
             }
         })
@@ -339,8 +306,8 @@ extension LectureViewController{
         mediaConnection.on(SKWMediaConnectionEventEnum.MEDIACONNECTION_EVENT_STREAM, callback: { (obj) -> Void in
             if let msStream = obj as? SKWMediaStream{
                 self.remoteStream = msStream
-                self.changeConnectionStatusUI(connected: true)
                 DispatchQueue.main.async {
+                    self.changeConnectionStatusUI(connected: true)
                     self.remoteStream?.addVideoRenderer(self.remoteStreamView, track: 0)
                 }
             }
@@ -354,9 +321,68 @@ extension LectureViewController{
                     self.remoteStream = nil
                     self.mediaConnection = nil
                 }
+                let obj = NCMBObject(className: "Lecture", objectId: self.lecture.objectId)
+                obj?.setObject(nil, forKey: "studentPeerId")
+                obj?.saveInBackground({ error in
+                    if error != nil{
+                        self.showOkAlert(title: "Erasing connection data error", message: error!.localizedDescription)
+                    }
+                })
                 self.changeConnectionStatusUI(connected: false)
             }
         })
+    }
+}
+
+//タイマー用
+extension LectureViewController{
+    
+//    peerIdの検索用
+    private func startSearchPeerId(){
+        if isAbleToStartTimer{
+            timer = Timer.scheduledTimer(timeInterval: 5.0, target: self, selector: #selector(searchPeerId), userInfo: nil, repeats: true)
+            isAbleToStartTimer = false
+        }
+    }
+    @objc private func searchPeerId(){
+        print("searching")
+        let obj = NCMBObject(className: "Lecture", objectId: lecture.objectId)
+        var error: NSError? = nil
+        obj?.fetch(&error)
+        if error == nil{
+            if let peerId = obj?.object(forKey: "studentPeerId") as? String {
+                DispatchQueue.main.async {
+                    self.stopSearchPeerId(peerId: peerId)
+                }
+            }
+        } else{
+            showOkAlert(title: "Loading infomation for conect error", message: error!.localizedDescription)
+        }
+    }
+    private func stopSearchPeerId(peerId: String){
+        isAbleToStartTimer = true
+        timer.invalidate()
+        call(targetPeerId: peerId)
+    }
+    
+//    授業時間の測定用
+    private func startCountLectureTime(){
+        if isAbleToStartTimer{
+            timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(addAttendanceTime), userInfo: nil, repeats: true)
+            isAbleToStartTimer = false
+        }
+    }
+    @objc private func addAttendanceTime(){
+        attendanceTime += 1
+        print(attendanceTime)
+    }
+    private func stopCountLectureTime(){
+        isAbleToStartTimer = true
+        timer.invalidate()
+        let obj = NCMBObject(className: "Lecture", objectId: lecture.objectId)
+        var error: NSError? = nil
+        obj?.setObject(attendanceTime, forKey: "teacherAttendanceTime")
+        obj?.save(&error)
     }
 }
 

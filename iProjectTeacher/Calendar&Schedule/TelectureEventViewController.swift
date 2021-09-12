@@ -13,10 +13,11 @@ class TelectureEventViewController: UIViewController, UIPickerViewDelegate, UIPi
     
     var student: User!
     var sentDate: Date!
+    var calenderVC: CalendarViewController!
+    
     private var limitDate: Date!
     private var toolBar:UIToolbar!
     private var selectedDate: Date!
-    
     private var alert: UIAlertController!
     
 //    教科用の　ク ラ ス 内 変数・定数
@@ -188,16 +189,31 @@ extension TelectureEventViewController{
     private func saveLecture(saveDateList: [Date]){
         alert = UIAlertController(title: "保存", message: "データを保存中です。\nしばらくお待ちください。", preferredStyle: .alert)
         self.present(alert, animated: true, completion: nil)
-        let l = Lecture(student: student, timeList: saveDateList, subject: selectedSubject, detail: detailTextView.text!, self)
-        l.delegate = self
+//        let l = Lecture(student: student, timeList: saveDateList, subject: selectedSubject, detail: detailTextView.text!, self)
+//        l.delegate = self
+        let object = NCMBObject(className: "Lectures")
+        object?.saveInBackground({ error in
+            if error == nil{
+                for i in 0..<saveDateList.count{
+                    let time = saveDateList[i]
+                    let l = Lecture(student: self.student, startTime: time, subject: self.selectedSubject, detail: self.detailTextView.text!, lecturesId: object!.objectId, self)
+                    if i == saveDateList.count - 1{
+                        l.delegate = self
+                    }
+                }
+            } else{
+                self.alert.dismiss(animated: true, completion: nil)
+                self.showOkAlert(title: "Saving main data error", message: error!.localizedDescription)
+            }
+        })
     }
 }
 
 extension TelectureEventViewController: ScheduleDelegate,LectureDelegate{
     
     func savedLecture() {
-        mixedScheduleG.delegate = self
-        mixedScheduleG.loadSchedule(date: self.sentDate, userIds: [currentUserG.userId, self.student.userId], self)
+        mixedScheduleG.delegate = calenderVC
+        mixedScheduleG.loadSchedule(date: self.sentDate, userIds: [currentUserG.userId, self.student.userId], calenderVC)
     }
     func schedulesDidLoaded() {
         alert.dismiss(animated: true, completion: nil)

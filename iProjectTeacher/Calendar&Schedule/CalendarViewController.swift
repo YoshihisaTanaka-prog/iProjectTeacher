@@ -51,6 +51,7 @@ class CalendarViewController: UIViewController, UITableViewDataSource, UITableVi
             self.navigationItem.title = student!.userName + "さんとのスケジュール"
             userIds.append(student!.userId)
         }
+        calenderView.backgroundColor = UIColor(red: 1, green: 1, blue: 1, alpha: 1)
     }
     
     override func viewWillAppear(_ animated: Bool) {

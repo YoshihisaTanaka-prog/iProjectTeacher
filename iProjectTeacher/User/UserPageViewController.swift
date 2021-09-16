@@ -26,7 +26,7 @@ class UserPageViewController: UIViewController, UITextFieldDelegate, UITextViewD
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        print(userImageView.frame.width, userImageView.frame.height)
         userImageView.layer.cornerRadius = userImageView.bounds.width / 2.0
         userImageView.layer.masksToBounds = true
         

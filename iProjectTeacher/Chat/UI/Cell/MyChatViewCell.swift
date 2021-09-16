@@ -20,6 +20,7 @@ class MyChatViewCell: UITableViewCell {
 		super.awakeFromNib()
 		self.backgroundColor = UIColor.clear
 		self.textView.layer.cornerRadius = 15 // 角を丸める
+        textView.textColor = UIColor(red: 0, green: 0, blue: 0, alpha: 1)
         addSubview(MyBalloonView(frame: CGRect(x: Int(screenSizeG["NnNt"]!.width - 30), y: 0, width: 30, height: 30))) //吹き出しのようにするためにビューを重ねる
 	}
 	

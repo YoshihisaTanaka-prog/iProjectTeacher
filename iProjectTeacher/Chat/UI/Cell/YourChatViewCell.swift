@@ -21,6 +21,8 @@ class YourChatViewCell: UITableViewCell {
         self.iconImageView.layer.cornerRadius = 15
         self.iconImageView.clipsToBounds = true
 		self.textView.layer.cornerRadius = 15// 角を丸める
+        textView.backgroundColor = UIColor(red: 1, green: 1, blue: 1, alpha: 1)
+        textView.textColor = UIColor(red: 0, green: 0, blue: 0, alpha: 1)
 		self.addSubview(YourBalloonView(frame: CGRect(x: textView.frame.minX-10, y: textView.frame.minY-10, width: 50, height: 50)))//吹き出しのようにするためにビューを重ねる
 	}
 	

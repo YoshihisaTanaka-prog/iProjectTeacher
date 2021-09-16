@@ -114,12 +114,20 @@ class ReportDetailViewController: UIViewController, UITextFieldDelegate, UITextV
                 if error != nil {
                     self.showOkAlert(title: "Error", message: error!.localizedDescription)
                 } else {
-                    self.showOkAlert(title: "報告書の保存", message: "保護者様に送信いたします。"){
-                        let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
-                        let rootViewController = storyboard.instantiateViewController(identifier: "RootTabBarController")
-                        self.present(rootViewController, animated: true, completion: nil)
-                    }
-                    self.sendReportEmailToParent(object.objectId)
+                    let lectureObject = NCMBObject(className: "Lecture", objectId: self.lecture.objectId)
+                    lectureObject?.setObject(object.objectId, forKey: "reportId")
+                    lectureObject?.saveInBackground({ error in
+                        if error == nil{
+                            self.showOkAlert(title: "報告", message: "保護者様に送信いたします。"){
+                                self.sendReportEmailToParent(object.objectId)
+                                let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
+                                let rootViewController = storyboard.instantiateViewController(identifier: "RootTabBarController")
+                                self.present(rootViewController, animated: true, completion: nil)
+                            }
+                        } else{
+                            self.showOkAlert(title: "Error", message: error!.localizedDescription)
+                        }
+                    })
                 }
             }
 //        }
@@ -134,9 +142,10 @@ class ReportDetailViewController: UIViewController, UITextFieldDelegate, UITextV
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // 値を渡すコード
         // 次の画面を取得
-        let View2 = segue.destination as! DocumentsViewController
+        let view2 = segue.destination as! DocumentsViewController
         // 次の画面の変数にこの画面の変数を入れている
-        View2.report = report
+        view2.report = report
+        view2.lectureId = lecture.objectId
     }
     
     func getSelectionNum(selesction: String?) -> Int {

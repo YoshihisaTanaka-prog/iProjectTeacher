@@ -59,7 +59,10 @@ class Chat{
         object?.setObject([], forKey: "readUserIds")
         object?.saveInBackground({ error in
             if error == nil{
-                if !chatRoomId.ary.contains("-"){
+                if chatRoomId.ary.contains("-"){
+                    self.delegate?.didFinishSendingMessage()
+                    currentVC?.sendMessageToOperator(id: currentUserG.userId)
+                } else{
                     let o = NCMBObject(className: "ChatRoom", objectId: chatRoomId)
                     o?.setObject(Date(), forKey: "lastTimeMessageSent")
                     o?.saveInBackground({ error in
@@ -69,8 +72,6 @@ class Chat{
                             self.delegate?.showOkAlertC(title: "Saving message sent time error", message: error!.localizedDescription)
                         }
                     })
-                } else {
-                    self.delegate?.didFinishSendingMessage()
                 }
             } else{
                 self.delegate?.showOkAlertC(title: "Sending message error", message: error!.localizedDescription)

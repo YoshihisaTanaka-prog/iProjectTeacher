@@ -23,13 +23,14 @@ class Opening2ViewController: UIViewController {
         
         let x = screenSizeG["NnNt"]!.width
         let y = screenSizeG["NnNt"]!.screenHeight
+        let length = min(x, 500.f)
         
-        baceView = UIView(frame: CGRect(x: 0, y: 0, width: x*0.8.f, height: x*0.8.f) )
+        baceView = UIView(frame: CGRect(x: 0, y: 0, width: length*0.8.f, height: length*0.8.f) )
         baceView.center = CGPoint(x: x / 2.f, y: y / 2.f)
-        baceView.layer.cornerRadius = x / 10.f
+        baceView.layer.cornerRadius = length / 10.f
         baceView.clipsToBounds = true
         
-        imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: x*1.6.f, height: x*0.8.f) )
+        imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: length*1.6.f, height: length*0.8.f) )
         imageView.image = UIImage(named: "iconT.png")
         baceView.addSubview(imageView)
         
@@ -53,7 +54,8 @@ class Opening2ViewController: UIViewController {
         
         UIView.animate(withDuration: 0.8, animations: {
             let x = screenSizeG["NnNt"]!.width
-            self.imageView.center = CGPoint(x: 0, y: x*0.4.f)
+            let length = min(x, 500.f)
+            self.imageView.center = CGPoint(x: 0, y: length*0.4.f)
         }) { _ in
             if isLogInG {
                 // ログイン中だったら

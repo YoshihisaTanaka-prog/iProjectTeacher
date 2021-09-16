@@ -25,6 +25,7 @@ class InviteUserTableViewCell: UITableViewCell {
         iconImageView.layer.cornerRadius = 30
         iconImageView.layer.cornerRadius = iconImageView.frame.width / 2.f
         self.backgroundColor = dColor.base
+        self.setFontColor()
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

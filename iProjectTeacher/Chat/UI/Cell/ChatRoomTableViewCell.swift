@@ -18,6 +18,7 @@ class ChatRoomTableViewCell: UITableViewCell {
         iconImageView.layer.cornerRadius = 30
         iconImageView.clipsToBounds = true
         self.backgroundColor = dColor.base
+        self.setFontColor()
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

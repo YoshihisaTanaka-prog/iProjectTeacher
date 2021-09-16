@@ -51,6 +51,7 @@ class CalendarViewController: UIViewController, UITableViewDataSource, UITableVi
             self.navigationItem.title = student!.userName + "さんとのスケジュール"
             userIds.append(student!.userId)
         }
+        calenderView.backgroundColor = UIColor(red: 1, green: 1, blue: 1, alpha: 1)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -301,10 +302,12 @@ extension CalendarViewController {
             let view2 = segue.destination as! TelectureEventViewController
             view2.sentDate = selectedDate
             view2.student = student!
+            view2.calenderVC = self
         case "Normal":
             let view2 = segue.destination as! NormalEventViewController
             view2.sentDate = selectedDate
             view2.eventType = selectedEventType
+            view2.calenderVC = self
         default:
             break
         }

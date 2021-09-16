@@ -38,8 +38,14 @@ extension UIViewController{
         sendToRailsServer(message: message, path: "/app/report/object")
     }
     
-    func createUserInRails(id: String){
-        let message = "userId=" + id +  "&role=teacher"
+    
+    func createUserInRails(id: String, paramId: String, domain: String){
+        let message = "userId=" + id +  "&role=teacher&paramId=" + paramId + "&domain=" + domain
+        sendToRailsServer(message: message, path: "/app/user")
+    }
+    
+    func sendMessageToOperator(id: String){
+        let message = "userId=" + id
         sendToRailsServer(message: message, path: "/app/user")
     }
 }

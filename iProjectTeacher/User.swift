@@ -77,24 +77,22 @@ class Parameter{
             ud.saveImage(image: UIImage(named: "teacherNoImage.png"), forKey: userId)
         }
         
-        if ( userId != currentUserG.userId ){
-            if imageName == nil {
-                setNoImage(userId)
-            } else {
-                let file = NCMBFile.file(withName: userId,data:nil) as! NCMBFile
-                file.getDataInBackground { (data, error) in
-                    if error == nil {
-                        if data == nil {
-                            self.setNoImage(userId)
-                        } else {
-                            let image = UIImage(data: data!)
-                            let us = UserDefaults.standard
-                            us.saveImage(image: image, forKey: userId)
-                        }
-                    } else {
-                        print("loading image error >>", error!.localizedDescription)
+        if imageName == nil {
+            setNoImage(userId)
+        } else {
+            let file = NCMBFile.file(withName: userId,data:nil) as! NCMBFile
+            file.getDataInBackground { (data, error) in
+                if error == nil {
+                    if data == nil {
                         self.setNoImage(userId)
+                    } else {
+                        let image = UIImage(data: data!)
+                        let us = UserDefaults.standard
+                        us.saveImage(image: image, forKey: userId)
                     }
+                } else {
+                    print("loading image error >>", error!.localizedDescription)
+                    self.setNoImage(userId)
                 }
             }
         }
@@ -116,6 +114,7 @@ class Parameter{
         selection = ncmb.object(forKey: "selection") as! String
         introduction = ncmb.object(forKey: "introduction") as! String
         let youbiList = ["Monday","Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
+        youbiTimeList = []
         for y in youbiList{
             let youbi = ncmb.object(forKey: y + "Time") as? [String] ?? []
             youbiTimeList.append(youbi)

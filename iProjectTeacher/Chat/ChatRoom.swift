@@ -24,7 +24,7 @@ class ChatRoom{
     var imageId: String
     
     init(){
-        id = "user-" + currentUserG.userId
+        id = "user-" + NCMBUser.current()!.objectId
         userInfo = []
         roomName = "サポートセンター"
         lastTimeMessageSent = Date()

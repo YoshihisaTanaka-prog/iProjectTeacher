@@ -88,12 +88,10 @@ class QuestionnaireViewController: UIViewController {
 //                            大学のドメインの場合、大学名を取得する
                             self.collageName = object.object(forKey: "collage") as! String
                         } else{
-//                            大学のドメインではない場合、管理サイトに通知する。
-                            self.sendToRailsServer(message: "id=" + NCMBUser.current()!.objectId + "&domain=" + self.domain + "&banned=true", path: "/app/user/domain")
+                            self.collageName = "???大学"
                         }
                     } else{
-//                        登録はされているが確認されていないのドメインの場合、管理サイトに通知する。
-                        self.sendToRailsServer(message: "id=" + NCMBUser.current()!.objectId + "&domain=" + self.domain, path: "/app/user/domain")
+                        self.collageName = "???大学"
                     }
                 }
             } else{
@@ -152,12 +150,11 @@ class QuestionnaireViewController: UIViewController {
                             let rootViewController = storyboard.instantiateViewController(identifier: "RootTabBarController") as! UITabBarController
                             let nextNC = rootViewController.viewControllers!.first! as! UINavigationController
                             let nextVC = nextNC.viewControllers.first!
-                            self.present(rootViewController, animated: true, completion: nil)
                             currentUserG = User(userId: NCMBUser.current()!.objectId, isNeedParameter: false, viewController: nextVC)
                             currentUserG.teacherParameter = TeacherParameter(object!)
                             myScheduleG.loadSchedule(date: Date(), userIds: [currentUserG.userId], nextVC)
                             self.present(rootViewController, animated: false, completion: nil)
-                            self.createUserInRails(id: NCMBUser.current()!.objectId)
+                            self.createUserInRails(id: NCMBUser.current()!.objectId, paramId: object!.objectId, domain: self.domain)
                         }
                         else{
                             self.showOkAlert(title: "Error", message: error!.localizedDescription)

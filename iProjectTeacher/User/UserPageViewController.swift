@@ -14,13 +14,13 @@ class UserPageViewController: UIViewController, UITextFieldDelegate, UITextViewD
     
     @IBOutlet var userImageView: UIImageView!
     
-    @IBOutlet var userIdTextField: UITextField!
-    @IBOutlet var userIdFuriganaTextField: UITextField!
-    @IBOutlet var schoolTextField: UITextField!
-    @IBOutlet var gradeTextField: UITextField!
+    @IBOutlet var userIdLabel: UILabel!
+    @IBOutlet var userIdFuriganaLabel: UILabel!
+    @IBOutlet var schoolLabel: UILabel!
+    @IBOutlet var gradeLabel: UILabel!
     //@IBOutlet var choiceTextField: UITextField!
-    @IBOutlet var selectionTextField: UITextField!
-    @IBOutlet var emailTextField: UITextField!
+    @IBOutlet var selectionLabel: UILabel!
+    //@IBOutlet var emailLabel: UILabel!
     //@IBOutlet var parentsEmailTextField: UITextField!
     @IBOutlet var introductionTextView: UITextView!
     
@@ -40,12 +40,12 @@ class UserPageViewController: UIViewController, UITextFieldDelegate, UITextViewD
         userImageView.layer.cornerRadius = userImageView.bounds.width / 2.0
         userImageView.layer.masksToBounds = true
         
-        userIdTextField.delegate = self
-        userIdFuriganaTextField.delegate = self
-        schoolTextField.delegate = self
-        gradeTextField.delegate = self
+        //userIdTextField.delegate = self
+        //userIdFuriganaLabel.delegate = self
+        //schoolTextField.delegate = self
+        //gradeTextField.delegate = self
         //choiceTextField.delegate = self
-        emailTextField.delegate = self
+        //emailTextField.delegate = self
         //parentsEmailTextField.delegate = self
 //        pickerView1.delegate = self
 //        pickerView1.dataSource = self
@@ -54,15 +54,15 @@ class UserPageViewController: UIViewController, UITextFieldDelegate, UITextViewD
         //let userIdFurigana = NCMBUser.current()?.setObject(userIdFuriganaTextField.text, forKey: "furigana") as! String
         //let Introduction = NCMBUser.current()?.setObject(introductionTextView.text, forKey: "introduction") as! String
         //userIdTextField.text = userId
-        userIdTextField.text = currentUserG.userName
-        emailTextField.text = currentUserG.mailAddress
-        userIdFuriganaTextField.text = currentUserG.furigana
-        schoolTextField.text = currentUserG.teacherParameter?.collage
+        userIdLabel.text = currentUserG.userName
+        //emailLabel.text = currentUserG.mailAddress
+        userIdFuriganaLabel.text = currentUserG.furigana
+        schoolLabel.text = currentUserG.teacherParameter?.collage
         
-        gradeTextField.text = transformGrade(currentUserG.grade)
+        gradeLabel.text = transformGrade(currentUserG.grade)
         //gradeTextField.text = transformGrade(currentUserG.grade)
         //choiceTextField.text = user.teacherParameter?.choice
-        selectionTextField.text = currentUserG.selection
+        selectionLabel.text = currentUserG.selection
         //parentsEmailTextField.text = user.studentParameter?.parentEmailAdress
         introductionTextView.text = currentUserG.introduction
         let ud = UserDefaults.standard

@@ -15,7 +15,7 @@ class EditUserPageViewController: UIViewController, UITextFieldDelegate, UITextV
     @IBOutlet var userImageView: UIImageView!
     @IBOutlet var userIdTextField: UITextField!
     @IBOutlet var userIdFuriganaTextField: UITextField!
-    @IBOutlet var schoolTextField: UITextField!
+    @IBOutlet var schoolLabel: UILabel!
     //@IBOutlet var gradeTextField: UITextField!
     @IBOutlet var emailTextField: UITextField!
     @IBOutlet var selectionTextField: UITextField!
@@ -104,7 +104,7 @@ class EditUserPageViewController: UIViewController, UITextFieldDelegate, UITextV
         
         userIdTextField.delegate = self
         userIdFuriganaTextField.delegate = self
-        schoolTextField.delegate = self
+        //schoolTextField.delegate = self
         //gradeTextField.text = transformGrade(currentUserG.grade)
         emailTextField.delegate = self
         selectionTextField.delegate = self
@@ -116,7 +116,7 @@ class EditUserPageViewController: UIViewController, UITextFieldDelegate, UITextV
         userIdTextField.text = currentUserG.userName
         emailTextField.text = currentUserG.mailAddress
         userIdFuriganaTextField.text = currentUserG.furigana
-        schoolTextField.text = currentUserG.teacherParameter?.collage
+        schoolLabel.text = currentUserG.teacherParameter?.collage
         //gradeTextField.text = user_.teacherParameter?.grade
         //gradeTextField.text = currentUserG.grade
         introductionTextView.text = currentUserG.introduction

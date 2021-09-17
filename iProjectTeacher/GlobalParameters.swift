@@ -15,7 +15,8 @@ var screenSizeG: Dictionary<String, Size> = [:]
 let dColor = OriginalCollor()
 var isLogInG: Bool = false
 var currentUserG: User!
-var blockedUserIdListG: [String] = []
+var reportedDataG = [String:[String]]()
+
 var followUserListG: [User] = []
 var waitingUserListG: [User] = []
 var favoriteUserListG: [User] = []

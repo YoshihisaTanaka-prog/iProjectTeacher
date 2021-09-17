@@ -78,7 +78,7 @@ extension CreateGroupViewController{
                             return
                         }
                     }
-                    chatRoomsG.insert(ChatRoom(chatRoom: object!, self), at: 1)
+                    chatRoomsG.insert(ChatRoom(chatRoom: object!, self)!, at: 1)
                     self.navigationController?.popViewController(animated: true)
                 } else{
                     self.showOkAlert(title: "Saving user list data error", message: error!.localizedDescription)

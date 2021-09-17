@@ -192,6 +192,7 @@ extension ChatViewController: ChatDelegate, ChatRoomDelegate{
     func didFinishSendingMessage() {
         textView.text = ""
         sentChatRoom.loadChats()
+        loadChatRoom()
     }
     
     func showOkAlertC(title: String, message: String) {

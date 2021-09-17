@@ -24,7 +24,9 @@ extension UIViewController{
                     var error: NSError? = nil
                     object.fetch(&error)
                     if error == nil{
-                        chatRoomsG.append(ChatRoom(chatRoom: object, self))
+                        if let c = ChatRoom(chatRoom: object, self){
+                            chatRoomsG.append(c)
+                        }
                     } else {
                         self.showOkAlert(title: "Loading chat room error", message: error!.localizedDescription)
                     }

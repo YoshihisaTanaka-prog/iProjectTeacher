@@ -33,10 +33,14 @@ class StudentViewController: UIViewController, UITableViewDataSource, UITableVie
         tableView.register(nib, forCellReuseIdentifier: "Cell2")
 //        /Users/tanakayoshihisa/iProjectStudent/iProjectStudent/Teacher
         setBackGround(true, true)
-        students = mixFollowList()
   
 
         // Do any additional setup after loading the view.
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        students = mixFollowList()
+        tableView.reloadData()
     }
     
 

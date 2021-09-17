@@ -249,6 +249,9 @@ class ScheduleMonth {
                 self.scheduleSort()
                 DispatchQueue.main.async {
                     let lectureQuery = self.query(className: "Lecture", userIds: userIds)
+                    if reportedDataG["User"] != nil && reportedDataG["User"] != [] {
+                        lectureQuery.whereKey("studentId", notContainedIn: reportedDataG["User"]!)
+                    }
                     lectureQuery.whereKey("startTime", greaterThanOrEqualTo: self.startDay)
                     lectureQuery.whereKey("startTime", lessThan: endDay)
                     lectureQuery.findObjectsInBackground { result, error in

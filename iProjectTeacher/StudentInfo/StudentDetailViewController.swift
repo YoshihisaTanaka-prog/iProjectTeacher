@@ -131,6 +131,9 @@ class StudentDetailViewController: UIViewController, UITableViewDelegate, UITabl
     
     func loadReport(){
         let query = NCMBQuery(className: "Report")
+        if reportedDataG["User"] != nil && reportedDataG["User"] != [] {
+            query?.whereKey("teacherId", notContainedIn: reportedDataG["User"]!)
+        }
         query?.whereKey("studentId", equalTo: student.userId)
         query?.findObjectsInBackground({ (result, error) in
             if(error == nil){

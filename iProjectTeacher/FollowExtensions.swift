@@ -16,12 +16,12 @@ extension UIViewController{
     func loadFollowList(){
         if NCMBUser.current() != nil{
             let query = NCMBQuery(className: "Follow")
-            //query?.includeKey("fromUserId")
-            //query?.includeKey("toUserId")
+            if reportedDataG["User"] != nil && reportedDataG["User"] != [] {
+                query?.whereKey("toUserId", notContainedIn: reportedDataG["User"]!)
+            }
             query?.whereKey("fromUserId", equalTo: NCMBUser.current()!.objectId)
             query?.findObjectsInBackground({ (result, error) in
                 if(error == nil){
-                    blockedUserIdListG = []
                     waitingUserListG = []
                     followUserListG = []
                     favoriteUserListG = []
@@ -29,10 +29,7 @@ extension UIViewController{
                         let userId = follow.object(forKey: "toUserId") as! String
                         let status = follow.object(forKey: "status") as! Int
                         let chatRoomId = follow.object(forKey: "chatRoomId") as! String
-                        if(status < 0){
-                            blockedUserIdListG.append(userId)
-                        }
-                        else{
+                        if(status >= 0){
                             let u = User(userId: userId, isNeedParameter: true, viewController: self)
                             u.status = status
                             u.chatRoomId = chatRoomId

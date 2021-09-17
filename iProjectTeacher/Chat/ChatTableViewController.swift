@@ -57,6 +57,39 @@ extension ChatTableViewController: UITableViewDataSource, UITableViewDelegate{
         selectedChatRoom = chatRoomsG[indexPath.row]
         self.performSegue(withIdentifier: "GoToChatRoom", sender: nil)
     }
+    //セルの編集許可
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool{
+        if indexPath.row == 0{
+            return false
+        }
+        return !chatRoomsG[indexPath.row].isGroup
+    }
+    
+    //スワイプしたセルを削除
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == UITableViewCell.EditingStyle.delete {
+            let chatRoom = chatRoomsG[indexPath.row]
+            var blockUserId = ""
+            if chatRoom.userInfo[0][0] == currentUserG.userId{
+                blockUserId = chatRoom.userInfo[1][0]
+            }
+            if chatRoom.userInfo[1][0] == currentUserG.userId{
+                blockUserId = chatRoom.userInfo[0][0]
+            }
+            if blockUserId != ""{
+                blockUserAlert(userId: blockUserId, chatRoomId: chatRoom.id, afterAction: {
+                    DispatchQueue.main.async {
+                        chatRoomsG.remove(at: indexPath.row)
+                        tableView.deleteRows(at: [indexPath as IndexPath], with: UITableView.RowAnimation.automatic)
+                    }
+                })
+            }
+        }
+    }
+//    スワイプした時に表示される文言の上書き
+    func tableView(_ tableView: UITableView, titleForDeleteConfirmationButtonForRowAt: IndexPath) -> String? {
+        return "ブロック"
+    }
 }
 
 extension ChatTableViewController{

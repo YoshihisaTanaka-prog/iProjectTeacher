@@ -14,6 +14,8 @@ class OriginalTabBarController: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        reportedDataG = NCMBUser.current()?.object(forKey: "reportInfo") as? [String:[String]] ?? [:]
+        
         loadChatRoom()
         loadFollowList()
         myScheduleG.loadSchedule(date: Date(), userIds: [currentUserG.userId], UIViewController())

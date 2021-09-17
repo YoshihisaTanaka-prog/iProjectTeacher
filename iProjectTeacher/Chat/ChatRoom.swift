@@ -32,7 +32,7 @@ class ChatRoom{
         imageId = "sapo-to"
     }
     
-    init(chatRoom: NCMBObject, _ vc: UIViewController){
+    init?(chatRoom: NCMBObject, _ vc: UIViewController){
 //        情報の読み込み
         id = chatRoom.objectId
         lastTimeMessageSent = chatRoom.object(forKey: "lastTimeMessageSent") as! Date
@@ -48,6 +48,15 @@ class ChatRoom{
                     name = ui[1]
                     imageId = ui[0]
                 }
+            }
+        } else if reportedDataG["User"] != nil{
+            if reportedDataG["User"]!.contains(userInfo[0][0]) || reportedDataG["User"]!.contains(userInfo[1][0]) {
+                if !reportedDataG["ChatRoom"]!.contains(chatRoom.objectId) {
+                    reportedDataG["ChatRoom"]!.append(chatRoom.objectId)
+                }
+                NCMBUser.current()?.setObject(reportedDataG, forKey: "reportInfo")
+                NCMBUser.current()?.saveInBackground { error in }
+                return nil
             }
         }
         self.roomName = roomName ?? name
@@ -84,7 +93,7 @@ class ChatRoom{
         let o = NCMBObject(className: "ChatRoom", objectId: user.chatRoomId)!
         var error: NSError? = nil
         o.fetch(&error)
-        self.init(chatRoom: o, UIViewController())
+        self.init(chatRoom: o, UIViewController())!
     }
     
     func loadChats(){

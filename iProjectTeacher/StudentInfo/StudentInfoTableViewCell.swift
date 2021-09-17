@@ -18,7 +18,7 @@ protocol StudentInfoTableViewCellDelegate {
 class StudentInfoTableViewCell: UITableViewCell {
     
     var delegate: StudentInfoTableViewCellDelegate?
-    var vc: UIViewController!
+    var vc: StudentDetailViewController!
     var student: User!
     private var size: Size!
     private var follow: NCMBObject!
@@ -139,11 +139,8 @@ class StudentInfoTableViewCell: UITableViewCell {
                 array.remove(at: i)
             }
         }
-//        NCMB上のデータをアップデート
-        follow.setObject(status, forKey: "status")
-        follow.saveInBackground { error in
-            if error == nil{
-//                元のステータスの配列から生徒を削除し、ボタンも削除
+        if status == -1{
+            vc.blockUserAlert(userId: student.userId, chatRoomId: student.chatRoomId, afterAction: {
                 switch self.student.status {
                 case 0:
                     self.centerButton.removeFromSuperview()
@@ -163,21 +160,47 @@ class StudentInfoTableViewCell: UITableViewCell {
                 default:
                     break
                 }
-                self.student.status = status
-//                新しいステータスの配列に生徒を追加
-                switch self.student.status {
-                case -1:
-                    blockedUserIdListG.append(self.student.userId)
-                case 1:
-                    followUserListG.append(self.student)
-                case 2:
-                    favoriteUserListG.append(self.student)
-                default:
-                    break
+                self.vc.navigationController?.popViewController(animated: true)
+            })
+        } else{
+//        NCMB上のデータをアップデート
+            follow.setObject(status, forKey: "status")
+            follow.saveInBackground { error in
+                if error == nil{
+//                    元のステータスの配列から生徒を削除し、ボタンも削除
+                    switch self.student.status {
+                    case 0:
+                        self.centerButton.removeFromSuperview()
+                        remove(value: self.student, array: &waitingUserListG)
+                    case 1:
+                        self.leftButton.removeFromSuperview()
+                        self.rightButton.removeFromSuperview()
+                        self.scheduleButton.removeFromSuperview()
+                        self.chatButton.removeFromSuperview()
+                        remove(value: self.student, array: &followUserListG)
+                    case 2:
+                        self.leftButton.removeFromSuperview()
+                        self.rightButton.removeFromSuperview()
+                        self.scheduleButton.removeFromSuperview()
+                        self.chatButton.removeFromSuperview()
+                        remove(value: self.student, array: &favoriteUserListG)
+                    default:
+                        break
+                    }
+                    self.student.status = status
+                    //                新しいステータスの配列に生徒を追加
+                    switch self.student.status {
+                    case 1:
+                        followUserListG.append(self.student)
+                    case 2:
+                        favoriteUserListG.append(self.student)
+                    default:
+                        break
+                    }
+                    self.delegate?.tappedChangeStatus()
+                } else{
+                    self.vc.showOkAlert(title: "Changing status Error", message: error!.localizedDescription)
                 }
-                self.delegate?.tappedChangeStatus()
-            } else{
-                self.vc.showOkAlert(title: "Changing status Error", message: error!.localizedDescription)
             }
         }
     }

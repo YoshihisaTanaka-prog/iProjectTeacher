@@ -33,20 +33,25 @@ class Chat{
         numOfReadUser = 0
     }
     
-    init(chat: NCMBObject){
+    init?(chat: NCMBObject){
         id = chat.objectId
         chatRoomId = chat.object(forKey: "chatRoomId") as! String
         let sentUserId = chat.object(forKey: "sentUserId") as! String
+        
+//        ブロックしたユーザーからのメッセージの場合除外する。
+        if reportedDataG["User"]?.contains(sentUserId) ?? false{
+            return nil
+        }
         self.sentUserId = sentUserId
         message = chat.object(forKey: "message") as! String
         sentTime = chat.createDate
         var readUserIds = chat.object(forKey: "readUserIds") as! [String]
         if !(readUserIds.contains(currentUserG.userId)) && currentUserG.userId != sentUserId {
+//            今回初めて既読したチャットの場合、既読したユーザIDのリストに自分のユーザIDを追加し保存する。
             readUserIds.append(currentUserG.userId)
             let o = chat
             o.setObject(readUserIds, forKey: "readUserIds")
-            o.saveInBackground { error in
-            }
+            o.saveInBackground { error in }
         }
         numOfReadUser = readUserIds.count
     }

@@ -44,7 +44,7 @@ class CreateGroupViewController: UIViewController {
 }
 
 extension CreateGroupViewController{
-    
+//    新しいグループを作る関数
     @IBAction func createGroup(){
         if roomNameTextField.text! != "" {
             let roomName = roomNameTextField.text

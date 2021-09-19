@@ -108,7 +108,9 @@ class ChatRoom{
                 let obs = result as? [NCMBObject] ?? []
                 var loadedChats = [Chat]()
                 for o in obs{
-                    loadedChats.insert(.init(chat: o), at: 0)
+                    if let c = Chat(chat: o){
+                        loadedChats.insert(c, at: 0)
+                    }
                 }
                 self.delegate?.didFinishLoadChats(chats: loadedChats)
             } else{
@@ -117,6 +119,7 @@ class ChatRoom{
         })
     }
     
+//    チャットの送信者の名前を取得する。
     func searchUserName(userId: String) -> String{
         for ui in userInfo{
             if ui[0] == userId{
@@ -126,6 +129,7 @@ class ChatRoom{
         return "No name"
     }
     
+//    このチャットルームを開いたことがあるかどうかを判定する変数
     public var isFirst: Bool{
         if self.id.ary.contains("-"){
             return false

@@ -71,6 +71,7 @@ extension AddUserViewController: UITableViewDataSource, InviteUserTableViewCellD
         return cell
     }
     
+//    招待するユーザーを選択するための関数（デリゲート）
     func tappedSwitch(cell: InviteUserTableViewCell) {
         isInvitedUsers[cell.tag] = !isInvitedUsers[cell.tag]
         tableView.reloadData()
@@ -79,40 +80,44 @@ extension AddUserViewController: UITableViewDataSource, InviteUserTableViewCellD
 
 
 extension AddUserViewController{
+//    グループにユーザを追加する。
     @IBAction func tappedButton(){
+//        ラグを防ぐためにボタンを押せなくする。
         button.isEnabled = false
-        for isInvited in isInvitedUsers{
+        var userInfo = beforeVC.sentChatRoom.userInfo
+        var userIds = [String]()
+        for i in 0..<isInvitedUsers.count{
+            let isInvited = isInvitedUsers[i]
             if isInvited{
-                let object = NCMBObject(className: "ChatRoom", objectId: beforeVC.sentChatRoom.id)
-                for u in users{
-                    beforeVC.sentChatRoom.userInfo.append([u.userId, u.userName])
-                }
-                object?.setObject(beforeVC.sentChatRoom.userInfo, forKey: "userInfo")
-                object?.saveInBackground({ error in
-                    if error == nil{
-                        let id = object?.objectId!
-                        for u in self.users{
-                            let object = NCMBObject(className: "UserChatRoom")
-                            object?.setObject(id, forKey: "chatRoomId")
-                            object?.setObject(u.userId != currentUserG.userId, forKey: "isFirst")
-                            object?.setObject(u.userId, forKey: "userId")
-                            var error: NSError? = nil
-                            object?.save(&error)
-                            if error != nil{
-                                self.showOkAlert(title: "Saving user list data error", message: error!.localizedDescription)
-                                self.button.isEnabled = true
-                                return
-                            }
-                        }
-                        self.dismiss(animated: true, completion: nil)
-                    } else{
-                        self.showOkAlert(title: "Saving user list data error", message: error!.localizedDescription)
-                        self.button.isEnabled = true
-                    }
-                })
-                return
+                userInfo.append([users[i].userId, users[i].userName])
+                userIds.append(users[i].userId)
             }
         }
-        button.isEnabled = true
+        let object = NCMBObject(className: "ChatRoom", objectId: beforeVC.sentChatRoom.id)
+        object?.setObject(userInfo, forKey: "userInfo")
+        object?.saveInBackground({ error in
+            if error == nil{
+                let id = object?.objectId!
+                for u in userIds{
+                    let object = NCMBObject(className: "UserChatRoom")
+                    object?.setObject(id, forKey: "chatRoomId")
+                    object?.setObject(u != currentUserG.userId, forKey: "isFirst")
+                    object?.setObject(u, forKey: "userId")
+//                    途中でエラーが起きたら止めるために非同期通信を行う
+                    var error: NSError? = nil
+                    object?.save(&error)
+                    if error != nil{
+                        self.showOkAlert(title: "Saving user list data error", message: error!.localizedDescription)
+                        self.button.isEnabled = true
+                        return
+                    }
+                }
+                self.beforeVC.sentChatRoom.userInfo = userInfo
+                self.dismiss(animated: true, completion: nil)
+            } else{
+                self.showOkAlert(title: "Saving user list data error", message: error!.localizedDescription)
+                self.button.isEnabled = true
+            }
+        })
     }
 }

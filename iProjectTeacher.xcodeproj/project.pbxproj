@@ -48,7 +48,6 @@
 		04A7E97325AF2B4900C0F43C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 04A7E97125AF2B4900C0F43C /* Main.storyboard */; };
 		04A7E97525AF2B4A00C0F43C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 04A7E97425AF2B4A00C0F43C /* Assets.xcassets */; };
 		04A7E97825AF2B4A00C0F43C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 04A7E97625AF2B4A00C0F43C /* LaunchScreen.storyboard */; };
-		04A7E98425AF2D0500C0F43C /* NCMBUserExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04A7E98325AF2D0500C0F43C /* NCMBUserExtensions.swift */; };
 		04ACB8B525DB2A7200916C15 /* GlobalParameters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04ACB8B425DB2A7200916C15 /* GlobalParameters.swift */; };
 		04B39D1925D43D57003EDECE /* StudentDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B39D1825D43D57003EDECE /* StudentDetailViewController.swift */; };
 		04B39D1E25D43E34003EDECE /* StudentInfoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B39D1C25D43E34003EDECE /* StudentInfoTableViewCell.swift */; };
@@ -172,7 +171,6 @@
 		04A7E97425AF2B4A00C0F43C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		04A7E97725AF2B4A00C0F43C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		04A7E97925AF2B4A00C0F43C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		04A7E98325AF2D0500C0F43C /* NCMBUserExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NCMBUserExtensions.swift; sourceTree = "<group>"; };
 		04ACB8B425DB2A7200916C15 /* GlobalParameters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalParameters.swift; sourceTree = "<group>"; };
 		04B39D1825D43D57003EDECE /* StudentDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentDetailViewController.swift; sourceTree = "<group>"; };
 		04B39D1C25D43E34003EDECE /* StudentInfoTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentInfoTableViewCell.swift; sourceTree = "<group>"; };
@@ -360,7 +358,6 @@
 				043079B1266A486900247080 /* AlertExtensions.swift */,
 				044BD1C4265D2DD000A169FC /* CalenderExtension.swift */,
 				043079C1266A4B2A00247080 /* FollowExtensions.swift */,
-				04A7E98325AF2D0500C0F43C /* NCMBUserExtensions.swift */,
 				043079B5266A493600247080 /* RailsExtensions.swift */,
 				044E43BB2688ABB700956C72 /* ScheduleExtension.swift */,
 				043079B3266A48D600247080 /* SetImageExtensions.swift */,
@@ -406,8 +403,8 @@
 				04D8035526D3E0D2004AC253 /* UI */,
 				04D803BA26D3E247004AC253 /* ChatTableViewController.swift */,
 				04D803B726D3E247004AC253 /* ChatViewController.swift */,
-				04D803B526D3E246004AC253 /* CreateGroupViewController.swift */,
 				04D803BB26D3E247004AC253 /* AddUserViewController.swift */,
+				04D803B526D3E246004AC253 /* CreateGroupViewController.swift */,
 				04D803B426D3E246004AC253 /* Chat.swift */,
 				04D803B926D3E247004AC253 /* ChatRoom.swift */,
 				04D803B626D3E246004AC253 /* ExtensionsForChat.swift */,
@@ -785,7 +782,6 @@
 				1F3FD57225E66D9000947E1C /* CheckBox.swift in Sources */,
 				0428E91B269088EB00F3FA2A /* ScheduleObject.swift in Sources */,
 				04D803DA26D3E2C8004AC253 /* MyChatViewCell.swift in Sources */,
-				04A7E98425AF2D0500C0F43C /* NCMBUserExtensions.swift in Sources */,
 				1B55D80425D3FFD9006BAE51 /* Event.swift in Sources */,
 				04D803C326D3E247004AC253 /* ChatTableViewController.swift in Sources */,
 			);

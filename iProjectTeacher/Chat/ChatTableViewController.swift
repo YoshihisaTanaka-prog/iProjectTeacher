@@ -57,11 +57,13 @@ extension ChatTableViewController: UITableViewDataSource, UITableViewDelegate{
         selectedChatRoom = chatRoomsG[indexPath.row]
         self.performSegue(withIdentifier: "GoToChatRoom", sender: nil)
     }
-    //セルの編集許可
+    //セルのスワイプでの編集を許可（ブロック用）
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool{
         if indexPath.row == 0{
+//            サポートセンターはブロックできない
             return false
         }
+//        1on1チャットのみブロック可能
         return !chatRoomsG[indexPath.row].isGroup
     }
     
@@ -77,6 +79,7 @@ extension ChatTableViewController: UITableViewDataSource, UITableViewDelegate{
                 blockUserId = chatRoom.userInfo[0][0]
             }
             if blockUserId != ""{
+//                afterActionの後のコードはアラートで「はい」を押した時のみ実行される部分
                 blockUserAlert(userId: blockUserId, chatRoomId: chatRoom.id, afterAction: {
                     DispatchQueue.main.async {
                         chatRoomsG.remove(at: indexPath.row)
@@ -98,8 +101,8 @@ extension ChatTableViewController{
         case "GoToChatRoom":
             let nextVC = segue.destination as! ChatViewController
             nextVC.sentChatRoom = selectedChatRoom
-            nextVC.sentChatRoom.loadChats()
             nextVC.sentChatRoom.delegate = nextVC
+            nextVC.sentChatRoom.loadChats()
         default:
             break
         }

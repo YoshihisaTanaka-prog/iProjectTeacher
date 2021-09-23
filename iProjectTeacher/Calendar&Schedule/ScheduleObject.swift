@@ -290,7 +290,7 @@ class ScheduleMonth {
         var queries = [NCMBQuery]()
         let tq = NCMBQuery(className: className)!
         tq.whereKey("teacherId", containedIn: userIds)
-        let sq = NCMBQuery(className: className)!
+        let sq = ncmbQuery(className: className, userIdFields: ["studentId"])!
         sq.whereKey("studentId", containedIn: userIds)
         queries.append(tq)
         queries.append(sq)

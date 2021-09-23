@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import NCMB
 
 //今日の授業の時間のデータを取得するための関数
 func getTodaysLectureTimeList(){
@@ -53,4 +54,18 @@ func judgeIsNeedToGoLecturePage(){
 func stopLectureTimer(){
     lectureCheckTimerG?.invalidate()
     isAbleToStartTimerG = true
+}
+
+
+func ncmbQuery(className: String, userIdFields: [String]) -> NCMBQuery?{
+    let ret = NCMBQuery(className: className)
+    if !(reportedDataG[className]?.isEmpty ?? true){
+        ret?.whereKey("objectId", notContainedIn: reportedDataG[className]!)
+    }
+    for field in userIdFields{
+        if !(reportedDataG["User"]?.isEmpty ?? true){
+            ret?.whereKey(field, notContainedIn: reportedDataG["User"]!)
+        }
+    }
+    return ret
 }

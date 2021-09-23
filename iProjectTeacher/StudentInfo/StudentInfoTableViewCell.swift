@@ -51,7 +51,7 @@ class StudentInfoTableViewCell: UITableViewCell {
     }
     
     func setButtons(){
-        let query = NCMBQuery(className: "Follow")
+        let query = ncmbQuery(className: "Follow", userIdFields: ["toUserId"])
         query?.whereKey("fromUserId", equalTo: currentUserG.userId)
         query?.whereKey("toUserId", equalTo: student.userId)
         query?.findObjectsInBackground({ result, error in

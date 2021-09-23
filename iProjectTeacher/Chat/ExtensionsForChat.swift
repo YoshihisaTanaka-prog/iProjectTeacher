@@ -12,7 +12,7 @@ import NCMB
 extension UIViewController{
     func loadChatRoom(){
         chatRoomsG = [ChatRoom()]
-        let query = NCMBQuery(className: "UserChatRoom")
+        let query = ncmbQuery(className: "UserChatRoom", userIdFields: [])
         query?.whereKey("userId", equalTo: currentUserG.userId)
         query?.findObjectsInBackground({ result, error in
             if error == nil{

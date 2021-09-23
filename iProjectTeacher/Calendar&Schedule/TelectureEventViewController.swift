@@ -87,7 +87,7 @@ extension TelectureEventViewController{
         if(selectedSubject == ""){
             self.showOkAlert(title: "注意", message: "教科・科目を選択してください！")
         } else{
-            let query = NCMBQuery(className: "Report")
+            let query = ncmbQuery(className: "Report",userIdFields: ["studentId"])
             query?.whereKey("studentId", equalTo: student.userId)
             query?.whereKey("subject", equalTo: selectedSubjectList[selectedSubjectId][0])
             query?.findObjectsInBackground({ result, error in

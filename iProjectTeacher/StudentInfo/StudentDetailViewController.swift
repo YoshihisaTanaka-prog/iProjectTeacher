@@ -130,7 +130,7 @@ class StudentDetailViewController: UIViewController, UITableViewDelegate, UITabl
     
     
     func loadReport(){
-        let query = NCMBQuery(className: "Report")
+        let query = ncmbQuery(className: "Report", userIdFields: ["teacherId","studentId"])
         if reportedDataG["User"] != nil && reportedDataG["User"] != [] {
             query?.whereKey("teacherId", notContainedIn: reportedDataG["User"]!)
         }

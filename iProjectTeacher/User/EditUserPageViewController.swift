@@ -286,6 +286,11 @@ class EditUserPageViewController: UIViewController, UITextFieldDelegate, UITextV
         actionController.addAction(cameraAction)
         actionController.addAction(albumAction)
         actionController.addAction(cancelAction)
+        if UIDevice.current.userInterfaceIdiom == .pad {
+        actionController.popoverPresentationController?.sourceView = self.view
+        let screenSize = UIScreen.main.bounds
+        actionController.popoverPresentationController?.sourceRect = CGRect(x: screenSize.size.width / 2, y: screenSize.size.height, width: 0, height: 0)
+        }
         self.present(actionController, animated: true, completion: nil)
     }
     
@@ -300,6 +305,11 @@ class EditUserPageViewController: UIViewController, UITextFieldDelegate, UITextV
             for action in alertOkActionList{
                 youbiAlertController.addAction(action)
             }
+        }
+        if UIDevice.current.userInterfaceIdiom == .pad {
+        youbiAlertController.popoverPresentationController?.sourceView = self.view
+        let screenSize = UIScreen.main.bounds
+        youbiAlertController.popoverPresentationController?.sourceRect = CGRect(x: screenSize.size.width / 2, y: screenSize.size.height, width: 0, height: 0)
         }
         self.present(youbiAlertController, animated: true, completion: nil)
     }
@@ -316,6 +326,11 @@ class EditUserPageViewController: UIViewController, UITextFieldDelegate, UITextV
             for action in alertOkActionList{
                 kamokuAlertController.addAction(action)
             }
+        }
+        if UIDevice.current.userInterfaceIdiom == .pad {
+        kamokuAlertController.popoverPresentationController?.sourceView = self.view
+        let screenSize = UIScreen.main.bounds
+        kamokuAlertController.popoverPresentationController?.sourceRect = CGRect(x: screenSize.size.width / 2, y: screenSize.size.height, width: 0, height: 0)
         }
         self.present(kamokuAlertController, animated: true, completion: nil)
     }
@@ -342,6 +357,11 @@ class EditUserPageViewController: UIViewController, UITextFieldDelegate, UITextV
         let action1 = UIAlertAction(title: "他の教科も設定する", style: .default) { (action) in
             self.kamokuCheckBoxList[i].mainView.removeFromSuperview()
             alertController.dismiss(animated: true, completion: nil)
+            if UIDevice.current.userInterfaceIdiom == .pad {
+                self.kamokuAlertController.popoverPresentationController?.sourceView = self.view
+            let screenSize = UIScreen.main.bounds
+                self.kamokuAlertController.popoverPresentationController?.sourceRect = CGRect(x: screenSize.size.width / 2, y: screenSize.size.height, width: 0, height: 0)
+            }
             self.present(self.kamokuAlertController, animated: true, completion: nil)
         }
         let action2 = UIAlertAction(title: "選択完了", style: .default) { (action) in
@@ -353,6 +373,11 @@ class EditUserPageViewController: UIViewController, UITextFieldDelegate, UITextV
         
         alertController.addAction(action1)
         alertController.addAction(action2)
+        if UIDevice.current.userInterfaceIdiom == .pad {
+        alertController.popoverPresentationController?.sourceView = self.view
+        let screenSize = UIScreen.main.bounds
+        alertController.popoverPresentationController?.sourceRect = CGRect(x: screenSize.size.width / 2, y: screenSize.size.height, width: 0, height: 0)
+        }
         self.present(alertController, animated: true, completion: nil)
     }
     
@@ -361,6 +386,11 @@ class EditUserPageViewController: UIViewController, UITextFieldDelegate, UITextV
         let alertController = UIAlertController(title: "時間帯を選んでください。", message: youbiCheckBoxList[i].msg, preferredStyle: .alert)
         let action1 = UIAlertAction(title: "他の曜日も設定する", style: .default) { (action) in
             alertController.dismiss(animated: true, completion: nil)
+            if UIDevice.current.userInterfaceIdiom == .pad {
+                self.youbiAlertController.popoverPresentationController?.sourceView = self.view
+            let screenSize = UIScreen.main.bounds
+                self.youbiAlertController.popoverPresentationController?.sourceRect = CGRect(x: screenSize.size.width / 2, y: screenSize.size.height, width: 0, height: 0)
+            }
             self.present(self.youbiAlertController, animated: true, completion: nil)
         }
         let action2 = UIAlertAction(title: "選択完了", style: .default) { (action) in
@@ -372,6 +402,11 @@ class EditUserPageViewController: UIViewController, UITextFieldDelegate, UITextV
         
         alertController.addAction(action1)
         alertController.addAction(action2)
+        if UIDevice.current.userInterfaceIdiom == .pad {
+        alertController.popoverPresentationController?.sourceView = self.view
+        let screenSize = UIScreen.main.bounds
+        alertController.popoverPresentationController?.sourceRect = CGRect(x: screenSize.size.width / 2, y: screenSize.size.height, width: 0, height: 0)
+        }
         self.present(alertController, animated: true, completion: nil)
     }
     

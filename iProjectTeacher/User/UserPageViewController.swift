@@ -97,6 +97,12 @@ class UserPageViewController: UIViewController, UITextFieldDelegate, UITextViewD
         alertController.addAction(signOutAction)
         alertController.addAction(cancelAction)
         
+        if UIDevice.current.userInterfaceIdiom == .pad {
+        alertController.popoverPresentationController?.sourceView = self.view
+        let screenSize = UIScreen.main.bounds
+        alertController.popoverPresentationController?.sourceRect = CGRect(x: screenSize.size.width / 2, y: screenSize.size.height, width: 0, height: 0)
+        }
+        
         self.present(alertController, animated: true, completion: nil)
     }
 }

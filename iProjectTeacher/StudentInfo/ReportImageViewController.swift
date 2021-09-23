@@ -62,11 +62,16 @@ class ReportImageViewController: UIViewController,UIImagePickerControllerDelegat
         }
     
     @IBAction func delete(){
-        for i in (0 ..< pageNum){
-            if pageNum == i{
-                selectedImages.remove(at: i)
-            }
-    }
+                selectedImages.remove(at: pageNum)
+        if pageNum == selectedImages.count{
+            
+            setPage(pageNum: pageNum - 1)
+            
+        } else {
+            
+            setPage(pageNum: pageNum)
+            
+        }
     }
     
     

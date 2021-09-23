@@ -352,6 +352,13 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xiW-2T-JST">
+                                <rect key="frame" x="153" y="710" width="108" height="30"/>
+                                <state key="normal" title="この画像を削除"/>
+                                <connections>
+                                    <action selector="delete" destination="Sa4-yh-CCL" eventType="touchUpInside" id="ysc-kT-nb1"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="ZNM-Bf-lA8"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -361,6 +368,9 @@
                             <constraint firstItem="ZNM-Bf-lA8" firstAttribute="bottom" secondItem="u66-7f-Nkx" secondAttribute="bottom" constant="50" id="8X8-O8-RhU"/>
                             <constraint firstItem="9u8-4o-Nil" firstAttribute="top" secondItem="K0l-ay-BHb" secondAttribute="top" id="9uf-sH-fRl"/>
                             <constraint firstItem="K0l-ay-BHb" firstAttribute="top" secondItem="ZNM-Bf-lA8" secondAttribute="top" constant="27" id="HIv-cG-FXC"/>
+                            <constraint firstItem="xiW-2T-JST" firstAttribute="top" secondItem="CNj-4f-YXN" secondAttribute="bottom" constant="8" symbolic="YES" id="f07-tV-BK4"/>
+                            <constraint firstItem="xiW-2T-JST" firstAttribute="centerX" secondItem="XIn-Xq-Ecx" secondAttribute="centerX" id="f7V-sv-Gdu"/>
+                            <constraint firstItem="u66-7f-Nkx" firstAttribute="top" secondItem="xiW-2T-JST" secondAttribute="bottom" constant="42" id="hL3-he-cx2"/>
                             <constraint firstItem="u66-7f-Nkx" firstAttribute="centerX" secondItem="XIn-Xq-Ecx" secondAttribute="centerX" id="j4A-gH-eLh"/>
                             <constraint firstItem="K0l-ay-BHb" firstAttribute="leading" secondItem="ZNM-Bf-lA8" secondAttribute="leading" constant="28" id="jko-eh-9D3"/>
                             <constraint firstItem="ZNM-Bf-lA8" firstAttribute="trailing" secondItem="9u8-4o-Nil" secondAttribute="trailing" constant="26" id="oMJ-m2-z9E"/>
@@ -382,6 +392,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="deleteButton" destination="xiW-2T-JST" id="Ddg-UA-JqQ"/>
                         <outlet property="documentImage" destination="CNj-4f-YXN" id="jaj-C2-e1U"/>
                         <outlet property="item" destination="fDu-Se-ggl" id="18I-WL-J2T"/>
                         <outlet property="minusButton" destination="K0l-ay-BHb" id="c41-SD-mZl"/>

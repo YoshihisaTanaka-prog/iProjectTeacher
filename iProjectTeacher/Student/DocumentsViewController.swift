@@ -16,6 +16,7 @@ class DocumentsViewController: UIViewController, UITextFieldDelegate, UITextView
     @IBOutlet private var pulusButton: UIButton!
     @IBOutlet private var minusButton: UIButton!
     @IBOutlet private var item: UIBarButtonItem!
+    @IBOutlet private var deleteButton: UIButton!
     
     private var selectedImages: [UIImage] = []
     private var pageNum = -1
@@ -49,6 +50,8 @@ class DocumentsViewController: UIViewController, UITextFieldDelegate, UITextView
         pulusButton.isEnabled = false
         minusButton.alpha = 0.5.f
         minusButton.isEnabled = false
+        deleteButton.alpha = 0.5.f
+        deleteButton.isEnabled = false
     }
     
 
@@ -82,6 +85,11 @@ class DocumentsViewController: UIViewController, UITextFieldDelegate, UITextView
         actionController.addAction(cameraAction)
         actionController.addAction(albumAction)
         actionController.addAction(cancelAction)
+        if UIDevice.current.userInterfaceIdiom == .pad {
+        actionController.popoverPresentationController?.sourceView = self.view
+        let screenSize = UIScreen.main.bounds
+        actionController.popoverPresentationController?.sourceRect = CGRect(x: screenSize.size.width / 2, y: screenSize.size.height, width: 0, height: 0)
+        }
         self.present(actionController, animated: true, completion: nil)
     }
     
@@ -169,6 +177,8 @@ class DocumentsViewController: UIViewController, UITextFieldDelegate, UITextView
     }
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        deleteButton.alpha = 1.f
+        deleteButton.isEnabled = true
         let selectedImage = info[UIImagePickerController.InfoKey.originalImage] as! UIImage
         selectedImages.append(selectedImage)
         setPage()
@@ -194,6 +204,39 @@ class DocumentsViewController: UIViewController, UITextFieldDelegate, UITextView
             minusButton.isEnabled = true
         }
     }
+    
+    @IBAction func delete(){
+                selectedImages.remove(at: pageNum)
+        maxPageNum = selectedImages.count
+        if pageNum == selectedImages.count {
+            if selectedImages.count == 0 {
+                deleteButton.alpha = 0.5.f
+                deleteButton.isEnabled = false
+                pageLabel.text =  " "
+                documentImage.image = nil
+            } else {
+                if selectedImages.count == 1{
+                    pulusButton.alpha = 0.5.f
+                    pulusButton.isEnabled = false
+                    minusButton.alpha = 0.5.f
+                    minusButton.isEnabled = false
+                }
+                
+                setPage(pageNum: pageNum - 1)
+            }
+            
+        } else if pageNum == selectedImages.count - 1 {
+            pulusButton.alpha = 0.5.f
+            pulusButton.isEnabled = false
+            setPage(pageNum: pageNum)
+            
+        } else {
+            setPage(pageNum: pageNum)
+        }
+        
+    
+        }
+    
     
     private func setPage(pageNum: Int){
         self.pageNum = pageNum

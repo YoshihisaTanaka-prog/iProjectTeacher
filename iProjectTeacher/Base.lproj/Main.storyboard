@@ -216,9 +216,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ffr-z1-Jjh">
-                                <rect key="frame" x="20" y="738" width="120" height="41"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ffr-z1-Jjh">
+                                <rect key="frame" x="20" y="743" width="102" height="36"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <state key="normal" title="前のページ">
                                     <color key="titleColor" systemColor="linkColor"/>
@@ -227,9 +226,8 @@
                                     <action selector="tappedMinus" destination="NIX-HX-bDq" eventType="touchUpInside" id="C1g-xZ-nvo"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pGP-Wv-Q15">
-                                <rect key="frame" x="274" y="738" width="120" height="41"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pGP-Wv-Q15">
+                                <rect key="frame" x="292" y="738" width="102" height="41"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <state key="normal" title="次のページ">
                                     <color key="titleColor" systemColor="linkColor"/>
@@ -238,13 +236,33 @@
                                     <action selector="tappedPlus" destination="NIX-HX-bDq" eventType="touchUpInside" id="0iB-Ux-xXN"/>
                                 </connections>
                             </button>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="EBw-2j-lKa">
-                                <rect key="frame" x="45" y="139" width="324" height="511"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="EBw-2j-lKa">
+                                <rect key="frame" x="45" y="139" width="324" height="516"/>
                             </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Z70-ou-Q9h">
+                                <rect key="frame" x="138" y="663" width="138" height="30"/>
+                                <state key="normal" title="この画像を削除する"/>
+                                <connections>
+                                    <action selector="delete" destination="NIX-HX-bDq" eventType="touchUpInside" id="2LJ-Rq-7kx"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="uKV-vq-DXU"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="uKV-vq-DXU" firstAttribute="trailing" secondItem="pGP-Wv-Q15" secondAttribute="trailing" constant="20" id="4uX-Rj-F0f"/>
+                            <constraint firstItem="ffr-z1-Jjh" firstAttribute="top" secondItem="EBw-2j-lKa" secondAttribute="bottom" constant="88" id="8GB-tb-QUc"/>
+                            <constraint firstItem="pGP-Wv-Q15" firstAttribute="top" secondItem="EBw-2j-lKa" secondAttribute="bottom" constant="83" id="9fp-kf-Pqo"/>
+                            <constraint firstItem="EBw-2j-lKa" firstAttribute="centerX" secondItem="YgB-Gs-5rv" secondAttribute="centerX" id="DBI-ou-XJq"/>
+                            <constraint firstItem="ffr-z1-Jjh" firstAttribute="leading" secondItem="uKV-vq-DXU" secondAttribute="leading" constant="20" id="FCg-Vx-Hvi"/>
+                            <constraint firstItem="uKV-vq-DXU" firstAttribute="bottom" secondItem="pGP-Wv-Q15" secondAttribute="bottom" constant="34" id="a6I-bi-SaA"/>
+                            <constraint firstItem="EBw-2j-lKa" firstAttribute="top" secondItem="uKV-vq-DXU" secondAttribute="top" constant="51" id="auN-fv-BGL"/>
+                            <constraint firstItem="Z70-ou-Q9h" firstAttribute="centerX" secondItem="YgB-Gs-5rv" secondAttribute="centerX" id="bcf-Ag-RYy"/>
+                            <constraint firstItem="Z70-ou-Q9h" firstAttribute="top" secondItem="EBw-2j-lKa" secondAttribute="bottom" constant="8" symbolic="YES" id="bhk-Qc-LDp"/>
+                            <constraint firstItem="uKV-vq-DXU" firstAttribute="bottom" secondItem="ffr-z1-Jjh" secondAttribute="bottom" constant="34" id="hOH-Fd-hiE"/>
+                            <constraint firstItem="EBw-2j-lKa" firstAttribute="leading" secondItem="uKV-vq-DXU" secondAttribute="leading" constant="45" id="jlf-E2-m0T"/>
+                            <constraint firstItem="uKV-vq-DXU" firstAttribute="trailing" secondItem="EBw-2j-lKa" secondAttribute="trailing" constant="45" id="nJd-dO-iNN"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="ZQU-FW-89p"/>
                     <connections>
@@ -1127,7 +1145,6 @@
         <!--Create Group View Controller-->
         <scene sceneID="x7M-OS-NKg">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="njY-M9-hoc" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <viewController id="myJ-EI-WfV" customClass="CreateGroupViewController" customModule="iProjectTeacher" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="m7m-cD-Qtd">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
@@ -1147,13 +1164,13 @@
                         </constraints>
                     </view>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="njY-M9-hoc" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2012" y="3061"/>
         </scene>
         <!--Add User View Controller-->
         <scene sceneID="2Ih-z3-RRr">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Q2K-Fj-1EI" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <viewController modalPresentationStyle="fullScreen" id="67S-a6-OPC" customClass="AddUserViewController" customModule="iProjectTeacher" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="bsh-cB-f0C">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
@@ -1174,6 +1191,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="T4U-0Q-wfr"/>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Q2K-Fj-1EI" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2951" y="3061"/>
         </scene>

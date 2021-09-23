@@ -14,6 +14,7 @@ class ReportImageViewController: UIViewController,UIImagePickerControllerDelegat
     @IBOutlet private var documentImage: UIImageView!
     @IBOutlet private var minusButton: UIButton!
     @IBOutlet private var plusButton: UIButton!
+    //@IBOutlet private var deleteButton: UIButton!
     
     private var pageNum = 0
     
@@ -49,7 +50,7 @@ class ReportImageViewController: UIViewController,UIImagePickerControllerDelegat
             }
         }
         
-        @IBAction func tappedMinus(){
+    @IBAction func tappedMinus(){
             pageNum -= 1
             plusButton.alpha = 1.f
             plusButton.isEnabled = true
@@ -59,6 +60,16 @@ class ReportImageViewController: UIViewController,UIImagePickerControllerDelegat
                 minusButton.isEnabled = false
             }
         }
+    
+    @IBAction func delete(){
+        for i in (0 ..< pageNum){
+            if pageNum == i{
+                selectedImages.remove(at: i)
+            }
+    }
+    }
+    
+    
     private func setPage(pageNum: Int){
             self.pageNum = pageNum
             documentImage.image = selectedImages[pageNum]

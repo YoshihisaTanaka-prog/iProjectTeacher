@@ -15,6 +15,7 @@ class NormalEventViewController: UIViewController, UITextFieldDelegate {
     var sentDate: Date!
     var eventType: String!
     var calenderVC: CalendarViewController!
+    var sentSchedule: Schedule?
     
     private var size: Size!
     private var toolBar:UIToolbar!
@@ -35,6 +36,7 @@ class NormalEventViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet private var firstTimeTextField: UITextField!
     @IBOutlet private var endDateTextField: UITextField!
     @IBOutlet private var endTimeTextField: UITextField!
+    @IBOutlet private var saveButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -45,16 +47,44 @@ class NormalEventViewController: UIViewController, UITextFieldDelegate {
         let end = tmp.date(byAdding: .hour, value: 1, to: start)!
         let now = Date()
         limitDate = tmp.date(from: DateComponents(year: now.y, month: now.m, day: now.d))!
-        if sentDate < limitDate {
-            sentDate = limitDate
-            showOkAlert(title: "注意", message: limitDate.ymdJp + "以降の予定しか追加できません。")
+        if sentSchedule == nil{
+            print("schedule is nil")
+            if sentDate < limitDate {
+                sentDate = limitDate
+                showOkAlert(title: "注意", message: limitDate.ymdJp + "以降の予定しか追加できません。")
+            }
+            savedDate.append([sentDate, start, end])
+            
+            firstDate = sentDate
+            endDate = sentDate
+            firstTime = start
+            endTime = end
+            
+            firstDateTextField.text = sentDate.ymdJp
+            firstTimeTextField.text = firstTime.hmJp
+            endDateTextField.text = sentDate.ymdJp
+            endTimeTextField.text = endTime.hmJp
+        } else {
+            print("schedule is not nil")
+            for detailTimes in sentSchedule!.detailTimeList{
+                let d1 = detailTimes[0]
+                let d2 = detailTimes[1]
+                let start = tmp.date(from: DateComponents(hour: d1.h, minute: d1.min))!
+                let end = tmp.date(from: DateComponents(hour: d2.h, minute: d2.min))!
+                savedDate.append([d1,start,end])
+            }
+            titleTextField.text = sentSchedule!.title
+            textTextView.text = sentSchedule!.detail
+            firstDateTextField.text = sentSchedule!.detailTimeList.first![0].ymdJp
+            firstTimeTextField.text = sentSchedule!.detailTimeList.first![0].hmJp
+            endDateTextField.text = sentSchedule!.detailTimeList.last![1].ymdJp
+            endTimeTextField.text = sentSchedule!.detailTimeList.last![1].hmJp
+            if sentSchedule!.detailTimeList.last![1] < limitDate {
+                saveButton.isEnabled = false
+                saveButton.alpha = 0.5.f
+                showOkAlert(title: "注意", message: limitDate.ymdJp + "以降の予定しか編集できません。")
+            }
         }
-        savedDate.append([sentDate, start, end])
-        
-        firstDate = sentDate
-        endDate = sentDate
-        firstTime = start
-        endTime = end
         
         switch eventType {
         case "school":
@@ -77,11 +107,6 @@ class NormalEventViewController: UIViewController, UITextFieldDelegate {
         endDateTextField.tag = 3
         endTimeTextField.delegate = self
         endTimeTextField.tag = 4
-        
-        firstDateTextField.text = sentDate.ymdJp
-        firstTimeTextField.text = firstTime.hmJp
-        endDateTextField.text = sentDate.ymdJp
-        endTimeTextField.text = endTime.hmJp
 
         setBackGround(true, true)
         dateTableView.frame = CGRect(x: 0.f, y: 0.f, width: 242.f, height: 242.f)
@@ -109,6 +134,7 @@ extension NormalEventViewController: ScheduleClassDelegate{
     }
     
     @IBAction private func save(){
+        print("save() was called")
         if titleTextField.text!.count == 0{
             showOkAlert(title: "注意", message: "予定のタイトルを入力してください。")
         } else{
@@ -121,7 +147,7 @@ extension NormalEventViewController: ScheduleClassDelegate{
                 }
                 if searchBookingList(dateList: detailTimeList).count == 0 {
                     showWaitingAlert()
-                    let s = Schedule(title: titleTextField.text!, detail: textTextView.text!, eventType: eventType, detailTimeList: detailTimeList, isAbleToShow: true, self)
+                    let s = Schedule(id: sentSchedule?.id, title: titleTextField.text!, detail: textTextView.text!, eventType: eventType, detailTimeList: detailTimeList, isAbleToShow: true, self)
                     s.delegate = self
                 }
             } else{
@@ -130,7 +156,7 @@ extension NormalEventViewController: ScheduleClassDelegate{
                 let detailTimeList = [[first,end]]
                 if searchBookingList(dateList: detailTimeList).count == 0 {
                     showWaitingAlert()
-                    let s = Schedule(title: titleTextField.text!, detail: textTextView.text!, eventType: eventType, detailTimeList: detailTimeList, isAbleToShow: true, self)
+                    let s = Schedule(id: sentSchedule?.id, title: titleTextField.text!, detail: textTextView.text!, eventType: eventType, detailTimeList: detailTimeList, isAbleToShow: true, self)
                     s.delegate = self
                 }
             }
@@ -147,14 +173,20 @@ extension NormalEventViewController: ScheduleClassDelegate{
                 dEnd = dList[1]
             }
             while(dStart < dList[1]){
-                for s in cachedScheduleG.values {
+                for key in cachedScheduleG.keys {
+                    let s = cachedScheduleG[key]!
+                    if let id = sentSchedule?.id {
+                        if id == key{
+                            continue
+                        }
+                    }
                     if s.userId == currentUserG.userId{
                         for times in s.detailTimeList{
                             let start = times[0]
                             let end = times[1]
                             if (start < dEnd && dStart < end){
                                 let t = TimeFrame(firstTime: start, lastTime: end, title: s.title, eventType: s.eventType)
-                                t.scheduleIds.append(s.ncmb.objectId)
+                                t.scheduleIds.append(s.id)
                                 ret.append((dates: [start,end], timeFrame: t))
                             }
                         }
@@ -205,6 +237,7 @@ extension NormalEventViewController: UITableViewDataSource, UITableViewDelegate,
     private func setTableView(){
         dateTableView.dataSource = self
         dateTableView.delegate = self
+        dateTableView.tableFooterView = UIView()
         let nib1 = UINib(nibName: "PlusTableViewCell", bundle: Bundle.main)
         let nib2 = UINib(nibName: "DateTableViewCell", bundle: Bundle.main)
         dateTableView.register(nib1, forCellReuseIdentifier: "Plus")

@@ -14,6 +14,7 @@ class TelectureEventViewController: UIViewController, UIPickerViewDelegate, UIPi
     var student: User!
     var sentDate: Date!
     var calenderVC: CalendarViewController!
+    var sentLecture: Lecture?
     
     private var limitDate: Date!
     private var toolBar:UIToolbar!
@@ -47,6 +48,7 @@ class TelectureEventViewController: UIViewController, UIPickerViewDelegate, UIPi
     @IBOutlet private var detailTextView: UITextView!
     @IBOutlet private var loopView: UIView!
     @IBOutlet private var loopSwitch: UISwitch!
+    @IBOutlet private var saveButton: UIButton!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -55,16 +57,30 @@ class TelectureEventViewController: UIViewController, UIPickerViewDelegate, UIPi
         let now = Date()
         limitDate = tmp.date(from: DateComponents(year: now.y, month: now.m, day: now.d))!
         limitDate = tmp.date(byAdding: .day, value: 3, to: limitDate)!
-        if sentDate < limitDate {
-            sentDate = limitDate
-            showOkAlert(title: "注意", message: limitDate.ymdJp + "以降の予定しか追加できません。")
-        }
 
         subjectPickerView.dataSource = self
         subjectPickerView.delegate = self
-        timePickerView.dataSource = self
-        timePickerView.delegate = self
-        timePickerView.tag = 1
+        if sentLecture == nil{
+            if sentDate < limitDate {
+                sentDate = limitDate
+                showOkAlert(title: "注意", message: limitDate.ymdJp + "以降の予定しか追加できません。")
+            }
+            dateTextField.text = sentDate.ymdJp
+            timePickerView.dataSource = self
+            timePickerView.delegate = self
+            timePickerView.tag = 1
+        } else{
+            if sentLecture!.startTime < limitDate{
+                showOkAlert(title: "注意", message: limitDate.ymdJp + "以降の予定しか編集できません。")
+                saveButton.alpha = 0.5.f
+                saveButton.isEnabled = false
+            }
+            dateTextField.text = sentLecture!.startTime.ymdJp + sentLecture!.startTime.hmJp
+            dateTextField.isEnabled = false
+            setSubjectPickerView()
+            timePickerView.alpha = 0.f
+            detailTextView.text = sentLecture!.detail
+        }
         detailTextView.delegate = self
         
         self.setBackGround(true, true)
@@ -76,6 +92,27 @@ class TelectureEventViewController: UIViewController, UIPickerViewDelegate, UIPi
         } else {
             loopView.alpha = 0.f
             loopSwitch.isEnabled = false
+        }
+    }
+}
+
+extension TelectureEventViewController{
+//    授業情報の編集時に科目を指定するための関数
+    private func setSubjectPickerView(){
+        if let subject = sentLecture?.subject{
+            selectedSubject = subject
+            for i in 0..<subSubjectList.count{
+                let subjects = subSubjectList[i]
+                for j in 0..<subjects.count{
+                    let s = subjects[j][1]
+                    if s == subject{
+                        selectedSubjectList = subSubjectList[i]
+                        subjectPickerView.selectRow(i, inComponent: 0, animated: false)
+                        subjectPickerView.selectRow(j, inComponent: 1, animated: false)
+                        return
+                    }
+                }
+            }
         }
     }
 }
@@ -97,7 +134,7 @@ extension TelectureEventViewController{
                     for o in objects{
                         self.reports.append(Report(o))
                     }
-//                    ここでページ遷移のコード
+                    self.performSegue(withIdentifier: "Report", sender: nil)
                 } else{
                     self.showOkAlert(title: "Loading Report Error", message: error!.localizedDescription)
                 }
@@ -111,7 +148,13 @@ extension TelectureEventViewController{
     }
     
     @IBAction func tappedSave(){
-        if selectedTimeIndex == 0 {
+        
+        if let lecture = sentLecture{
+            alert = UIAlertController(title: "保存", message: "データを保存中です。\nしばらくお待ちください。", preferredStyle: .alert)
+            self.present(alert, animated: true, completion: nil)
+            let l = Lecture(id: lecture.objectId, student: lecture.student, startTime: lecture.startTime, subject: selectedSubject, detail: detailTextView.text, lecturesId: lecture.lecturesId, self)
+            l.delegate = self
+        } else if selectedTimeIndex == 0 {
             showOkAlert(title: "注意", message: "時間を選択してください。")
         } else if selectedSubject == ""{
             showOkAlert(title: "注意", message: "教科・科目を選択してください！")
@@ -189,14 +232,12 @@ extension TelectureEventViewController{
     private func saveLecture(saveDateList: [Date]){
         alert = UIAlertController(title: "保存", message: "データを保存中です。\nしばらくお待ちください。", preferredStyle: .alert)
         self.present(alert, animated: true, completion: nil)
-//        let l = Lecture(student: student, timeList: saveDateList, subject: selectedSubject, detail: detailTextView.text!, self)
-//        l.delegate = self
         let object = NCMBObject(className: "Lectures")
         object?.saveInBackground({ error in
             if error == nil{
                 for i in 0..<saveDateList.count{
                     let time = saveDateList[i]
-                    let l = Lecture(student: self.student, startTime: time, subject: self.selectedSubject, detail: self.detailTextView.text!, lecturesId: object!.objectId, self)
+                    let l = Lecture(id: nil, student: self.student, startTime: time, subject: self.selectedSubject, detail: self.detailTextView.text!, lecturesId: object!.objectId, self)
                     if i == saveDateList.count - 1{
                         l.delegate = self
                     }
@@ -209,17 +250,15 @@ extension TelectureEventViewController{
     }
 }
 
-extension TelectureEventViewController: ScheduleDelegate,LectureDelegate{
+extension TelectureEventViewController: LectureDelegate{
     
     func savedLecture() {
+        self.navigationController?.popViewController(animated: false)
+        print("savedLecture()was called")
+        alert.dismiss(animated: true, completion: nil)
         mixedScheduleG.delegate = calenderVC
         mixedScheduleG.loadSchedule(date: self.sentDate, userIds: [currentUserG.userId, self.student.userId], calenderVC)
     }
-    func schedulesDidLoaded() {
-        alert.dismiss(animated: true, completion: nil)
-        self.navigationController?.popViewController(animated: true)
-    }
-    func allSchedulesDidLoaded() {}
 }
 
 //テキストフィールド、テキストビュー関連
@@ -233,7 +272,6 @@ extension TelectureEventViewController: UITextFieldDelegate{
         dateTextField.inputAccessoryView = toolBar
         dateTextField.delegate = self
         selectedDate = sentDate
-        dateTextField.text = sentDate.ymdJp
     }
 //    決定ボタンを押したときの処理
     @objc func doneBtn(){
@@ -388,7 +426,12 @@ extension TelectureEventViewController{
 //値渡し
 extension TelectureEventViewController{
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+        switch segue.identifier {
+        case "Report":
+            let nextVC = segue.destination as! ReportListViewController
+            nextVC.reportList = reports
+        default:
+            break
+        }
     }
 }

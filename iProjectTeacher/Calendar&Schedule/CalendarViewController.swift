@@ -21,6 +21,10 @@ class CalendarViewController: UIViewController, UITableViewDataSource, UITableVi
     private var currentMonth: Int!
     private var schedules: [[TimeFrameUnit]] = []
     private var userIds:[String] = []
+    private var selectedLecture: Lecture?
+    private var selectedSchedule: Schedule?
+    private var selectedScheduleTitleAndIds = [[String]]()
+    private var alert: UIAlertController?
     
     @IBOutlet private var tableView: UITableView!  //スケジュール内容
     @IBOutlet private var labelTitle: UILabel!  //「主なスケジュール」の表示
@@ -55,6 +59,8 @@ class CalendarViewController: UIViewController, UITableViewDataSource, UITableVi
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        selectedLecture = nil
+        selectedSchedule = nil
         loadEvent(selectedDate)
         datelabel.text = selectedDate.ymdJp
         if isFirstTime{
@@ -189,8 +195,83 @@ extension CalendarViewController: ScheduleTableViewCellDelegate{
     }
     
     func tappedScheduleButton(timeFrame: TimeFrameUnit) {
+        switch timeFrame.eventType {
+        case "telecture":
+            selectedLecture = cachedLectureG[timeFrame.lectureId!]
+            if selectedLecture!.teacher.userId == currentUserG.userId{
+                self.performSegue(withIdentifier: "Telecture", sender: nil)
+            } else{
+                self.performSegue(withIdentifier: "ShowLecture", sender: nil)
+            }
+        case "school":
+            moveToSchedule(timeFrame: timeFrame)
+        case "private":
+            moveToSchedule(timeFrame: timeFrame)
+        default:
+            break
+        }
     }
     
+    private func moveToSchedule(timeFrame: TimeFrameUnit){
+        if timeFrame.scheduleIds.count == 1{
+            selectedSchedule = cachedScheduleG[timeFrame.scheduleIds.first!]!
+            if timeFrame.isMyEvent{
+                self.performSegue(withIdentifier: "Normal", sender: nil)
+            } else if timeFrame.isAbleToShow{
+                self.performSegue(withIdentifier: "ShowDetailSchedule", sender: nil)
+            }
+        } else if timeFrame.scheduleIds.count != 0{
+            selectedScheduleTitleAndIds = []
+            for s in timeFrame.scheduleIds{
+                let title = cachedScheduleG[s]!.title
+                selectedScheduleTitleAndIds.append([s,title])
+            }
+            alert = UIAlertController(title: "どの予定の詳細を見ますか？", message: "\n\n\n\n\n", preferredStyle: .alert)
+            let action = UIAlertAction(title: "キャンセル", style: .cancel) { action in
+                self.alert!.dismiss(animated: true, completion: nil)
+            }
+            alert!.addAction(action)
+            
+            let pickerView = UIPickerView(frame: CGRect(x: 0.f, y: 50.f, width: 250, height: 100.f))
+            pickerView.dataSource = self
+            pickerView.delegate = self
+            alert!.view.addSubview(pickerView)
+            
+            self.present(alert!, animated: true, completion: nil)
+        }
+    }
+}
+
+extension CalendarViewController: UIPickerViewDataSource, UIPickerViewDelegate{
+    
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return selectedScheduleTitleAndIds.count + 1
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        if row == 0{
+            return "予定を選択"
+        } else{
+            return selectedScheduleTitleAndIds[row-1][1]
+        }
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        if row != 0{
+            selectedSchedule = cachedScheduleG[ selectedScheduleTitleAndIds[row-1][0] ]
+            if selectedSchedule!.userId == currentUserG.userId {
+                self.performSegue(withIdentifier: "Normal", sender: nil)
+            } else if selectedSchedule!.isAbleToShow{
+                self.performSegue(withIdentifier: "ShowDetailSchedule", sender: nil)
+            }
+            alert?.dismiss(animated: true, completion: nil)
+        }
+        tableView.reloadData()
+    }
 }
     
 //カレンダー関係
@@ -303,16 +384,24 @@ extension CalendarViewController {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         switch segue.identifier {
+        case "ShowLecture":
+            let view2 = segue.destination as! ShowTelectureViewController
+            view2.lecture = selectedLecture!
+        case "ShowDetailSchedule":
+            let view2 = segue.destination as! ShowNormalEventViewController
+            view2.schedule = selectedSchedule!
         case "Telecture":
             let view2 = segue.destination as! TelectureEventViewController
             view2.sentDate = selectedDate
-            view2.student = student!
+            view2.student = selectedLecture?.student ?? student!
             view2.calenderVC = self
+            view2.sentLecture = selectedLecture
         case "Normal":
             let view2 = segue.destination as! NormalEventViewController
             view2.sentDate = selectedDate
-            view2.eventType = selectedEventType
+            view2.eventType = selectedSchedule?.eventType ?? selectedEventType
             view2.calenderVC = self
+            view2.sentSchedule = selectedSchedule
         default:
             break
         }

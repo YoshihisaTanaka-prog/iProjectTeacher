@@ -84,11 +84,11 @@ class DoubleScheduleTableViewCell: UITableViewCell {
         case "school":
             let fbColor = UIColor(iRed: 127, iGreen: 0, iBlue: 0)
             let bColor = UIColor(iRed: 255, iGreen: 255, iBlue: 68)
-            setButtonColor(button: myDetailButton, fontBorderColor: fbColor, backgroundColor: bColor)
+            setButtonColor(button: yourDetailButton, fontBorderColor: fbColor, backgroundColor: bColor)
         case "private":
             let fbColor = UIColor(iRed: 127, iGreen: 0, iBlue: 0)
             let bColor = UIColor(iRed: 255, iGreen: 127, iBlue: 192)
-            setButtonColor(button: myDetailButton, fontBorderColor: fbColor, backgroundColor: bColor)
+            setButtonColor(button: yourDetailButton, fontBorderColor: fbColor, backgroundColor: bColor)
         default:
             let fbColor = dColor.font
             let bColor = dColor.base

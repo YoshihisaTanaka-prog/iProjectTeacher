@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="vls-KQ-dbX">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="vls-KQ-dbX">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17126"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -35,7 +35,7 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                             </textField>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0BQ-VK-Aw5">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0BQ-VK-Aw5" customClass="WeakButton" customModule="iProjectTeacher" customModuleProvider="target">
                                 <rect key="frame" x="92" y="309" width="230" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="230" id="I46-tk-6lr"/>
@@ -116,28 +116,30 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dso-bs-He6">
-                                <rect key="frame" x="35.5" y="258" width="62" height="30"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dso-bs-He6" customClass="WeakButton" customModule="iProjectTeacher" customModuleProvider="target">
+                                <rect key="frame" x="33" y="258" width="70" height="33"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <state key="normal" title="利用規約"/>
                                 <connections>
-                                    <segue destination="VRq-8y-Jce" kind="presentation" id="GEH-Ry-cn8"/>
+                                    <segue destination="VRq-8y-Jce" kind="show" id="GEH-Ry-cn8"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="と" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="T1A-In-gkn">
-                                <rect key="frame" x="105.5" y="258" width="17" height="30"/>
+                                <rect key="frame" x="103" y="258" width="17" height="33"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hQA-uO-1ur">
-                                <rect key="frame" x="130.5" y="258" width="153" height="30"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hQA-uO-1ur" customClass="WeakButton" customModule="iProjectTeacher" customModuleProvider="target">
+                                <rect key="frame" x="120" y="258" width="174" height="33"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <state key="normal" title="プライバシーポリシー"/>
                                 <connections>
-                                    <segue destination="mpF-LJ-Bhg" kind="presentation" id="fDA-ea-8ma"/>
+                                    <segue destination="mpF-LJ-Bhg" kind="show" id="fDA-ea-8ma"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="に同意して" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SrV-Cc-acl">
-                                <rect key="frame" x="291" y="258" width="87" height="30"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="に同意して" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SrV-Cc-acl" customClass="AccentLabel" customModule="iProjectTeacher" customModuleProvider="target">
+                                <rect key="frame" x="294" y="258" width="87" height="33"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -151,7 +153,7 @@
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tly-7b-WnY">
-                                <rect key="frame" x="61" y="328" width="292" height="36"/>
+                                <rect key="frame" x="61" y="331" width="292" height="36"/>
                                 <color key="backgroundColor" red="0.98704621749999999" green="1" blue="0.1279521297" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <color key="tintColor" systemColor="labelColor"/>
@@ -166,22 +168,21 @@
                         <constraints>
                             <constraint firstItem="tly-7b-WnY" firstAttribute="trailing" secondItem="5S2-2d-toF" secondAttribute="trailing" id="8ap-Rk-aB7"/>
                             <constraint firstItem="5S2-2d-toF" firstAttribute="centerX" secondItem="OvB-m3-O1P" secondAttribute="centerX" id="926-Eo-n6p"/>
-                            <constraint firstItem="T1A-In-gkn" firstAttribute="leading" secondItem="dso-bs-He6" secondAttribute="trailing" constant="8" symbolic="YES" id="Ea7-HX-ZmG"/>
+                            <constraint firstItem="T1A-In-gkn" firstAttribute="leading" secondItem="dso-bs-He6" secondAttribute="trailing" id="Ea7-HX-ZmG"/>
                             <constraint firstItem="dso-bs-He6" firstAttribute="top" secondItem="5S2-2d-toF" secondAttribute="bottom" constant="48" id="Odb-OU-MdE"/>
                             <constraint firstItem="tly-7b-WnY" firstAttribute="centerX" secondItem="OvB-m3-O1P" secondAttribute="centerX" id="Pys-5Y-dry"/>
-                            <constraint firstItem="SrV-Cc-acl" firstAttribute="leading" secondItem="hQA-uO-1ur" secondAttribute="trailing" constant="7.5" id="W9g-tb-0Q2"/>
+                            <constraint firstItem="SrV-Cc-acl" firstAttribute="leading" secondItem="hQA-uO-1ur" secondAttribute="trailing" id="W9g-tb-0Q2"/>
                             <constraint firstItem="tly-7b-WnY" firstAttribute="top" secondItem="hQA-uO-1ur" secondAttribute="bottom" constant="40" id="X3d-PZ-A6E"/>
                             <constraint firstItem="T1A-In-gkn" firstAttribute="centerY" secondItem="dso-bs-He6" secondAttribute="centerY" id="dSe-ZA-utl"/>
                             <constraint firstItem="SrV-Cc-acl" firstAttribute="centerY" secondItem="dso-bs-He6" secondAttribute="centerY" id="eM6-1M-lhT"/>
                             <constraint firstItem="hQA-uO-1ur" firstAttribute="centerY" secondItem="dso-bs-He6" secondAttribute="centerY" id="f42-gm-omS"/>
                             <constraint firstItem="tly-7b-WnY" firstAttribute="leading" secondItem="5S2-2d-toF" secondAttribute="leading" id="pjU-F2-RFb"/>
-                            <constraint firstItem="hQA-uO-1ur" firstAttribute="leading" secondItem="T1A-In-gkn" secondAttribute="trailing" constant="8" symbolic="YES" id="q05-Yv-x5W"/>
+                            <constraint firstItem="hQA-uO-1ur" firstAttribute="leading" secondItem="T1A-In-gkn" secondAttribute="trailing" id="q05-Yv-x5W"/>
                             <constraint firstItem="hQA-uO-1ur" firstAttribute="centerX" secondItem="OvB-m3-O1P" secondAttribute="centerX" id="rJR-vf-6Dq"/>
                             <constraint firstItem="5S2-2d-toF" firstAttribute="top" secondItem="U4X-Gi-maT" secondAttribute="top" constant="88" id="sTa-4Y-H6G"/>
                             <constraint firstItem="SrV-Cc-acl" firstAttribute="top" secondItem="5S2-2d-toF" secondAttribute="bottom" constant="48" id="upV-3x-YaA"/>
                             <constraint firstItem="hQA-uO-1ur" firstAttribute="top" secondItem="5S2-2d-toF" secondAttribute="bottom" constant="48" id="w0r-1R-eRb"/>
                             <constraint firstItem="T1A-In-gkn" firstAttribute="top" secondItem="5S2-2d-toF" secondAttribute="bottom" constant="48" id="w5o-KX-jK8"/>
-                            <constraint firstItem="T1A-In-gkn" firstAttribute="leading" secondItem="dso-bs-He6" secondAttribute="trailing" constant="8" symbolic="YES" id="xKM-U9-Ep2"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="dcB-9x-u5a"/>
@@ -273,13 +274,13 @@
         <!--View Controller-->
         <scene sceneID="0yU-le-HbC">
             <objects>
-                <viewController id="VRq-8y-Jce" customClass="ViewController" customModule="iProjectTeacher" sceneMemberID="viewController">
+                <viewController modalPresentationStyle="fullScreen" id="VRq-8y-Jce" customClass="ViewController" customModule="iProjectTeacher" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="pjf-KW-lLz">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="H2F-qK-Fat">
-                                <rect key="frame" x="5" y="5" width="404" height="832"/>
+                                <rect key="frame" x="5" y="93" width="404" height="710"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <string key="text">利用規約
 この利用規約（以下，「本規約」といいます。）は，田中義久，平岡龍聖，上園陸斗，中村香織（以下，「開発者」といいます。）がこのアプリ上で提供するサービス（以下，「本サービス」といいます。）の利用条件を定めるものです。登録ユーザーの皆さま（以下，「ユーザー」といいます。）には，本規約に従って，本サービスをご利用いただきます。
@@ -395,6 +396,7 @@ e. その他，開発者が本サービスの利用を適当でないと判断�
                             <constraint firstItem="H2F-qK-Fat" firstAttribute="centerY" secondItem="pjf-KW-lLz" secondAttribute="centerY" id="d2b-tM-inT"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" id="bbh-aq-w45"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7bP-Hw-5Zf" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -405,11 +407,11 @@ e. その他，開発者が本サービスの利用を適当でないと判断�
             <objects>
                 <viewController id="mpF-LJ-Bhg" customClass="ViewController" customModule="iProjectTeacher" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="0Bu-5b-zXx">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yiG-YS-8vT">
-                                <rect key="frame" x="5" y="5" width="404" height="832"/>
+                                <rect key="frame" x="5" y="93" width="404" height="710"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <string key="text">プライバシーポリシー
 田中義久，平岡龍聖，上園陸斗，中村香織（以下，「開発者」といいます。）は，本アプリ上で提供するサービス（以下,「本サービス」といいます。）におけるプライバシー情報の取扱いについて，以下のとおりプライバシーポリシー（以下，「本ポリシー」といいます。）を定めます。
@@ -484,6 +486,7 @@ e. その他，開発者が本サービスの利用を適当でないと判断�
                             <constraint firstItem="yiG-YS-8vT" firstAttribute="centerY" secondItem="0Bu-5b-zXx" secondAttribute="centerY" id="Ziz-PQ-4gZ"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" id="scH-pT-jcA"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rBB-xY-JSQ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

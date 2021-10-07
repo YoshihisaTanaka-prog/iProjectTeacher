@@ -206,7 +206,7 @@ class DocumentsViewController: UIViewController, UITextFieldDelegate, UITextView
     }
     
     @IBAction func delete(){
-                selectedImages.remove(at: pageNum)
+        selectedImages.remove(at: pageNum)
         maxPageNum = selectedImages.count
         if pageNum == selectedImages.count {
             if selectedImages.count == 0 {
@@ -234,8 +234,8 @@ class DocumentsViewController: UIViewController, UITextFieldDelegate, UITextView
             setPage(pageNum: pageNum)
         }
         
-    
-        }
+        
+    }
     
     
     private func setPage(pageNum: Int){

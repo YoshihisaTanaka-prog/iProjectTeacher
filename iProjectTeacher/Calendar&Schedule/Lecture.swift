@@ -67,10 +67,10 @@ class Lecture {
     }
     
 //    初回登録用
-    init(student: User, startTime: Date, subject: String, detail: String, lecturesId: String, _ vc: UIViewController){
+    init(id: String?, student: User, startTime: Date, subject: String, detail: String, lecturesId: String, _ vc: UIViewController){
         isAbleToEdit = true
-        objectId = ""
-        let ncmb = NCMBObject(className: "Lecture")!
+        objectId = id ?? ""
+        let ncmb = NCMBObject(className: "Lecture", objectId: id)!
         self.lecturesId = lecturesId
         ncmb.setObject(lecturesId, forKey: "lecturesId")
         isFinished = false
@@ -91,9 +91,7 @@ class Lecture {
         
         ncmb.setObject(subject, forKey: "subject")
         teacherAttendanceTime = 0
-        ncmb.setObject(0, forKey: "teacherAttendanceTime")
         studentAttendanceTime = 0
-        ncmb.setObject(0, forKey: "studentAttendanceTime")
         ncmb.setObject(nil, forKey: "studentPeerId")
         ncmb.setObject(nil, forKey: "reportId")
         ncmb.setObject(nil, forKey: "reviewId")

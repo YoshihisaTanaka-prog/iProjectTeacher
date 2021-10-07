@@ -79,6 +79,7 @@ class Schedules: ScheduleMonthDelegate {
     }
     
     func delete() {
+        cachedLecturesG.removeAll()
         for v in self.monthDic.values{
             v.dateDic.removeAll()
         }

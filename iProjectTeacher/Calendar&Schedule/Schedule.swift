@@ -17,7 +17,7 @@ class Schedule{
     
     var delegate: ScheduleClassDelegate?
     
-    var ncmb: NCMBObject
+    var id: String
     
     var title: String
     var detail: String
@@ -30,7 +30,7 @@ class Schedule{
     var detailTimeList: [[Date]]
     
     init(schedule: NCMBObject, _ vc: UIViewController) {
-        ncmb = schedule
+        id = schedule.objectId
         
         title = schedule.object(forKey: "title") as! String
         detail = schedule.object(forKey: "detail") as? String ?? ""
@@ -44,8 +44,12 @@ class Schedule{
         detailTimeList = schedule.object(forKey: "detailTimeList") as! [[Date]]
     }
     
-    init(title: String, detail: String, eventType: String, detailTimeList: [[Date]], isAbleToShow: Bool, _ vc: UIViewController){
-        ncmb = NCMBObject(className: "Schedule")!
+    init(id: String?, title: String, detail: String, eventType: String, detailTimeList: [[Date]], isAbleToShow: Bool, _ vc: UIViewController){
+        
+        print("init was called!")
+        let ncmb = NCMBObject(className: "Schedule", objectId: id)!
+        
+        self.id = ""
         
         self.title = title
         ncmb.setObject(title, forKey: "title")
@@ -53,7 +57,6 @@ class Schedule{
         ncmb.setObject(detail, forKey: "detail")
         self.eventType = eventType
         ncmb.setObject(eventType, forKey: "eventType")
-//        ＊＊＊＊＊＊＊＊＊＊コピペ時注意＊＊＊＊＊＊＊＊＊＊
         self.userId = currentUserG.userId
         ncmb.setObject(currentUserG.userId, forKey: "userId")
         
@@ -67,14 +70,17 @@ class Schedule{
         if detailTimeList.count != 0{
             for detailTime in detailTimeList{
                 if(detailTime.count != 2){
+                    self.delegate?.savedSchedule()
                     return
                 }
                 if(detailTime[0] >= detailTime[1]){
+                    self.delegate?.savedSchedule()
                     return
                 }
             }
             ncmb.saveInBackground { error in
                 if error == nil{
+                    print("saved!")
                     self.delegate?.savedSchedule()
                 } else{
                     vc.showOkAlert(title: "Saving message error!", message: error!.localizedDescription)
@@ -112,13 +118,13 @@ extension Schedule{
                                 if d == times[0]{
                                     let t = TimeFrameUnit(firstHour: d.h, firstMinute: d.m, lastHour: end.h, lastMinute: end.m, title: self.title, isAbleToShow: self.isAbleToShow, isMyEvent: self.userId == currentUserG.userId)
                                     t.eventType = self.eventType
-                                    t.scheduleIds.append(self.ncmb.objectId)
+                                    t.scheduleIds.append(self.id)
                                     ret[d.d.s]!.append(t)
                                     
                                 } else{
                                     let t = TimeFrameUnit(firstHour: d.h, firstMinute: 0, lastHour: end.h, lastMinute: end.m, title: self.title, isAbleToShow: self.isAbleToShow, isMyEvent: self.userId == currentUserG.userId)
                                     t.eventType = self.eventType
-                                    t.scheduleIds.append(self.ncmb.objectId)
+                                    t.scheduleIds.append(self.id)
                                     ret[d.d.s]!.append(t)
                                 }
                                 break
@@ -126,13 +132,13 @@ extension Schedule{
                                 if d == times[0]{
                                     let t = TimeFrameUnit(firstHour: d.h, firstMinute: d.m, lastHour: d.h + 1, lastMinute: 0, title: self.title, isAbleToShow: self.isAbleToShow, isMyEvent: self.userId == currentUserG.userId)
                                     t.eventType = self.eventType
-                                    t.scheduleIds.append(self.ncmb.objectId)
+                                    t.scheduleIds.append(self.id)
                                     ret[d.d.s]!.append(t)
 
                                 } else{
                                     let t = TimeFrameUnit(firstHour: d.h, firstMinute: 0, lastHour: d.h + 1, lastMinute: 0, title: self.title, isAbleToShow: self.isAbleToShow, isMyEvent: self.userId == currentUserG.userId)
                                     t.eventType = self.eventType
-                                    t.scheduleIds.append(self.ncmb.objectId)
+                                    t.scheduleIds.append(self.id)
                                     ret[d.d.s]!.append(t)
                                 }
                                 d = c.date(byAdding: .hour, value: 1, to: d)!
